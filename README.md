@@ -36,10 +36,11 @@ Have you walked 7000 steps today? According to science, a daily step count of 70
     - [Frameworks](#frameworks)
   - [Deployment](#deployment)
     - [1.  DB Setup (PostgreSQL / ElephantSQL)](#1--db-setup-postgresql--elephantsql)
+    - [2. Heroku Setup](#2-heroku-setup)
       - [How to Fork](#how-to-fork)
       - [How to Clone](#how-to-clone)
     - [Deployment on Heroku](#deployment-on-heroku)
-    - [2. Heroku Setup](#2-heroku-setup)
+    - [2. Heroku Setup](#2-heroku-setup-1)
   - [Testing](#testing)
     - [Testing Procedure](#testing-procedure)
     - [Solved Bugs](#solved-bugs)
@@ -191,6 +192,17 @@ The deployment consists of 2 steps :
 ```
 
 
+###  2. Heroku Setup
+
+- Login to Heroku Website and Create a new App (EU)
+- Connect the App with your GitHub Repository on the Heroku Website
+- Go to `Settings > Config Vars` and add your secret environment variables from your `env.py`:
+  - `SECRET_KEY` = (as per `env.py`) 
+  - `DATABASE_URL` = (as per `env.py`) 
+  - `CLOUDINARY_URL` = (as per `env.py`) 
+  - `PORT` = 8000
+  - `DISABLE_COLLECTSTATIC` = 1
+  - `DEBUG` = False
 
 #### How to Fork
 
