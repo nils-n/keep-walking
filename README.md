@@ -55,6 +55,32 @@ Have you walked 7000 steps today? According to science, a daily step count of 70
 
 ### User Stories 
 
+User stories are prioritized and categorized according to the *MuSCoW* priortization principle, aiming for 60 % must-have User Stories in the first iteration. The first iteration of this project has 14 User stories:
+
+- 8 must-have stories (**57 %** )
+- 1 should-have stories (**7 %** )
+- 2 could-have story ( **14 %**)
+- 3 wont-have stories ( **21 %**)
+
+
+| **#** | **USER STORY**                                                                                                                                                                                                                                                                                                                                                                                            | **PRIORITY** |
+|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| 1     | As a website user I can log in with a username/password so that I can access my personal area and my dashboard                                                                                                                                                                                                                                                                                            | Must-have    |
+| 2     | As a signed in website user I can click on the logout button so that I sign out of my personal area and close the website                                                                                                                                                                                                                                                                                 | Must-have    |
+| 3     | As a website user I can create a new user account so that I can access my personal area                                                                                                                                                                                                                                                                                                                   | Must-have    |
+| 4     | As a signed in user I can view my step count and weight measurements of the recent time so that I am motivated to moving more and be on a good way of maintaining or reaching a healthy BMI (Body-mass-index)                                                                                                                                                                                             | Must-have    |
+| 5     | As a signed in user I can give an emotional rating for each day so that (over time) I can find out whether increasing daily walks leads to increased happiness                                                                                                                                                                                                                                            | Must-have    |
+| 6     | As a signed in user I can CRUD my emotional rating for each day so that I can correct a wrong mistakes, or delete my records from the database                                                                                                                                                                                                                                                            | Must-have    |
+| 7     | As a signed in user I can load my health stats from my Garmin watch so that (over time) I can track my exact step count and my weight measurements from the Garmin App                                                                                                                                                                                                                                    | Must-have    |
+| 8     | As a signed in user I can CRUD my Garmin stats for each day so that I can correct a wrong reading (such as a wrong manual entry of weight in the App), or delete my records from the database                                                                                                                                                                                                             | Must-have    |
+| 9     | As a website user I can upload a user profile picture so that the website is personalized and my testimonials look more personalized                                                                                                                                                                                                                                                                      | Could-have   |
+| 10    | As a site admin I can **create and run a simple statistical analysis whether increased step count is associated also with improved sleep patterns, reduced heart variablity and stress levels ** so that this creates further evidence of the main site goal and can be used to advertise the method on the main website (i.e. 'our users increase their sleep by xx per cent and reduced stress levels') | Could-have   |
+| 11    | As a authenticated user I can give or reject my consent at any time to collect specific data (daily steps) so that the website can use this information anonymously to evaulate a cross-section of users whether increasing daily steps leads to loss of weight and more happiness                                                                                                                        | Should-have  |
+| 12    | As a website user I can write a testimonial in my personal area so that I can express my opinion about the website to other users                                                                                                                                                                                                                                                                         | Won’t-have   |
+| 13    | As a website admin I can approve or reject testimonials so that the approved testimonial will be displayed on the main page                                                                                                                                                                                                                                                                               | Won’t-have   |
+| 14    | As a authenticated I can write a testimonal of my user experience so that other users can benefit from my experience and feel motivated to sign up or continue using the website                                                                                                                                                                                                                          | Won’t-have   |
+
+
 --- 
 
 ### Website Aims
@@ -176,6 +202,7 @@ User data are stored in a relational database. The main model has been carefully
 ## Acknowledgements
 
 - Teaching and Support from Code Insitute [Code Insitute](https://codeinstitute.net/)
+- Convert Excel Tables (User Stories) into Markdown format [Link to TableConvert](https://tableconvert.com/)
 - How to approach designing Django Models  :
   - DjangoGirls online tutorial : [Django models](https://tutorial.djangogirls.org/en/django_models/) 
   - LearnDjango Blog from W. Vincent  [Django Best Practices: Models](https://learndjango.com/tutorials/django-best-practices-models)
