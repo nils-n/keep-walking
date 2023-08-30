@@ -58,8 +58,8 @@ Have you walked 7000 steps today? According to science, a daily step count of 70
 User stories are prioritized and categorized according to the *MuSCoW* priortization principle, aiming for 60 % must-have User Stories in the first iteration. The first iteration of this project has 14 User stories:
 
 - 8 must-have stories (**57 %** )
-- 1 should-have stories (**7 %** )
-- 2 could-have story ( **14 %**)
+- 1 should-have story (**7 %** )
+- 2 could-have stories ( **14 %**)
 - 3 wont-have stories ( **21 %**)
 
 
@@ -74,7 +74,7 @@ User stories are prioritized and categorized according to the *MuSCoW* priortiza
 | 7     | As a signed in user I can load my health stats from my Garmin watch so that (over time) I can track my exact step count and my weight measurements from the Garmin App                                                                                                                                                                                                                                    | Must-have    |
 | 8     | As a signed in user I can CRUD my Garmin stats for each day so that I can correct a wrong reading (such as a wrong manual entry of weight in the App), or delete my records from the database                                                                                                                                                                                                             | Must-have    |
 | 9     | As a website user I can upload a user profile picture so that the website is personalized and my testimonials look more personalized                                                                                                                                                                                                                                                                      | Could-have   |
-| 10    | As a site admin I can **create and run a simple statistical analysis whether increased step count is associated also with improved sleep patterns, reduced heart variablity and stress levels ** so that this creates further evidence of the main site goal and can be used to advertise the method on the main website (i.e. 'our users increase their sleep by xx per cent and reduced stress levels') | Could-have   |
+| 10    | As a site admin I can create and run a simple statistical analysis whether increased step count is associated also with improved sleep patterns, reduced heart variablity and stress levels so that this creates further evidence of the main site goal and can be used to advertise the method on the main website (i.e. 'our users increase their sleep by xx per cent and reduced stress levels') | Could-have   |
 | 11    | As a authenticated user I can give or reject my consent at any time to collect specific data (daily steps) so that the website can use this information anonymously to evaulate a cross-section of users whether increasing daily steps leads to loss of weight and more happiness                                                                                                                        | Should-have  |
 | 12    | As a website user I can write a testimonial in my personal area so that I can express my opinion about the website to other users                                                                                                                                                                                                                                                                         | Won’t-have   |
 | 13    | As a website admin I can approve or reject testimonials so that the approved testimonial will be displayed on the main page                                                                                                                                                                                                                                                                               | Won’t-have   |
@@ -182,7 +182,14 @@ User data are stored in a relational database. The main model has been carefully
 ### Solved Bugs 
 
 - In a first iteration of this project, I made a mistake in the Model design where I kept the emotional rating linked to the readout from the Garmin device. This has made my life *very* difficult creating `POST` requests and handling the CRUD functionality. 
-  - Solution : The best way seemed to me to go back to the Models and simplify from the start by improving the data structure design. The solution was to separate the *GarminData* table(readouts from the Garmin API) and the *EmotionRating* table. In this way, the user can do CRUD operations for each table *independently* - and also, the data structure seems more natural.   
+  <div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+        <tr>
+          <td> <img src="./assets/images/first-attempt-er-diagram-model.png"; alt="first attempt of an ER diagram of the model - emotional rating and Garmin stats in same model (turned out to complicate things)" >  </td>
+        </tr>
+    </table>
+  </div>
+- **Solution** : After some research (see acknowledgements), it turned out to be the best advice to go back to the Model diagram and simplify the design. In this way, the data structures reflect much better the data flow inside Django's MVT architecture. The final solution was to split the `DailyActivity` table into a `GarminData` table (readouts from the Garmin API) and a `EmotionRating` table, so that both are linked to independent requests. Also, CRUD operations for each table are independent, which is not only more natural but also leads to a cleaner implementation.   
 
 ### Open Bugs 
 
