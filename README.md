@@ -35,6 +35,7 @@ Have you walked 7000 steps today? According to science, a daily step count of 70
     - [Languages](#languages)
     - [Frameworks](#frameworks)
   - [Deployment](#deployment)
+    - [1.  DB Setup (PostgreSQL / ElephantSQL)](#1--db-setup-postgresql--elephantsql)
       - [How to Fork](#how-to-fork)
       - [How to Clone](#how-to-clone)
     - [Deployment on Heroku](#deployment-on-heroku)
@@ -158,6 +159,38 @@ User data are stored in a relational database. The main model has been carefully
 ----- 
 
 ## Deployment
+
+The deployment consists of 2 steps : 
+1.  setting up backend DB (PostgreSQL) 
+2. setting up Heroku app and connect to DB
+
+###  1.  DB Setup (PostgreSQL / ElephantSQL)
+
+- Create ElephantSQL account (if needed) and login on website 
+  - click on `create New Instance` and choose a name (recommend not using `-` or `.` in the name - that seems to cause issues)
+  - use `Tiny Turtle` plan, leave Tags empty. Then select region
+  - enter the new project from dashboard and copy the URL into your `env.py` template of the `DATABASE_URL` variable
+- open the `settings.py` of your main django project and update the `DATABASE_URL`  
+
+```python
+ # DATABASES = {
+ #     'default': {
+ #         'ENGINE': 'django.db.backends.sqlite3',
+ #         'NAME': BASE_DIR / 'db.sqlite3',
+ #     }
+ # }
+    
+ DATABASES = {
+     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+ }
+```
+- To confirm that we can now connect to the BD hosted on ElephantSQL, Run the migration command in your terminal to migrate your database structure to the newly-connected ElephantSQL database
+
+```
+ python manage.py migrate
+```
+
+
 
 #### How to Fork
 
