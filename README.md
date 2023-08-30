@@ -1,108 +1,192 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# *Keep on Walking* - improve your health and happiness by daily walks
 
-Welcome USER_NAME,
+Have you walked 7000 steps today? According to science, a daily step count of 7000 steps is associated with increased happiness, mental health and improvement of various body parameters ( [Paluch, et. al., 2021](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2783711?utm_source=For_The_Media&utm_medium=referral&utm_campaign=ftm_links&utm_term=090321), [Choi, et. al., 2019](https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2720689)). The aim of this website is to take up on this idea and promote health, fitness and happiness.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+ Users are encouraged to sign up and log their daily step count using their  Garmin&copy; watch. The website will keep them on track with their step goal, and inform them if they are progessing in their goal of either reaching or maintaining a healthy BMI (body-mass-index). In addition, a simple statistic will be applied across all signed up users as to wheter meeting the targeted step count  improves their health parameters, such as increased sleep times, reduced heart variability and reduced stress levels. 
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+**References:**
 
-## Gitpod Reminders
+[1] *Paluch, Amanda E., et al. "Steps per day and all-cause mortality in middle-aged adults in the coronary artery risk development in young adults study." JAMA Network Open 4.9 (2021): e2124516-e2124516.*
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+[2] *Choi, Karmel W., et al. "Assessment of bidirectional relationships between physical activity and depression among adults: a 2-sample mendelian randomization study." JAMA psychiatry 76.4 (2019): 399-408.*
 
-`python3 -m http.server`
+--- 
 
-A blue button should appear to click: _Make Public_,
+- [*Keep on Walking* - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
+  - [User Experience (UX)](#user-experience-ux)
+    - [User Stories](#user-stories)
+    - [Website Aims](#website-aims)
+    - [How these needs are addressed](#how-these-needs-are-addressed)
+    - [Opportunities](#opportunities)
+    - [Feature selection](#feature-selection)
+  - [Design](#design)
+    - [Color Scheme](#color-scheme)
+    - [Typography](#typography)
+    - [Imagery](#imagery)
+  - [Wireframes](#wireframes)
+  - [Features](#features)
+    - [General Features](#general-features)
+    - [Main Page](#main-page)
+    - [Future Implementations](#future-implementations)
+    - [Accessibility](#accessibility)
+  - [Models](#models)
+  - [](#)
+  - [Technologies Used](#technologies-used)
+    - [Languages](#languages)
+    - [Frameworks](#frameworks)
+  - [Deployment](#deployment)
+      - [How to Fork](#how-to-fork)
+      - [How to Clone](#how-to-clone)
+    - [Deployment on Heroku](#deployment-on-heroku)
+    - [2. Heroku Setup](#2-heroku-setup)
+  - [Testing](#testing)
+    - [Testing Procedure](#testing-procedure)
+    - [Solved Bugs](#solved-bugs)
+    - [Open Bugs](#open-bugs)
+  - [Credits](#credits)
+    - [Code Used](#code-used)
+    - [Content](#content)
+  - [Acknowledgements](#acknowledgements)
 
-Another blue button should appear to click: _Open Browser_.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+----
 
-A blue button should appear to click: _Make Public_,
+## User Experience (UX)
 
-Another blue button should appear to click: _Open Browser_.
+### User Stories 
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+--- 
 
-To log into the Heroku toolbelt CLI:
+### Website Aims
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### How these needs are addressed
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Opportunities 
 
-------
+### Feature selection
 
-## Release History
+----- 
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+## Design
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### Color Scheme
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Typography
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Imagery
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+-----
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+## Wireframes
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+---- 
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+## Features
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+### General Features 
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+The website consits of several pages, and a 404 page and are responsive, designed using a mobile-first approach.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+### Main Page 
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Future Implementations
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
 
-------
+### Accessibility
 
-## FAQ about the uptime script
+--- 
 
-**Why have you added this script?**
+## Models 
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+User data are stored in a relational database. The main model has been carefully designed to allow for emotional ratings and API calls from the Garmin Connect App:
 
-**How will this affect me?**
+- **User**: each row is a user that has signed up on the website
+- **GarminData**:  each row is an entry as read from the Garmin API (Many-to-Many Field)
+- **EmotionRating**:  each row is a rating that a User for a specific date (Many-to-Many Field)
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+<table style='width:90%; content-align:center'>
+    <tr>
+       <td> <img src="./assets/images/drawSQL-pp4-activity-tracker.png"; alt="ER diagram of the model" >  </td>
+    </tr>
+</table>
+--- 
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+## Technologies Used 
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+- [DrawSQL](https://drawsql.app/) 
 
-**So….?**
+### Languages 
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+- HTML
+- CSS
+- Python
 
-**Can I opt out?**
+### Frameworks 
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+- jQuery
+- Bootstrap (V. 4.2)
+- Pytest 
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+----- 
 
-**Anything more?**
+## Deployment
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+#### How to Fork
+
+#### How to Clone
+
+---- 
+
+### Deployment on Heroku 
+
+###  2. Heroku Setup
 
 ---
 
-Happy coding!
+
+## Testing 
+
+### Testing Procedure 
+
+
+---
+
+### Solved Bugs 
+
+- In a first iteration of this project, I made a mistake in the Model design where I kept the emotional rating linked to the readout from the Garmin device. This has made my life *very* difficult creating `POST` requests and handling the CRUD functionality. 
+  - Solution : The best way seemed to me to go back to the Models and simplify from the start by improving the data structure design. The solution was to separate the *GarminData* table(readouts from the Garmin API) and the *EmotionRating* table. In this way, the user can do CRUD operations for each table *independently* - and also, the data structure seems more natural.   
+
+### Open Bugs 
+
+---- 
+
+## Credits 
+
+### Code Used
+
+
+### Content 
+
+- All of the content was written by myself.
+- Externally used code (such as code snippets from stackoverflow) in this project are referenced in this Readme and inside the HTML / CSS / JS / Python source code. 
+
+
+## Acknowledgements
+
+- Teaching and Support from Code Insitute [Code Insitute](https://codeinstitute.net/)
+- How to approach designing Django Models  :
+  - DjangoGirls online tutorial : [Django models](https://tutorial.djangogirls.org/en/django_models/) 
+  - LearnDjango Blog from W. Vincent  [Django Best Practices: Models](https://learndjango.com/tutorials/django-best-practices-models)
+  - I've spent a fair amount of time researching how Models work. Here a selection of blog Articles and Youtube videos that contributed to my understanding :
+    -  Klement Omeri : [Best practices and tips to build better Django models (Medium)](https://medium.com/@daspiyush0_44431/best-practices-and-tips-to-build-better-django-models-c0f78cd4e52e)
+    -  Sagar Chopade:  [Django Model Best Practices: Tips and Tricks for Clean and Efficient Code (Medium)](https://medium.com/@schopade333/django-model-best-practices-c5c8a142dfc)
+    -   Sagar Chopade:  [Custom Model Managers In Django (Medium)](https://medium.com/scalereal/custom-model-managers-in-django-2dac30acdf55)
+    -  Ben Lopatin/ Cobey Potter, 'This Old Pony', Wellfire Interactive : [The problem with fat models, or, an OOPs mistake](https://wellfire.co/this-old-pony/the-problem-with-fat-models--or--an-oops-mistake--this-old-pony-69/)
+    - Jair Verçosa [Django model Guideline (Medium)](https://jairvercosa.medium.com/django-model-guideline-d48a96c9b38c)
+    - Aravind Srinivas [Essential Tips for Optimizing Your Django Models for Better Code Readability  (Medium)](https://awstip.com/essential-tips-for-optimizing-your-django-models-for-better-code-readability-f1a22665fe25)
+    - Michał Macura (Soft Kraft) : [Django Best Practices — Refactoring Django Fat Models](https://www.softkraft.co/django-best-practises/)
+    - Matt Freire, [Learn the basics of Django's Model Managers and Querysets - YouTube](https://www.youtube.com/watch?v=rjUmA_pkGtw)
+    - Tarun Garg [Design Django models such that your future self will thank you - YouTube](https://www.youtube.com/watch?v=dXCh8m4P5Tc)
+- Thanks to my mentor Ronan (Code Institute) for his advices and clear feedback 
