@@ -8,6 +8,13 @@
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 
+	<form action="/activities/" method="post">
+    {% csrf_token %}
+    {{ garmin_form }}
+    <input type="submit" value="Submit">
+	</form>
+
+
 	<h1>Your activities</h1>
 	{% for garmin_row in garmin_data %}
 

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "django.contrib.staticfiles",
     "cloudinary",
+    "crispy_forms",
     "accounts",
     "activities",
 ]
@@ -118,6 +119,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 AUTH_USER_MODEL = "accounts.CustomUser"  # new
+
+# Forms as per Course Material (Django Blog - Commenting , part 1)
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# Authentication as per Course Material (Django Blog - Authorisation , part 1)
+SITE_ID = 1
 
 # redirect after login/logout
 LOGIN_REDIRECT_URL = "home"
