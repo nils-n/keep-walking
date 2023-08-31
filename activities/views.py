@@ -4,7 +4,7 @@ from .models import GarminData
 
 def view_activities(request):
     """this view loads all activities for the currently logged in user"""
-    garmin_data = GarminData.objects.all()
+    garmin_data = GarminData.objects.filter(user=request.user)
     context = {"garmin_data": garmin_data}
 
     return render(request, "activities_list.html", context)
