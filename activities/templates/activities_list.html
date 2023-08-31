@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Keep on Walking{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+
+	<h1>Your activities</h1>
+	{% for activity in object_list %}
+
+		{% if activity.user.username == user.username %}
+		<ul>
+			<li>{{ activity.date}} : {{ activity.user.username}}  - {{ activity.steps }}</li>
+		</ul>
+		{% endif %}
+
+	{% endfor %}
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a> |
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}
+
+
+
