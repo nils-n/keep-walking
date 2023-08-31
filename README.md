@@ -244,6 +244,8 @@ The deployment consists of 2 steps :
 
 ### Code Used
 
+- User and Login/Logout functionality using a Custom User Model : [LearnDjango - Django Best Practices: Custom User Model](https://learndjango.com/tutorials/django-custom-user-model) 
+
 
 ### Content 
 
