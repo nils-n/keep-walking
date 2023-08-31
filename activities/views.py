@@ -20,9 +20,11 @@ def view_activities(request):
         garmin_form = GarminDataForm(request.POST)
         garmin_data = GarminData.objects.filter(user=request.user)
         if garmin_form.is_valid():
-            new_dates = get_dates_without_garmin_data(garmin_form, garmin_data)
+            form_data = garmin_form.cleaned_data
+            start_date = form_data["start_date"]
+            end_date = form_data["end_date"]
+            new_dates = get_dates_without_garmin_data(start_date, end_date)
             for new_date in new_dates:
-                form_data = garmin_form.cleaned_data
                 new_garmin_entry = GarminData()
                 new_garmin_entry.user = request.user
                 new_garmin_entry.date = form_data["start_date"]
