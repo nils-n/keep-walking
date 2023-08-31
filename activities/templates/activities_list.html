@@ -9,11 +9,11 @@
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 
 	<h1>Your activities</h1>
-	{% for activity in object_list %}
+	{% for garmin_row in garmin_data %}
 
-		{% if activity.user.username == user.username %}
+		{% if garmin_row.user.username == user.username %}
 		<ul>
-			<li>{{ activity.date}} : {{ activity.user.username}}  - {{ activity.steps }}</li>
+			<li>{{ garmin_row.date}} : {{ garmin_row.user.username}}  - {{ garmin_row.steps }}</li>
 		</ul>
 		{% endif %}
 
