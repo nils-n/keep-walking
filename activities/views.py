@@ -32,17 +32,17 @@ def view_activities(request):
             form_data = garmin_form.cleaned_data
             start_date = form_data["start_date"] - timedelta(days=10)
             end_date = form_data["start_date"]
-            # garmin_step_data, garmin_weight_data = garmin_api_call(
-            #     form_data["garmin_username"],
-            #     form_data["garmin_password"],
-            #     start_date,
-            #     end_date,
-            # )
+            garmin_step_data, garmin_weight_data = garmin_api_call(
+                form_data["garmin_username"],
+                form_data["garmin_password"],
+                start_date,
+                end_date,
+            )
 
-            (
-                garmin_step_data,
-                garmin_weight_data,
-            ) = get_garmin_mock_data_for_testing()
+            # (
+            #     garmin_step_data,
+            #     garmin_weight_data,
+            # ) = get_garmin_mock_data_for_testing()
 
             garmin_step_data = garmin_step_data[0]
             # garmin_weight_data = garmin_weight_data[0]
