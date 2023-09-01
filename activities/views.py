@@ -1,10 +1,11 @@
-import datetime
+from datetime import timedelta
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.utils.timezone import datetime
 
 from .models import GarminData
 from .forms import GarminDataForm
-from .views_helper import create_date_range, remove_duplicates
+from .views_helper import create_date_range
 
 
 def view_activities(request):
@@ -21,22 +22,22 @@ def view_activities(request):
         garmin_form = GarminDataForm(request.POST)
         garmin_data = GarminData.objects.filter(user=request.user)
         existing_dates = [db_record.date for db_record in garmin_data]
+        print(f" existing dates  {existing_dates}")
         if garmin_form.is_valid():
             form_data = garmin_form.cleaned_data
-            start_date = form_data["start_date"]
-            # end_date = form_data["end_date"]
-            # for quick testing, replace it with start date
-            end_date = form_data["start_date"] + datetime.timedelta(days=2)
+            start_date = form_data["start_date"] - timedelta(days=1)
+            end_date = form_data["start_date"]
             new_dates = create_date_range(start_date, end_date)
-            new_dates = remove_duplicates(new_dates, existing_dates)
+            print(f" new_dates dates  {new_dates}")
             for new_date in new_dates:
-                new_garmin_entry = GarminData()
-                new_garmin_entry.user = request.user
-                new_garmin_entry.date = new_date
-                # dummy values - these will be taken from API later
-                new_garmin_entry.steps = 6500
-                new_garmin_entry.weight_kg = 75
-                new_garmin_entry.save()
+                if new_date not in existing_dates:
+                    new_garmin_entry = GarminData()
+                    new_garmin_entry.user = request.user
+                    new_garmin_entry.date = new_date
+                    # dummy values - these will be taken from API later
+                    new_garmin_entry.steps = 6500
+                    new_garmin_entry.weight_kg = 75
+                    new_garmin_entry.save()
 
             return HttpResponseRedirect("/activities/")
 
