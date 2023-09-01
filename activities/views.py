@@ -30,31 +30,32 @@ def view_activities(request):
         print(f" existing dates  {existing_dates}")
         if garmin_form.is_valid():
             form_data = garmin_form.cleaned_data
-            start_date = form_data["start_date"] - timedelta(days=1)
+            start_date = form_data["start_date"] - timedelta(days=10)
             end_date = form_data["start_date"]
             new_dates = create_date_range(start_date, end_date)
             print("---------------------------------")
             print("--> calling garmin api ")
-            # garmin_api_data = garmin_api_call(
-            #     form_data["garmin_username"],
-            #     form_data["garmin_password"],
-            #     start_date,
-            #     end_date,
-            # )
-            garmin_api_data = [
-                {
-                    "calendarDate": "2023-08-31",
-                    "totalSteps": 1194,
-                    "totalDistance": 945,
-                    "stepGoal": 7000,
-                },
-                {
-                    "calendarDate": "2023-09-01",
-                    "totalSteps": 261,
-                    "totalDistance": 207,
-                    "stepGoal": 7000,
-                },
-            ]
+            garmin_api_data = garmin_api_call(
+                form_data["garmin_username"],
+                form_data["garmin_password"],
+                start_date,
+                end_date,
+            )
+            # garmin_api_data = [
+            #     {
+            #         "calendarDate": "2023-08-31",
+            #         "totalSteps": 1194,
+            #         "totalDistance": 945,
+            #         "stepGoal": 7000,
+            #     },
+            #     {
+            #         "calendarDate": "2023-09-01",
+            #         "totalSteps": 261,
+            #         "totalDistance": 207,
+            #         "stepGoal": 7000,
+            #     },
+            # ]
+            # [{'calendarDate': '2023-08-22', 'totalSteps': 7385, 'totalDistance': 6288, 'stepGoal': 7000}, {'calendarDate': '2023-08-23', 'totalSteps': 7942, 'totalDistance': 6288, 'stepGoal': 7000}, {'calendarDate': '2023-08-24', 'totalSteps': 2809, 'totalDistance': 2243, 'stepGoal': 7000}, {'calendarDate': '2023-08-25', 'totalSteps': 3625, 'totalDistance': 2870, 'stepGoal': 7000}, {'calendarDate': '2023-08-26', 'totalSteps': 7519, 'totalDistance': 5953, 'stepGoal': 7000}, {'calendarDate': '2023-08-27', 'totalSteps': 14899, 'totalDistance': 11796, 'stepGoal': 7000}, {'calendarDate': '2023-08-28', 'totalSteps': 7147, 'totalDistance': 5667, 'stepGoal': 7000}, {'calendarDate': '2023-08-29', 'totalSteps': 2151, 'totalDistance': 1711, 'stepGoal': 7000}, {'calendarDate': '2023-08-30', 'totalSteps': 3546, 'totalDistance': 2807, 'stepGoal': 7000}, {'calendarDate': '2023-08-31', 'totalSteps': 1194, 'totalDistance': 945, 'stepGoal': 7000}, {'calendarDate': '2023-09-01', 'totalSteps': 261, 'totalDistance': 207, 'stepGoal': 7000}]
 
             # extract the dates from the garmin api call
             print(f"--> garmin_api_data : {garmin_api_data}")
