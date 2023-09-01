@@ -22,10 +22,11 @@
 		<ul>
 			<li>
 				<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 
-					{% comment %} <button class="btn btn-secondary edit-button" data-id='{{  garmin_row.id }}'>Edit</button> {% endcomment %}
-					{% comment %} <form action=" ${ url_ }"></form> {% endcomment %}
-					<button class="btn btn-danger delete-button" data-id='{{  garmin_row.id }}'>Delete</button>
-			 </li>
+					<form action="" method="POST" class='delete-activity-form' data-id='{{  garmin_row.id }}'>
+							{% csrf_token %} 
+							<button class="btn btn-danger delete-button" data-id='{{  garmin_row.id }}' type='submit'>Delete</button> 
+					</form>  
+				</li>
 		</ul>
 		{% endif %}
 

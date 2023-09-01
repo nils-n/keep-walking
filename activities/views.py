@@ -1,7 +1,7 @@
 from datetime import timedelta
 import os
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.timezone import datetime
 
 from .models import GarminData
@@ -37,7 +37,7 @@ def view_activities(request):
             # (and riksing being blocked by Garmin), i will comment the API call
             # out for now and replace it mock data. later on, i will activate the
             # actual api call again
-            use_mockdata = False
+            use_mockdata = True
             if use_mockdata:
                 print("calling with fake API data")
                 print(use_mockdata)
@@ -76,3 +76,16 @@ def view_activities(request):
             return HttpResponseRedirect("/activities/")
 
     return render(request, "activities_list.html", context)
+
+
+def delete_activity():
+    """
+    this view sends a post request to delete an activity.
+     It uses ajax to post without having to reload the page, based on:
+    https://www.pluralsight.com/guides/work-with-ajax-django
+    """
+    print("-------> entering delete_activity")
+
+    # some other error occured
+    print("--> some other error occurred")
+    return JsonResponse({"error": ""}, status=400)
