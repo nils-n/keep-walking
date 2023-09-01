@@ -20,7 +20,11 @@
 
 		{% if garmin_row.user.username == user.username %}
 		<ul>
-			<li>{{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg)</li>
+			<li>
+					{{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 
+					<button class="btn btn-secondary edit-button">Edit</button>
+					<button class="btn btn-danger delete-button">Delete</button>
+			 </li>
 		</ul>
 		{% endif %}
 
@@ -33,6 +37,15 @@
 {% endif %}
 
 {% endblock %}
+
+
+{% block javascript %}
+
+{% load static %}
+
+<script src= {% static  'scripts/activities.js'  %}></script>
+
+{%  endblock %}
 
 
 
