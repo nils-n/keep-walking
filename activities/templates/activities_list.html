@@ -21,11 +21,8 @@
 		{% if garmin_row.user.username == user.username %}
 		<ul>
 			<li>
-				<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 
-					<form action="" method="POST" class='delete-activity-form' data-id='{{  garmin_row.id }}'>
-							{% csrf_token %} 
-							<button class="btn btn-danger delete-button" data-id='{{  garmin_row.id }}' type='submit'>Delete</button> 
-					</form>  
+				<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 	
+				<a class='badge badge-danger delete-button' style='cursor: pointer;' data-id="{{ garmin_row.id }}" href='activities/delete_activity/{{ garmin_row.id}}'>X</a>
 				</li>
 		</ul>
 		{% endif %}

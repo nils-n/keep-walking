@@ -77,20 +77,3 @@ $('.delete-button').click( (e) => {
     // $('#delete-id')[0].innerText = garmin_id
     // $('#deleteModal').modal('show')
 })
-
-
-// as per https://realpython.com/django-and-ajax-form-submissions/
-$('.delete-activity-form').on('submit', function(e) {
-    e.preventDefault();
-    console.log('--> A Delete Form was submitted!')
-    const form = $(e.target)
-    const garmin_id = form.attr('data-id')
-    console.log(garmin_id)
-    delete_activity(garmin_id)
-});
-
-
-function delete_activity( garmin_id) {
-
-    console.log('--> deleting activity with id : ' + garmin_id )
-}

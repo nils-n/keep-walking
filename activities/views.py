@@ -3,6 +3,7 @@ import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.timezone import datetime
+from django.shortcuts import get_object_or_404
 
 from .models import GarminData
 from .forms import GarminDataForm
@@ -78,14 +79,11 @@ def view_activities(request):
     return render(request, "activities_list.html", context)
 
 
-def delete_activity():
+def delete_activity(request, garmin_data_id, *args, **kwargs):
     """
     this view sends a post request to delete an activity.
-     It uses ajax to post without having to reload the page, based on:
-    https://www.pluralsight.com/guides/work-with-ajax-django
     """
-    print("-------> entering delete_activity")
+    garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
+    garmin_data.delete()
 
-    # some other error occured
-    print("--> some other error occurred")
-    return JsonResponse({"error": ""}, status=400)
+    return HttpResponseRedirect("/activities/")
