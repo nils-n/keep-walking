@@ -21,3 +21,7 @@ class GarminDataForm(forms.Form):
             }
         )
     )
+    garmin_username = forms.CharField(max_length=80)
+    garmin_password = forms.CharField(
+        max_length=80, widget=forms.PasswordInput()
+    )

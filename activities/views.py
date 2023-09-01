@@ -5,7 +5,11 @@ from django.utils.timezone import datetime
 
 from .models import GarminData
 from .forms import GarminDataForm
-from .views_helper import create_date_range
+from .views_helper import (
+    create_date_range,
+    garmin_api_call,
+    convert_api_data_to_datetime,
+)
 
 
 def view_activities(request):
@@ -28,8 +32,20 @@ def view_activities(request):
             start_date = form_data["start_date"] - timedelta(days=1)
             end_date = form_data["start_date"]
             new_dates = create_date_range(start_date, end_date)
+            print("---------------------------------")
+            print("--> calling garmin api ")
+            garmin_api_data = garmin_api_call(
+                form_data["garmin_username"],
+                form_data["garmin_password"],
+                start_date,
+                end_date,
+            )
+            # extract the dates from the garmin api call
+            print(f"--> garmin_api_data : {garmin_api_data}")
+            print("---------------------------------")
             print(f" new_dates dates  {new_dates}")
-            for new_date in new_dates:
+            for garmin_entry in garmin_api_data:
+                new_date = convert_api_data_to_datetime(garmin_entry)
                 if new_date not in existing_dates:
                     new_garmin_entry = GarminData()
                     new_garmin_entry.user = request.user

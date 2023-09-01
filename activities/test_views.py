@@ -1,7 +1,7 @@
 import pytest
 import datetime
 import pandas as pd
-from .views_helper import create_date_range, remove_duplicates
+from .views_helper import create_date_range, convert_api_data_to_datetime
 
 
 def test_the_obvious():
@@ -30,3 +30,30 @@ def test_should_return_empty_list_when_start_date_after_end_date(
         is_empty = False
 
     assert is_empty == expected_output
+
+
+@pytest.mark.parametrize(
+    "input_date_from_api, expected_datetime_object",
+    [
+        (
+            {
+                "calendarDate": "2023-08-31",
+            },
+            datetime.date(2023, 8, 31),
+        ),
+        (
+            {
+                "calendarDate": "2010-01-01",
+            },
+            datetime.date(2010, 1, 1),
+        ),
+    ],
+)
+def test_converts_api_date_format_correctly_into_djangos_datetime(
+    input_date_from_api, expected_datetime_object
+):
+    """test whether the input string as fetched from the api converts
+    correctly into pythons datetime format"""
+    model = convert_api_data_to_datetime(input_date_from_api)
+
+    assert model == expected_datetime_object
