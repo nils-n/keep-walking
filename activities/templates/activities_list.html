@@ -21,9 +21,9 @@
 		{% if garmin_row.user.username == user.username %}
 		<ul>
 			<li>
-					{{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 
-					<button class="btn btn-secondary edit-button">Edit</button>
-					<button class="btn btn-danger delete-button">Delete</button>
+				<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 
+					<button class="btn btn-secondary edit-button" data-id='{{  garmin_row.id }}'>Edit</button>
+					<button class="btn btn-danger delete-button" data-id='{{  garmin_row.id }}'>Delete</button>
 			 </li>
 		</ul>
 		{% endif %}
