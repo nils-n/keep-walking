@@ -1,4 +1,5 @@
 from datetime import timedelta
+import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.utils.timezone import datetime
@@ -36,14 +37,16 @@ def view_activities(request):
             # (and riksing being blocked by Garmin), i will comment the API call
             # out for now and replace it mock data. later on, i will activate the
             # actual api call again
-            TEMP_DONT_CALL_GARMIN_API = True
-            if TEMP_DONT_CALL_GARMIN_API:
+            use_mockdata = False
+            if use_mockdata:
                 print("calling with fake API data")
+                print(use_mockdata)
                 (
                     garmin_step_data,
                     garmin_weight_data,
                 ) = get_garmin_mock_data_for_testing()
             else:
+                print("calling the actual Garmin API data")
                 garmin_step_data, garmin_weight_data = garmin_api_call(
                     form_data["garmin_username"],
                     form_data["garmin_password"],
