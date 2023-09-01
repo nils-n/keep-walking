@@ -9,6 +9,7 @@ from .views_helper import (
     create_date_range,
     garmin_api_call,
     convert_api_data_to_datetime,
+    convert_api_data_to_steps,
 )
 
 
@@ -34,24 +35,39 @@ def view_activities(request):
             new_dates = create_date_range(start_date, end_date)
             print("---------------------------------")
             print("--> calling garmin api ")
-            garmin_api_data = garmin_api_call(
-                form_data["garmin_username"],
-                form_data["garmin_password"],
-                start_date,
-                end_date,
-            )
+            # garmin_api_data = garmin_api_call(
+            #     form_data["garmin_username"],
+            #     form_data["garmin_password"],
+            #     start_date,
+            #     end_date,
+            # )
+            garmin_api_data = [
+                {
+                    "calendarDate": "2023-08-31",
+                    "totalSteps": 1194,
+                    "totalDistance": 945,
+                    "stepGoal": 7000,
+                },
+                {
+                    "calendarDate": "2023-09-01",
+                    "totalSteps": 261,
+                    "totalDistance": 207,
+                    "stepGoal": 7000,
+                },
+            ]
+
             # extract the dates from the garmin api call
             print(f"--> garmin_api_data : {garmin_api_data}")
             print("---------------------------------")
             print(f" new_dates dates  {new_dates}")
             for garmin_entry in garmin_api_data:
                 new_date = convert_api_data_to_datetime(garmin_entry)
+                new_steps = convert_api_data_to_steps(garmin_entry)
                 if new_date not in existing_dates:
                     new_garmin_entry = GarminData()
                     new_garmin_entry.user = request.user
                     new_garmin_entry.date = new_date
-                    # dummy values - these will be taken from API later
-                    new_garmin_entry.steps = 6500
+                    new_garmin_entry.steps = new_steps
                     new_garmin_entry.weight_kg = 75
                     new_garmin_entry.save()
 

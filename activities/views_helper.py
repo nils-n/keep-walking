@@ -68,3 +68,10 @@ def convert_api_data_to_datetime(garmin_api_data):
     return datetime.strptime(
         garmin_api_data["calendarDate"], "%Y-%m-%d"
     ).date()
+
+
+def convert_api_data_to_steps(garmin_api_data):
+    """
+    converts the output of the api call into step count
+    """
+    return int(garmin_api_data["totalSteps"])

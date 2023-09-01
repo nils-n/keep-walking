@@ -1,7 +1,11 @@
 import pytest
 import datetime
 import pandas as pd
-from .views_helper import create_date_range, convert_api_data_to_datetime
+from .views_helper import (
+    create_date_range,
+    convert_api_data_to_datetime,
+    convert_api_data_to_steps,
+)
 
 
 def test_the_obvious():
@@ -57,3 +61,32 @@ def test_converts_api_date_format_correctly_into_djangos_datetime(
     model = convert_api_data_to_datetime(input_date_from_api)
 
     assert model == expected_datetime_object
+
+
+@pytest.mark.parametrize(
+    "input_steps_from_api, expected_step_count",
+    [
+        (
+            {
+                "totalSteps": "42",
+            },
+            42,
+        ),
+        (
+            {
+                "totalSteps": "1000",
+            },
+            1000,
+        ),
+    ],
+)
+def test_that_step_count_converts_correctly_to_integer(
+    input_steps_from_api, expected_step_count
+):
+    """
+    test whether input json from api call converts correctly to
+    step count of that day
+    """
+    model = convert_api_data_to_steps(input_steps_from_api)
+
+    assert model == expected_step_count
