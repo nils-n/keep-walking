@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.timezone import datetime
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 from .models import GarminData
 from .forms import GarminDataForm
@@ -84,6 +85,13 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
     this view sends a post request to delete an activity.
     """
     garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
-    garmin_data.delete()
+
+    if garmin_data.user.username == request.user.username:
+        garmin_data.delete()
+        messages.add_message(request, messages.SUCCESS, "Entry deleted")
+    else:
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
 
     return HttpResponseRedirect("/activities/")
