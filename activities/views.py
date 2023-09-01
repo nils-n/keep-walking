@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
 from .models import GarminData
-from .forms import GarminDataForm
+from .forms import GarminDataForm, EditGarminDataForm
 from .views_helper import (
     garmin_api_call,
     convert_api_data_to_datetime,
@@ -95,3 +95,34 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
         )
 
     return HttpResponseRedirect("/activities/")
+
+
+def edit_activity(request, garmin_data_id, *args, **kwargs):
+    """
+    this view sends a post request to edit an existing activity
+    """
+    garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
+
+    if request.method == "POST":
+        edit_garmin_form = EditGarminDataForm(request.POST)
+        if edit_garmin_form.is_valid():
+            print("halleluja")
+            form_data = edit_garmin_form.cleaned_data
+            garmin_data.steps = form_data["steps"]
+            garmin_data.weight_kg = form_data["weight_kg"]
+            garmin_data.save()
+            messages.add_message(request, messages.SUCCESS, "Entry edited")
+        else:
+            messages.add_message(request, messages.ERROR, "Could not edit")
+
+        return HttpResponseRedirect("/activities/")
+
+    else:
+        data = {
+            "date": garmin_data.date,
+            "weight_kg": garmin_data.weight_kg,
+            "steps": garmin_data.steps,
+        }
+        garmin_form = EditGarminDataForm(initial=data)
+        context = {"garmin_edit_form": garmin_form, "date": garmin_data.date}
+        return render(request, "edit_activity.html", context)

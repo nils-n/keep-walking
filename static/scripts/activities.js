@@ -74,6 +74,8 @@ $('.delete-button').click( (e) => {
     const garmin_id = button.attr('data-id')
     console.log(garmin_id)
 
+    
+
     // $('#delete-id')[0].innerText = garmin_id
     // $('#deleteModal').modal('show')
 })

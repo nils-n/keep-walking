@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Activity{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+
+
+	<h2>Edit activity for {{ date }}</h2>
+
+	<form method="post">
+    {% csrf_token %}
+    {{ garmin_edit_form.as_p }}
+    <button type="submit">Edit</button>
+	</form>
+
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a> |
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}
+
+
+{% block javascript %}
+
+{% load static %}
+
+<script src= {% static  'scripts/activities.js'  %}></script>
+
+{%  endblock %}
+
+
+
