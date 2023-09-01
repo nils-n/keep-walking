@@ -1,3 +1,4 @@
+from django.utils.timezone import now
 from django import forms
 
 
@@ -7,6 +8,8 @@ class DateInput(forms.DateInput):
     input_type = "date"
 
 
+# setting default TimeDate value for Datepicker from :
+# https://stackoverflow.com/questions/55439368/how-to-get-timezone-today-as-default-value
 class GarminDataForm(forms.Form):
     start_date = forms.DateField(
         widget=DateInput(
@@ -14,6 +17,7 @@ class GarminDataForm(forms.Form):
                 "id": "start-date-input",
                 "required": True,
                 "placeholder": "Start Date",
+                "value": now().date(),
             }
         )
     )
