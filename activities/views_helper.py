@@ -46,14 +46,21 @@ def garmin_api_call(
     print(f"  end_date {end_date} ")
     try:
         api = init_api(garmin_username, garmin_password)
-        output = (
+        # get the steps from the api
+        output_steps = (
             api.get_daily_steps(start_date.isoformat(), end_date.isoformat()),
         )
-        print(output[0])
-        print(type(output[0]))
+        # output_steps = output_steps[0]
+        # get the body weight from the api
+        output_weight_kg = (
+            api.get_body_composition(
+                start_date.isoformat(), end_date.isoformat()
+            ),
+        )
+        # output_weight_kg = output_weight_kg[0]
         # example output
         #  ([{'calendarDate': '2023-08-31', 'totalSteps': 1194, 'totalDistance': 945, 'stepGoal': 7000}, {'calendarDate': '2023-09-01', 'totalSteps': 261, 'totalDistance': 207, 'stepGoal': 7000}],)
-        return output[0]
+        return output_steps, output_weight_kg
     except Exception:
         print("too many API calls ")
 
@@ -75,3 +82,149 @@ def convert_api_data_to_steps(garmin_api_data):
     converts the output of the api call into step count
     """
     return int(garmin_api_data["totalSteps"])
+
+
+def extract_weight(garmin_weight_data, target_date) -> int:
+    """
+    extracts weight measurment for a specific data
+    in a json fetched from garmin api
+    """
+    date_weight_list = garmin_weight_data["dateWeightList"]
+
+    for weight_entry in date_weight_list:
+        current_date = convert_api_data_to_datetime(weight_entry)
+        if current_date == target_date:
+            return int(weight_entry["weight"] / 1000)
+
+    return 0
+
+
+def get_garmin_mock_data_for_testing():
+    """
+    return json strings in the same format
+    as obtained from API (to reduce actual API calls avoiding
+    a block from Garmin for doing too many API calls )
+    """
+    garmin_step_data = (
+        [
+            {
+                "calendarDate": "2023-08-31",
+                "totalSteps": 1194,
+                "totalDistance": 945,
+                "stepGoal": 7000,
+            },
+            {
+                "calendarDate": "2023-09-01",
+                "totalSteps": 261,
+                "totalDistance": 207,
+                "stepGoal": 7000,
+            },
+        ],
+    )
+    garmin_weight_data = (
+        {
+            "startDate": "2023-08-25",
+            "endDate": "2023-09-01",
+            "dateWeightList": [
+                {
+                    "samplePk": 1693438985313,
+                    "date": 1693442578001,
+                    "calendarDate": "2023-08-31",
+                    "weight": 77199.0,
+                    "bmi": None,
+                    "bodyFat": None,
+                    "bodyWater": None,
+                    "boneMass": None,
+                    "muscleMass": None,
+                    "physiqueRating": None,
+                    "visceralFat": None,
+                    "metabolicAge": None,
+                    "sourceType": "MANUAL",
+                    "timestampGMT": 1693438978001,
+                    "weightDelta": None,
+                },
+                {
+                    "samplePk": 1693338330726,
+                    "date": 1693341923002,
+                    "calendarDate": "2023-08-29",
+                    "weight": 78500.0,
+                    "bmi": None,
+                    "bodyFat": None,
+                    "bodyWater": None,
+                    "boneMass": None,
+                    "muscleMass": None,
+                    "physiqueRating": None,
+                    "visceralFat": None,
+                    "metabolicAge": None,
+                    "sourceType": "MANUAL",
+                    "timestampGMT": 1693338323002,
+                    "weightDelta": None,
+                },
+                {
+                    "samplePk": 1693254851757,
+                    "date": 1693258445002,
+                    "calendarDate": "2023-08-28",
+                    "weight": 77400.0,
+                    "bmi": None,
+                    "bodyFat": None,
+                    "bodyWater": None,
+                    "boneMass": None,
+                    "muscleMass": None,
+                    "physiqueRating": None,
+                    "visceralFat": None,
+                    "metabolicAge": None,
+                    "sourceType": "MANUAL",
+                    "timestampGMT": 1693254845002,
+                    "weightDelta": None,
+                },
+                {
+                    "samplePk": 1693152069834,
+                    "date": 1693155664001,
+                    "calendarDate": "2023-08-27",
+                    "weight": 77699.0,
+                    "bmi": None,
+                    "bodyFat": None,
+                    "bodyWater": None,
+                    "boneMass": None,
+                    "muscleMass": None,
+                    "physiqueRating": None,
+                    "visceralFat": None,
+                    "metabolicAge": None,
+                    "sourceType": "MANUAL",
+                    "timestampGMT": 1693152064001,
+                    "weightDelta": None,
+                },
+                {
+                    "samplePk": 1693036193597,
+                    "date": 1693039786007,
+                    "calendarDate": "2023-08-26",
+                    "weight": 77599.0,
+                    "bmi": None,
+                    "bodyFat": None,
+                    "bodyWater": None,
+                    "boneMass": None,
+                    "muscleMass": None,
+                    "physiqueRating": None,
+                    "visceralFat": None,
+                    "metabolicAge": None,
+                    "sourceType": "MANUAL",
+                    "timestampGMT": 1693036186007,
+                    "weightDelta": None,
+                },
+            ],
+            "totalAverage": {
+                "from": 1692921600000,
+                "until": 1693612799999,
+                "weight": 77679.4,
+                "bmi": None,
+                "bodyFat": None,
+                "bodyWater": None,
+                "boneMass": None,
+                "muscleMass": None,
+                "physiqueRating": None,
+                "visceralFat": None,
+                "metabolicAge": None,
+            },
+        },
+    )
+    return garmin_step_data, garmin_weight_data
