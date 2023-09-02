@@ -12,7 +12,7 @@
 
 	<h2>Load activities</h2>
 
-	<form action="/activities/" method="post">
+	<form hx-post=" {% url 'load_activities' %}" hx-target='#activities-list'  >
 
     {% csrf_token %}
 
@@ -25,7 +25,7 @@
 		<label> {{  garmin_form.garmin_password.label_tag }}</label>
 		{% render_field garmin_form.garmin_password %}
 
-		<button type='submit' class='btn'>Submit</button>
+		<button type='submit' class='btn btn-secondary'>Load Data</button>
 
 	</form>
 

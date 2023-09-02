@@ -6,6 +6,7 @@ from .views_helper import (
     convert_api_data_to_datetime,
     convert_api_data_to_steps,
     extract_weight,
+    convert_date_str_to_datetime,
 )
 
 
@@ -60,6 +61,25 @@ def test_converts_api_date_format_correctly_into_djangos_datetime(
     """test whether the input string as fetched from the api converts
     correctly into pythons datetime format"""
     model = convert_api_data_to_datetime(input_date_from_api)
+
+    assert model == expected_datetime_object
+
+
+@pytest.mark.parametrize(
+    "input_date_str, expected_datetime_object",
+    [
+        ("2023-09-02", datetime.date(2023, 9, 2)),
+        ("2023-09-03", datetime.date(2023, 9, 3)),
+    ],
+)
+def test_converts_date_str_correctly_to_datetime(
+    input_date_str, expected_datetime_object
+):
+    """
+    test to confirm that date strings are converted correctly into
+    pythons datetime data structure
+    """
+    model = convert_date_str_to_datetime(input_date_str)
 
     assert model == expected_datetime_object
 

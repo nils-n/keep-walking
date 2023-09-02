@@ -1,14 +1,14 @@
 from django.urls import path
 
 from .views import (
-    view_activities,
     delete_activity,
     edit_activity,
+    load_activities,
     ActivityList,
 )
 
 urlpatterns = [
-    path("", view_activities, name="view_activities"),
+    path("", ActivityList.as_view(), name="activity_list"),
     path("list/", ActivityList.as_view(), name="activity_list"),
     path(
         "delete_activity/<int:garmin_data_id>/",
@@ -20,4 +20,5 @@ urlpatterns = [
         edit_activity,
         name="edit_activity",
     ),
+    path("load_activities", load_activities, name="load_activities"),
 ]

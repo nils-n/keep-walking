@@ -67,6 +67,13 @@ def garmin_api_call(
     return []
 
 
+def convert_date_str_to_datetime(date_str):
+    """
+    convert string to datetime object
+    """
+    return datetime.strptime(date_str, "%Y-%m-%d").date()
+
+
 def convert_api_data_to_datetime(garmin_api_data):
     """
     converts the output of the api call into datetime objects
