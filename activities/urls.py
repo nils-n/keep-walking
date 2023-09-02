@@ -8,8 +8,13 @@ from .views import (
 )
 
 urlpatterns = [
-    path("", ActivityList.as_view(), name="activity_list"),
+    path("", ActivityList.as_view(), name="activity_home"),
     path("list/", ActivityList.as_view(), name="activity_list"),
+    path(
+        "list/edit_activity/<int:garmin_data_id>",
+        edit_activity,
+        name="edit_activity",
+    ),
     path(
         "edit_activity/<int:garmin_data_id>",
         edit_activity,
