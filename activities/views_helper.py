@@ -1,6 +1,8 @@
 import datetime
 from datetime import datetime
 import pandas as pd
+import logging
+import requests
 
 from garminconnect import (
     Garmin,
@@ -8,6 +10,12 @@ from garminconnect import (
     GarminConnectConnectionError,
     GarminConnectTooManyRequestsError,
 )
+
+
+# Configure debug logging
+# logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def create_date_range(
@@ -41,15 +49,22 @@ def garmin_api_call(
 ) -> list[str]:
     """calls the data from the garmin api"""
     print("Entering garmin_api_call")
-    print(f"  garmin_username {garmin_username} ")
-    print(f"  start_date {start_date} ")
-    print(f"  end_date {end_date} ")
+    print(f"  user {garmin_username}  - Type : {type(garmin_username)} ")
+    print(f"  start_date {start_date} - Type : {type(start_date)}")
+    print(f"  end_date {end_date} - Type : {type(end_date)} ")
+
     try:
-        api = init_api(garmin_username, garmin_password)
+        # api = init_api(garmin_username, garmin_password)
+        api = Garmin(garmin_username, garmin_password)
+        api.login()
+        print(api)
+        print(start_date.isoformat())
+        print(end_date.isoformat())
         # get the steps from the api
         output_steps = (
             api.get_daily_steps(start_date.isoformat(), end_date.isoformat()),
         )
+        print(output_steps)
         # output_steps = output_steps[0]
         # get the body weight from the api
         output_weight_kg = (
@@ -57,14 +72,23 @@ def garmin_api_call(
                 start_date.isoformat(), end_date.isoformat()
             ),
         )
+        print(output_weight_kg)
         # output_weight_kg = output_weight_kg[0]
         # example output
         #  ([{'calendarDate': '2023-08-31', 'totalSteps': 1194, 'totalDistance': 945, 'stepGoal': 7000}, {'calendarDate': '2023-09-01', 'totalSteps': 261, 'totalDistance': 207, 'stepGoal': 7000}],)
         return output_steps, output_weight_kg
-    except Exception:
-        print("too many API calls ")
+    except (
+        GarminConnectConnectionError,
+        GarminConnectAuthenticationError,
+        GarminConnectTooManyRequestsError,
+        requests.exceptions.HTTPError,
+    ) as err:
+        logger.error(
+            "Error occurred during Garmin Connect communication: %s", err
+        )
+        return None
 
-    return []
+    return [], []
 
 
 def convert_date_str_to_datetime(date_str):

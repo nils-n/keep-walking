@@ -48,10 +48,11 @@ def load_activities(request):
     garmin_username = request.POST.get("garmin_username")
     garmin_password = request.POST.get("garmin_password")
     start_date = request.POST.get("start_date")
-    print(start_date)
 
-    start_date = convert_date_str_to_datetime(start_date)
-    end_date = start_date - timedelta(days=10)
+    # it's just for the moment - start and end date are switched. Once the
+    # final UI in place, handle the naming conventions better.
+    garmin_end_date = convert_date_str_to_datetime(start_date)
+    garmin_start_date = garmin_end_date - timedelta(days=10)
 
     # load information about the currently stored data for the user
     garmin_data = GarminData.objects.filter(user=request.user)
@@ -72,8 +73,8 @@ def load_activities(request):
         garmin_step_data, garmin_weight_data = garmin_api_call(
             garmin_username,
             garmin_password,
-            start_date,
-            end_date,
+            garmin_start_date,
+            garmin_end_date,
         )
     garmin_step_data = garmin_step_data[0]
 
