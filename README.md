@@ -290,4 +290,5 @@ C
 - Tutorial about using HTMX library for dynamic POST requests :
   - Installing HTMX and basic usage [BugBytes - Django and HTMX #1 - Introduction to HTMX and Dynamic AJAX Requests](https://youtu.be/Ula0c_rZ6gk?feature=shared)
   - Updating DB using HTMX  [Django and HTMX #3 - Listing and Creating Items (with no refresh!)](https://youtu.be/H_m1g8XOtHY?feature=shared)
+  - Deleting from DB using HTMX [Django and HTMX #4 - Deleting Items (with no refresh!)](https://youtu.be/qk1gVbnaOAc?feature=shared)
 - Thanks to my mentor Ronan (Code Institute) for his advices and clear feedback 

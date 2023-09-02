@@ -34,6 +34,13 @@
 					crossorigin="anonymous">
 	</script>
 
+	<script type='text/javascript'>
+			// attach the CSRF token to the CRUD requests with htmx 
+			document.body.addEventListener('htmx:configRequest', function(evt) {
+				evt.detail.headers['X-CSRFToken'] =  '{{ csrf_token }}'; 
+			});
+	</script>
+
 	{% block javascript %}
 	{% endblock %}
 </body>
