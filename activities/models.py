@@ -4,7 +4,9 @@ from django.db import models
 
 class GarminData(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="garmin_data",
     )
     steps = models.PositiveIntegerField(null=True)
     date = models.DateField(null=True)

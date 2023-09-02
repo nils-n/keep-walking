@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load widget_tweaks %}
+
 {% block title %}Keep on Walking{% endblock %}
 
 {% block content %}
@@ -11,9 +13,20 @@
 	<h2>Load activities</h2>
 
 	<form action="/activities/" method="post">
+
     {% csrf_token %}
-    {{ garmin_form }}
-    <input type="submit" value="Submit">
+
+			<label> {{ garmin_form.start_date.label_tag }}</label>
+			{% render_field garmin_form.start_date %}
+
+		<label> {{ garmin_form.garmin_username.label_tag }}</label>
+		{% render_field garmin_form.garmin_username   %}
+		
+		<label> {{  garmin_form.garmin_password.label_tag }}</label>
+		{% render_field garmin_form.garmin_password %}
+
+		<button type='submit' class='btn'>Submit</button>
+
 	</form>
 
 	<h2>Your activities</h2>

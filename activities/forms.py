@@ -14,18 +14,20 @@ class DateInput(forms.DateInput):
 # https://stackoverflow.com/questions/55439368/how-to-get-timezone-today-as-default-value
 class GarminDataForm(forms.Form):
     start_date = forms.DateField(
+        label="Date",
         widget=DateInput(
             attrs={
                 "id": "start-date-input",
                 "required": True,
                 "placeholder": "Start Date",
                 "value": now().date(),
+                "label": "date",
             }
-        )
+        ),
     )
-    garmin_username = forms.CharField(max_length=80)
+    garmin_username = forms.CharField(max_length=80, label="Garmin Username")
     garmin_password = forms.CharField(
-        max_length=80, widget=forms.PasswordInput()
+        max_length=80, label="Garmin Password", widget=forms.PasswordInput()
     )
 
 
