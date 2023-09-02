@@ -9,6 +9,14 @@
 			{% for garmin_row in garmin_data %}
 						<li>
 							<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 	
+								
+							<a 
+							class='badge badge-secondary edit-button' 
+							style='cursor: pointer;' 
+							data-id="{{ garmin_row.id }}" 
+							href='edit_activity/{{ garmin_row.id}}'>Edit
+							</a> 
+			
 							<span 
 									class='badge badge-danger delete-button' 
 									style='cursor: pointer;' 
@@ -17,8 +25,7 @@
 									hx-target= '#activities-list'
 									hx-confirm = 'Are your sure to delete?'>Delete
 							</span>
-
-							{% comment %} <span class='badge badge-secondary edit-button' style='cursor: pointer;' data-id="{{ garmin_row.id }}" href='delete_activity/{{ garmin_row.id}}'>X</span> {% endcomment %}
+		
 						</li>
 			{% endfor %}
 </ul>
