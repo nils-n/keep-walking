@@ -5,7 +5,9 @@ from .views import (
     edit_activity,
     load_activities,
     ActivityList,
-    rate_good
+    rate_good,
+    rate_neutral,
+    rate_bad,
 )
 
 urlpatterns = [
@@ -31,6 +33,10 @@ htmx_urlpatterns = [
         name="delete_activity",
     ),
     path("rate_good/<int:garmin_data_id>/", rate_good, name="rate_good"),
+    path(
+        "rate_neutral/<int:garmin_data_id>/", rate_neutral, name="rate_neutral"
+    ),
+    path("rate_bad/<int:garmin_data_id>/", rate_bad, name="rate_bad"),
 ]
 
 urlpatterns += htmx_urlpatterns

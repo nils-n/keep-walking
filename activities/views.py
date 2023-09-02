@@ -183,3 +183,69 @@ def rate_good(request, garmin_data_id):
             "garmin_data": garmin_data,
         },
     )
+
+
+def rate_neutral(request, garmin_data_id):
+    """
+    this views sends a POST request of a neutral user rating
+    of an activity
+    """
+    garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
+
+    if garmin_data.user.username == request.user.username:
+        if garmin_data.rating == garmin_data.EmotionRating.UNDEFINED:
+            print("-->Emotion does not exist : creating now. ")
+            garmin_data.rating = garmin_data.EmotionRating.NEUTRAL
+            garmin_data.save()
+            request, messages.SUCCESS, "Emotion Rating successful"
+        else:
+            print("-->Emotion exists : updating now. ")
+            garmin_data.rating = garmin_data.EmotionRating.NEUTRAL
+            garmin_data.save()
+            request, messages.SUCCESS, "Emotion Rating changed successfully"
+    else:
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
+    # update the template
+    garmin_data = GarminData.objects.filter(user=request.user)
+    return render(
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+        },
+    )
+
+
+def rate_bad(request, garmin_data_id):
+    """
+    this views sends a POST request of a bad user rating
+    of an activity
+    """
+    garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
+
+    if garmin_data.user.username == request.user.username:
+        if garmin_data.rating == garmin_data.EmotionRating.UNDEFINED:
+            print("-->Emotion does not exist : creating now. ")
+            garmin_data.rating = garmin_data.EmotionRating.BAD
+            garmin_data.save()
+            request, messages.SUCCESS, "Emotion Rating successful"
+        else:
+            print("-->Emotion exists : updating now. ")
+            garmin_data.rating = garmin_data.EmotionRating.BAD
+            garmin_data.save()
+            request, messages.SUCCESS, "Emotion Rating changed successfully"
+    else:
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
+    # update the template
+    garmin_data = GarminData.objects.filter(user=request.user)
+    return render(
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+        },
+    )
