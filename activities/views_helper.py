@@ -1,8 +1,6 @@
 import datetime
 from datetime import datetime
 import pandas as pd
-import logging
-import requests
 
 from garminconnect import (
     Garmin,
@@ -10,12 +8,6 @@ from garminconnect import (
     GarminConnectConnectionError,
     GarminConnectTooManyRequestsError,
 )
-
-
-# Configure debug logging
-# logging.basicConfig(level=logging.DEBUG)
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 
 def create_date_range(
@@ -81,12 +73,9 @@ def garmin_api_call(
         GarminConnectConnectionError,
         GarminConnectAuthenticationError,
         GarminConnectTooManyRequestsError,
-        requests.exceptions.HTTPError,
     ) as err:
-        logger.error(
-            "Error occurred during Garmin Connect communication: %s", err
-        )
-        return None
+        print(f"Error occurred during Garmin Connect communication: {err}")
+        return [], []
 
     return [], []
 
