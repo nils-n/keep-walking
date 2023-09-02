@@ -10,6 +10,14 @@
 						<li>
 							<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 	
 								
+							<span class="badge rate-good-button  {%  if  garmin_row.rating == 'GOOD' %} badge-success  {% else %}  badge-secondary  {% endif%}",
+										style='cursor: pointer;' 
+										hx-post=" {% url 'rate_good' garmin_row.id %} "
+										hx-target='#activities-list'
+							>Good</span>
+
+							<span> Rating : [ {{  garmin_row.rating  }} ] </span>
+
 							<a 
 							class='badge badge-secondary edit-button' 
 							style='cursor: pointer;' 

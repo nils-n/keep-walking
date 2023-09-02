@@ -150,3 +150,36 @@ def edit_activity(request, garmin_data_id, *args, **kwargs):
         garmin_form = EditGarminDataForm(initial=data)
         context = {"garmin_edit_form": garmin_form, "date": garmin_data.date}
         return render(request, "edit_activity.html", context)
+
+
+def rate_good(request, garmin_data_id):
+    """
+    this views sends a POST request of a user rating
+    of an activity
+    """
+    garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
+
+    if garmin_data.user.username == request.user.username:
+        if garmin_data.rating == garmin_data.EmotionRating.UNDEFINED:
+            print("-->Emotion does not exist : creating now. ")
+            garmin_data.rating = garmin_data.EmotionRating.GOOD
+            garmin_data.save()
+            request, messages.SUCCESS, "Emotion Rating successful"
+        else:
+            print("-->Emotion exists : updating now. ")
+            garmin_data.rating = garmin_data.EmotionRating.GOOD
+            garmin_data.save()
+            request, messages.SUCCESS, "Emotion Rating changed successfully"
+    else:
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
+    # update the template
+    garmin_data = GarminData.objects.filter(user=request.user)
+    return render(
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+        },
+    )
