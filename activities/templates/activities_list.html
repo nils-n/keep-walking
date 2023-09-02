@@ -29,20 +29,10 @@
 
 	</form>
 
-	<h2>Your activities</h2>
-	{% for garmin_row in garmin_data %}
 
-		{% if garmin_row.user.username == user.username %}
-		<ul>
-			<li>
-				<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 	
-				<a class='badge badge-secondary edit-button' style='cursor: pointer;' data-id="{{ garmin_row.id }}" href='edit_activity/{{ garmin_row.id}}'>Edit</a>
-				<a class='badge badge-danger delete-button' style='cursor: pointer;' data-id="{{ garmin_row.id }}" href='delete_activity/{{ garmin_row.id}}'>X</a>
-				</li>
-		</ul>
-		{% endif %}
-
-	{% endfor %}
+	<div id='activities-list'>
+		{% include "partials/activities.html" %}
+	</div>
 
 
 {% else %}

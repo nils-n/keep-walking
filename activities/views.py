@@ -1,10 +1,12 @@
 from datetime import timedelta
 import os
+from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.timezone import datetime
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.views.generic.list import ListView
 
 from .models import GarminData
 from .forms import GarminDataForm, EditGarminDataForm
@@ -15,6 +17,25 @@ from .views_helper import (
     extract_weight,
     get_garmin_mock_data_for_testing,
 )
+
+
+class ActivityList(ListView):
+    """
+    this view loads all activities for the user
+    https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
+    """
+
+    template_name = "activities_list.html"
+    model = GarminData
+    context_object_name = "garmin_data"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context_data = super().get_context_data(**kwargs)
+        context_data["garmin_form"] = GarminDataForm()
+        return context_data
+
+    def get_queryset(self):
+        return GarminData.objects.filter(user=self.request.user)
 
 
 def view_activities(request):
