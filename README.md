@@ -130,9 +130,10 @@ The website consits of several pages, and a 404 page and are responsive, designe
 
 User data are stored in a relational database. The main model has been carefully designed to allow for emotional ratings and API calls from the Garmin Connect App:
 
-- **User**: each row is a user that has signed up on the website
+- **User**: each row is a user that has signed up on the website 
+- **UserProfile**: each row is a profile where the user can enter more details (height, date of birth, profile picture)
 - **GarminData**:  each row is an entry as read from the Garmin API for a specific date and user
-- **EmotionRating**:  each row is a user rating for a specific date 
+
 
 <table style='width:90%; content-align:center'>
     <tr>
