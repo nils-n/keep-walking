@@ -41,7 +41,7 @@ htmx_urlpatterns = [
     ),
     path("rate_bad/<int:garmin_data_id>/", rate_bad, name="rate_bad"),
     path(
-        "update_profile/<int:profile_id>/",
+        "update_profile/<int:user_id>/",
         update_profile,
         name="update_profile",
     ),

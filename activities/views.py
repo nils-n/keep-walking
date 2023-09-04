@@ -35,38 +35,39 @@ def user_profile(request, *args, **kwargs):
         profile_form.step_goal = profile.step_goal
         profile_form.start_date = profile.start_date
     else:
+        profile = UserProfile()
         profile_form = UserProfileForm()
 
-    context = {"profile_form": profile_form, "user_profile": user_profile}
+    context = {"profile_form": profile_form, "user_profile": profile}
 
     return render(request, "profile.html", context)
 
 
-def update_profile(request, profile_id):
+def update_profile(request, user_id, *args, **kwargs):
     """
     this view creates a profile view of the user
     """
+    print("-->entering update_profile")
+    queryset = UserProfile.objects.filter(user=user_id)
+    profile = get_object_or_404(queryset)
 
-    queryset = UserProfile.objects.filter(user=request.user)
-
-    if request.user.username == profile_id:
+    if request.user.id == user_id:
         print("--> Profile found in DB ")
-        user_profile = get_object_or_404(queryset)
         profile_form = UserProfileForm(request.POST)
         if profile_form.is_valid():
             print("Data in form is valid")
-            profile = UserProfile()
-            profile.height_cm = profile_form.height_cm
-            profile.birthday = profile_form.birthday
-            profile.step_goal = profile_form.step_goal
-            profile.start_date = profile_form.start_date
+            form_data = profile_form.cleaned_data
+            profile.height_cm = form_data["height_cm"]
+            profile.birthday = form_data["birthday"]
+            profile.step_goal = form_data["step_goal"]
+            profile.start_date = form_data["start_date"]
             profile.save()
             messages.add_message(
                 request, messages.SUCCESS, "Profile Updates edited"
             )
 
     else:
-        user_profile = UserProfile()
+        profile = UserProfile()
         profile_form = UserProfileForm(request.POST)
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
@@ -74,7 +75,8 @@ def update_profile(request, profile_id):
 
     # update the template
     user_profile = UserProfile.objects.filter(user=request.user)
-    context = {"profile_form": profile_form, "user_profile": user_profile}
+    profile = get_object_or_404(user_profile)
+    context = {"profile_form": profile_form, "user_profile": profile}
 
     return render(request, "partials/profile_details.html", context)
 
@@ -189,7 +191,6 @@ def edit_activity(request, garmin_data_id, *args, **kwargs):
     if request.method == "POST":
         edit_garmin_form = EditGarminDataForm(request.POST)
         if edit_garmin_form.is_valid():
-            print("halleluja")
             form_data = edit_garmin_form.cleaned_data
             garmin_data.steps = form_data["steps"]
             garmin_data.weight_kg = form_data["weight_kg"]
