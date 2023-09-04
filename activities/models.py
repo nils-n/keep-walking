@@ -28,3 +28,16 @@ class GarminData(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="profile",
+    )
+    birthday = models.DateField(null=True)
+    height_cm = models.IntegerField(null=True)
+    step_goal = models.IntegerField(default=7000)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)

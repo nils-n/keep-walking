@@ -59,7 +59,7 @@ def load_activities(request):
     existing_dates = [db_record.date for db_record in garmin_data]
 
     # for the moment just fake an API call - will add this once the rest is working
-    use_mockdata = False
+    use_mockdata = True
     print(f"use_mockdata : {use_mockdata}")
     if use_mockdata:
         print("calling with fake API data")
