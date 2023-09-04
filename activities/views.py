@@ -29,7 +29,11 @@ def user_profile(request, *args, **kwargs):
 
     if user_profile.exists():
         profile = get_object_or_404(user_profile)
-        profile_form = UserProfileForm(instance=profile)
+        profile_form = UserProfileForm()
+        profile_form.height_cm = profile.height_cm
+        profile_form.birthday = profile.birthday
+        profile_form.step_goal = profile.step_goal
+        profile_form.start_date = profile.start_date
     else:
         profile_form = UserProfileForm()
 
@@ -54,8 +58,8 @@ def update_profile(request, profile_id):
             profile = UserProfile()
             profile.height_cm = profile_form.height_cm
             profile.birthday = profile_form.birthday
-            profile.step_goal = profile.step_goal
-            profile.start_date = profile.start_date
+            profile.step_goal = profile_form.step_goal
+            profile.start_date = profile_form.start_date
             profile.save()
             messages.add_message(
                 request, messages.SUCCESS, "Profile Updates edited"
