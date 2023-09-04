@@ -1,13 +1,42 @@
 from django.utils.timezone import now
 from django import forms
 
-from .models import GarminData
+from .models import GarminData, UserProfile
 
 
 # to make datepicker work with crispyforms
 # https://stackoverflow.com/questions/3367091/whats-the-cleanest-simplest-to-get-running-datepicker-in-django
 class DateInput(forms.DateInput):
     input_type = "date"
+
+
+class UserProfileForm(forms.Form):
+    birthday = forms.DateField(
+        label="Birthday",
+        widget=DateInput(
+            attrs={
+                "id": "user-birthday",
+                "required": True,
+                "placeholder": "Birthday",
+                "value": now().date(),
+                "label": "birthday",
+            }
+        ),
+    )
+    height_cm = forms.IntegerField(label=("Height (cm)"))
+    step_goal = forms.IntegerField(label="Daily Step Goal")
+    start_date = forms.DateField(
+        label="Start Date",
+        widget=DateInput(
+            attrs={
+                "id": "user-start-state",
+                "required": True,
+                "placeholder": "Start Date",
+                "value": now().date(),
+                "label": "start_date",
+            }
+        ),
+    )
 
 
 # setting default TimeDate value for Datepicker from :

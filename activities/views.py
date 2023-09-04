@@ -2,14 +2,14 @@ from datetime import timedelta
 import os
 from typing import Any, Dict
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.timezone import datetime
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.views.generic.list import ListView
 
-from .models import GarminData
-from .forms import GarminDataForm, EditGarminDataForm
+from .models import GarminData, UserProfile
+from .forms import GarminDataForm, EditGarminDataForm, UserProfileForm
 from .views_helper import (
     garmin_api_call,
     convert_api_data_to_datetime,
@@ -18,6 +18,61 @@ from .views_helper import (
     get_garmin_mock_data_for_testing,
     convert_date_str_to_datetime,
 )
+
+
+def user_profile(request, *args, **kwargs):
+    """
+    view to see and edit data stored for an
+    authenticated user
+    """
+    user_profile = UserProfile.objects.filter(user=request.user)
+
+    if user_profile.exists():
+        profile = get_object_or_404(user_profile)
+        profile_form = UserProfileForm(instance=profile)
+    else:
+        profile_form = UserProfileForm()
+
+    context = {"profile_form": profile_form, "user_profile": user_profile}
+
+    return render(request, "profile.html", context)
+
+
+def update_profile(request, profile_id):
+    """
+    this view creates a profile view of the user
+    """
+
+    queryset = UserProfile.objects.filter(user=request.user)
+
+    if request.user.username == profile_id:
+        print("--> Profile found in DB ")
+        user_profile = get_object_or_404(queryset)
+        profile_form = UserProfileForm(request.POST)
+        if profile_form.is_valid():
+            print("Data in form is valid")
+            profile = UserProfile()
+            profile.height_cm = profile_form.height_cm
+            profile.birthday = profile_form.birthday
+            profile.step_goal = profile.step_goal
+            profile.start_date = profile.start_date
+            profile.save()
+            messages.add_message(
+                request, messages.SUCCESS, "Profile Updates edited"
+            )
+
+    else:
+        user_profile = UserProfile()
+        profile_form = UserProfileForm(request.POST)
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
+
+    # update the template
+    user_profile = UserProfile.objects.filter(user=request.user)
+    context = {"profile_form": profile_form, "user_profile": user_profile}
+
+    return render(request, "partials/profile_details.html", context)
 
 
 class ActivityList(ListView):

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Keep on Walking{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+
+	<div id='user-profile-info'>
+		{% include 'partials/profile_details.html' %}
+	</div>
+
+	<h2>Update Profile</h2>
+
+	<p>Update Details of your Profile. In this way, the BMI is calcuated correctly </p>
+
+	<form hx-post=" {% url 'update_profile'  user.id %}" hx-target='#user-profile-info'  >
+
+    {% csrf_token %}
+
+			<label> {{ profile_form.birthday.label_tag }}</label>
+			{% render_field profile_form.birthday %}
+
+		<label> {{ profile_form.height_cm.label_tag }}</label>
+		{% render_field profile_form.height_cm   %}
+		
+		<label> {{  profile_form.step_goal.label_tag }}</label>
+		{% render_field profile_form.step_goal %}
+
+				
+		<label> {{  profile_form.start_date.label_tag }}</label>
+		{% render_field profile_form.start_date %}
+
+		<button type='submit' class='btn btn-secondary'>Update</button>
+
+	</form>
+
+
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a> |
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}
+
+
+{% block javascript %}
+
+{% load static %}
+
+<script src= {% static  'scripts/activities.js'  %}></script>
+
+{%  endblock %}
+
+
+

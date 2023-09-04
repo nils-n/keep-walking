@@ -8,10 +8,13 @@ from .views import (
     rate_good,
     rate_neutral,
     rate_bad,
+    user_profile,
+    update_profile,
 )
 
 urlpatterns = [
     path("", ActivityList.as_view(), name="activity_home"),
+    path("profile/", user_profile, name="user_profile"),
     path("list/", ActivityList.as_view(), name="activity_list"),
     path(
         "list/edit_activity/<int:garmin_data_id>",
@@ -37,6 +40,11 @@ htmx_urlpatterns = [
         "rate_neutral/<int:garmin_data_id>/", rate_neutral, name="rate_neutral"
     ),
     path("rate_bad/<int:garmin_data_id>/", rate_bad, name="rate_bad"),
+    path(
+        "update_profile/<int:profile_id>/",
+        update_profile,
+        name="update_profile",
+    ),
 ]
 
 urlpatterns += htmx_urlpatterns

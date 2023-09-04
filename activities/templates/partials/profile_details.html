@@ -1,0 +1,16 @@
+
+
+<h2>Your Profile</h2>
+
+{% if user_profile %}
+
+<p> Birthday : {{ user_profile.birthday }}</p>
+<p> Height in cm : {{ user_profile.height_cm }}</p>
+<p> Step Goal  : {{ user_profile.step_goal }}</p>
+<p> Start Date : {{ user_profile.start_date }}</p>
+
+{% else %}
+
+<p>No profile to display</p>
+
+{%  endif %}
