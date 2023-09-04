@@ -135,7 +135,7 @@ User data are stored in a relational database. The main model has been carefully
 - **GarminData**:  each row is an entry as read from the Garmin API for a specific date and user
 
 
-<table style='width:90%; content-align:center'>
+<table style='width:60%; content-align:center'>
     <tr>
        <td> <img src="./assets/images/drawSQL-pp4-activity-tracker.png"; alt="ER diagram of the model" >  </td>
     </tr>

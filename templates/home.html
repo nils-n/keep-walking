@@ -2,14 +2,46 @@
 
 {% block title %}Keep on Walking{% endblock %}
 
+
+{% block header %}
+{% if user.is_authenticated %}
+
+<nav class='container bg-indigo-500 text-indigo-100 font-bold text-xl leading-8'>
+  <div class="py-8 top-0 flex flex-col flex-wrap justify-center align-center">
+    <div>
+        <div class='ml-20'>
+          <a class='text-center' href="{% url 'user_profile' %}">User Profile</a>
+        </div>
+        <div  class='ml-20'>
+            <a class='text-center' href="{% url 'activity_list' %}">Home</a>
+        </div>
+        <div  class='ml-20'>
+          <a class='text-center' href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </div>
+  </div>
+</nav>
+{% else %}
+
+{% endif %}
+
+{% endblock %}
+
+
+
+
 {% block content %}
 {% if user.is_authenticated %}
+
   Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-	<p><a href="{% url 'activity_list' %}">Activities</a></p>
-	<p><a href="{% url 'user_profile' %}">User Profile</a></p>
+  
 	{% else %}
   <p>You are not logged in</p>
+
+
+  <nav></nav>
+
+
   <a href="{% url 'login' %}">Log In</a> |
   <a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
