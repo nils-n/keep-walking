@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "cloudinary",
     "crispy_forms",
+    "crispy_tailwind",
     "widget_tweaks",
     "accounts",
     "activities",
@@ -122,8 +123,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "accounts.CustomUser"  # new
 
-# Forms as per Course Material (Django Blog - Commenting , part 1)
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+# use Tailwind crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 # Authentication as per Course Material (Django Blog - Authorisation , part 1)
 SITE_ID = 1
