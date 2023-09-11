@@ -132,7 +132,7 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 SITE_ID = 1
 
 # redirect after login/logout
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "activity_home"
 LOGOUT_REDIRECT_URL = "home"
 
 MESSAGE_TAGS = {
