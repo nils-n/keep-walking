@@ -1,57 +1,81 @@
+<h2 class="py-4 text-2xl font-bold text-blue-600">
+  <span> <i class="fa-solid fa-person-walking"> </i> </span> Your walks 
+</h2>
 
+{% if garmin_data %} 
 
+		{% for garmin_row in garmin_data %}
 
-<h2 class = 'text-blue-600 text-2xl font-bold py-4 '><span> <i class="fa-solid fa-person-walking"> </i> </span> Your walks </h2>
+				<div class="grap-y-3 flex px-0 py-1">
 
-{% if garmin_data %}
-			
-<ul>
-			{% for garmin_row in garmin_data %}
-						<li>
-							<span class='garmin-id'> id : {{  garmin_row.id }}  </span> {{ garmin_row.date}} : {{ garmin_row.user.username}} -  {{ garmin_row.steps }} steps -  weight : {{ garmin_row.weight_kg }} (kg) 	
-								
-							<span class="badge rate-good-button  {%  if  garmin_row.rating == 2 %} badge-success  {% else %}  badge-secondary  {% endif%}",
-										style='cursor: pointer;' 
-										hx-post=" {% url 'rate_good' garmin_row.id %} "
-										hx-target='#activities-list'
-							>Good</span>
-							<span 
-									class="badge rate-neutral-button  {%  if  garmin_row.rating == 1 %} badge-info  {% else %}  badge-secondary  {% endif%}",
-									style='cursor: pointer;' 
-									hx-post=" {% url 'rate_neutral' garmin_row.id %} "
-									hx-target='#activities-list'
-							>Neutral</span>
+					<div class="px-4 py-2 flex flex-1 justify-between align-center bg-blue-200 rounded-full">
 
-							<span 
-									class="badge rate-bad-button  {%  if  garmin_row.rating == 0 %} badge-warning  {% else %}  badge-secondary  {% endif%}",
-									style='cursor: pointer;' 
-									hx-post=" {% url 'rate_bad' garmin_row.id %} "
-									hx-target='#activities-list'
-							>Bad</span>
+						<div class=" pl-2 sm:text-sm text-xs font-semibold text-gray-500 flex flex-col justify-center">
+							{{ garmin_row.date}}
+						</div>
 
-							<a 
-							class='badge badge-secondary edit-button' 
-							style='cursor: pointer;' 
-							data-id="{{ garmin_row.id }}" 
-							href='edit_activity/{{ garmin_row.id}}'>Edit
-							</a> 
-			
-							<span 
-									class='badge badge-danger delete-button' 
-									style='cursor: pointer;' 
-									data-id="{{ garmin_row.id }}" 
-									hx-delete= "{%  url 'delete_activity' garmin_row.id %} "
-									hx-target= '#activities-list'
-									hx-confirm = 'Are your sure to delete?'>Delete
-							</span>
-		
-						</li>
-			{% endfor %}
-</ul>
+						<div class=" text-gray-700 font-bold sm:text-lg flex flex-row items-center ">
+							 <i class="fa-solid fa-shoe-prints text-blue-500 font-normal sm:pr-2"> </i> {{ garmin_row.steps}}
+						</div>
 
-{% else  %}
+						<div class="font-normal text-gray-600 invisible sm:visible flex flex-col justify-center">
+							{{ garmin_row.weight_kg}} kg
+						</div>
+
+						<div class="font-normal text-gray-600 text-3xl">
+							<span
+								class="badge rate-good-button {% if garmin_row.rating == 2 %} text-emerald-500 text-green-50 {% else %}  text-blue-500 text-blue-50 opacity-50 {% endif%}",
+								style="cursor: pointer"
+								hx-post=" {% url 'rate_good' garmin_row.id %} "
+								hx-target="#activities-list"
+								>
+								{% if garmin_row.rating == 2 %} <i class="fa-solid fa-face-smile  "> {% else %} <i class="fa-regular fa-face-smile">  {% endif%}
+								</i></span>
+							<span
+								class="badge rate-neutral-button {% if garmin_row.rating == 1 %} text-amber-600 text-green-50  {% else %} text-blue-500 text-blue-50 opacity-50 {% endif%}",
+								style="cursor: pointer"
+								hx-post=" {% url 'rate_neutral' garmin_row.id %} "
+								hx-target="#activities-list"
+								>	{% if garmin_row.rating == 1 %} <i class="fa-solid fa-face-smile  "> {% else %} <i class="fa-regular fa-face-smile">  {% endif%}</i></span>
+
+							<span
+								class="badge rate-bad-button {% if garmin_row.rating == 0 %} text-red-600 text-blue-50 {% else %} text-blue-500 text-blue-50 opacity-50 {% endif%}",
+								style="cursor: pointer"
+								hx-post=" {% url 'rate_bad' garmin_row.id %} "
+								hx-target="#activities-list">
+								{% if garmin_row.rating == 0 %} <i class="fa-solid fa-face-smile  "> {% else %} <i class="fa-regular fa-face-smile">  {% endif%}</i></span>	
+						</div>
+
+						<div class='flex flex-row flex-nowrap gap-x-4'> 
+							<div class="font-normal text-blue-700 flex flex-col justify-center">
+								<a
+									class="badge badge-secondary edit-button"
+									style="cursor: pointer"
+									data-id="{{ garmin_row.id }}"
+									href="edit_activity/{{ garmin_row.id}}"><i class="fa-solid fa-wrench"></i>
+								</a>
+							</div>
+	
+							<div class="text-xl font-bold text-red-500 flex flex-col justify-center">
+								<span
+									class="badge badge-danger delete-button"
+									style="cursor: pointer"
+									data-id="{{ garmin_row.id }}"
+									hx-delete="{%  url 'delete_activity' garmin_row.id %} "
+									hx-target="#activities-list"
+									hx-confirm="Are your sure to delete?">X</span>
+							</div>
+
+						</div>
+						
+
+					</div>
+				</div>
+
+		{% endfor %} 
+
+{% else %}
 
 <p>No activities to display</p>
 
-{%  endif %}
-	
+{% endif %}
