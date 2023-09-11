@@ -31,8 +31,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG").lower() in ["true"]
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
     "localhost",
+    "127.0.0.1",
     os.environ.get("HEROKU_HOSTNAME"),
 ]
 

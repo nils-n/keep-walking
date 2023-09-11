@@ -729,14 +729,6 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-h1 {
-  color: rebeccapurple;
-}
-
-h2 {
-  color: red;
-}
-
 @media (min-width: 640px) {
   .sm\:flex {
     display: flex;
