@@ -7,6 +7,7 @@ from django.utils.timezone import datetime
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.views.generic.list import ListView
+from django.core.paginator import Paginator
 
 from .models import GarminData, UserProfile
 from .forms import GarminDataForm, EditGarminDataForm, UserProfileForm
@@ -93,7 +94,12 @@ class ActivityList(ListView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context_data = super().get_context_data(**kwargs)
+        garmin_data = self.model.objects.filter(user=self.request.user).order_by("-date")
+        paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+        page_number = self.request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
         context_data["garmin_form"] = GarminDataForm()
+        context_data["page_obj"] = page_obj
         return context_data
 
     def get_queryset(self):

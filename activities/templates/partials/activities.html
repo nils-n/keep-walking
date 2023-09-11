@@ -4,11 +4,11 @@
 
 {% if garmin_data %} 
 
-		{% for garmin_row in garmin_data %}
+		{% for garmin_row in page_obj %}
 
 				<div class="grap-y-3 flex px-0 py-1">
 
-					<div class="px-4 py-2 flex flex-1 justify-between align-center bg-blue-200 rounded-full">
+					<div class="px-4 py-2 flex flex-1 justify-between align-center bg-blue-200 rounded-full shadow-md">
 
 						<div class=" pl-2 sm:text-sm text-xs font-semibold text-gray-500 flex flex-col justify-center">
 							{{ garmin_row.date}}
@@ -73,6 +73,31 @@
 				</div>
 
 		{% endfor %} 
+
+
+		<div class='pt-10 flex flex-row justify-center items-center'>
+			<div class="pagination">
+				<span class="step-links">
+
+						{% if page_obj.has_previous %}
+								<a class='bg-blue-100 text-blue-700 px-3 py-2 rounded-lg hover:text-blue-100 hover:bg-blue-700' href="?page=1">&laquo; first</a>
+								<a class='bg-blue-100 text-blue-700 px-3 py-2 rounded-lg hover:text-blue-100 hover:bg-blue-700' href="?page={{ page_obj.previous_page_number }}">previous</a>
+						{% endif %}
+			
+						<span class="current text-blue-500 text-xl pr-2 sm:pr-4 ">
+								Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+						</span>
+			
+						{% if page_obj.has_next %}
+								<a href="?page={{ page_obj.next_page_number }}" class='bg-blue-100 text-blue-700 px-3 py-2 rounded-lg hover:text-blue-100 hover:bg-blue-700'>next</a>
+								<a href="?page={{ page_obj.paginator.num_pages }}" class='bg-blue-100 text-blue-700 px-3 py-2 rounded-lg hover:text-blue-100 hover:bg-blue-700'>last &raquo;</a>
+						{% endif %}
+				</span>
+			</div>
+
+		</div>
+		
+		
 
 {% else %}
 
