@@ -13,56 +13,8 @@
 	
 	<header>
 		
-		{% if user.is_authenticated %}
-
-		<nav class='w-screen bg-indigo-200 text-indigo-800 font-semibold text-xl leading-8'>
-			<div class="py-8 top-0 flex flex-wrap flex-grow justify-center sm:justify-between align-center sm:pl-8">
-					<div class="sm:hidden  space-y-2 hamburger-nav absolute right-0 mr-8  ">
-						<svg class='w-10 h-10 fill-current' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-					</div>
-
-				<div class=' sm:flex justify-center sm:justify-between sm:gap-x-4 md:gap-x-8 uppercase md:font-bold'>
-						<div class=''>
-							<a class='text-center' href="{% url 'user_profile' %}">{{ user.username }}</a>
-						</div>
-						<div  class=''>
-								<a class='text-center' href="{% url 'activity_list' %}">Home</a>
-						</div>
-						<div  class=''>
-							<a class='text-center' href="{% url 'logout' %}">Log Out</a>
-						</div>
-				</div>
-
-			</div>
-		</nav>
-
-		{% else %}
-
-
-		<nav class='w-screen bg-indigo-200 text-indigo-800 font-semibold text-xl leading-8'>
-			<div class="py-8 top-0 flex flex-wrap flex-grow justify-center sm:justify-between align-center sm:pl-8">
-					<div class="sm:hidden  space-y-2 hamburger-nav absolute right-0 mr-8  ">
-						<svg class='w-10 h-10 fill-current' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-					</div>
-
-				<div class=' sm:flex justify-center sm:justify-between sm:gap-x-4 md:gap-x-8 uppercase md:font-bold'>
-						<div class=''>
-							<a class='text-center' href="{% url 'user_profile' %}">{{ user.username }}</a>
-						</div>
-						<div  class=''>
-								<a class='text-center' href="{% url 'signup' %}">Sign Up</a>
-						</div>
-						<div  class=''>
-							<a class='text-center' href="{% url 'login' %}">Log In</a>
-						</div>
-				</div>
-
-			</div>
-		</nav>
-
-
-		{% endif %}
-
+		{% include 'partials/nav.html'%}
+    
 	</header>
 
 
