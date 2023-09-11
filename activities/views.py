@@ -241,12 +241,17 @@ def rate_good(request, garmin_data_id):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user)
+    garmin_data = GarminData.objects.filter(user=request.user).order_by("-date")
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(
         request,
         "partials/activities.html",
         {
             "garmin_data": garmin_data,
+            "page_obj": page_obj,
         },
     )
 
@@ -274,14 +279,19 @@ def rate_neutral(request, garmin_data_id):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user)
+    garmin_data = GarminData.objects.filter(user=request.user).order_by("-date")
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(
         request,
         "partials/activities.html",
         {
             "garmin_data": garmin_data,
+            "page_obj": page_obj,
         },
     )
+
 
 
 def rate_bad(request, garmin_data_id):
@@ -307,11 +317,15 @@ def rate_bad(request, garmin_data_id):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user)
+    garmin_data = GarminData.objects.filter(user=request.user).order_by("-date")
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(
         request,
         "partials/activities.html",
         {
             "garmin_data": garmin_data,
+            "page_obj": page_obj,
         },
     )
