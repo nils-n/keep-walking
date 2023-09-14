@@ -1,14 +1,105 @@
 
 
-<h2>Your Profile</h2>
+
+<h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-3'><span> <i class="fa-solid  fa-circle-check"> </i> </span> Details </h2>
 
 
 {% if user_profile %}
 
-<p> Birthday : {{ user_profile.birthday }}</p>
-<p> Height in cm : {{ user_profile.height_cm }}</p>
-<p> Step Goal  : {{ user_profile.step_goal }}</p>
-<p> Start Date : {{ user_profile.start_date }}</p>
+
+<!-- using DaisyUI table component https://daisyui.com/components/table/ -->
+<div class="overflow-x-auto text-blue-300">
+  <table class="table text-blue-500">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th class='text-blue-400'>Description</th>
+        <th class='text-blue-400'>Value</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+      <tr>
+        <td>
+          <div class="flex items-center space-x-3">
+            <div>
+                <p>Birthday</p>
+            </div>
+          </div>
+        </td>
+        <td class="font-bold text-md">
+          {{ user_profile.birthday }}
+        </td>
+        <td>
+          <button class="btn btn-ghost btn-xs uppercase">edit</button>
+        </td>
+        <th>
+          <button class="btn btn-ghost btn-xs uppercase">reset</button>
+        </th>
+      </tr>
+      <!-- row 2 -->
+      <tr>
+        <td>
+          <div class="flex items-center space-x-3">
+            <div>
+                <p>Height / cm</p>
+            </div>
+          </div>
+        </td>
+        <td class="font-bold text-md">
+          {{ user_profile.height_cm }}
+        </td>
+        <td>
+          <button class="btn btn-ghost btn-xs uppercase">edit</button>
+        </td>
+        <th>
+          <button class="btn btn-ghost btn-xs uppercase">reset</button>
+        </th>
+      </tr>
+      <!-- row 3 -->
+      <tr>
+        <td>
+          <div class="flex items-center space-x-3">
+            <div >
+                <p>Step Goal</p>
+            </div>
+          </div>
+        </td>
+        <td class="font-bold text-md">
+          {{ user_profile.step_goal }}
+        </td>
+        <td>
+          <button class="btn btn-ghost btn-xs uppercase">edit</button>
+        </td>
+        <th>
+          <button class="btn btn-ghost btn-xs uppercase">reset</button>
+        </th>
+      </tr>
+      <!-- row 3 -->
+      <tr>
+        <td>
+          <div class="flex items-center space-x-3">
+            <div>
+                <p>Start Date</p>
+            </div>
+          </div>
+        </td>
+        <td class="font-bold text-md">
+          {{ user_profile.start_date }}
+        </td>
+        <td>
+          <button class="btn btn-ghost btn-xs uppercase">edit</button>
+        </td>
+        <th>
+          <button class="btn btn-ghost btn-xs uppercase">reset</button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 {% else %}
 
