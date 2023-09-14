@@ -10,11 +10,17 @@ from .views import (
     rate_bad,
     user_profile,
     update_profile,
+    edit_birthday,
 )
 
 urlpatterns = [
     path("", ActivityList.as_view(), name="activity_home"),
     path("profile/<int:user_id>", user_profile, name="user_profile"),
+    path(
+        "profile/<int:user_id>/edit_birthday",
+        edit_birthday,
+        name="edit_birthday",
+    ),
     path("list/", ActivityList.as_view(), name="activity_list"),
     path(
         "list/edit_activity/<int:garmin_data_id>",

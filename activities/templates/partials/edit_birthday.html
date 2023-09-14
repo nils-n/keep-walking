@@ -1,0 +1,12 @@
+{% load tailwind_filters %}
+
+
+<!-- https://github.com/saadeghi/daisyui/issues/338 to fix the daisy UI error of dark form background -->
+
+{{ profile_form.height_cm.as_hidden }}
+<form class=' text-blue-100 text-normal bg-transparent'>
+  {% csrf_token %}
+  {{profile_form | crispy }}
+  <input type="submit" class='btn btn-ghost btn-xs uppercase'>
+ 
+</form>

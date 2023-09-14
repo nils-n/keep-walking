@@ -52,6 +52,32 @@ def user_profile(request, user_id, *args, **kwargs):
     return render(request, "profile.html", context)
 
 
+def edit_birthday(request, user_id, *args, **kwargs):
+    """
+    view to edit birthday of an authenticated user
+    """
+    if request.user.id == user_id:
+        user_profile = UserProfile.objects.filter(user=request.user)
+        profile = get_object_or_404(user_profile)
+        profile_form = UserProfileForm()
+        profile_form.height_cm = profile.height_cm
+        profile_form.birthday = profile.birthday
+        profile_form.step_goal = profile.step_goal
+        profile_form.start_date = profile.start_date
+        # make other fields hidden
+        field = profile_form.fields['height_cm']
+        field.widget = field.hidden_widget()
+        field = profile_form.fields['step_goal']
+        field.widget = field.hidden_widget()
+        field = profile_form.fields['start_date']
+        field.widget = field.hidden_widget()
+
+        context = {"profile_form": profile_form, "user_profile": profile}
+    else:
+        profile = UserProfile()
+    return render(request, "partials/edit_birthday.html", context)
+
+
 def update_profile(request, user_id, *args, **kwargs):
     """
     this view creates a profile view of the user
@@ -102,8 +128,12 @@ class ActivityList(ListView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context_data = super().get_context_data(**kwargs)
-        garmin_data = self.model.objects.filter(user=self.request.user).order_by("-date")
-        paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+        garmin_data = self.model.objects.filter(
+            user=self.request.user
+        ).order_by("-date")
+        paginator = Paginator(
+            garmin_data, 8
+        )  # Show 8 last activities per page.
         page_number = self.request.GET.get("page")
         page_obj = paginator.get_page(page_number)
         context_data["garmin_form"] = GarminDataForm()
@@ -249,7 +279,9 @@ def rate_good(request, garmin_data_id):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user).order_by("-date")
+    garmin_data = GarminData.objects.filter(user=request.user).order_by(
+        "-date"
+    )
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -287,7 +319,9 @@ def rate_neutral(request, garmin_data_id):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user).order_by("-date")
+    garmin_data = GarminData.objects.filter(user=request.user).order_by(
+        "-date"
+    )
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -299,7 +333,6 @@ def rate_neutral(request, garmin_data_id):
             "page_obj": page_obj,
         },
     )
-
 
 
 def rate_bad(request, garmin_data_id):
@@ -325,7 +358,9 @@ def rate_bad(request, garmin_data_id):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user).order_by("-date")
+    garmin_data = GarminData.objects.filter(user=request.user).order_by(
+        "-date"
+    )
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

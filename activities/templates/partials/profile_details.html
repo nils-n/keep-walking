@@ -29,11 +29,13 @@
             </div>
           </div>
         </td>
-        <td class="font-bold text-md">
-          {{ user_profile.birthday }}
+        <td class="font-bold text-md"> 
+          <p id='profile-birthday'>
+            {{ user_profile.birthday }}
+          </p> 
         </td>
         <td>
-          <button class="btn btn-ghost btn-xs uppercase">edit</button>
+          <button class="btn btn-ghost btn-xs uppercase" hx-get="{% url 'edit_birthday' user.id %}" hx-target='#profile-birthday'>edit</button>
         </td>
         <th>
           <button class="btn btn-ghost btn-xs uppercase">reset</button>
