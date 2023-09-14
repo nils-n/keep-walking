@@ -4,6 +4,7 @@ from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.timezone import datetime
+from django.http import QueryDict
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.views.generic.list import ListView
@@ -49,12 +50,40 @@ def user_profile(request, user_id, *args, **kwargs):
             request, messages.ERROR, "No permission to do this request"
         )
 
-    return render(request, "profile.html", context)
+    if request.method == "GET":
+        return render(request, "profile.html", context)
+    elif request.method == 'PUT':
+        user_profile = UserProfile.objects.filter(user=request.user)
+        profile = get_object_or_404(user_profile)
+        data = QueryDict(request.body).dict()
+        new_birthday = convert_date_str_to_datetime(data['birthday'])
+        print('The request body is: ')
+        print(request.body)
+        print('The data is: ')
+        print(data)
+        profile_form = UserProfileForm(data)
+        profile_form.height_cm = profile.height_cm
+        profile_form.birthday = profile.birthday
+        profile_form.step_goal = profile.step_goal
+        profile_form.start_date = profile.start_date
+        print('--->What are the error?')
+        if profile_form.is_valid():
+            print('---> OK the form is valiud')
+            form_data = profile_form.cleaned_data
+            profile.height_cm = form_data["height_cm"]
+            profile.birthday = form_data["birthday"]
+            profile.step_goal = form_data["step_goal"]
+            profile.start_date = form_data["start_date"]
+            profile.save()
+            context = {"profile_form": profile_form, "user_profile": profile}
+            return render(request, "partials/profile_details.html", context)
+        context['profile_form'] = profile_form
+        return render(request, "partials/edit_profile.html", context)
 
 
-def edit_birthday(request, user_id, *args, **kwargs):
+def edit_profile(request, user_id, *args, **kwargs):
     """
-    view to edit birthday of an authenticated user
+    view to edit profile of an authenticated user
     """
     if request.user.id == user_id:
         user_profile = UserProfile.objects.filter(user=request.user)
@@ -64,18 +93,10 @@ def edit_birthday(request, user_id, *args, **kwargs):
         profile_form.birthday = profile.birthday
         profile_form.step_goal = profile.step_goal
         profile_form.start_date = profile.start_date
-        # make other fields hidden
-        field = profile_form.fields['height_cm']
-        field.widget = field.hidden_widget()
-        field = profile_form.fields['step_goal']
-        field.widget = field.hidden_widget()
-        field = profile_form.fields['start_date']
-        field.widget = field.hidden_widget()
-
         context = {"profile_form": profile_form, "user_profile": profile}
     else:
         profile = UserProfile()
-    return render(request, "partials/edit_birthday.html", context)
+    return render(request, "partials/edit_profile.html", context)
 
 
 def update_profile(request, user_id, *args, **kwargs):

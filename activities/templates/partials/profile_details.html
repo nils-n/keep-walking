@@ -7,6 +7,23 @@
 {% if user_profile %}
 
 
+
+<p> Birthday :  {{ user_profile.birthday }} </p>
+<p>  Height / cm : {{ user_profile.height_cm }} </p>
+<p> Start Date  :  {{ user_profile.start_date }} </p>
+<p> Step Goal :  {{ user_profile.step_goal }} </p>
+
+<div id='edit-profile'></div>
+
+<button class="btn btn-ghost btn-xs uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'>edit</button>
+
+
+<!-- Before styling too much, let's get it working with simple divs. Then replace the table -->
+
+
+
+
+
 <!-- using DaisyUI table component https://daisyui.com/components/table/ -->
 <div class="overflow-x-auto text-blue-300">
   <table class="table text-blue-500">
@@ -35,7 +52,7 @@
           </p> 
         </td>
         <td>
-          <button class="btn btn-ghost btn-xs uppercase" hx-get="{% url 'edit_birthday' user.id %}" hx-target='#profile-birthday'>edit</button>
+          <button class="btn btn-ghost btn-xs uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#profile-birthday'>edit</button>
         </td>
         <th>
           <button class="btn btn-ghost btn-xs uppercase">reset</button>

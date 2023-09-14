@@ -10,25 +10,20 @@ from .views import (
     rate_bad,
     user_profile,
     update_profile,
-    edit_birthday,
+    edit_profile,
 )
 
 urlpatterns = [
     path("", ActivityList.as_view(), name="activity_home"),
     path("profile/<int:user_id>", user_profile, name="user_profile"),
     path(
-        "profile/<int:user_id>/edit_birthday",
-        edit_birthday,
-        name="edit_birthday",
+        "profile/<int:user_id>/edit_profile",
+        edit_profile,
+        name="edit_profile",
     ),
     path("list/", ActivityList.as_view(), name="activity_list"),
     path(
         "list/edit_activity/<int:garmin_data_id>",
-        edit_activity,
-        name="edit_activity",
-    ),
-    path(
-        "edit_activity/<int:garmin_data_id>",
         edit_activity,
         name="edit_activity",
     ),
