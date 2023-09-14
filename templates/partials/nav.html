@@ -29,7 +29,7 @@
 
 				{% if user.is_authenticated %}
 						<li class="sm:inline-block">
-								<a class="text-center" href="{% url 'user_profile' %}">{{ user.username }}</a> 
+								<a class="text-center" href="{% url 'user_profile' user.id %}">{{ user.username  }}</a> 
 						</li>
 						<li class="sm:inline-block">
 								<a class="text-center" href="{% url 'activity_list' %}">Home</a>

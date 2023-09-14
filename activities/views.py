@@ -21,25 +21,33 @@ from .views_helper import (
 )
 
 
-def user_profile(request, *args, **kwargs):
+def user_profile(request, user_id, *args, **kwargs):
     """
     view to see and edit data stored for an
     authenticated user
     """
-    user_profile = UserProfile.objects.filter(user=request.user)
+    if request.user.id == user_id:
+        user_profile = UserProfile.objects.filter(user=request.user)
 
-    if user_profile.exists():
-        profile = get_object_or_404(user_profile)
-        profile_form = UserProfileForm()
-        profile_form.height_cm = profile.height_cm
-        profile_form.birthday = profile.birthday
-        profile_form.step_goal = profile.step_goal
-        profile_form.start_date = profile.start_date
+        if user_profile.exists():
+            profile = get_object_or_404(user_profile)
+            profile_form = UserProfileForm()
+            profile_form.height_cm = profile.height_cm
+            profile_form.birthday = profile.birthday
+            profile_form.step_goal = profile.step_goal
+            profile_form.start_date = profile.start_date
+        else:
+            profile = UserProfile()
+            profile_form = UserProfileForm()
+
+        context = {"profile_form": profile_form, "user_profile": profile}
     else:
         profile = UserProfile()
         profile_form = UserProfileForm()
-
-    context = {"profile_form": profile_form, "user_profile": profile}
+        context = {"profile_form": profile_form, "user_profile": profile}
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
 
     return render(request, "profile.html", context)
 

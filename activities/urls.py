@@ -14,7 +14,7 @@ from .views import (
 
 urlpatterns = [
     path("", ActivityList.as_view(), name="activity_home"),
-    path("profile/", user_profile, name="user_profile"),
+    path("profile/<int:user_id>", user_profile, name="user_profile"),
     path("list/", ActivityList.as_view(), name="activity_list"),
     path(
         "list/edit_activity/<int:garmin_data_id>",
