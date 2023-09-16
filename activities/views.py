@@ -52,23 +52,23 @@ def user_profile(request, user_id, *args, **kwargs):
 
     if request.method == "GET":
         return render(request, "profile.html", context)
-    elif request.method == 'PUT':
+    elif request.method == "PUT":
         user_profile = UserProfile.objects.filter(user=request.user)
         profile = get_object_or_404(user_profile)
         data = QueryDict(request.body).dict()
-        new_birthday = convert_date_str_to_datetime(data['birthday'])
-        print('The request body is: ')
+        new_birthday = convert_date_str_to_datetime(data["birthday"])
+        print("The request body is: ")
         print(request.body)
-        print('The data is: ')
+        print("The data is: ")
         print(data)
         profile_form = UserProfileForm(data)
         profile_form.height_cm = profile.height_cm
         profile_form.birthday = profile.birthday
         profile_form.step_goal = profile.step_goal
         profile_form.start_date = profile.start_date
-        print('--->What are the error?')
+        print("--->What are the error?")
         if profile_form.is_valid():
-            print('---> OK the form is valiud')
+            print("---> OK the form is valiud")
             form_data = profile_form.cleaned_data
             profile.height_cm = form_data["height_cm"]
             profile.birthday = form_data["birthday"]
@@ -77,22 +77,25 @@ def user_profile(request, user_id, *args, **kwargs):
             profile.save()
             context = {"profile_form": profile_form, "user_profile": profile}
             return render(request, "partials/profile_details.html", context)
-        context['profile_form'] = profile_form
+        context["profile_form"] = profile_form
         return render(request, "partials/edit_profile.html", context)
 
 
 def edit_profile(request, user_id, *args, **kwargs):
     """
     view to edit profile of an authenticated user
+    https://stackoverflow.com/questions/813418/django-set-field-value-after-a-form-is-initialized
     """
     if request.user.id == user_id:
-        user_profile = UserProfile.objects.filter(user=request.user)
-        profile = get_object_or_404(user_profile)
-        profile_form = UserProfileForm()
-        profile_form.height_cm = profile.height_cm
-        profile_form.birthday = profile.birthday
-        profile_form.step_goal = profile.step_goal
-        profile_form.start_date = profile.start_date
+        profile = get_object_or_404(UserProfile, user_id=request.user.id)
+        profile_form = UserProfileForm(
+            initial={
+                "birthday": profile.birthday,
+                "step_goal": profile.step_goal,
+                "height_cm": profile.height_cm,
+                "start_date": profile.start_date,
+            }
+        )
         context = {"profile_form": profile_form, "user_profile": profile}
     else:
         profile = UserProfile()
