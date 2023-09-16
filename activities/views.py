@@ -32,14 +32,11 @@ def user_profile(request, user_id, *args, **kwargs):
         profile_form = UserProfileForm()
         context = {"profile_form": profile_form, "user_profile": profile}
         if request.method == "GET":
-            print("GET Request - render the page")
             return render(request, "profile.html", context)
         elif request.method == "PUT":
-            print("PUT Request - update something on the page")
             data = QueryDict(request.body).dict()
             profile_form = UserProfileForm(data)
             if profile_form.is_valid():
-                print("---> OK the form is valid")
                 form_data = profile_form.cleaned_data
                 profile.height_cm = form_data["height_cm"]
                 profile.birthday = form_data["birthday"]
