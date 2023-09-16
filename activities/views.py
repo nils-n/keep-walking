@@ -99,12 +99,9 @@ def delete_profile(request, user_id, *args, **kwargs):
         print(" profile found ...")
         print("need to add dialog to confirm here")
         print("--> Not deleting the user for now")
-        #profile.user.delete()
+        profile.user.delete()
         messages.add_message(request, messages.SUCCESS, "User Profile deleted")
-        profile_form = UserProfileForm()
-        profile = UserProfile()
-        context = {"profile_form": profile_form, "user_profile": profile}
-        return render(request, "", context)
+        return render(request, "partials/delete_profile.html", {})
 
 
 def update_profile(request, user_id, *args, **kwargs):

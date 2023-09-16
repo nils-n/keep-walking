@@ -15,7 +15,6 @@
 			<!--p class='text-blue-400 font-semibold text-lg'>Hi {{ user.username }}!<-->
 			<p class='pt-1 pb-4 text-blue-500 sm:text-lg font-normal' style='line-height:1.6; max-width:79ch'> Here you can find all the information stored about you. Keep these information accurate, so that your BMI is calculated correctly according to your age and height.</p>
 			<!-- small form to allow user syncing data with Garmin watch--> 
-
 			<div class='pt-8 pb-6'> 
 				<div id='user-profile-info'>
 					{% include 'partials/profile_details.html' %}
@@ -23,38 +22,7 @@
 			</div>
 			
 		<p class='text-gray-400 text-sm pb-16'> We don't recommend deleting your data - it will keep the calculation of the BMI correct.</p>
-
-
-
-
-			<!--
-			<h2>Update Profile</h2>
-
-			<p>Update Details of your Profile. In this way, the BMI is calcuated correctly </p>
-
-			<form hx-post=" {% url 'update_profile'  user.id %}" hx-target='#user-profile-info'  >
-
-				{% csrf_token %}
-
-					<label> {{ profile_form.birthday.label_tag }}</label>
-					{% render_field profile_form.birthday %}
-
-				<label> {{ profile_form.height_cm.label_tag }}</label>
-				{% render_field profile_form.height_cm   %}
-				
-				<label> {{  profile_form.step_goal.label_tag }}</label>
-				{% render_field profile_form.step_goal %}
-
-						
-				<label> {{  profile_form.start_date.label_tag }}</label>
-				{% render_field profile_form.start_date %}
-
-				<button type='submit' class='btn btn-secondary'>Update</button>
-
-			</form>
-
-			 -->
-
+		
 		</div>
 	</div>
 
