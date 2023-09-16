@@ -1,124 +1,83 @@
 
-
-
 <h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-3'><span> <i class="fa-solid  fa-circle-check"> </i> </span> Details </h2>
-
 
 {% if user_profile %}
 
-
-
-<p> Birthday :  {{ user_profile.birthday }} </p>
-<p>  Height / cm : {{ user_profile.height_cm }} </p>
-<p> Start Date  :  {{ user_profile.start_date }} </p>
-<p> Step Goal :  {{ user_profile.step_goal }} </p>
-
-<div id='edit-profile'></div>
-
-<button class="btn  bg-blue-700 hover:bg-blue-500 text-blue-100  btn-xs uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'> Edit </button>
-
-
-<!-- Before styling too much, let's get it working with simple divs. Then replace the table -->
-
-
-
-
-
 <!-- using DaisyUI table component https://daisyui.com/components/table/ -->
-<div class="overflow-x-auto text-blue-300">
-  <table class="table text-blue-500">
-    <!-- head -->
-    <thead>
-      <tr>
-        <th class='text-blue-400'>Description</th>
-        <th class='text-blue-400'>Value</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- row 1 -->
-      <tr>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div>
-                <p>Birthday</p>
+<div class='w-100 sm:w-1/2'>
+  <div class="overflow-x-auto text-blue-300 ">
+    <table class="table text-blue-500">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th class='text-blue-400'>Description</th>
+          <th class='text-blue-400'>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        <tr>
+          <td>
+            <div class="flex items-center space-x-3">
+              <div>
+                  <p class='font-bold'>Birthday</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td class="font-bold text-md"> 
-          <p id='profile-birthday'>
-            {{ user_profile.birthday }}
-          </p> 
-        </td>
-        <td>
-          <button class="btn btn-ghost btn-xs uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#profile-birthday'>edit</button>
-        </td>
-        <th>
-          <button class="btn btn-ghost btn-xs uppercase">reset</button>
-        </th>
-      </tr>
-      <!-- row 2 -->
-      <tr>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div>
-                <p>Height / cm</p>
+          </td>
+          <td class="text-md"> 
+            <p id='profile-birthday'>
+              {{ user_profile.birthday }}
+            </p> 
+          </td>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <td>
+            <div class="flex items-center space-x-3">
+              <div>
+                  <p class='font-bold'>Height / cm</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td class="font-bold text-md">
-          {{ user_profile.height_cm }}
-        </td>
-        <td>
-          <button class="btn btn-ghost btn-xs uppercase">edit</button>
-        </td>
-        <th>
-          <button class="btn btn-ghost btn-xs uppercase">reset</button>
-        </th>
-      </tr>
-      <!-- row 3 -->
-      <tr>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div >
-                <p>Step Goal</p>
+          </td>
+          <td class="font-bold text-md">
+            {{ user_profile.height_cm }}
+          </td>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <td>
+            <div class="flex items-center space-x-3">
+              <div >
+                  <p class='font-bold'>Step Goal</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td class="font-bold text-md">
-          {{ user_profile.step_goal }}
-        </td>
-        <td>
-          <button class="btn btn-ghost btn-xs uppercase">edit</button>
-        </td>
-        <th>
-          <button class="btn btn-ghost btn-xs uppercase">reset</button>
-        </th>
-      </tr>
-      <!-- row 3 -->
-      <tr>
-        <td>
-          <div class="flex items-center space-x-3">
-            <div>
-                <p>Start Date</p>
+          </td>
+          <td class="text-md">
+            {{ user_profile.step_goal }}
+          </td>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <td>
+            <div class="flex items-center space-x-3">
+              <div>
+                  <p class='font-bold'>Start Date</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td class="font-bold text-md">
-          {{ user_profile.start_date }}
-        </td>
-        <td>
-          <button class="btn btn-ghost btn-xs uppercase">edit</button>
-        </td>
-        <th>
-          <button class="btn btn-ghost btn-xs uppercase">reset</button>
-        </th>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+          <td class="text-md">
+            {{ user_profile.start_date }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<div id='edit-profile'></div>
+<div class='py-4'>
+  <button class="btn  bg-blue-700 hover:bg-blue-500 text-blue-100  btn-md uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'> Edit </button>
+</div>
 
 {% else %}
 
