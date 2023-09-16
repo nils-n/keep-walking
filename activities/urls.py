@@ -11,6 +11,7 @@ from .views import (
     user_profile,
     update_profile,
     edit_profile,
+    delete_profile,
 )
 
 urlpatterns = [
@@ -20,6 +21,11 @@ urlpatterns = [
         "profile/<int:user_id>/edit_profile",
         edit_profile,
         name="edit_profile",
+    ),
+    path(
+        "profile/<int:user_id>/delete_profile",
+        delete_profile,
+        name="delete_profile",
     ),
     path("list/", ActivityList.as_view(), name="activity_list"),
     path(

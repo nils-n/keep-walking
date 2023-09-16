@@ -74,10 +74,37 @@
   </div>
 </div>
 
+
 <div id='edit-profile'></div>
-<div class='py-4'>
-  <button class="btn  bg-blue-700 hover:bg-blue-500 text-blue-50  btn-md uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'> Edit </button>
+<div class='py-4 '>
+  <button class="btn  bg-blue-700 hover:bg-blue-300 hover:text-blue-700 text-blue-50  btn-md uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'> Edit </button>
+  <!-- Modal taken from DaisyUI components  https://daisyui.com/components/modal/ -->
+  <button class="btn  bg-red-50 hover:bg-red-400 hover:text-red-50 text-red-400  btn-md uppercase" onclick="my_modal_1.showModal()">Delete</button>
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg">Confirm Deleting your Profile</h3>
+      <p class="py-4">Are your sure to delete your Profile? This action cannot be undone.</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+          <button class='btn bg-red-500 hover:bg-red-300 hover:text-red-70 text-red-50 '> Confirm </button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+  
+{% comment %}   
+      #class="btn  bg-red-50 hover:bg-red-400 hover:text-red-50 text-red-400  btn-md uppercase" 
+      data-id= {{ user_profile.user.id }} {% endcomment %}
+      {% comment %} hx-delete="{% url 'delete_profile' user.id %}" 
+      hx-target='#delete_message' 
+      hx-confirm="Are your sure to delete your profile? This action cannot be undone." {% endcomment %}
+      
+ 
 </div>
+
+
 
 {% else %}
 

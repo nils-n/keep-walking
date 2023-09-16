@@ -81,6 +81,32 @@ def edit_profile(request, user_id, *args, **kwargs):
     return render(request, "partials/edit_profile.html", context)
 
 
+def delete_profile(request, user_id, *args, **kwargs):
+    """this view sends a post request to delete an profile."""
+
+    if request.user.id != user_id:
+        print("-->no permission to do that")
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
+        profile = UserProfile()
+        context = {"user_profile": profile}
+        return render(request, "partials/profile_details.html", context)
+    else:
+        print("searching for user...")
+        profile = get_object_or_404(UserProfile, user=request.user)
+        print(profile)
+        print(" profile found ...")
+        print("need to add dialog to confirm here")
+        print("--> Not deleting the user for now")
+        #profile.user.delete()
+        messages.add_message(request, messages.SUCCESS, "User Profile deleted")
+        profile_form = UserProfileForm()
+        profile = UserProfile()
+        context = {"profile_form": profile_form, "user_profile": profile}
+        return render(request, "", context)
+
+
 def update_profile(request, user_id, *args, **kwargs):
     """
     this view creates a profile view of the user
