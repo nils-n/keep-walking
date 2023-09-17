@@ -169,14 +169,7 @@ class ActivityList(ListView):
 
         # for plotting the step count
         print("--> Preparing bokeh plot")
-        print(garmin_data)
-        days = [db_record.date for db_record in garmin_data]
-        steps = [db_record.steps for db_record in garmin_data]
-        weights = [db_record.weight_kg for db_record in garmin_data]
-        print(days)
         days, steps = extract_user_steps(garmin_data)
-        print(days)
-        print(steps)
 
         # provide data strucutre for bokeh
         # this will create components for the template

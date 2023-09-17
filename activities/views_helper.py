@@ -256,13 +256,15 @@ def extract_user_steps(
     garmin_data: list[GarminData],
 ) -> tuple[list[datetime.date], list[int]]:
     """extract days and steps as input for bokeh plot"""
+    days = [to_datetime(db_record.date) for db_record in garmin_data]
+    steps = [db_record.steps for db_record in garmin_data]
+
     days = [
         to_datetime(date(2023, 9, 11)),
         to_datetime(date(2023, 9, 12)),
         to_datetime(date(2023, 9, 13)),
         to_datetime(date(2023, 9, 14)),
         to_datetime(date(2023, 9, 15)),
-       
     ]
     steps = [6, 7, 2, 4, 5]
 

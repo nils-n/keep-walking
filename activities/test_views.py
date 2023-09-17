@@ -7,7 +7,9 @@ from .views_helper import (
     convert_api_data_to_steps,
     extract_weight,
     convert_date_str_to_datetime,
+    extract_user_steps
 )
+from models import GarminData
 
 
 def test_the_obvious():
@@ -153,3 +155,12 @@ def test_that_weight_data_is_extracted_from_correct_date(
     model = extract_weight(garmin_weight_data, target_date)
 
     assert model == expected_output
+
+
+
+
+def test_extracted_user_steps_have_correct_format_for_bokeh_plot( garmindata_factory)
+    """
+    test of the helper function that converts garmin data into 
+    a data structure than can be plotted with bokeh
+    """
