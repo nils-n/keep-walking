@@ -1,12 +1,16 @@
 import pytest
 import datetime
 import pandas as pd
+from .models import GarminData 
+from .factories import ActivityFactory
+
 from .views_helper import (
     create_date_range,
     convert_api_data_to_datetime,
     convert_api_data_to_steps,
     extract_weight,
     convert_date_str_to_datetime,
+    extract_user_steps
 )
 
 
