@@ -22,7 +22,7 @@ from .views_helper import (
     extract_weight,
     get_garmin_mock_data_for_testing,
     convert_date_str_to_datetime,
-    extract_user_steps
+    extract_user_steps,
 )
 
 
@@ -173,16 +173,24 @@ class ActivityList(ListView):
         days = [db_record.date for db_record in garmin_data]
         steps = [db_record.steps for db_record in garmin_data]
         weights = [db_record.weight_kg for db_record in garmin_data]
-        days, steps = extract_user_steps( garmin_data)
+        print(days)
+        days, steps = extract_user_steps(garmin_data)
+        print(days)
+        print(steps)
 
         # provide data strucutre for bokeh
         # this will create components for the template
         # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
-        source = ColumnDataSource(data=dict(days=steps, steps=steps))
+        source = ColumnDataSource(data=dict(days=days, steps=steps))
         fig = figure(
-            height=500, title="Steps within last 30 days"
+            title="Steps within last 30 days",
+            height=300, 
+            width=800, 
+            tools="xpan",
+            toolbar_location=None,
+            x_axis_type="datetime",
         )
-        fig.line(source=source, x='days', y='steps', line_width=2)
+        fig.line(source=source, x="days", y="steps")
         script, div = components(fig)
 
         context_data["garmin_form"] = GarminDataForm()
