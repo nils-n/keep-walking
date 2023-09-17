@@ -1,6 +1,7 @@
 import datetime
 from datetime import datetime
 import pandas as pd
+from .models import GarminData
 
 from garminconnect import (
     Garmin,
@@ -248,3 +249,13 @@ def get_garmin_mock_data_for_testing():
         },
     )
     return garmin_step_data, garmin_weight_data
+
+
+def extract_user_steps(
+    garmin_data: list[GarminData],
+) -> tuple[list[datetime.date], list[int]]:
+    """extract days and steps as input for bokeh plot"""
+    days = [1, 2, 3, 4, 5]
+    steps = [6, 7, 2, 4, 5]
+
+    return days, steps

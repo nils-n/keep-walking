@@ -12,6 +12,13 @@
 {% if user.is_authenticated %}
 
 
+<p>Let's see if we get these data plotted here. </p>
+
+<div class='border-2 border-blue-600' style='min-height:200px; min-width:200px'>
+	{{ div|safe  }}
+</div>
+
+
 <div class="sm:py-14 py-10 px-4 "> 
   <div class="px-4 w-full mx-auto" style='max-width:1200px '>
 			<h1 class = 'text-blue-700 text-4xl font-bold py-4 '> <span><i class="fa-solid fa-table-columns"></i> </span> Dashboard</h1>
@@ -68,6 +75,8 @@
 {% load static %}
 
 <script src= {% static  'scripts/activities.js'  %}></script>
+
+{{ script |safe  }}
 
 {%  endblock %}
 
