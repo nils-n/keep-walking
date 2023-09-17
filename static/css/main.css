@@ -2142,6 +2142,14 @@ html {
   padding-top: 2rem;
 }
 
+.pt-32 {
+  padding-top: 8rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
+}
+
 .text-center {
   text-align: center;
 }

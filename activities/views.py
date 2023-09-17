@@ -177,13 +177,17 @@ class ActivityList(ListView):
         source = ColumnDataSource(data=dict(days=days, steps=steps))
         fig = figure(
             title="Steps within last 30 days",
-            height=300, 
-            width=800, 
-            tools="xpan",
+            tools="reset",
             toolbar_location=None,
             x_axis_type="datetime",
+            background_fill_color = None,
+            border_fill_color = None,
+            sizing_mode = 'scale_both'
+
         )
-        fig.line(source=source, x="days", y="steps")
+        #fig.line(source=source, x="days", y="steps", line_width=2)
+        fig.vbar(source=source, x="days", top="steps",  width=0.9,)
+        fig.title.align = 'center' 
         script, div = components(fig)
 
         context_data["garmin_form"] = GarminDataForm()

@@ -12,13 +12,6 @@
 {% if user.is_authenticated %}
 
 
-<p>Let's see if we get these data plotted here. </p>
-
-<div class='border-2 border-blue-600' style='min-height:200px; min-width:200px'>
-	{{ div|safe  }}
-</div>
-
-
 <div class="sm:py-14 py-10 px-4 "> 
   <div class="px-4 w-full mx-auto" style='max-width:1200px '>
 			<h1 class = 'text-blue-700 text-4xl font-bold py-4 '> <span><i class="fa-solid fa-table-columns"></i> </span> Dashboard</h1>
@@ -45,7 +38,7 @@
 				</div>
 			</div>
 			<div class='inline-block'>
-				<div class="sm:pb-20 pb-16 pt-8 md:pt-2  px-4 "> 
+				<div class=" pt-8 md:pt-2  px-4 "> 
 					<div class="px-4 py-14 md:py-2 w-full mx-auto " style='max-width:79ch '>
 							<h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-3'><span> <i class="fa-solid  fa-circle-check"> </i> </span> Your Summary </h2>
 							<p>Here goes a summary based on the previous month. Will be done in javascript.</p>
@@ -54,6 +47,16 @@
 								<li> <span class='text-blue-600 '>Average Weight</span>: You average weight this month was <span class='text-bold text-blue-500'> 75.1 kg<span> </li>
 								<li><span class='text-blue-600 '>Happniess</span> : Your average rating was <span class='text-bold text-blue-500'> 1.4 </span>. Last month the rating was  <span class='text-bold text-blue-500'> 1.1 <span>  </li>
 							</ul>
+					</div>
+				</div>
+			</div>
+			<div class='inline-block pt-8' style='max-width:79ch; min-width:200px'>
+				<div class=" pt-8 md:pt-2  px-4 "> 
+					<div class="px-4 py-14 md:py-2 w-full mx-auto ">
+						<h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-4'><span> <i class="fa-solid fa-calendar-days"></i> </span> Previous 30 Days </h2>
+						<div class='' style='min-width:350px; min-height:350px;'>
+							{{ div|safe  }}
+						</div>	
 					</div>
 				</div>
 			</div>
