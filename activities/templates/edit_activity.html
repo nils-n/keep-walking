@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 
+{% load tailwind_filters %}
+
+
 {% block title %}Edit Activity{% endblock %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
 
+<div class="sm:py-14 py-10 px-4 "> 
+  <div class="px-4 w-full mx-auto" style='max-width:1200px '>
 
-	<h2>Edit activity for {{ date }}</h2>
+      <h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-3'><span> <i class="fa-solid  fa-screwdriver-wrench"> </i> </span> Edit activity </h2>
+      <p class='pt-2 pb-4 text-blue-500 sm:text-lg font-normal' style='line-height:1.6; max-width:79ch'> Hi {{ user.username}} ! Did something go wrong with synchronising your data or you accidently enter a wrong weight in the Garmin App? No problem, simply edit the value here and save the save changes!  </p>
+			<p  class='pt-2 pb-4 text-blue-700 text-lg font-bold uppercase'>  date :  {{ date }}</p>
 
-	<form method="post">
-    {% csrf_token %}
-    {{ garmin_edit_form.as_p }}
-    <button type="submit">Edit</button>
-	</form>
+      <form method="post" class>
+        {% csrf_token %}
+        {{ garmin_edit_form | crispy }}
+        <button type="submit" class='mt-4 py-4 btn bg-blue-400 hover:bg-blue-700 text-blue-50'>Save Changes</button>
+      </form>
+
+    </div>
+  </div>
 
 
 {% else %}
