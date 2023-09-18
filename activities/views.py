@@ -283,10 +283,19 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
             request, messages.ERROR, "No permission to do this request"
         )
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user)
-    return render(
-        request, "partials/activities.html", {"garmin_data": garmin_data}
+    garmin_data = GarminData.objects.filter(user=request.user).order_by(
+        "-date"
     )
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+            "page_obj": page_obj,
+        },)
 
 
 def edit_activity(request, garmin_data_id, *args, **kwargs):

@@ -19,23 +19,6 @@
 	</header>
 
 
-	{% comment %} message display from  https://docs.djangoproject.com/en/4.2/ref/contrib/messages/ {% endcomment %}
-	{% if messages %}
-	<ul class="messages flex justify-center pt-2" id='message-list'>
-			{% for message in messages %}
-					{% if message.tags == 'alert-success'%} 
-							<li  style='animation: fadeOut 4s;' class=" inline-block py-2 px-10 bg-green-600 text-gray-100 font-bold rounded-lg shadow">{{ message }}	</li>
-					{% elif message.tags == 'alert-info'%} 
-							<li  style='animation: fadeOut 4s;' class=" inline-block py-2 px-10 bg-blue-700 text-gray-100 font-bold rounded-lg shadow">{{ message }}	</li>
-					{% elif message.tags == 'alert-warning'%} 
-							<li  style='animation: fadeOut 4s;' class=" inline-block py-2 px-10 bg-yellow-600 text-gray-100 font-bold rounded-lg shadow">{{ message }}	</li>
-							{% elif message.tags == 'alert-danger'%} 
-							<li  style='animation: fadeOut 4s;' class=" inline-block py-2 px-10 bg-red-600 text-gray-100 font-bold rounded-lg shadow">{{ message }}	</li>
-					{% endif %}
-			{% endfor %}
-	</ul>
-	{% endif %}
-
 	<main>
     {% block content %}
     {% endblock %}
