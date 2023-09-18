@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block title %}Keep On Walking{% endblock %}</title>
 	<link rel="stylesheet" href="{% static 'css/main.css' %}" type='text/css'/>
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}" type='text/css'/>
 	<script src="https://kit.fontawesome.com/e1a06996e6.js" crossorigin="anonymous"></script>
 </head>
 <body class='bg-blue-100'>
@@ -20,9 +21,9 @@
 
 	{% comment %} message display from  https://docs.djangoproject.com/en/4.2/ref/contrib/messages/ {% endcomment %}
 	{% if messages %}
-	<ul class="messages">
+	<ul class="messages flex justify-center py-2" id='message-list'>
 			{% for message in messages %}
-			<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			<li{% if message.tags %} style='animation: fadeOut 2s;' class=" inline-block py-4 px-10 bg-green-400 text-gray-100 rounded-lg shadow"{% endif %}>{{ message }}</li>
 			{% endfor %}
 	</ul>
 	{% endif %}

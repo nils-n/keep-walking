@@ -168,7 +168,6 @@ class ActivityList(ListView):
         page_obj = paginator.get_page(page_number)
 
         # for plotting the step count
-        print("--> Preparing bokeh plot")
         days, steps = extract_user_steps(garmin_data)
 
         # provide data strucutre for bokeh
@@ -180,14 +179,18 @@ class ActivityList(ListView):
             tools="reset",
             toolbar_location=None,
             x_axis_type="datetime",
-            background_fill_color = None,
-            border_fill_color = None,
-            sizing_mode = 'scale_both'
-
+            background_fill_color=None,
+            border_fill_color=None,
+            sizing_mode="scale_both",
         )
-        #fig.line(source=source, x="days", y="steps", line_width=2)
-        fig.vbar(source=source, x="days", top="steps",  width=0.9,)
-        fig.title.align = 'center' 
+        # fig.line(source=source, x="days", y="steps", line_width=2)
+        fig.vbar(
+            source=source,
+            x="days",
+            top="steps",
+            width=0.9,
+        )
+        fig.title.align = "center"
         script, div = components(fig)
 
         context_data["garmin_form"] = GarminDataForm()

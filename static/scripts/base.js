@@ -17,3 +17,14 @@ navButton.addEventListener("click", (e) => {
     navLinks.classList.remove("hidden");
   }
 });
+
+//to make messages disappear after fading out
+const message = document.getElementById("message-list");
+message.addEventListener("animationend", function () {
+  message.style.opacity = 0;
+  message.style.visibility = "hidden";
+});
+message.addEventListener("animationstart", function () {
+  message.style.opacity = 1;
+  message.style.visibility = "visible";
+});
