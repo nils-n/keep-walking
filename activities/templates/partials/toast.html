@@ -1,0 +1,36 @@
+
+{% if messages %}
+
+  <div style='animation: fadeOut 4s;' class="toast toast-top toast-center" id='profile-toast'>
+    {% for message in messages %}
+
+      {% if message.tags == 'alert-success'%} 
+        <div class="alert alert-success py-2 px-10  text-gray-50 font-bold rounded-lg">
+          <span>{{ message }}</span>
+        </div>
+      {% elif message.tags == 'alert-info'%} 
+        <div class="alert alert-info">
+          <span>{{ message }}</span>
+        </div>
+      {% endif %}
+    
+    {% endfor %}
+
+</div>
+
+<script>
+
+  const profile_msg = document.getElementById("profile-toast");
+profile_msg.addEventListener("animationend", function () {
+  profile_msg.style.opacity = 0;
+  profile_msg.style.visibility = "hidden";
+});
+profile_msg.addEventListener("animationstart", function () {
+  profile_msg.style.opacity = 1;
+  profile_msg.style.visibility = "visible";
+});
+
+</script>
+
+{% endif %}
+

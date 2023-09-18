@@ -47,6 +47,7 @@ def user_profile(request, user_id, *args, **kwargs):
                 profile.step_goal = form_data["step_goal"]
                 profile.start_date = form_data["start_date"]
                 profile.save()
+                messages.add_message(request, messages.SUCCESS, "Profile edited")
                 context = {
                     "profile_form": profile_form,
                     "user_profile": profile,
@@ -62,6 +63,9 @@ def user_profile(request, user_id, *args, **kwargs):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
+        return render(
+                    request, "partials/profile_details.html", context
+                )
 
 
 def edit_profile(request, user_id, *args, **kwargs):

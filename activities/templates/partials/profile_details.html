@@ -74,6 +74,10 @@
   </div>
 </div>
 
+<section id='profile-messages'>
+    {% include 'partials/toast.html'%}
+</section>
+
 <div id='edit-profile'></div>
 <div class='py-4 '>
   <button class="btn  bg-blue-700 hover:bg-blue-300 hover:text-blue-700 text-blue-50  btn-md uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'> Edit </button>
