@@ -1,7 +1,7 @@
 
 {% if messages %}
 
-  <div style='animation: fadeOut 4s;' class="toast toast-top toast-center" id='profile-toast'>
+  <div style='animation: fadeOut 4s;' class="toast toast-top toast-center" id='message-toast'>
     {% for message in messages %}
 
       {% if message.tags == 'alert-success'%} 
@@ -20,8 +20,8 @@
 
 <script>
 
-  const profile_msg = document.getElementById("profile-toast");
-profile_msg.addEventListener("animationend", function () {
+  let profile_msg = document.getElementById("message-toast");
+  profile_msg.addEventListener("animationend", function () {
   profile_msg.style.opacity = 0;
   profile_msg.style.visibility = "hidden";
 });
