@@ -47,7 +47,9 @@ def user_profile(request, user_id, *args, **kwargs):
                 profile.step_goal = form_data["step_goal"]
                 profile.start_date = form_data["start_date"]
                 profile.save()
-                messages.add_message(request, messages.SUCCESS, "Profile edited")
+                messages.add_message(
+                    request, messages.SUCCESS, "Profile edited"
+                )
                 context = {
                     "profile_form": profile_form,
                     "user_profile": profile,
@@ -63,9 +65,7 @@ def user_profile(request, user_id, *args, **kwargs):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
-        return render(
-                    request, "partials/profile_details.html", context
-                )
+        return render(request, "partials/profile_details.html", context)
 
 
 def edit_profile(request, user_id, *args, **kwargs):
@@ -244,6 +244,9 @@ def load_activities(request):
             garmin_start_date,
             garmin_end_date,
         )
+        messages.add_message(
+            request, messages.ERROR, "Sync with Garmin API successful"
+        )
     garmin_step_data = garmin_step_data[0]
 
     for garmin_entry in garmin_step_data:
@@ -261,11 +264,20 @@ def load_activities(request):
                 f"weight on date {new_date} was : {new_garmin_entry.weight_kg}"
             )
             new_garmin_entry.save()
-
     # update the template
-    garmin_data = GarminData.objects.filter(user=request.user)
+    garmin_data = GarminData.objects.filter(user=request.user).order_by(
+        "-date"
+    )
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(
-        request, "partials/activities.html", {"garmin_data": garmin_data}
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+            "page_obj": page_obj,
+        },
     )
 
 
@@ -295,7 +307,8 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
         {
             "garmin_data": garmin_data,
             "page_obj": page_obj,
-        },)
+        },
+    )
 
 
 def edit_activity(request, garmin_data_id, *args, **kwargs):
