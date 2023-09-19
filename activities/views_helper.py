@@ -13,6 +13,7 @@ from garminconnect import (
 from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.models import DatetimeTickFormatter, ColumnDataSource, HoverTool
+from scipy.stats import linregress
 
 
 def create_date_range(
@@ -343,4 +344,15 @@ def calculate_bmi_change(
     returns : average bmi, linear trend of the BMI over recent n days
     """
     print("-->calculating BMI change now")
-    return 42, 0
+
+    bmi_list = [weight / (float(height_cm) / 100.0) ** 2 for weight in weights]
+
+    slope, intercept, r_value, p_value, std_err = linregress(
+        range(len(bmi_list)), bmi_list
+    )
+
+    num_days = len(bmi_list)
+    bmi_change = (num_days - 1) * slope
+    bmi_average = intercept + (num_days - 1) / 2.0 * slope
+
+    return bmi_average, bmi_change

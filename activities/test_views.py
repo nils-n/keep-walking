@@ -175,7 +175,20 @@ def test_that_weight_data_is_extracted_from_correct_date(
             200,
             24,
             0,
-        )
+        ),
+        (
+            [
+                datetime.date(2023, 8, 31),
+                datetime.date(2023, 8, 30),
+            ],
+            [
+                96,
+                128,
+            ],
+            200,
+            28,
+            8,
+        ),
     ],
 )
 def test_bmi_change_is_calculated_correctly(
@@ -187,5 +200,5 @@ def test_bmi_change_is_calculated_correctly(
     """
     bmi, change_of_bmi = calculate_bmi_change(days, weights, height)
 
-    assert bmi== expected_avg_bmi
+    assert bmi == expected_avg_bmi
     assert change_of_bmi == expected_bmi_change
