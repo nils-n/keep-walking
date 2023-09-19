@@ -171,8 +171,15 @@ class ActivityList(ListView):
         page_number = self.request.GET.get("page")
         page_obj = paginator.get_page(page_number)
 
-        # for plotting the step count
-        days, steps = extract_user_steps(garmin_data)
+        # ensure to plot only data from the last 30 days using field lookup
+        # and chaining the filter to the existing query
+        # https://stackoverflow.com/questions/1984047/django-filter-older-than-days
+        first_day_for_bokeh_plot = datetime.now() - timedelta(days=30)
+        garmin_data_bokeh = garmin_data.filter(
+            user=self.request.user, date__gte=first_day_for_bokeh_plot
+        ).order_by("-date")
+
+        days, steps = extract_user_steps(garmin_data_bokeh)
 
         # provide data strucutre for bokeh
         # this will create components for the template
