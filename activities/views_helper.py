@@ -14,6 +14,7 @@ from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.models import DatetimeTickFormatter, ColumnDataSource, HoverTool
 from scipy.stats import linregress
+from numpy import around, median
 
 
 def create_date_range(
@@ -343,9 +344,10 @@ def calculate_bmi_change(
     over the recent n days
     returns : average bmi, linear trend of the BMI over recent n days
     """
-    print("-->calculating BMI change now")
-
-    bmi_list = [weight / (float(height_cm) / 100.0) ** 2 for weight in weights]
+    # fix entries for weight of 0 kg - for now just used the median value
+    bmi_list = [weight / (float(height_cm) / 100.0) ** 2 if weight>0  else median(weights) / (float(height_cm) / 100.0) ** 2  for weight in weights ]
+    # flip list to calculate from latest to new
+    bmi_list = bmi_list[::-1]
 
     slope, intercept, r_value, p_value, std_err = linregress(
         range(len(bmi_list)), bmi_list

@@ -203,6 +203,9 @@ class ActivityList(ListView):
             days, weights, profile.height_cm
         )
 
+        print( f' --> average_bmi : {average_bmi}')
+        print( f' --> change_bmi : {change_bmi}')
+
         context_data["garmin_form"] = GarminDataForm()
         context_data["page_obj"] = page_obj
         context_data["script"] = script
