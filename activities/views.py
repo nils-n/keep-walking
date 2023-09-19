@@ -12,6 +12,8 @@ from django.core.paginator import Paginator
 from bokeh.models import ColumnDataSource
 from bokeh.embed import components
 from bokeh.plotting import figure
+from bokeh.models import DatetimeTickFormatter
+
 
 from .models import GarminData, UserProfile
 from .forms import GarminDataForm, EditGarminDataForm, UserProfileForm
@@ -179,12 +181,18 @@ class ActivityList(ListView):
             user=self.request.user, date__gte=first_day_for_bokeh_plot
         ).order_by("-date")
 
-        days, steps = extract_user_steps(garmin_data_bokeh)
-
         # provide data strucutre for bokeh
         # this will create components for the template
         # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
+        days, steps = extract_user_steps(garmin_data_bokeh)
         source = ColumnDataSource(data=dict(days=days, steps=steps))
+
+        # plot also the step goal
+        steps_goal = [7000 for day in days]
+        source_steps_goal = ColumnDataSource(
+            data=dict(days=days, steps=steps_goal)
+        )
+
         fig = figure(
             title="Steps within last 30 days",
             tools="reset",
@@ -195,21 +203,45 @@ class ActivityList(ListView):
             sizing_mode="scale_both",
         )
         # fig.line(source=source, x="days", y="steps", line_width=2)
-        # ensure correct scaling - the width unit needs to be scaled to 
+        # ensure correct scaling - the width unit needs to be scaled to
         # the displayed time range (it's a relativ value - see )
-       # https://stackoverflow.com/questions/51642602/bokeh-bar-chart-not-showing-width-properly
+        # https://stackoverflow.com/questions/51642602/bokeh-bar-chart-not-showing-width-properly
         msec_per_sec = 1000
         sec_per_min = 60
-        min_per_hour = 60 
-        hour_per_day = 24  
-        width_scale_fac = msec_per_sec * sec_per_min * min_per_hour * hour_per_day
+        min_per_hour = 60
+        hour_per_day = 24
+        width_scale_fac = (
+            msec_per_sec * sec_per_min * min_per_hour * hour_per_day
+        )
         fig.vbar(
             source=source,
             x="days",
             top="steps",
             width=0.5 * width_scale_fac,
+            fill_alpha=0.8,
         )
         fig.title.align = "center"
+        fig.xaxis.axis_label_text_font_size = "40pt"
+        fig.yaxis.axis_label_text_font_size = "40pt"
+        fig.xaxis.major_label_text_font_style = "bold"
+        fig.yaxis.major_label_text_font_style = "bold"
+        fig.xaxis[0].formatter = DatetimeTickFormatter(
+            hours=["%d %B %Y"],
+            days=["%d %B %Y"],
+            months=["%d %B %Y"],
+            years=["%d %B %Y"],
+        )
+        fig.xaxis.major_label_orientation = 3.141/4
+        fig.line(
+            source=source_steps_goal,
+            x="days",
+            y="steps",
+            line_width=2,
+            line_color="orange",
+            line_dash="dashed",
+            line_alpha=0.8,
+        )
+
         script, div = components(fig)
 
         context_data["garmin_form"] = GarminDataForm()
