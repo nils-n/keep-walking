@@ -357,4 +357,8 @@ def calculate_bmi_change(
     bmi_change = (num_days - 1) * slope
     bmi_average = intercept + (num_days - 1) / 2.0 * slope
 
+    # make it more human readable 
+    bmi_change = around(bmi_change, 1)
+    bmi_average = around(bmi_average, 1)
+
     return bmi_average, bmi_change
