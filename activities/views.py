@@ -195,11 +195,19 @@ class ActivityList(ListView):
             sizing_mode="scale_both",
         )
         # fig.line(source=source, x="days", y="steps", line_width=2)
+        # ensure correct scaling - the width unit needs to be scaled to 
+        # the displayed time range (it's a relativ value - see )
+       # https://stackoverflow.com/questions/51642602/bokeh-bar-chart-not-showing-width-properly
+        msec_per_sec = 1000
+        sec_per_min = 60
+        min_per_hour = 60 
+        hour_per_day = 24  
+        width_scale_fac = msec_per_sec * sec_per_min * min_per_hour * hour_per_day
         fig.vbar(
             source=source,
             x="days",
             top="steps",
-            width=0.9,
+            width=0.5 * width_scale_fac,
         )
         fig.title.align = "center"
         script, div = components(fig)
