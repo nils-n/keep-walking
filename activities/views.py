@@ -1,6 +1,7 @@
 from datetime import timedelta
 import os
 from typing import Any, Dict
+import pandas as pd
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.timezone import datetime
@@ -12,7 +13,7 @@ from django.core.paginator import Paginator
 from bokeh.models import ColumnDataSource
 from bokeh.embed import components
 from bokeh.plotting import figure
-from bokeh.models import DatetimeTickFormatter
+from bokeh.models import DatetimeTickFormatter, HoverTool
 
 
 from .models import GarminData, UserProfile
@@ -185,13 +186,26 @@ class ActivityList(ListView):
         # this will create components for the template
         # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
         days, steps = extract_user_steps(garmin_data_bokeh)
-        source = ColumnDataSource(data=dict(days=days, steps=steps))
+        # source = ColumnDataSource(data=dict(days=days, steps=steps))
 
         # plot also the step goal
         steps_goal = [7000 for day in days]
         source_steps_goal = ColumnDataSource(
             data=dict(days=days, steps=steps_goal)
         )
+
+        # create pandas dataframe for tooltips
+        # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
+        data = pd.DataFrame()
+        data["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
+        data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
+        data.insert(2, "Steps", pd.to_numeric(steps))
+        source = ColumnDataSource(data=data)
+        hover = HoverTool(
+            tooltips=[("Date", "@DateString"), ("Steps", "@Steps")]
+        )
+
+        print(data)
 
         fig = figure(
             title="Steps within last 30 days",
@@ -215,12 +229,13 @@ class ActivityList(ListView):
         )
         fig.vbar(
             source=source,
-            x="days",
-            top="steps",
+            x="Date",
+            top="Steps",
             width=0.5 * width_scale_fac,
             fill_alpha=0.8,
         )
         fig.title.align = "center"
+        fig.add_tools(hover)
         fig.xaxis.axis_label_text_font_size = "40pt"
         fig.yaxis.axis_label_text_font_size = "40pt"
         fig.xaxis.major_label_text_font_style = "bold"
@@ -231,7 +246,7 @@ class ActivityList(ListView):
             months=["%d %B %Y"],
             years=["%d %B %Y"],
         )
-        fig.xaxis.major_label_orientation = 3.141/4
+        fig.xaxis.major_label_orientation = 3.141 / 4
         fig.line(
             source=source_steps_goal,
             x="days",
