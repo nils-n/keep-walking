@@ -20,8 +20,10 @@ from .views_helper import (
     extract_weight,
     get_garmin_mock_data_for_testing,
     convert_date_str_to_datetime,
-    extract_user_steps,
+    extract_user_data,
     create_bokeh_plot,
+    calculate_bmi_change,
+    calculate_bmi_change,
 )
 
 
@@ -181,7 +183,7 @@ class ActivityList(ListView):
         # provide data strucutre for bokeh
         # this will create components for the template
         # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
-        days, steps = extract_user_steps(garmin_data_bokeh)
+        days, steps, weights = extract_user_data(garmin_data_bokeh)
 
         # create pandas dataframe for tooltips
         # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
@@ -192,6 +194,14 @@ class ActivityList(ListView):
 
         # create a bokeh plot and styling of the plot inside a helper function
         script, div = create_bokeh_plot(data)
+
+        # calculate the average bmi and the linear trend for the last 30 days
+        # get height from the user profile for calculating BMI
+        user_profile = UserProfile.objects.filter(user=self.request.user)
+        profile = get_object_or_404(user_profile)
+        average_bmi, change_bmi = calculate_bmi_change(
+            days, weights, profile.height_cm
+        )
 
         context_data["garmin_form"] = GarminDataForm()
         context_data["page_obj"] = page_obj

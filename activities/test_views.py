@@ -1,8 +1,7 @@
 import pytest
 import datetime
 import pandas as pd
-from .models import GarminData 
-from .factories import ActivityFactory
+from .models import GarminData
 
 from .views_helper import (
     create_date_range,
@@ -10,7 +9,7 @@ from .views_helper import (
     convert_api_data_to_steps,
     extract_weight,
     convert_date_str_to_datetime,
-    extract_user_steps
+    calculate_bmi_change,
 )
 
 
@@ -157,3 +156,36 @@ def test_that_weight_data_is_extracted_from_correct_date(
     model = extract_weight(garmin_weight_data, target_date)
 
     assert model == expected_output
+
+
+@pytest.mark.parametrize(
+    "days, weights, height, expected_avg_bmi, expected_bmi_change",
+    [
+        (
+            [
+                datetime.date(2023, 8, 31),
+                datetime.date(2023, 8, 30),
+                datetime.date(2023, 8, 29),
+            ],
+            [
+                96,
+                96,
+                96,
+            ],
+            200,
+            24,
+            0,
+        )
+    ],
+)
+def test_bmi_change_is_calculated_correctly(
+    days, weights, height, expected_avg_bmi, expected_bmi_change
+):
+    """
+    this test confirms that the helper function calculates the
+    avearage BMI and the change of BMI over a given time correctly
+    """
+    bmi, change_of_bmi = calculate_bmi_change(days, weights, height)
+
+    assert bmi== expected_avg_bmi
+    assert change_of_bmi == expected_bmi_change

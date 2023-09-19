@@ -255,14 +255,15 @@ def get_garmin_mock_data_for_testing():
     return garmin_step_data, garmin_weight_data
 
 
-def extract_user_steps(
+def extract_user_data(
     garmin_data: list[GarminData],
 ) -> tuple[list[datetime.date], list[int]]:
     """extract days and steps as input for bokeh plot"""
     days = [to_datetime(db_record.date) for db_record in garmin_data]
     steps = [db_record.steps for db_record in garmin_data]
+    weights = [db_record.weight_kg for db_record in garmin_data]
 
-    return days, steps
+    return days, steps, weights
 
 
 def create_bokeh_plot(data: pd.DataFrame):
@@ -273,10 +274,10 @@ def create_bokeh_plot(data: pd.DataFrame):
     source = ColumnDataSource(data=data)
 
     # plot also the step goal
-    steps_goal = [7000 for day in data['Date']]
+    steps_goal = [7000 for day in data["Date"]]
     source_steps_goal = ColumnDataSource(
-         data=dict(days=data['Date'], steps=steps_goal)
-        )
+        data=dict(days=data["Date"], steps=steps_goal)
+    )
 
     hover = HoverTool(tooltips=[("Date", "@DateString"), ("Steps", "@Steps")])
 
@@ -331,3 +332,15 @@ def create_bokeh_plot(data: pd.DataFrame):
     script, div = components(fig)
 
     return script, div
+
+
+def calculate_bmi_change(
+    days: list[datetime.date], weights: list[int], height_cm: int
+):
+    """
+    helper function to calculate the average BMI and the BMI change
+    over the recent n days
+    returns : average bmi, linear trend of the BMI over recent n days
+    """
+    print("-->calculating BMI change now")
+    return 42, 0
