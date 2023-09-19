@@ -10,6 +10,9 @@ from garminconnect import (
     GarminConnectConnectionError,
     GarminConnectTooManyRequestsError,
 )
+from bokeh.embed import components
+from bokeh.plotting import figure
+from bokeh.models import DatetimeTickFormatter, ColumnDataSource, HoverTool
 
 
 def create_date_range(
@@ -260,3 +263,71 @@ def extract_user_steps(
     steps = [db_record.steps for db_record in garmin_data]
 
     return days, steps
+
+
+def create_bokeh_plot(data: pd.DataFrame):
+    """
+    create and style a bokeh plot of the recent 30 days
+    of activity which will be passed into the template
+    """
+    source = ColumnDataSource(data=data)
+
+    # plot also the step goal
+    steps_goal = [7000 for day in data['Date']]
+    source_steps_goal = ColumnDataSource(
+         data=dict(days=data['Date'], steps=steps_goal)
+        )
+
+    hover = HoverTool(tooltips=[("Date", "@DateString"), ("Steps", "@Steps")])
+
+    fig = figure(
+        title="Steps within last 30 days",
+        tools="reset",
+        toolbar_location=None,
+        x_axis_type="datetime",
+        background_fill_color=None,
+        border_fill_color=None,
+        sizing_mode="scale_both",
+    )
+    # fig.line(source=source, x="days", y="steps", line_width=2)
+    # ensure correct scaling - the width unit needs to be scaled to
+    # the displayed time range (it's a relativ value - see )
+    # https://stackoverflow.com/questions/51642602/bokeh-bar-chart-not-showing-width-properly
+    msec_per_sec = 1000
+    sec_per_min = 60
+    min_per_hour = 60
+    hour_per_day = 24
+    width_scale_fac = msec_per_sec * sec_per_min * min_per_hour * hour_per_day
+    fig.vbar(
+        source=source,
+        x="Date",
+        top="Steps",
+        width=0.5 * width_scale_fac,
+        fill_alpha=0.8,
+    )
+    fig.title.align = "center"
+    fig.add_tools(hover)
+    fig.xaxis.axis_label_text_font_size = "40pt"
+    fig.yaxis.axis_label_text_font_size = "40pt"
+    fig.xaxis.major_label_text_font_style = "bold"
+    fig.yaxis.major_label_text_font_style = "bold"
+    fig.xaxis[0].formatter = DatetimeTickFormatter(
+        hours=["%d %B %Y"],
+        days=["%d %B %Y"],
+        months=["%d %B %Y"],
+        years=["%d %B %Y"],
+    )
+    fig.xaxis.major_label_orientation = 3.141 / 4
+    fig.line(
+        source=source_steps_goal,
+        x="days",
+        y="steps",
+        line_width=2,
+        line_color="orange",
+        line_dash="dashed",
+        line_alpha=0.8,
+    )
+
+    script, div = components(fig)
+
+    return script, div
