@@ -187,7 +187,7 @@ def test_that_weight_data_is_extracted_from_correct_date(
             ],
             200,
             28,
-            8,
+            -8,
         ),
     ],
 )
