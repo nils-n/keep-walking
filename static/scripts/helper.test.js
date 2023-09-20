@@ -16,3 +16,13 @@ test("calling BMI calculate with wrong input throws error", () => {
   expect(() => getBMIstatus(42, 10)).toThrow();
   expect(() => getBMIstatus("42")).toThrow();
 });
+
+test("the trend of the BMI returns correct summary", () => {
+  expect(getBMItrend(-2)).toBe("bmi is decreasing");
+  expect(getBMItrend(-0.6)).toBe("bmi is decreasing");
+  expect(getBMItrend(-0.4)).toBe("bmi is constant");
+  expect(getBMItrend(0)).toBe("bmi is constant");
+  expect(getBMItrend(0.4)).toBe("bmi is constant");
+  expect(getBMItrend(2)).toBe("bmi is increasing");
+  expect(getBMItrend(4)).toBe("bmi is increasing");
+});
