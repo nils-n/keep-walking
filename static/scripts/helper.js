@@ -2,7 +2,17 @@ function sum(a, b) {
   return a + b;
 }
 
-function getBMIstatus(current_bmi) {
+function getBMIstatus(args) {
+  if (args == null) {
+    throw new Error("No arguments provided (expected 1)");
+  }
+
+  if (args.length > 1) {
+    throw new Error("Too many arguments (expected 1)");
+  }
+
+  current_bmi = args;
+
   const lower_healthy_limit = 18.5;
   const upper_healthy_limit = 25.0;
 
