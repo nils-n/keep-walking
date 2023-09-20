@@ -77,38 +77,3 @@ $(".delete-button").click((e) => {
   // $('#delete-id')[0].innerText = garmin_id
   // $('#deleteModal').modal('show')
 });
-
-//: Good job. Your BMI is <span id='average-bmi'>{{ average_bmi }} </span>. Over the last month, you have maintained a healthy BMI and it has even improved by {{ change_bmi }}. Keep on walking!
-
-function createBmiSummaryMessage(avg_bmi, change_bmi) {
-  console.log("entering the function");
-
-  // first assess whether BMI is currently too high, too low, or just right
-  bmi_status = getBMIstatus(avg_bmi);
-  bmi_trend = getBMItrend(change_bmi);
-
-  return `The answer is 42`;
-}
-
-// update the summary text based on the average BMI and change over the last month
-document.addEventListener("DOMContentLoaded", function (event) {
-  // extract the BMI and its change as it was passed from the View
-  const average_bmi = parseFloat(
-    document.getElementById("average-bmi").textContent,
-  );
-  const change_bmi = parseFloat(
-    document.getElementById("change-bmi").textContent,
-  );
-  const bmi_message = document.getElementById("bmi-message");
-
-  // apply some logic to create a summary message
-  const updated_bmi_message = createBmiSummaryMessage(average_bmi, change_bmi);
-
-  //enter the summary message into the DOM
-  document.getElementById("bmi-message").textContent = updated_bmi_message;
-
-  console.log("OK starting to adapt the stuff now.");
-  console.log(average_bmi);
-  console.log(change_bmi);
-  console.log(bmi_message);
-});

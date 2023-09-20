@@ -48,15 +48,15 @@ function getBMItrend(args) {
 
   current_bmi_change = args;
 
-  const limit_for_increasing_trend = 0.5;
-  const limit_for_decreasing_trend = -0.5;
+  const limit_for_increasing_trend = 0.25;
+  const limit_for_decreasing_trend = -0.25;
 
   if (current_bmi_change < limit_for_decreasing_trend) {
-    return "bmi is decreasing";
+    return "decreasing";
   } else if (current_bmi_change > limit_for_increasing_trend) {
-    return "bmi is increasing";
+    return "increasing";
   } else {
-    return "bmi is constant";
+    return "constant";
   }
 }
 
