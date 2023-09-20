@@ -2,13 +2,23 @@ function sum(a, b) {
   return a + b;
 }
 
+// function to evaluate whether the current BMI is in the
+// healthy range  (or below/above this range)
 function getBMIstatus(args) {
   if (args == null) {
     throw new Error("No arguments provided (expected 1)");
   }
 
-  if (args.length > 1) {
+  if (arguments.length > 1) {
     throw new Error("Too many arguments (expected 1)");
+  }
+
+  if (isNaN(args)) {
+    throw new Error("Argument is not a number");
+  }
+
+  if (typeof args === "string") {
+    throw new Error("Argument should not be a string");
   }
 
   current_bmi = args;
@@ -24,8 +34,34 @@ function getBMIstatus(args) {
     return "too low";
   }
 }
+// function to evaluate the trend of the current BMI
+// this should indicate whether the BMI is currently
+// improving,  getting worse, or staying same
+function getBMItrend(args) {
+  if (args == null) {
+    throw new Error("No arguments provided (expected 1)");
+  }
+
+  if (args.length > 1) {
+    throw new Error("Too many arguments (expected 1)");
+  }
+
+  current_bmi_change = args;
+
+  const limit_for_increasing_trend = 0.5;
+  const limit_for_decreasing_trend = -0.5;
+
+  if (current_bmi_change < limit_for_decreasing_trend) {
+    return "bmi is decreasing";
+  } else if (current_bmi_change > limit_for_increasing_trend) {
+    return "bmi is increasing";
+  } else {
+    return "bmi is constant";
+  }
+}
 
 module.exports = {
   sum,
   getBMIstatus,
+  getBMItrend,
 };

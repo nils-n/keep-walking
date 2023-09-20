@@ -1,6 +1,7 @@
 const helpers = require("./helper");
 const sum = helpers.sum;
 const getBMIstatus = helpers.getBMIstatus;
+const getBMItrend = helpers.getBMItrend;
 
 test("a BMI within a healthy range should returns correct summary", () => {
   expect(getBMIstatus(16)).toBe("too low");
@@ -12,6 +13,6 @@ test("a BMI within a healthy range should returns correct summary", () => {
 
 test("calling BMI calculate with wrong input throws error", () => {
   expect(() => getBMIstatus()).toThrow();
-  //expect(() => getBMIstatus(42, 10)).toThrow();
-  //expect(() => getBMIstatus("42")).toThrow();
+  expect(() => getBMIstatus(42, 10)).toThrow();
+  expect(() => getBMIstatus("42")).toThrow();
 });
