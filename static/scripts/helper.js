@@ -7,9 +7,11 @@ function getBMIstatus(current_bmi) {
   const upper_healthy_limit = 25.0;
 
   if (current_bmi > lower_healthy_limit && current_bmi < upper_healthy_limit) {
-    return "something";
+    return "just right";
+  } else if (current_bmi > upper_healthy_limit) {
+    return "too high";
   } else {
-    return "something else ";
+    return "too low";
   }
 }
 
