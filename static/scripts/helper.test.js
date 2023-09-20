@@ -1,5 +1,7 @@
-const sum = require("./helper");
+const helpers = require("./helper");
+const sum = helpers.sum;
+const getBMIstatus = helpers.getBMIstatus;
 
-test("adds 1 + 2 to equal 3", () => {
-  expect(sum(1, 2)).toBe(3);
+test("a BMI within a healthy range should returns correct summary", () => {
+  expect(getBMIstatus(20)).toBe("just right");
 });

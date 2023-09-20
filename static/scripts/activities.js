@@ -82,6 +82,10 @@ $(".delete-button").click((e) => {
 
 function createBmiSummaryMessage(avg_bmi, change_bmi) {
   console.log("entering the function");
+
+  // first assess whether BMI is currently too high, too low, or just right
+  bmi_status = getBMIstatus(avg_bmi);
+
   return `The answer is 42`;
 }
 
