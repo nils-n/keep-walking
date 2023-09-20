@@ -80,6 +80,12 @@ $(".delete-button").click((e) => {
 
 //: Good job. Your BMI is <span id='average-bmi'>{{ average_bmi }} </span>. Over the last month, you have maintained a healthy BMI and it has even improved by {{ change_bmi }}. Keep on walking!
 
+function createBmiSummaryMessage(avg_bmi, change_bmi) {
+  console.log("entering the function");
+
+  return "The answer is 42";
+}
+
 // update the summary text based on the average BMI and change over the last month
 document.addEventListener("DOMContentLoaded", function (event) {
   // extract the BMI and its change as it was passed from the View
@@ -92,10 +98,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const bmi_message = document.getElementById("bmi-message");
 
   // apply some logic to create a summary message
-  // TO DO
+  const updated_bmi_message = createBmiSummaryMessage(average_bmi, change_bmi);
 
   //enter the summary message into the DOM
-  document.getElementById("bmi-message").textContent = "Here goes the summary";
+  document.getElementById("bmi-message").textContent = updated_bmi_message;
 
   console.log("OK starting to adapt the stuff now.");
   console.log(average_bmi);
