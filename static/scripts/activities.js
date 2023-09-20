@@ -82,8 +82,7 @@ $(".delete-button").click((e) => {
 
 function createBmiSummaryMessage(avg_bmi, change_bmi) {
   console.log("entering the function");
-
-  return "The answer is 42";
+  return `The answer is 42`;
 }
 
 // update the summary text based on the average BMI and change over the last month
