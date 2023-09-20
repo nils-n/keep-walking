@@ -1,17 +1,4 @@
-console.log("entering summary.js now...");
-
-console.log("the answer is probably ...... " + sum(32, 10));
-console.log("   A BMI of   16 is -->  " + getBMIstatus(16));
-console.log("   A BMI of   20 is -->  " + getBMIstatus(20));
-console.log("   A BMI of   28  is -->  " + getBMIstatus(28));
-
-//: Good job. Your BMI is <span id='average-bmi'>{{ average_bmi }}
-//</span>. Over the last month,
-//you have maintained a healthy BMI and it has even improved by {{ change_bmi }}. Keep on walking!
-
 function createBmiSummaryMessage(avg_bmi, change_bmi) {
-  console.log("entering the function");
-
   // first assess whether BMI is currently too high, too low, or just right
   bmi_status = getBMIstatus(avg_bmi);
   bmi_trend = getBMItrend(change_bmi);
@@ -72,9 +59,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   //enter the summary message into the DOM
   document.getElementById("bmi-message").textContent = updated_bmi_message;
-
-  console.log("OK starting to adapt the stuff now.");
-  console.log(average_bmi);
-  console.log(change_bmi);
-  console.log(bmi_message);
 });
