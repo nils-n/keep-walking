@@ -9,7 +9,7 @@ function getBMIstatus(current_bmi) {
   if (current_bmi > lower_healthy_limit && current_bmi < upper_healthy_limit) {
     return "something";
   } else {
-    ("something else ");
+    return "something else ";
   }
 }
 
