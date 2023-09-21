@@ -8,16 +8,19 @@
 {% block content %}
 
 
-
-<div class="py-16 px-4 "> 
-  <div class="px-4 w-full sm:w-1/2">
-    <h2 class='pb-4  text-blue-800 font-bold text-2xl'>Log In</h2>
-    <div class=''>
-      <form method="post" >
-        {% csrf_token %}
-        {{ form |crispy }}
-        <button class='px-10 py-3 mt-4  text-blue-50 bg-blue-800 hover:bg-blue-300  hover:text-blue-800 rounded shadow' type="submit">Login</button>
-      </form>
+<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+  <div class='font-sans '>
+    <div class="flex "> 
+      <div class="w-full sm:w-1/2 bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl ">
+        <h2 class='pb-4  text-blue-800 font-bold text-2xl'>Log In</h2>
+        <div class=''>
+          <form method="post" >
+            {% csrf_token %}
+            {{ form |crispy }}
+            <button class='px-10 py-3 mt-4  text-blue-50 bg-blue-800 hover:bg-blue-300  hover:text-blue-800 rounded shadow' type="submit">Login</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
