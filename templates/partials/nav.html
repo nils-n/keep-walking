@@ -43,6 +43,9 @@
 											<a class="text-center" href="{% url 'logout' %}">Log Out</a>
 									</li>				
 							{% else %}
+								<li class="sm:inline-block hover:text-blue-800 active:text-blue-500 focus:border-2 focus:border-blue-800 ">
+									<a class="text-center" href="{% url 'home' %}">Home</a>
+								</li>
 									<li class="sm:inline-block hover:text-blue-800 active:text-blue-500 focus:border-2 focus:border-blue-800">
 										<a class="text-center" href="{% url 'signup' %}">Sign Up</a>
 									</li>
