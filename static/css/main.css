@@ -2670,6 +2670,11 @@ html {
   padding-right: 0.5rem;
 }
 
+.px-32 {
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -2732,6 +2737,10 @@ html {
 
 .pb-32 {
   padding-bottom: 8rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
 }
 
 .text-left {
