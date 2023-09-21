@@ -2711,6 +2711,10 @@ html {
     flex-direction: row;
   }
 
+  .sm\:justify-center {
+    justify-content: center;
+  }
+
   .sm\:justify-between {
     justify-content: space-between;
   }
