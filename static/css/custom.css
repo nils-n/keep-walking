@@ -1,3 +1,7 @@
+:root {
+  --max-page-width: 1400px;
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
