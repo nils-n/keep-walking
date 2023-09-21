@@ -2292,6 +2292,10 @@ html {
   margin-left: 3.5rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -2743,6 +2747,14 @@ html {
   padding-left: 2.5rem;
 }
 
+.pb-7 {
+  padding-bottom: 1.75rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -3168,6 +3180,20 @@ html {
 }
 
 @media (min-width: 640px) {
+  .sm\:mx-4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .sm\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+
+  .sm\:mt-5 {
+    margin-top: 1.25rem;
+  }
+
   .sm\:inline-block {
     display: inline-block;
   }
@@ -3209,6 +3235,20 @@ html {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.25rem * var(--tw-space-x-reverse));
     margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .sm\:rounded-2xl {
+    border-radius: 1rem;
+  }
+
+  .sm\:rounded-t-2xl {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+
+  .sm\:rounded-b-2xl {
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .sm\:px-2 {
