@@ -2131,6 +2131,11 @@ html {
   padding-bottom: 2rem;
 }
 
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -2193,6 +2198,14 @@ html {
 
 .pb-32 {
   padding-bottom: 8rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
+}
+
+.pb-14 {
+  padding-bottom: 3.5rem;
 }
 
 .text-left {
@@ -2573,6 +2586,16 @@ html {
     padding-bottom: 3.5rem;
   }
 
+  .sm\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .sm\:py-7 {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
   .sm\:pb-16 {
     padding-bottom: 4rem;
   }
@@ -2587,6 +2610,10 @@ html {
 
   .sm\:pr-4 {
     padding-right: 1rem;
+  }
+
+  .sm\:pb-32 {
+    padding-bottom: 8rem;
   }
 
   .sm\:text-lg {
