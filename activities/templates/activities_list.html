@@ -41,10 +41,14 @@
 						{% include "partials/activities.html" %}
 				</div>
 			</div>
+		</div>
+	</div>
+	<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+		<div class='font-sans bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
 			<div class='inline-block'>
 				<div class=" pt-8 md:pt-2  px-4 "> 
 					<div class="px-4 py-14 md:py-2 w-full mx-auto " style='max-width:79ch '>
-							<h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-3'><span> <i class="fa-solid  fa-circle-check"> </i> </span> Your Summary </h2>
+							<h2 class = 'text-blue-900 text-2xl font-bold pt-1 pb-3'><span> <i class="fa-solid  fa-circle-check"> </i> </span> Your Summary </h2>
 							<p id='summary-intro'>Here goes a summary based on the previous month. Will be done in javascript.</p>
 							<ul class='list-disc px-4 py-4 leading-loose'>
 								<li> <span class='text-blue-600 '>BMI </span> : <span id='bmi-message'> <span id='average-bmi'>{{ average_bmi }} </span>  <span id='change-bmi'> {{ change_bmi }} </span>  </span> </li>
@@ -54,10 +58,15 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50 pt-16'>
+		<div class='font-sans bg-blue-100 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+			<h2 class = 'text-blue-500 text-2xl font-bold pt-1 pb-4'><span> <i class="fa-solid fa-magnifying-glass"></i> </span> More Details </h2>
+			<p> This section is more informative, in case you are interested how we calculated your progress. Find below some charts explaining in more detail how we tracked your progress. </p>
 			<div class='inline-block pt-8' style='max-width:79ch; min-width:200px'>
 				<div class=" pt-8 md:pt-2  px-4 "> 
-					<div class="px-4 py-14 md:py-2 w-full mx-auto ">
-						<h2 class = 'text-blue-600 text-2xl font-bold pt-1 pb-4'><span> <i class="fa-solid fa-calendar-days"></i> </span> Previous 30 Days </h2>
+					<div class="px-4 py-14 md:py-2 w-full md:w-1/2 mx-auto ">
 						<div class='' style='min-width:350px; min-height:350px;'>
 							{{ div|safe  }}
 						</div>	
@@ -67,6 +76,8 @@
 		</div>
 	</div>
 </div>
+
+<div class'bg-blue-50' style='min-height:200px'></div>
 
 
 
