@@ -13,102 +13,103 @@
 
 {% block content %}
 
+<div class='bg-blue-50'>
+  <!-- Hero banner -->
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div class='flex flex-col pb-8 sm:pb-16'>
+          <h1 class='text-5xl w-2/3 pt-8 sm:font-extrabold text-blue-900' style='line-height: 0.9'>Keep on Walking</h1>
+          <p class='text-lg py-4 sm:w-1/2 w-full text-gray-800'> Research shows* that 7000 daily steps reduce weight and improve happiness. </p>
+          <div class='md:flex md:w-1/2 '>
+            {% if user.is_authenticated %}
+              <a  href="{% url 'activity_home' %}" class=' bg-blue-800 text-blue-100 text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md'> Go to your Dashboard</a>
+              <a  href="{% url 'logout' %}" class='bg-blue-400 text-blue-800 text-bold w-full block md:inline-block text-center mb-8 md:mb-2 md: py-2 rounded-md ' > Logout</a>
+            {% else %}
+              <a  href="{% url 'signup' %}" class=' bg-blue-800 text-blue-100 text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md'> Sign Up Now</a>
+              <a  href="{% url 'login' %}" class='bg-blue-400 text-blue-800 text-bold w-full block md:inline-block text-center mb-8 md:mb-2 md: py-2 rounded-md ' > Login</a>
+            {% endif %}
 
-<!-- Hero banner -->
-<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-  <div class='font-sans bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-    <div class='flex flex-col pb-8 sm:pb-16'>
-        <h1 class='text-5xl w-2/3 pt-8 sm:font-extrabold text-blue-900' style='line-height: 0.9'>Keep on Walking</h1>
-        <p class='text-lg py-4 sm:w-1/2 w-full text-gray-800'> Research shows* that 7000 daily steps reduce weight and improve happiness. </p>
-        <div class='md:flex md:w-1/2 '>
-          {% if user.is_authenticated %}
-            <a  href="{% url 'activity_home' %}" class=' bg-blue-800 text-blue-100 text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md'> Go to your Dashboard</a>
-            <a  href="{% url 'logout' %}" class='bg-blue-400 text-blue-800 text-bold w-full block md:inline-block text-center mb-8 md:mb-2 md: py-2 rounded-md ' > Logout</a>
-          {% else %}
-            <a  href="{% url 'signup' %}" class=' bg-blue-800 text-blue-100 text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md'> Sign Up Now</a>
-            <a  href="{% url 'login' %}" class='bg-blue-400 text-blue-800 text-bold w-full block md:inline-block text-center mb-8 md:mb-2 md: py-2 rounded-md ' > Login</a>
-          {% endif %}
-
-        </div>
-        <button class="block"  > </button>
-        <button class=" text-gray-800 block"> </button>
-    </div>
-  </div>
-</div>
-<!-- Our approach -->
-<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-  <div class='font-sans bg-blue-50 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-    <div class=''>
-      <h2 class='font-bold text-2xl text-blue-900'>Our approach</h2>
-      <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, nemo, vero praesentium ipsam ab doloremque possimus placeat iusto debitis officia at magnam nostrum tempore quod sit dicta sapiente recusandae nobis earum cupiditate. Corporis natus vitae sapiente molestias in, praesentium soluta?</p>
-    </div>
-  </div>
-</div>
-<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-  <div class='font-sans bg-blue-50 px-6 pb-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-    <div style='min-height: 200px;' class='my-auto mx-auto'>
-      <div class="flex flex-col w-full lg:flex-row"> 
-        <div class="grid flex-grow  sm:max-w-sm card bg-blue-200 rounded-box place-items-top ">
-          <h3 class='pt-8 px-4  text-blue-900 font-bold text-lg text-center'>Slow, but Constant </h3> 
-          <p class='pt-2 pb-4 px-4 text-gray-700' style='line-height:1.6'> We don't use a receipe such as “lose 10 kg in 2 weeks” - usually those are followed by increase in weight in same time, paired with emotional downs. </p>
-        </div> 
-        <div class="divider lg:divider-horizontal"> </div> 
-        <div class="grid flex-grow  sm:max-w-sm card bg-blue-200 rounded-box place-items-top ">
-          <div class='flex flex-col justify-left align-center text-center' >
-            <h3 class='pt-8 px-4  text-blue-900 font-bold text-lg'>Be Happy - Stay Happy </h3> 
-            <p class='pt-2 pb-4 px-4 text-gray-700 text-left' style='line-height:1.6'> Keeping track of your BMI and see your constant improvements will help you stay motivated. </p>
           </div>
-        </div>
-        <div class="divider lg:divider-horizontal"></div> 
-        <div class="grid flex-grow  sm:max-w-sm card bg-blue-200 rounded-box place-items-top ">
-          <div class='flex flex-col justify-left align-center text-center' >
-            <h3 class='pt-8 px-4  text-blue-900 font-bold text-lg'> Power of Science </h3> 
-            <p class='pt-2 pb-4 px-4 text-gray-700 text-left' style='line-height:1.6'> Our approach is based on latest research in peer-reviewed journals - leverage the power of knowledge. </p>
+          <button class="block"  > </button>
+          <button class=" text-gray-800 block"> </button>
+      </div>
+    </div>
+  </div>
+  <!-- Our approach -->
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-50 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div class=''>
+        <h2 class='font-bold text-2xl text-blue-900'>Our approach</h2>
+        <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis, nemo, vero praesentium ipsam ab doloremque possimus placeat iusto debitis officia at magnam nostrum tempore quod sit dicta sapiente recusandae nobis earum cupiditate. Corporis natus vitae sapiente molestias in, praesentium soluta?</p>
+      </div>
+    </div>
+  </div>
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-50 px-6 pb-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div style='min-height: 200px;' class='my-auto mx-auto'>
+        <div class="flex flex-col w-full lg:flex-row"> 
+          <div class="grid flex-grow  sm:max-w-sm card bg-blue-200 rounded-box place-items-top ">
+            <h3 class='pt-8 px-4  text-blue-900 font-bold text-lg text-center'>Slow, but Constant </h3> 
+            <p class='pt-2 pb-4 px-4 text-gray-700' style='line-height:1.6'> We don't use a receipe such as “lose 10 kg in 2 weeks” - usually those are followed by increase in weight in same time, paired with emotional downs. </p>
+          </div> 
+          <div class="divider lg:divider-horizontal"> </div> 
+          <div class="grid flex-grow  sm:max-w-sm card bg-blue-200 rounded-box place-items-top ">
+            <div class='flex flex-col justify-left align-center text-center' >
+              <h3 class='pt-8 px-4  text-blue-900 font-bold text-lg'>Be Happy - Stay Happy </h3> 
+              <p class='pt-2 pb-4 px-4 text-gray-700 text-left' style='line-height:1.6'> Keeping track of your BMI and see your constant improvements will help you stay motivated. </p>
+            </div>
+          </div>
+          <div class="divider lg:divider-horizontal"></div> 
+          <div class="grid flex-grow  sm:max-w-sm card bg-blue-200 rounded-box place-items-top ">
+            <div class='flex flex-col justify-left align-center text-center' >
+              <h3 class='pt-8 px-4  text-blue-900 font-bold text-lg'> Power of Science </h3> 
+              <p class='pt-2 pb-4 px-4 text-gray-700 text-left' style='line-height:1.6'> Our approach is based on latest research in peer-reviewed journals - leverage the power of knowledge. </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Your Journey  -->
-<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-  <div class='font-sans bg-blue-50 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-    <div class='px-4'>
-      <h2 class='font-bold text-2xl text-blue-900'>Your Journey</h2>
-      <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> The secret to maintaining 7000 daily steps is creating the right habits. We will guide to to leverage the power of your Garmin Smartwatch to helping you maintain a healthy BMI and stay fit. </p>
+  <!-- Your Journey  -->
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-50 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div class='px-4'>
+        <h2 class='font-bold text-2xl text-blue-900'>Your Journey</h2>
+        <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> The secret to maintaining 7000 daily steps is creating the right habits. We will guide to to leverage the power of your Garmin Smartwatch to helping you maintain a healthy BMI and stay fit. </p>
+      </div>
     </div>
   </div>
-</div>
-<!-- based on Tailwind Flowbite timeline component https://flowbite.com/docs/components/timeline/-->
-<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-  <div class='font-sans bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-    <div style='min-height: 200px;' class='my-auto mx-auto'>
-      <ol class="px-4 relative border-l border-gray-200 text-gray-800">                  
-        <li class="mb-10 ml-4">
-           <div class="absolute w-3 h-3 bg-blue-400 rounded-xl mt-1.5 -left-1.5 border border-white "></div>
-           <h3 class="text-lg font-semibold text-blue-900 e"> 1. Sign Up</h3>
-           <p class="mb-4 text-base font-normal text-blue-600 ">Get access to your main activitiy board, enter your height and current weight. This is important to calculate your BMI (Body-mass-index).</p>
+  <!-- based on Tailwind Flowbite timeline component https://flowbite.com/docs/components/timeline/-->
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div style='min-height: 200px;' class='my-auto mx-auto'>
+        <ol class="px-4 relative border-l border-gray-200 text-gray-800">                  
+          <li class="mb-10 ml-4">
+            <div class="absolute w-3 h-3 bg-blue-400 rounded-xl mt-1.5 -left-1.5 border border-white "></div>
+            <h3 class="text-lg font-semibold text-blue-900 e"> 1. Sign Up</h3>
+            <p class="mb-4 text-base font-normal text-blue-600 ">Get access to your main activitiy board, enter your height and current weight. This is important to calculate your BMI (Body-mass-index).</p>
+          </li>
+          <li class="mb-10 ml-4">
+            <div class="absolute w-3 h-3 bg-blue-400 rounded-xl mt-1.5 -left-1.5 border border-white "></div>
+            <h3 class="text-lg font-semibold text-blue-900 e"> 2. Sync with Your Garmin Watch</h3>
+            <p class="mb-4 text-base font-normal text-blue-600 ">From your personal page, sync with your Garmin Watch using Garmin Connect. Don't worry, we don't save your login details.</p>
         </li>
         <li class="mb-10 ml-4">
           <div class="absolute w-3 h-3 bg-blue-400 rounded-xl mt-1.5 -left-1.5 border border-white "></div>
-          <h3 class="text-lg font-semibold text-blue-900 e"> 2. Sync with Your Garmin Watch</h3>
-          <p class="mb-4 text-base font-normal text-blue-600 ">From your personal page, sync with your Garmin Watch using Garmin Connect. Don't worry, we don't save your login details.</p>
-       </li>
-       <li class="mb-10 ml-4">
-        <div class="absolute w-3 h-3 bg-blue-400 rounded-xl mt-1.5 -left-1.5 border border-white "></div>
-        <h3 class="text-lg font-semibold text-blue-900 e"> 3. Start Walking and keep track</h3>
-        <p class="mb-4 text-base font-normal text-blue-600 ">Receive a first summary of your last month based on your walks. We will guide your carfully to reach and maintain your healthy BMI. Log in as often as you can, and track your progression.  </p>
-     </li>
-      </ol>
+          <h3 class="text-lg font-semibold text-blue-900 e"> 3. Start Walking and keep track</h3>
+          <p class="mb-4 text-base font-normal text-blue-600 ">Receive a first summary of your last month based on your walks. We will guide your carfully to reach and maintain your healthy BMI. Log in as often as you can, and track your progression.  </p>
+      </li>
+        </ol>
+      </div>
     </div>
   </div>
-</div>
-<!-- Example Stories -->
-<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-  <div class='font-sans bg-blue-50 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-    <div>
-      <h2 class='font-bold text-2xl text-blue-900'> Example Journey</h2>
-      <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> Here is an example story of xxx. He signed up on  </p>
+  <!-- Example Stories -->
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-50 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div>
+        <h2 class='font-bold text-2xl text-blue-900'> Example Journey</h2>
+        <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> Here is an example story of xxx. He signed up on  </p>
+      </div>
     </div>
   </div>
 </div>
