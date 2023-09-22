@@ -6,7 +6,7 @@ Users are encouraged to sign up and log their daily step count using their Garmi
 
 Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuapp.com/)
 
-![GitHub top language](https://img.shields.io/github/languages/top/nils-n/keep-running?logo=GitHub&style=flat-square) ![GitHub contributors](https://img.shields.io/github/contributors/nils-n/keep-running?color=oo&logo=Github) ![GitHub last commit](https://img.shields.io/github/last-commit/nils-n/keep-running?logo=Github)
+![GitHub top language](https://img.shields.io/github/languages/top/nils-n/keep-walking?logo=GitHub&style=flat-square) ![GitHub contributors](https://img.shields.io/github/contributors/nils-n/keep-walking?color=oo&logo=Github) ![GitHub last commit](https://img.shields.io/github/last-commit/nils-n/keep-walking?logo=Github)
 
 **References:**
 
