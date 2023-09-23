@@ -202,3 +202,24 @@ def test_bmi_change_is_calculated_correctly(
 
     assert bmi == expected_avg_bmi
     assert change_of_bmi == expected_bmi_change
+
+
+def test_confirm_that_userdata_factory_works(user_factory):
+    """
+    this tests that we can use the factory for the user
+    in our unit tests
+    """
+    result = user_factory.username
+
+    assert isinstance(result, str)
+
+
+def test_confirm_that_garmin_data_factory_works(garmindata_factory):
+    """
+    this tests that we can use the factory for the GarminData model
+    for unit tests of functions that use this model
+    """
+    model = garmindata_factory
+
+    assert isinstance(model.steps, int)
+    assert isinstance(model.weight_kg, int)

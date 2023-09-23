@@ -10,3 +10,4 @@ cloudinary_python.txt
 venv/
 .vscode-gitpod/
 node_modules/
+db.sqlite3
