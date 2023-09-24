@@ -158,6 +158,7 @@ User data are stored in a relational database. The main model has been carefully
 - [Shields.io](https://shields.io/) for Readme badges
 - convert markdown tables to html via [HTML Table Converter](https://tableconvert.com/markdown-to-html)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) VS Code formatter
+- [python-garminconnect](https://github.com/cyberjunky/python-garminconnect/tree/master) for Garmin API calls
 
 ### Languages
 
