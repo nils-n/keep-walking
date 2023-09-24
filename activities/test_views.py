@@ -261,11 +261,40 @@ def test_authenticated_user_can_access_profile_page(client, django_user_model):
 def test_unauthenticated_user_cannot_access_profile_page(
     client, django_user_model
 ):
+    """
+    this tests whether a 403 error is raised when an unauthorized user
+    tries to access a profile page
+    """
     response = client.get("/activities/profile/1")
     assert response.status_code == 403
 
 
+@pytest.mark.parametrize(
+    "fixture_name, input_url, expected_status_code",
+    [
+        ("client", "/activities/wrong-url-1", 404),
+        ("client", "/activities/wrong-url-2", 404),
+        ("client", "/", 200),
+    ],
+)
+def test_404_is_raised_when_providing_wrong_url(
+    fixture_name, input_url, expected_status_code, request
+):
+    """
+    this tests whether a 404 error is raised when the website user
+    types in a wrong URL
+    """
+    client = request.getfixturevalue(fixture_name)
+
+    response = client.get(input_url)
+
+    assert response.status_code == expected_status_code
+
 
 def test_unauthenticated_user_can_access_home_page(client, django_user_model):
+    """
+    this tests whether the homepage is display when a not authenticated
+    website user visits the page
+    """
     response = client.get("/")
     assert response.status_code == 200
