@@ -4,3 +4,7 @@ filterwarnings = [
     "ignore::DeprecationWarning",
     "ignore::UserWarning"
 ]
+
+[project]
+name = "keep-walking"
+version = "0.0.1"
