@@ -151,19 +151,27 @@ User data are stored in a relational database. The main model has been carefully
 
 ## Technologies Used
 
-- [DrawSQL](https://drawsql.app/)
+- [DrawSQL](https://drawsql.app/) to draw ERD diagram for the DB tables
+- Git / [Github](https://github.com/) for Version Control
+- [VS Code ](https://code.visualstudio.com/) as local IDE
+- [Figma](https://www.figma.com/) for Wireframs and Flowcharts
+- [Shields.io](https://shields.io/) for Readme badges
+- convert markdown tables to html via [HTML Table Converter](https://tableconvert.com/markdown-to-html)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) VS Code formatter
 
 ### Languages
 
 - HTML
 - CSS
 - Python
+- Javascript
 
 ### Frameworks
 
-- jQuery
-- Bootstrap (V. 4.2)
-- Pytest
+- [Django](https://www.djangoproject.com/) for backend server
+- [Tailwind CSS](https://tailwindcss.com/) for frontend / UI / CSS
+- [Pytest](https://docs.pytest.org/en/7.4.x/) for Unit Testing
+- [htmx](https://htmx.org/) for AJAX requests without re-loading the page
 
 ---
 
