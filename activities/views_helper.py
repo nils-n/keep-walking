@@ -344,6 +344,10 @@ def calculate_bmi_change(
     over the recent n days
     returns : average bmi, linear trend of the BMI over recent n days
     """
+    # return zero when called with empty list 
+    if not days:
+        return 0,0
+
     # fix entries for weight of 0 kg - for now just used the median value
     bmi_list = [
         weight / (float(height_cm) / 100.0) ** 2
