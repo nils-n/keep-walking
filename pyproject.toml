@@ -1,5 +1,6 @@
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "keep_walking.settings"
 filterwarnings = [
-    "ignore::DeprecationWarning"
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning"
 ]

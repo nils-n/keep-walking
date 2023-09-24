@@ -1,6 +1,7 @@
 import pytest
 import datetime
 import pandas as pd
+from django.urls.exceptions import NoReverseMatch
 from .models import GarminData
 from pandas import to_datetime
 
@@ -242,3 +243,28 @@ def test_user_data_extracted_correctly(garmin_data_list):
         assert result.date == days[i].date()
         assert result.weight_kg == weights[i]
         assert result.steps == steps[i]
+
+
+def test_authenticated_user_can_access_profile_page(client, django_user_model):
+    username = "testuser2"
+    password = "f#hm&$xXjK8bfmt4"
+    user = django_user_model.objects.create_user(
+        username=username, password=password
+    )
+    client.login(username=username, password=password)
+    response = client.get("/activities/profile/1")
+    assert response.status_code == 200
+
+
+def test_unauthenticated_user_cannot_access_profile_page(
+    client, django_user_model
+):
+    with pytest.raises(NoReverseMatch):
+        response = client.get("/activities/profile/1")
+
+
+def test_unauthenticated_user_can_access_home_page(
+    client, django_user_model
+):
+    response = client.get("/")
+    assert response.status_code == 200
