@@ -19,7 +19,6 @@ from .views_helper import (
     convert_api_data_to_datetime,
     convert_api_data_to_steps,
     extract_weight,
-    get_garmin_mock_data_for_testing,
     convert_date_str_to_datetime,
     extract_user_data,
     create_bokeh_plot,
@@ -236,27 +235,16 @@ def load_activities(request):
     garmin_data = GarminData.objects.filter(user=request.user)
     existing_dates = [db_record.date for db_record in garmin_data]
 
-    # for the moment just fake an API call - will add this once the rest is working
-    use_mockdata = False
-    print(f"use_mockdata : {use_mockdata}")
-    if use_mockdata:
-        print("calling with fake API data")
-        print(use_mockdata)
-        (
-            garmin_step_data,
-            garmin_weight_data,
-        ) = get_garmin_mock_data_for_testing()
-    else:
-        print("calling the actual Garmin API data")
-        garmin_step_data, garmin_weight_data = garmin_api_call(
-            garmin_username,
-            garmin_password,
-            garmin_start_date,
-            garmin_end_date,
-        )
-        messages.add_message(
-            request, messages.ERROR, "Sync with Garmin API successful"
-        )
+    # retrieve latest data from garmin api
+    garmin_step_data, garmin_weight_data = garmin_api_call(
+        garmin_username,
+        garmin_password,
+        garmin_start_date,
+        garmin_end_date,
+    )
+    messages.add_message(
+        request, messages.ERROR, "Sync with Garmin API successful"
+    )
     garmin_step_data = garmin_step_data[0]
 
     for garmin_entry in garmin_step_data:
@@ -269,9 +257,6 @@ def load_activities(request):
             new_garmin_entry.steps = new_steps
             new_garmin_entry.weight_kg = extract_weight(
                 garmin_weight_data[0], new_date
-            )
-            print(
-                f"weight on date {new_date} was : {new_garmin_entry.weight_kg}"
             )
             new_garmin_entry.save()
     # update the template
