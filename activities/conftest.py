@@ -11,7 +11,7 @@ register(GarmindataFactory)
 @pytest.fixture()
 def garmin_data_list(
     garmindata_factory,
-) -> tuple[list[GarminData], list[int], list[int], list[date]]:
+) -> list[GarminData]:
     """
     create a list of fake GarminData objects to test the
     view function that extracts data from the DB
@@ -35,4 +35,4 @@ def garmin_data_list(
         )
         for i in range(number_of_random_dates)
     ]
-    return data, steps_list, weights_list, date_list
+    return data
