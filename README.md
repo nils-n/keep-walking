@@ -1,12 +1,18 @@
+![GitHub top language](https://img.shields.io/github/languages/top/nils-n/keep-walking?logo=GitHub&style=flat-square&style=plastic) ![GitHub contributors](https://img.shields.io/github/contributors/nils-n/keep-walking?color=oo&logo=Github&style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/nils-n/keep-walking?logo=Github&style=plastic) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nils-n/keep-walking/django.yml?style=plastic&logo=github&label=Django%20CI)
+
 # _Keep on Walking_ - improve your health and happiness by daily walks
 
 Have you walked 7000 steps today? According to science, a daily step count of 7000 steps is associated with increased happiness, mental health and improvement of various body parameters ( [Paluch, et. al., 2021](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2783711?utm_source=For_The_Media&utm_medium=referral&utm_campaign=ftm_links&utm_term=090321), [Choi, et. al., 2019](https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2720689)). The aim of this website is to take up on this idea and promote health, fitness and happiness.
 
-Users are encouraged to sign up and log their daily step count using their Garmin&copy; watch. The website will keep them on track with their step goal, and inform them if they are progessing in their goal of either reaching or maintaining a healthy BMI (body-mass-index). In addition, a simple statistic will be applied across all signed up users as to wheter meeting the targeted step count improves their health parameters, such as increased sleep times, reduced heart variability and reduced stress levels.
+### Project Goal
+
+- Users are encouraged to sign up and log their daily step count using their Garmin&copy; watch.
+- The website will keep them on track with their step goal, and inform them if they are progessing in their goal of either reaching or maintaining a healthy BMI (body-mass-index).
+- In addition, a simple statistic will be applied across all signed up users as to wheter meeting the targeted step count improves their health parameters, such as increased sleep times, reduced heart variability and reduced stress levels.
 
 Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuapp.com/)
 
-![GitHub top language](https://img.shields.io/github/languages/top/nils-n/keep-walking?logo=GitHub&style=flat-square&style=plastic) ![GitHub contributors](https://img.shields.io/github/contributors/nils-n/keep-walking?color=oo&logo=Github&style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/nils-n/keep-walking?logo=Github&style=plastic) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nils-n/keep-walking/django.yml?style=plastic&logo=github&label=Django%20CI)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 **References:**
 
@@ -16,7 +22,11 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 
 ---
 
+### Table of Content
+
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
+  - [Project Goal](#project-goal)
+  - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
