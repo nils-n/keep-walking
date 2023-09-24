@@ -25,8 +25,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-  - [Project Goal](#project-goal)
-  - [Table of Content](#table-of-content)
+    - [Project Goal](#project-goal)
+    - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
@@ -274,6 +274,7 @@ The deployment consists of 2 steps :
 
 ### Code Used
 
+- Garmin API calls based on example files and documentation from [cyberjunky : Python: Garmin Connect](https://github.com/cyberjunky/python-garminconnect/tree/master)
 - User and Login/Logout functionality using a Custom User Model : [LearnDjango - Django Best Practices: Custom User Model](https://learndjango.com/tutorials/django-custom-user-model)
 - To retrieve a custom attribute when clicking a button while using also arrow functions : [Stackoverflow - $(this) is selecting window object instead of clicked element jquery [duplicate]](https://stackoverflow.com/questions/49449325/this-is-selecting-window-object-instead-of-clicked-element-jquery)
 - Cookie setup for handling CSRF Tokens when using AJAX [Github](https://github.com/realpython/django-form-fun/blob/master/part1/main.js) as referenced in this blog post [Django and AJAX Form Submissions – Say 'Goodbye' to the Page Refresh](https://realpython.com/django-and-ajax-form-submissions/)
