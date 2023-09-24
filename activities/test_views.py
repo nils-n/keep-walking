@@ -233,10 +233,11 @@ def test_user_data_extracted_correctly(garmin_data_list):
     this tests the view function that extracts data
     from the DB
     """
-    model = garmin_data_list
+    model, expected_steps, expected_weights, expected_dates = garmin_data_list
 
     days, steps, weights = extract_user_data(model)
 
-    for item in model:
-        print(f"{item.date} - {item.steps} - {item.weight_kg}")
-    assert False
+    for i, result in enumerate(model):
+        assert result.date == expected_dates[i]
+        assert result.weight_kg == expected_weights[i]
+        assert result.steps == expected_steps[i]
