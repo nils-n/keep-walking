@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Keep on Walking{% endblock %}
+
+
+{% block header %}
+
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class='bg-blue-50'>
+  <!-- Hero banner -->
+  <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+    <div class='font-sans bg-blue-200 sm:px-16 px-4 pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+      <div class='flex flex-col pb-8 sm:pb-16'>
+          <h1 class='text-5xl w-2/3 pt-8 sm:font-extrabold text-blue-900' style='line-height: 0.9'> Something went wrong. </h1>
+          <p class='text-lg py-4 sm:w-1/2 w-full text-gray-800'> You do not have permission for this request (403). </p> 
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

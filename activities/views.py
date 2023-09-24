@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator
+from django.core.exceptions import PermissionDenied
 
 from .models import GarminData, UserProfile
 from .forms import GarminDataForm, EditGarminDataForm, UserProfileForm
@@ -66,7 +67,7 @@ def user_profile(request, user_id, *args, **kwargs):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
-        return render(request, "partials/profile_details.html", context)
+        raise PermissionDenied
 
 
 def edit_profile(request, user_id, *args, **kwargs):
@@ -86,7 +87,7 @@ def edit_profile(request, user_id, *args, **kwargs):
         )
         context = {"profile_form": profile_form, "user_profile": profile}
     else:
-        profile = UserProfile()
+        raise PermissionDenied
     return render(request, "partials/edit_profile.html", context)
 
 
@@ -100,7 +101,7 @@ def delete_profile(request, user_id, *args, **kwargs):
         )
         profile = UserProfile()
         context = {"user_profile": profile}
-        return render(request, "partials/profile_details.html", context)
+        raise PermissionDenied
     else:
         print("searching for user...")
         profile = get_object_or_404(UserProfile, user=request.user)
@@ -142,6 +143,7 @@ def update_profile(request, user_id, *args, **kwargs):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
+        raise PermissionDenied
 
     # update the template
     user_profile = UserProfile.objects.filter(user=request.user)
@@ -302,6 +304,7 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
+        raise PermissionDenied
     # update the template
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
@@ -371,6 +374,7 @@ def rate_good(request, garmin_data_id):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
+        raise PermissionDenied
     # update the template
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
@@ -411,6 +415,7 @@ def rate_neutral(request, garmin_data_id):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
+        raise PermissionDenied
     # update the template
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
@@ -450,6 +455,7 @@ def rate_bad(request, garmin_data_id):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
+        raise PermissionDenied
     # update the template
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
