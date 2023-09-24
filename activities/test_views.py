@@ -10,6 +10,7 @@ from .views_helper import (
     extract_weight,
     convert_date_str_to_datetime,
     calculate_bmi_change,
+    extract_user_data,
 )
 
 
@@ -233,6 +234,9 @@ def test_user_data_extracted_correctly(garmin_data_list):
     from the DB
     """
     model = garmin_data_list
+
+    days, steps, weights = extract_user_data(model)
+
     for item in model:
-        print(item)
+        print(f"{item.date} - {item.steps} - {item.weight_kg}")
     assert False
