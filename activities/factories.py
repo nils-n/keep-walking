@@ -1,6 +1,6 @@
 import factory
 from faker import Faker
-from django.contrib.auth.models import User
+from django.conf import settings
 from .models import GarminData
 
 fake = Faker()
@@ -13,7 +13,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     """
 
     class Meta:
-        model = User
+        model = settings.AUTH_USER_MODEL
 
     username = fake.name()
 
@@ -30,3 +30,4 @@ class GarmindataFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     steps = fake.random_int(0, 14000)
     weight_kg = fake.random_int(50, 120)
+    date = fake.date()

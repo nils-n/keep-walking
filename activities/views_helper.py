@@ -259,7 +259,7 @@ def get_garmin_mock_data_for_testing():
 
 def extract_user_data(
     garmin_data: list[GarminData],
-) -> tuple[list[datetime.date], list[int]]:
+) -> tuple[list[datetime.date], list[int], list[int]]:
     """extract days and steps as input for bokeh plot"""
     days = [to_datetime(db_record.date) for db_record in garmin_data]
     steps = [db_record.steps for db_record in garmin_data]
@@ -345,7 +345,12 @@ def calculate_bmi_change(
     returns : average bmi, linear trend of the BMI over recent n days
     """
     # fix entries for weight of 0 kg - for now just used the median value
-    bmi_list = [weight / (float(height_cm) / 100.0) ** 2 if weight>0  else median(weights) / (float(height_cm) / 100.0) ** 2  for weight in weights ]
+    bmi_list = [
+        weight / (float(height_cm) / 100.0) ** 2
+        if weight > 0
+        else median(weights) / (float(height_cm) / 100.0) ** 2
+        for weight in weights
+    ]
     # flip list to calculate from latest to new
     bmi_list = bmi_list[::-1]
 
@@ -357,7 +362,7 @@ def calculate_bmi_change(
     bmi_change = (num_days - 1) * slope
     bmi_average = intercept + (num_days - 1) / 2.0 * slope
 
-    # make it more human readable 
+    # make it more human readable
     bmi_change = around(bmi_change, 1)
     bmi_average = around(bmi_average, 1)
 
