@@ -131,8 +131,9 @@ def extract_bmi_timeseries(
     simple linear fit of the BMI measurments
     """
     num_days = len(days)
-    slope = change_bmi / (num_days - 1)
-    intercept = average_bmi - (slope * num_days) / 2
+    slope = 2 * change_bmi / (num_days - 1)
+    intercept = average_bmi - (num_days - 1) / 2.0 * slope
+
     return [intercept + slope * i for i, day in enumerate(days)]
 
 

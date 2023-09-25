@@ -12,6 +12,7 @@ from .views_helper import (
     convert_date_str_to_datetime,
     calculate_bmi_change,
     extract_user_data,
+    extract_bmi_timeseries,
 )
 
 
@@ -204,6 +205,44 @@ def test_bmi_change_is_calculated_correctly(
 
     assert bmi == expected_avg_bmi
     assert change_of_bmi == expected_bmi_change
+
+
+@pytest.mark.parametrize(
+    "days, avg_bmi, change_bmi, expected_bmi_timeseries",
+    [
+        (
+            [
+                datetime.date(2023, 8, 31),
+                datetime.date(2023, 8, 30),
+                datetime.date(2023, 8, 29),
+            ],
+            20,
+            1,
+            [19, 20, 21],
+        ),
+        (
+            [
+                datetime.date(2023, 8, 31),
+                datetime.date(2023, 8, 30),
+                datetime.date(2023, 8, 30),
+            ],
+            42,
+            2,
+            [40, 42, 44],
+        ),
+
+    ],
+)
+def test_bmi_timeseries_is_extracted_correctly(
+    days, avg_bmi, change_bmi, expected_bmi_timeseries
+):
+    """
+    this test confirms that the BMI timeseries for the bokeh plot
+    has correct values
+    """
+    result = extract_bmi_timeseries(days, avg_bmi, change_bmi)
+
+    assert result == expected_bmi_timeseries
 
 
 def test_confirm_that_userdata_factory_works(db, user_factory):
