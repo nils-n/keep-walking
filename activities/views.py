@@ -24,6 +24,7 @@ from .views_helper import (
     create_bokeh_plot,
     calculate_bmi_change,
     calculate_bmi_change,
+    extract_bmi_timeseries,
 )
 
 
@@ -200,10 +201,13 @@ class ActivityList(ListView):
         average_bmi, change_bmi = calculate_bmi_change(
             days, weights, profile.height_cm
         )
+        bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
+        print(f"average : {average_bmi}")
+        print(f"change_bmi : {change_bmi}")
+        print(f"bmi : {bmi}")
 
         # create a bokeh plot and styling of the plot inside a helper function
-        script, div = create_bokeh_plot(data)
-
+        script, div = create_bokeh_plot(data, "Steps")
 
         context_data["average_bmi"] = average_bmi
         context_data["change_bmi"] = change_bmi

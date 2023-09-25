@@ -123,7 +123,20 @@ def extract_user_data(
     return days, steps, weights
 
 
-def create_bokeh_plot(data: pd.DataFrame):
+def extract_bmi_timeseries(
+    days: list[datetime.date], average_bmi: int, change_bmi: int
+):
+    """
+    extract bmi values for the BMI bokeh plot
+    simple linear fit of the BMI measurments
+    """
+    num_days = len(days)
+    slope = change_bmi / (num_days - 1)
+    intercept = average_bmi - (slope * num_days) / 2
+    return [intercept + slope * i for i, day in enumerate(days)]
+
+
+def create_bokeh_plot(data: pd.DataFrame, title: str):
     """
     create and style a bokeh plot of the recent 30 days
     of activity which will be passed into the template
@@ -136,10 +149,12 @@ def create_bokeh_plot(data: pd.DataFrame):
         data=dict(days=data["Date"], steps=steps_goal)
     )
 
-    hover = HoverTool(tooltips=[("Date", "@DateString"), ("Steps", "@Steps")])
+    hover = HoverTool(
+        tooltips=[("Date", "@DateString"), (f"{title}", f"@{title}")]
+    )
 
     fig = figure(
-        title="Steps within last 30 days",
+        title=f"{title} within last 30 days",
         tools="reset",
         toolbar_location=None,
         x_axis_type="datetime",
@@ -159,7 +174,7 @@ def create_bokeh_plot(data: pd.DataFrame):
     fig.vbar(
         source=source,
         x="Date",
-        top="Steps",
+        top=f"{title}",
         width=0.5 * width_scale_fac,
         fill_alpha=0.8,
     )
@@ -212,7 +227,6 @@ def calculate_bmi_change(
         weight / (float(height_cm) / 100.0) ** 2 if weight > 0 else bmi_median
         for weight in weights
     ]
-    print(bmi_median)
 
     # flip list to calculate from latest to new
     bmi_list = bmi_list[::-1]
