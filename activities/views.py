@@ -25,6 +25,7 @@ from .views_helper import (
     calculate_bmi_change,
     calculate_bmi_change,
     extract_bmi_timeseries,
+    calculate_average_weight,
 )
 
 
@@ -217,6 +218,9 @@ class ActivityList(ListView):
         data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
         script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
 
+        #calculate the average weight over the last 30 days
+        average_weight = calculate_average_weight( weights)
+
         context_data["average_bmi"] = average_bmi
         context_data["change_bmi"] = change_bmi
         context_data["garmin_form"] = GarminDataForm()
@@ -225,6 +229,7 @@ class ActivityList(ListView):
         context_data["div"] = div
         context_data["script_bmi"] = script_bmi
         context_data["div_bmi"] = div_bmi
+        context_data["average_weight"] = average_weight
         return context_data
 
     def get_queryset(self):

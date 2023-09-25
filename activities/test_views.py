@@ -13,6 +13,7 @@ from .views_helper import (
     calculate_bmi_change,
     extract_user_data,
     extract_bmi_timeseries,
+    calculate_average_weight,
 )
 
 
@@ -230,7 +231,6 @@ def test_bmi_change_is_calculated_correctly(
             2,
             [40, 42, 44],
         ),
-
     ],
 )
 def test_bmi_timeseries_is_extracted_correctly(
@@ -243,6 +243,27 @@ def test_bmi_timeseries_is_extracted_correctly(
     result = extract_bmi_timeseries(days, avg_bmi, change_bmi)
 
     assert result == expected_bmi_timeseries
+
+
+@pytest.mark.parametrize(
+    "weight_entries, expected_average",
+    [
+        ([41, 42, 43], 42),
+        ([41, 0, 43], 42),
+        ([0, 0, 1], 1),
+    ],
+)
+def test_average_weight_calculated_correctly(
+    weight_entries: list[int], expected_average: float
+):
+    """
+    tests that the average weight is calculated correctly
+    empty values should be ignored to not affect the average
+    """
+
+    result = calculate_average_weight(weight_entries)
+
+    assert result == expected_average
 
 
 def test_confirm_that_userdata_factory_works(db, user_factory):

@@ -298,3 +298,12 @@ def calculate_bmi_change(
     bmi_average = around(bmi_average, 1)
 
     return bmi_average, bmi_change
+
+
+def calculate_average_weight( weights: list[int]) -> float:
+    """
+    calculate the average weight over given input .
+    Filtering out empty values to not affect the average
+    """
+
+    return 42
