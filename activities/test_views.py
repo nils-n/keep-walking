@@ -273,6 +273,7 @@ def test_average_weight_calculated_correctly(
         ([0, 1, 2], "neutral"),
         ([0, 0, 1], "bad"),
         ([1, 2, 2], "good"),
+        ([3, 3, 1], "good"),
     ],
 )
 def test_average_emotion_rating_calculated_correctly(
