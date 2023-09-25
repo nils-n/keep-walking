@@ -315,6 +315,9 @@ def calculate_average_weight(weights: list[int]) -> float:
 def calculate_average_rating(ratings: list[int]) -> float:
     """
     calculate the average emotional rating over given input
-    Filtering out empty values to not affect the average
+    Rating is by default 'good' so no need to filter.
     """
-    return 1
+    ratings = [float(r) for r in ratings]
+    average_rating = int(around(mean(ratings)))
+    verbose_rating = ["bad", "neutral", "good"]
+    return verbose_rating[average_rating]
