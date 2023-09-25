@@ -25,8 +25,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-    - [Project Goal](#project-goal)
-    - [Table of Content](#table-of-content)
+  - [Project Goal](#project-goal)
+  - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
@@ -159,6 +159,8 @@ User data are stored in a relational database. The main model has been carefully
 - convert markdown tables to html via [HTML Table Converter](https://tableconvert.com/markdown-to-html)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) VS Code formatter
 - [python-garminconnect](https://github.com/cyberjunky/python-garminconnect/tree/master) for Garmin API calls
+- [icecream](https://github.com/gruns/icecream) for more expressive print statements
+- [black](https://github.com/psf/black) for code formatting
 
 ### Languages
 
