@@ -12,7 +12,7 @@ from garminconnect import (
 )
 from bokeh.embed import components
 from bokeh.plotting import figure
-from bokeh.models import DatetimeTickFormatter, ColumnDataSource, HoverTool
+from bokeh.models import DatetimeTickFormatter, ColumnDataSource, HoverTool, Range1d
 from scipy.stats import linregress
 from numpy import around, median
 
@@ -144,11 +144,23 @@ def create_bokeh_plot(data: pd.DataFrame, title: str):
     """
     source = ColumnDataSource(data=data)
 
+    print(source)
+
     # plot also the step goal
-    steps_goal = [7000 for day in data["Date"]]
-    source_steps_goal = ColumnDataSource(
-        data=dict(days=data["Date"], steps=steps_goal)
-    )
+    if title == "Steps":
+        steps_goal = [7000 for day in data["Date"]]
+        source_steps_goal = ColumnDataSource(
+            data=dict(days=data["Date"], steps=steps_goal)
+        )
+    else:
+        lower_bmi_goal = [18.5 for day in data["Date"]]
+        source_lower_bmi_goal = ColumnDataSource(
+            data=dict(days=data["Date"], lower_bmi=lower_bmi_goal)
+        )
+        upper_bmi_goal = [24.9 for day in data["Date"]]
+        source_upper_bmi_goal = ColumnDataSource(
+            data=dict(days=data["Date"], upper_bmi=upper_bmi_goal)
+        )
 
     hover = HoverTool(
         tooltips=[("Date", "@DateString"), (f"{title}", f"@{title}")]
@@ -167,18 +179,63 @@ def create_bokeh_plot(data: pd.DataFrame, title: str):
     # ensure correct scaling - the width unit needs to be scaled to
     # the displayed time range (it's a relativ value - see )
     # https://stackoverflow.com/questions/51642602/bokeh-bar-chart-not-showing-width-properly
-    msec_per_sec = 1000
-    sec_per_min = 60
-    min_per_hour = 60
-    hour_per_day = 24
-    width_scale_fac = msec_per_sec * sec_per_min * min_per_hour * hour_per_day
-    fig.vbar(
-        source=source,
-        x="Date",
-        top=f"{title}",
-        width=0.5 * width_scale_fac,
-        fill_alpha=0.8,
-    )
+
+    if title == "Steps":
+        # plot the steps
+        msec_per_sec = 1000
+        sec_per_min = 60
+        min_per_hour = 60
+        hour_per_day = 24
+        width_scale_fac = (
+            msec_per_sec * sec_per_min * min_per_hour * hour_per_day
+        )
+        fig.vbar(
+            source=source,
+            x="Date",
+            top=f"{title}",
+            width=0.5 * width_scale_fac,
+            fill_alpha=0.8,
+        )
+        fig.line(
+            source=source_steps_goal,
+            x="days",
+            y="steps",
+            line_width=2,
+            line_color="orange",
+            line_dash="dashed",
+            line_alpha=0.8,
+        )
+    else:
+        # plot the BMI
+        fig.line(
+            source=source,
+            x="Date",
+            y="BMI",
+            line_width=2,
+            line_color="blue",
+            line_alpha=0.9,
+        )
+        fig.line(
+            source=source_lower_bmi_goal,
+            x="days",
+            y="lower_bmi",
+            line_width=2,
+            line_color="green",
+            line_dash="dashed",
+            line_alpha=0.8,
+        )
+        fig.line(
+            source=source_upper_bmi_goal,
+            x="days",
+            y="upper_bmi",
+            line_width=2,
+            line_color="green",
+            line_dash="dashed",
+            line_alpha=0.8,
+        )
+        fig.y_range = Range1d(10, 35)
+
+
     fig.title.align = "center"
     fig.add_tools(hover)
     fig.xaxis.axis_label_text_font_size = "40pt"
@@ -192,15 +249,7 @@ def create_bokeh_plot(data: pd.DataFrame, title: str):
         years=["%d %B %Y"],
     )
     fig.xaxis.major_label_orientation = 3.141 / 4
-    fig.line(
-        source=source_steps_goal,
-        x="days",
-        y="steps",
-        line_width=2,
-        line_color="orange",
-        line_dash="dashed",
-        line_alpha=0.8,
-    )
+    # set a range using a Range1d
 
     script, div = components(fig)
 

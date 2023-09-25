@@ -202,6 +202,7 @@ class ActivityList(ListView):
             days, weights, profile.height_cm
         )
         bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
+        bmi = bmi[::-1]
         print(f"average : {average_bmi}")
         print(f"change_bmi : {change_bmi}")
         print(f"bmi : {bmi}")
@@ -209,12 +210,21 @@ class ActivityList(ListView):
         # create a bokeh plot and styling of the plot inside a helper function
         script, div = create_bokeh_plot(data, "Steps")
 
+        # create a second bokeh plot with the BMI progression
+        data_bmi = pd.DataFrame()
+        data_bmi["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
+        data_bmi["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
+        data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
+        script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
+
         context_data["average_bmi"] = average_bmi
         context_data["change_bmi"] = change_bmi
         context_data["garmin_form"] = GarminDataForm()
         context_data["page_obj"] = page_obj
         context_data["script"] = script
         context_data["div"] = div
+        context_data["script_bmi"] = script_bmi
+        context_data["div_bmi"] = div_bmi
         return context_data
 
     def get_queryset(self):
