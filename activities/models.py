@@ -39,7 +39,7 @@ class UserProfile(models.Model):
         related_name="profile",
     )
     birthday = models.DateField(null=True)
-    height_cm = models.IntegerField(null=True)
+    height_cm = models.IntegerField(default=170)
     step_goal = models.IntegerField(default=7000)
     start_date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now=True)

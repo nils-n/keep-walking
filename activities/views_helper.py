@@ -12,7 +12,12 @@ from garminconnect import (
 )
 from bokeh.embed import components
 from bokeh.plotting import figure
-from bokeh.models import DatetimeTickFormatter, ColumnDataSource, HoverTool, Range1d
+from bokeh.models import (
+    DatetimeTickFormatter,
+    ColumnDataSource,
+    HoverTool,
+    Range1d,
+)
 from scipy.stats import linregress
 from numpy import around, median
 
@@ -234,7 +239,6 @@ def create_bokeh_plot(data: pd.DataFrame, title: str):
             line_alpha=0.8,
         )
         fig.y_range = Range1d(10, 35)
-
 
     fig.title.align = "center"
     fig.add_tools(hover)
