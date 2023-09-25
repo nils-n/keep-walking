@@ -218,8 +218,8 @@ class ActivityList(ListView):
         data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
         script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
 
-        #calculate the average weight over the last 30 days
-        average_weight = calculate_average_weight( weights)
+        # calculate the average weight over the last 30 days
+        average_weight = calculate_average_weight(weights)
 
         context_data["average_bmi"] = average_bmi
         context_data["change_bmi"] = change_bmi
