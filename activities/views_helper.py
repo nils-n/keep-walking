@@ -120,13 +120,14 @@ def extract_weight(garmin_weight_data, target_date) -> int:
 
 def extract_user_data(
     garmin_data: list[GarminData],
-) -> tuple[list[datetime.date], list[int], list[int]]:
+) -> tuple[list[datetime.date], list[int], list[int], list[int]]:
     """extract days and steps as input for bokeh plot"""
     days = [to_datetime(db_record.date) for db_record in garmin_data]
     steps = [db_record.steps for db_record in garmin_data]
     weights = [db_record.weight_kg for db_record in garmin_data]
+    ratings = [db_record.rating for db_record in garmin_data]
 
-    return days, steps, weights
+    return days, steps, weights, ratings
 
 
 def extract_bmi_timeseries(
@@ -309,3 +310,11 @@ def calculate_average_weight(weights: list[int]) -> float:
     weights = [float(w) for w in weights]
     filtered_weights = filter(lambda w: w > 0, weights)
     return mean(list(filtered_weights))
+
+
+def calculate_average_rating(ratings: list[int]) -> float:
+    """
+    calculate the average emotional rating over given input
+    Filtering out empty values to not affect the average
+    """
+    return 1

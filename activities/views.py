@@ -26,6 +26,7 @@ from .views_helper import (
     calculate_bmi_change,
     extract_bmi_timeseries,
     calculate_average_weight,
+    calculate_average_rating,
 )
 
 
@@ -186,7 +187,7 @@ class ActivityList(ListView):
         # provide data strucutre for bokeh
         # this will create components for the template
         # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
-        days, steps, weights = extract_user_data(garmin_data_bokeh)
+        days, steps, weights, ratings = extract_user_data(garmin_data_bokeh)
 
         # create pandas dataframe for tooltips
         # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
@@ -221,6 +222,9 @@ class ActivityList(ListView):
         # calculate the average weight over the last 30 days
         average_weight = calculate_average_weight(weights)
 
+        # calculate the average emotional rating over the last 30 days
+        average_rating = calculate_average_rating(ratings)
+
         context_data["average_bmi"] = average_bmi
         context_data["change_bmi"] = change_bmi
         context_data["garmin_form"] = GarminDataForm()
@@ -230,6 +234,7 @@ class ActivityList(ListView):
         context_data["script_bmi"] = script_bmi
         context_data["div_bmi"] = div_bmi
         context_data["average_weight"] = average_weight
+        context_data["average_rating"] = average_rating
         return context_data
 
     def get_queryset(self):

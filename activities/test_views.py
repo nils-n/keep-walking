@@ -14,6 +14,7 @@ from .views_helper import (
     extract_user_data,
     extract_bmi_timeseries,
     calculate_average_weight,
+    calculate_average_rating,
 )
 
 
@@ -266,6 +267,26 @@ def test_average_weight_calculated_correctly(
     assert result == expected_average
 
 
+@pytest.mark.parametrize(
+    "rating_entries, expected_average_rating",
+    [
+        ([0, 1, 2], "neutral"),
+        ([0, 0, 1], "bad"),
+        ([1, 2, 2], "good"),
+    ],
+)
+def test_average_emotion_rating_calculated_correctly(
+    rating_entries: list[int], expected_average_rating: float
+):
+    """
+    tests that the average rating is calculated correctly
+    """
+
+    result = calculate_average_rating(rating_entries)
+
+    assert result == expected_average_rating
+
+
 def test_confirm_that_userdata_factory_works(db, user_factory):
     """
     this tests that we can use the factory for the user
@@ -296,7 +317,7 @@ def test_user_data_extracted_correctly(garmin_data_list):
     """
     model = garmin_data_list
 
-    days, steps, weights = extract_user_data(model)
+    days, steps, weights, _ = extract_user_data(model)
 
     for i, result in enumerate(model):
         assert result.date == days[i].date()
