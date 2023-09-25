@@ -193,9 +193,6 @@ class ActivityList(ListView):
         data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
         data.insert(2, "Steps", pd.to_numeric(steps))
 
-        # create a bokeh plot and styling of the plot inside a helper function
-        script, div = create_bokeh_plot(data)
-
         # calculate the average bmi and the linear trend for the last 30 days
         # get height from the user profile for calculating BMI
         user_profile = UserProfile.objects.filter(user=self.request.user)
@@ -203,6 +200,10 @@ class ActivityList(ListView):
         average_bmi, change_bmi = calculate_bmi_change(
             days, weights, profile.height_cm
         )
+
+        # create a bokeh plot and styling of the plot inside a helper function
+        script, div = create_bokeh_plot(data)
+
 
         context_data["average_bmi"] = average_bmi
         context_data["change_bmi"] = change_bmi
@@ -229,7 +230,7 @@ def load_activities(request):
     # it's just for the moment - start and end date are switched. Once the
     # final UI in place, handle the naming conventions better.
     garmin_end_date = convert_date_str_to_datetime(start_date)
-    garmin_start_date = garmin_end_date - timedelta(days=10)
+    garmin_start_date = garmin_end_date - timedelta(days=25)
 
     # load information about the currently stored data for the user
     garmin_data = GarminData.objects.filter(user=request.user)

@@ -310,6 +310,6 @@ The deployment consists of 2 steps :
 - How to use Django's signals to automatically create a User Profile at signup: [Automatically Create User Profiles - Django Wednesdays Twitter #3](https://youtu.be/H8MmNqDyra8?feature=shared)
 - How to use factoryboy with pytest for testing functions (Very Academy) [Pytest | Django | Introducing Factory Boy and Faker - Fixture Replacement](https://youtu.be/qrvqNdCDKjM?feature=shared)
 - Setup of automatic tests using Github Actions and pytest
-  - Okken, Brian. "Python Testing with pytest." Pragmatic Bookshelf, 2022.
+  - Okken, Brian. "Python Testing with pytest." (2nd ed.) Pragmatic Bookshelf, 2022.
   - Automated Testing in Python with pytest, tox, and GitHub Actions [mCoding (Youtube) ](https://www.youtube.com/watch?v=DhUpxWjOhME)
 - Thanks to my mentor Ronan (Code Institute) for his advices and clear feedback

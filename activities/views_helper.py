@@ -204,12 +204,16 @@ def calculate_bmi_change(
         return 0, 0
 
     # fix entries for weight of 0 kg - for now just used the median value
+    filtered_weights = filter(lambda w: w > 0, weights)
+    bmi_median = (
+        median(list(filtered_weights)) / (float(height_cm) / 100.0) ** 2
+    )
     bmi_list = [
-        weight / (float(height_cm) / 100.0) ** 2
-        if weight > 0
-        else median(weights) / (float(height_cm) / 100.0) ** 2
+        weight / (float(height_cm) / 100.0) ** 2 if weight > 0 else bmi_median
         for weight in weights
     ]
+    print(bmi_median)
+
     # flip list to calculate from latest to new
     bmi_list = bmi_list[::-1]
 
