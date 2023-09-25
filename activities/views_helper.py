@@ -3,6 +3,7 @@ from datetime import datetime, date
 import pandas as pd
 from .models import GarminData
 from pandas import to_datetime
+from icecream import ic
 
 from garminconnect import (
     Garmin,
@@ -19,7 +20,7 @@ from bokeh.models import (
     Range1d,
 )
 from scipy.stats import linregress
-from numpy import around, median
+from numpy import around, median, mean
 
 
 def create_date_range(
@@ -300,10 +301,11 @@ def calculate_bmi_change(
     return bmi_average, bmi_change
 
 
-def calculate_average_weight( weights: list[int]) -> float:
+def calculate_average_weight(weights: list[int]) -> float:
     """
     calculate the average weight over given input .
     Filtering out empty values to not affect the average
     """
-
-    return 42
+    weights = [float(w) for w in weights]
+    filtered_weights = filter(lambda w: w > 0, weights)
+    return mean(list(filtered_weights))
