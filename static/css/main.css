@@ -2820,6 +2820,10 @@ html {
   .sm\:font-extrabold {
     font-weight: 800;
   }
+
+  .sm\:font-bold {
+    font-weight: 700;
+  }
 }
 
 @media (min-width: 768px) {
