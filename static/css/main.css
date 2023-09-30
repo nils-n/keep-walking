@@ -1784,6 +1784,22 @@ html {
   top: 1rem;
 }
 
+.top-24 {
+  top: 6rem;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.top-12 {
+  top: 3rem;
+}
+
+.top-8 {
+  top: 2rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2077,6 +2093,29 @@ html {
   background-color: rgb(191 219 254 / 0.8);
 }
 
+.bg-blue-200\/20 {
+  background-color: rgb(191 219 254 / 0.2);
+}
+
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
+
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+.bg-green-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
+.bg-blue-200\/0 {
+  background-color: rgb(191 219 254 / 0);
+}
+
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
 }
@@ -2144,6 +2183,10 @@ html {
   fill: currentColor;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -2209,6 +2252,11 @@ html {
   padding-bottom: 2rem;
 }
 
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -2263,6 +2311,14 @@ html {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
 }
 
 .text-left {
@@ -2619,9 +2675,23 @@ html {
 }
 
 @media (min-width: 640px) {
+  .sm\:top-4 {
+    top: 1rem;
+  }
+
   .sm\:mx-16 {
     margin-left: 4rem;
     margin-right: 4rem;
+  }
+
+  .sm\:mx-12 {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .sm\:mx-1 {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
 
   .sm\:mt-5 {
@@ -2676,6 +2746,10 @@ html {
     background-color: rgb(239 246 255 / var(--tw-bg-opacity));
   }
 
+  .sm\:bg-blue-50\/90 {
+    background-color: rgb(239 246 255 / 0.9);
+  }
+
   .sm\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
@@ -2696,6 +2770,11 @@ html {
     padding-bottom: 1.75rem;
   }
 
+  .sm\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
   .sm\:pb-16 {
     padding-bottom: 4rem;
   }
@@ -2714,6 +2793,18 @@ html {
 
   .sm\:pr-4 {
     padding-right: 1rem;
+  }
+
+  .sm\:pb-4 {
+    padding-bottom: 1rem;
+  }
+
+  .sm\:pb-2 {
+    padding-bottom: 0.5rem;
+  }
+
+  .sm\:pb-12 {
+    padding-bottom: 3rem;
   }
 
   .sm\:text-lg {
