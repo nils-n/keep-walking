@@ -12,6 +12,14 @@ Have you walked 7000 steps today? According to science, a daily step count of 70
 
 Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuapp.com/)
 
+  <div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+        <tr>
+          <td> <img src="./assets/images/preview-website.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+        </tr>
+    </table>
+  </div>
+
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 **References:**
