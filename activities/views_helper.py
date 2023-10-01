@@ -309,7 +309,7 @@ def calculate_average_weight(weights: list[int]) -> float:
     """
     weights = [float(w) for w in weights]
     filtered_weights = filter(lambda w: w > 0, weights)
-    return mean(list(filtered_weights))
+    return around(mean(list(filtered_weights)), 1)
 
 
 def calculate_average_rating(ratings: list[int]) -> float:
