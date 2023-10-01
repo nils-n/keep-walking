@@ -274,10 +274,11 @@ Two buttos allow the users to interact with the page:
 
 <div style='text-align:center'>
     <table style='width:90%; content-align:center'>
-      <tr>
-      <td> <img src="./assets/images/features-profile.png"; alt="preview image of the profile page" >  </td>
-      </tr>
-    </table>
+      <tr> <td> <img src="./assets/images/feature-profile-1.png"; alt="preview image of the profile page" >  </td> </tr>
+      <tr> <td> <img src="./assets/images/feature-profile-2.png"; alt="preview image of the profile page" >  </td> </tr>
+      <tr> <td> <img style='width:50%'  src="./assets/images/feature-profile-3.png"; alt="preview image of the profile page" >  </td> </tr>
+      <tr> <td> <img  src="./assets/images/features-profile.png"; alt="preview image of the profile page" >  </td> </tr>
+  </table>
 </div>
 
 #### 6. Feature : Other Pages
@@ -289,7 +290,7 @@ This page contains a friendly message when the 404 and 403 server error have occ
       <tr>
       <td> <img src="./assets/images/feature-403-page.png"; alt="preview image of the 403 page" >  </td>
       </tr>
-        <tr>
+      <tr>
       <td> <img src="./assets/images/feature-404-page.png"; alt="preview image of the 404 page" >  </td>
       </tr>
     </table>
