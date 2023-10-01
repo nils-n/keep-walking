@@ -235,7 +235,7 @@ This is the central page of a signed-in user where the user can interact with th
 - The user can interact with a component that allows syncing their data with the data stored in their Garmin App. By providing their Garmin username/password and clicking the `sync` button, an asynchroneous request is sent to the Garmin API.
   - If the synchronization was successfull, the data `JSON` received from the Garmin API is then processed in the `View` , where the data is entered in the `GarminData` DB table. The page is also updated without reloading (since htmx uses AJAX in the background) displaying the latest walks.
   - If the synchronization was not successful, a toast displaying the error appears on top of the screen with the error message
-- A paginated list of the most recent walks is displayed, allowing the user to get a quick overview of his recent activity and step counts of the last 7 days. The list contains:
+- A paginated list of the most recent walks is displayed, allowing the user to get a quick overview of their recent activity and step counts of the last 7 days. The list contains:
   - General information about daily activities such as : Date, number of steps (as extracted from Garmin API) and body weight (as entered inside the Garmin Connect App)
   - The user can give and modify an emotional rating of the day (via `htmx-post` request that updates the DB without reloading the page )
   - For each activity, the user can press an `Edit` button to update missing or wrong entries (such as, if the watch was charging but the user did go for walk - an estimated step count is still closer than zero steps).
@@ -255,6 +255,11 @@ This is the central page of a signed-in user where the user can interact with th
       <tr> <td> <img src="./assets/images/dashboard-summary.png"; alt="preview of personalized summary of dashboard page" >  </td> </tr>
        <tr> <td> <img src="./assets/images/dashboard-plots.png"; alt="graphical summary of the activities on dashboard page" >  </td> </tr>
       <tr> <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td> </tr>
+      <tr> 
+      <td style='text-align: left'> 
+        <span style='font-weight:bold'>Figure </span> Flow Diagram for the Dashboard Page. The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page. Signed-in users can submit their Garmin credentials in the `Sync Garmin` form, in order to retrieve their latest health stats from the Garmin API. Users can give emotional rating for each day by clicking on the rating symbols next to each activity, which is updating the DB without reloading the page (thanks to htmx-AJAX requests). Users can also read, edit and delete any of their dailiy activities by clicking on 'edit' or 'delete' buttons next to each activity. They can sign out by clicking on the 'Logout' link in the navbar, return to the main page by clicking on 'Home' link, or go their profile page using the 'Profile' link.  
+        </td>
+    </tr>
   </table>
 </div>
 
