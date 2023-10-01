@@ -52,6 +52,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
       - [2. Login/Signup Page](#2-loginsignup-page)
       - [3. Dashboard](#3-dashboard)
       - [4. Profile Page](#4-profile-page)
+      - [5. Other Pages](#5-other-pages)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
@@ -168,6 +169,11 @@ The website consits of a landing page, and a personal area including a dashboard
 
 1. Profile Details Table
 2. Edit/Delete Functionality
+
+#### 5. Other Pages
+
+1. 404 Page
+2. 403 Page
 
 ### Future Implementations
 
