@@ -164,8 +164,10 @@ On top of each page, a navbar is placed leading to sites available to the user.
       <td> <img src="./assets/images/navbar-2.png"; alt="preview image of the navbar" >  </td>
       </tr>
         <tr>
-      <td> <img style='width:30%' src="./assets/images/navbar-small-1.png"; alt="preview image of the navbar" > 
-      <img style='width:30%' src="./assets/images/navbar-small-2.png"; alt="preview image of the navbar" >   </td>
+      <td> 
+      <img style='width:30%' src="./assets/images/navbar-small-1.png"; alt="preview image of the navbar" > 
+      <img style='width:30%' src="./assets/images/navbar-small-2.png"; alt="preview image of the navbar" >   
+      <img style='width:30%' src="./assets/images/navbar-small-3.png"; alt="preview image of the navbar" >   </td>
       </tr>
     </table>
   </div>
