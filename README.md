@@ -50,10 +50,10 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [General Features](#general-features)
       - [1. Feature: Navbar](#1-feature-navbar)
       - [2. Feature: Landing Page](#2-feature-landing-page)
-      - [2. Login/Signup Page](#2-loginsignup-page)
-      - [3. Dashboard](#3-dashboard)
-      - [4. Profile Page](#4-profile-page)
-      - [5. Other Pages](#5-other-pages)
+      - [3. Login/Signup Page](#3-loginsignup-page)
+      - [4. Dashboard](#4-dashboard)
+      - [5. Profile Page](#5-profile-page)
+      - [6. Other Pages](#6-other-pages)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
@@ -197,7 +197,7 @@ This site is the main entry point and is accessible for all users.
     </table>
 </div>
 
-#### 2. Login/Signup Page
+#### 3. Login/Signup Page
 
 - New users can sign up on the website using the Signup Form.
 - If the username already exists, the user is prompted to choose a different, unique username
@@ -227,7 +227,7 @@ This site is the main entry point and is accessible for all users.
   </table>
 </div>
 
-#### 3. Dashboard
+#### 4. Dashboard
 
 1. Banner
 2. Latest Walks
@@ -245,7 +245,7 @@ This site is the main entry point and is accessible for all users.
   </table>
 </div>
 
-#### 4. Profile Page
+#### 5. Profile Page
 
 1. Profile Details Table
 2. Edit/Delete Functionality
@@ -259,7 +259,7 @@ This site is the main entry point and is accessible for all users.
 
   </div>
 
-#### 5. Other Pages
+#### 6. Other Pages
 
 1. 404 Page
 2. 403 Page
