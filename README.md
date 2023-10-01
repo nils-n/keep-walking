@@ -150,6 +150,14 @@ The website consits of a landing page, and a personal area including a dashboard
 3. Timeline
 4. Example User Journey
 
+  <div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+        <tr>
+          <td> <img src="./assets/images/features-landing.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+        </tr>
+    </table>
+  </div>
+
 #### 2. Login/Signup Page
 
 1. Login Page
@@ -165,10 +173,26 @@ The website consits of a landing page, and a personal area including a dashboard
 4. Personalized Summary
 5. Graphs and Charts
 
+  <div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+        <tr>
+          <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+        </tr>
+    </table>
+  </div>
+
 #### 4. Profile Page
 
 1. Profile Details Table
 2. Edit/Delete Functionality
+
+  <div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+        <tr>
+          <td> <img src="./assets/images/features-profile.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+        </tr>
+    </table>
+  </div>
 
 #### 5. Other Pages
 
