@@ -183,10 +183,10 @@ This site is the main entry point and is accessible for all users.
 - On the middle of the page, a timeline is displayed that explains the user their journey through the page and what steps they will be expecting :
   - Step 1: Signing up and filling out profile details which enables calculation of personal Body-Mass-Index (BMI)
   - Step 2: Synchronization with the Garmin watch to track recent daily walks
-  - Step 3: Motivation to keep logging in and tracking over time the progress in terms of BMI, body weight and happiness
-- On the bottom of the page, a preview is presented to allow a new user to form an expectation of the site content and to motivate them to sign up
+  - Step 3: Repeating to log into the page over time, in order to keep track of the progress in terms of BMI, body weight and happiness
+- On the bottom of the page, a preview is presented to allow a new user to form an expectation of the site content and to motivate them to sign up.
 
-  <div style='text-align:center'>
+<div style='text-align:center'>
    <table style='width:90%; content-align:center'>
       <tr>
       <td> <img src="./assets/images/landing-page.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
@@ -194,11 +194,8 @@ This site is the main entry point and is accessible for all users.
        <tr>
       <td> <img src="./assets/images/landing-page-2.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
       </tr>
-      <tr>
-      <td> <img src="./assets/images/features-landing.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-      </tr>
     </table>
-  </div>
+</div>
 
 #### 2. Login/Signup Page
 
@@ -208,9 +205,21 @@ This site is the main entry point and is accessible for all users.
 <div style='text-align:center'>
   <table style='width:90%; content-align:center'>
     <tr>
-      <td> <img src="./assets/images/preview-signup.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-      <td> <img src="./assets/images/preview-login.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-      </tr>
+      <td> 
+        <img style='width:49%' src="./assets/images/preview-signup.png"; alt="preview image of the website taken on multiple screen sizes" > 
+        <img style='width:49%' src="./assets/images/preview-login.png"; alt="preview image of the website taken on multiple screen sizes" > 
+      </td>
+    </tr>
+    <tr>
+      <td> 
+        <img style='width:90%' src="./assets/images/features-landing.png"; alt="preview image of the website taken on multiple screen sizes" >
+      </td>
+    </tr>
+    <tr> 
+     <td style='text-align: left'> 
+      Figure: Flow Diagram for the Landing Page and the Login/Signup Routes. When user enters the site, they will be directed to the Home Page, from where the 'Login' or 'Signup' Buttons direct to the Login and Signup Page. New site users can sign up providing a username/password combination. Users that have already signed-up users can login using their credentials in order to access their personal area.
+      </td>
+    </tr>
   </table>
 </div>
 
