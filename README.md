@@ -272,19 +272,30 @@ Two buttos allow the users to interact with the page:
 - the `Edit button`allows the user to modify key information necessary to calculate the correct progression of this summary, namely the `height (cm)` and their `date of birth` to correct the healthy BMI range for age and body height. Upon successful edit, a toast appears on top of the screen to confirm that the DB has been updated successfully.
 - the `Delete` button triggers a modal for the user to confirm deleltion of their profile. It also includes a warning that this action cannot be undone. If confirmed, the user is deleted from the DB and the user receives a confirmation message that his profile and account has been deleted.
 
-  <div style='text-align:center'>
+<div style='text-align:center'>
     <table style='width:90%; content-align:center'>
       <tr>
-      <td> <img src="./assets/images/features-profile.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      <td> <img src="./assets/images/features-profile.png"; alt="preview image of the profile page" >  </td>
       </tr>
     </table>
-
-  </div>
+</div>
 
 #### 6. Feature : Other Pages
 
-1. 404 Page
-2. 403 Page
+This page contains a friendly message when the 404 and 403 server error have occured.
+
+<div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+      <tr>
+      <td> <img src="./assets/images/feature-403-page.png"; alt="preview image of the 403 page" >  </td>
+      </tr>
+        <tr>
+      <td> <img src="./assets/images/feature-404-page.png"; alt="preview image of the 404 page" >  </td>
+      </tr>
+    </table>
+</div>
+
+---
 
 ### Future Implementations
 
