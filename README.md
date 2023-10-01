@@ -155,7 +155,7 @@ On top of each page, a navbar is placed leading to sites available to the user.
 - On large screen, each link is listed from top lef to middle of the screen
 - On small screen, the navbar collaps to a Hamburger Button. When clicked, a list of links appears, as well as a Cross Icon to close the Hamburger Menu and return to the collapsed state.
 
-  <div style='text-align:center'>
+<div style='text-align:center'>
    <table style='width:90%; content-align:center'>
       <tr>
       <td> <img src="./assets/images/navbar-1.png"; alt="preview image of the navbar" >  </td>
@@ -170,14 +170,21 @@ On top of each page, a navbar is placed leading to sites available to the user.
       <img style='width:30%' src="./assets/images/navbar-small-3.png"; alt="preview image of the navbar" >   </td>
       </tr>
     </table>
-  </div>
+</div>
 
 #### 2. Feature: Landing Page
 
-1.  Hero Image
-2.  Mission Statement
-3.  Timeline
-4.  Example User Journey
+This site is the main entry point and is accessible for all users.
+
+- It shows a hero image with a person walking, a main heading of the page and two CTA buttons
+- When a user is not signed in, the CTA buttons lead to `Signup` and `Login` page to allow users fast access to the main functionality of the page
+- When a user is signed in, the CTA buttons lead to the personal `Dashboard` or the `Logout` page
+- Below the Hero image, the user can find the mission statement of the website, consisting of a brief intrductory summary of the site goal and three cards showcasing the main ethos of the page
+- On the middle of the page, a timeline is displayed that explains the user their journey through the page and what steps they will be expecting :
+  - Step 1: Signing up and filling out profile details which enables calculation of personal Body-Mass-Index (BMI)
+  - Step 2: Synchronization with the Garmin watch to track recent daily walks
+  - Step 3: Motivation to keep logging in and tracking over time the progress in terms of BMI, body weight and happiness
+- On the bottom of the page, a preview is presented to allow a new user to form an expectation of the site content and to motivate them to sign up
 
   <div style='text-align:center'>
    <table style='width:90%; content-align:center'>
