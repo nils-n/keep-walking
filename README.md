@@ -48,7 +48,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
   - [Wireframes](#wireframes)
   - [Features](#features)
     - [General Features](#general-features)
-      - [1. Landing Page](#1-landing-page)
+      - [1. Feature: Navbar](#1-feature-navbar)
+      - [2. Feature: Landing Page](#2-feature-landing-page)
       - [2. Login/Signup Page](#2-loginsignup-page)
       - [3. Dashboard](#3-dashboard)
       - [4. Profile Page](#4-profile-page)
@@ -143,12 +144,38 @@ The website consits of a landing page, and a personal area including a dashboard
 - `Dashboard`: Once logged in, users are directed to their personal dashboard, which includes a visual and textual summary of their latest walks, showing their progression in terms of BMI and body weight. Graphical visualizations of their step count progression and BMI are also here, and users find a form to synchronize their latest data with their Garmin watch.
 - `Profile Page`: On the profile page, users can edit their information such as body height (cm), birthday and their step goal - theses information are important to calculate the BMI for them more precise. Users can also delete their profile from here.
 
-#### 1. Landing Page
+The landing page is accessible for all users, whereas the Dashboard and Profile page can only be accessed by the User (and the site Admin) after signing in with their credentials. Any attempt for unauthorized access redirects directly to the 403 error page (unauthorized access).
 
-1. Hero Image
-2. Mission Statement
-3. Timeline
-4. Example User Journey
+#### 1. Feature: Navbar
+
+On top of each page, a navbar is placed leading to sites available to the user.
+
+- When a user is not signed in: links are displayed to `Home`, `Signup` and `Login` Screen
+- When a user is signed in: links are displayed to `Home`, `Sign out`, `Profile` and `Dashboard`. The Profile link is displayed as name of the signed-in user and directs to their individual profile page.
+- On large screen, each link is listed from top lef to middle of the screen
+- On small screen, the navbar collaps to a Hamburger Button. When clicked, a list of links appears, as well as a Cross Icon to close the Hamburger Menu and return to the collapsed state.
+
+  <div style='text-align:center'>
+   <table style='width:90%; content-align:center'>
+      <tr>
+      <td> <img src="./assets/images/navbar-1.png"; alt="preview image of the navbar" >  </td>
+      </tr>
+        <tr>
+      <td> <img src="./assets/images/navbar-2.png"; alt="preview image of the navbar" >  </td>
+      </tr>
+        <tr>
+      <td> <img style='width:30%' src="./assets/images/navbar-small-1.png"; alt="preview image of the navbar" > 
+      <img style='width:30%' src="./assets/images/navbar-small-2.png"; alt="preview image of the navbar" >   </td>
+      </tr>
+    </table>
+  </div>
+
+#### 2. Feature: Landing Page
+
+1.  Hero Image
+2.  Mission Statement
+3.  Timeline
+4.  Example User Journey
 
   <div style='text-align:center'>
    <table style='width:90%; content-align:center'>
