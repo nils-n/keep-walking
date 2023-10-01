@@ -151,10 +151,16 @@ The website consits of a landing page, and a personal area including a dashboard
 4. Example User Journey
 
   <div style='text-align:center'>
-    <table style='width:90%; content-align:center'>
-        <tr>
-          <td> <img src="./assets/images/features-landing.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-        </tr>
+   <table style='width:90%; content-align:center'>
+      <tr>
+      <td> <img src="./assets/images/landing-page.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      </tr>
+       <tr>
+      <td> <img src="./assets/images/landing-page-2.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      </tr>
+      <tr>
+      <td> <img src="./assets/images/features-landing.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      </tr>
     </table>
   </div>
 
@@ -162,6 +168,15 @@ The website consits of a landing page, and a personal area including a dashboard
 
 1. Login Page
 2. Signup Page
+
+<div style='text-align:center'>
+  <table style='width:90%; content-align:center'>
+    <tr>
+      <td> <img src="./assets/images/preview-signup.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      <td> <img src="./assets/images/preview-login.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      </tr>
+  </table>
+</div>
 
 #### 3. Dashboard
 
@@ -173,13 +188,13 @@ The website consits of a landing page, and a personal area including a dashboard
 4. Personalized Summary
 5. Graphs and Charts
 
-  <div style='text-align:center'>
-    <table style='width:90%; content-align:center'>
-        <tr>
-          <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-        </tr>
-    </table>
-  </div>
+<div style='text-align:center'>
+  <table style='width:100%; content-align:center'>
+      <tr>
+      <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      </tr>
+  </table>
+</div>
 
 #### 4. Profile Page
 
@@ -188,10 +203,11 @@ The website consits of a landing page, and a personal area including a dashboard
 
   <div style='text-align:center'>
     <table style='width:90%; content-align:center'>
-        <tr>
-          <td> <img src="./assets/images/features-profile.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-        </tr>
+       <tr>
+      <td> <img src="./assets/images/features-profile.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+       </tr>
     </table>
+
   </div>
 
 #### 5. Other Pages
