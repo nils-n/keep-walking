@@ -50,10 +50,10 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [General Features](#general-features)
       - [1. Feature: Navbar](#1-feature-navbar)
       - [2. Feature: Landing Page](#2-feature-landing-page)
-      - [3. Login/Signup Page](#3-loginsignup-page)
-      - [4. Dashboard](#4-dashboard)
-      - [5. Profile Page](#5-profile-page)
-      - [6. Other Pages](#6-other-pages)
+      - [3. Feature: Login/Signup Page](#3-feature-loginsignup-page)
+      - [4. Feature: Dashboard](#4-feature-dashboard)
+      - [5. Feature : Profile Page](#5-feature--profile-page)
+      - [6. Feature : Other Pages](#6-feature--other-pages)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
@@ -197,7 +197,7 @@ This site is the main entry point and is accessible for all users.
     </table>
 </div>
 
-#### 3. Login/Signup Page
+#### 3. Feature: Login/Signup Page
 
 - New users can sign up on the website using the Signup Form.
 - If the username already exists, the user is prompted to choose a different, unique username
@@ -227,7 +227,23 @@ This site is the main entry point and is accessible for all users.
   </table>
 </div>
 
-#### 4. Dashboard
+#### 4. Feature: Dashboard
+
+This is the central page of a signed-in user where the user can interact with the main functionalities of the website, and read a brief summary from the data analysis of their personal progress.
+
+- A banner on top of the Dashboard greets the user with their username aimed to create a postitive emotion and a feeling of welcome
+- The user can interact with a component that allows syncing their data with the data stored in their Garmin App. By providing their Garmin username/password and clicking the `sync` button, an asynchroneous request is sent to the Garmin API.
+  - If the synchronization was successfull, the data `JSON` received from the Garmin API is then processed in the `View` , where the data is entered in the `GarminData` DB table. The page is also updated without reloading (since htmx uses AJAX in the background) displaying the latest walks.
+  - If the synchronization was not successful, a toast displaying the error appears on top of the screen with the error message
+- A paginated list of the most recent walks is displayed, allowing the user to get a quick overview of his recent activity and step counts of the last 7 days. The list contains:
+  - General information about daily activities such as : Date, number of steps (as extracted from Garmin API) and body weight (as entered inside the Garmin Connect App)
+  - The user can give and modify an emotional rating of the day (via `htmx-post` request that updates the DB without reloading the page )
+  - For each activity, the user can press an `Edit` button to update missing or wrong entries (such as, if the watch was charging but the user did go for walk - an estimated step count is still closer than zero steps).
+  - For each activity, the user has the option to entirely delete the activty if they desire so. Upon pressing the `Delete` button, a confirmation modal pops up (using `htmx-confirm`). If confirmed, the entry is deleted from the DB and the activites are loaded in-place (using `htmx-delete` requests)
+- On the bottom of the page, the user can read a personalized summary that is based on data processing and simple linear regression of the data provided in the DB. The data processing pipeline informs the user :
+  - The progress towards a healthy BMI : The user receives information about their average BMI and the linear trend of the BMI over the past month. A friendly reminder is written when BMI is too high, too low. If the BMI has worsed over the past month, the user is informed with motivating words to walk more, and the user get positive feedback when the BMI change has been improving towards a healthy range.
+  - Summary of the Average body weight (kg) over the past month
+  - Summary over the average emotional rating over the past month
 
 1. Banner
 2. Latest Walks
@@ -245,7 +261,7 @@ This site is the main entry point and is accessible for all users.
   </table>
 </div>
 
-#### 5. Profile Page
+#### 5. Feature : Profile Page
 
 1. Profile Details Table
 2. Edit/Delete Functionality
@@ -259,7 +275,7 @@ This site is the main entry point and is accessible for all users.
 
   </div>
 
-#### 6. Other Pages
+#### 6. Feature : Other Pages
 
 1. 404 Page
 2. 403 Page
