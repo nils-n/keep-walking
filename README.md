@@ -257,7 +257,7 @@ This is the central page of a signed-in user where the user can interact with th
       <tr> <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td> </tr>
       <tr> 
       <td style='text-align: left'> 
-        <span style='font-weight:bold'>Figure </span> Flow Diagram for the Dashboard Page. The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page. Signed-in users can submit their Garmin credentials in the `Sync Garmin` form, in order to retrieve their latest health stats from the Garmin API. Users can give emotional rating for each day by clicking on the rating symbols next to each activity, which is updating the DB without reloading the page (thanks to htmx-AJAX requests). Users can also read, edit and delete any of their dailiy activities by clicking on 'edit' or 'delete' buttons next to each activity. They can sign out by clicking on the 'Logout' link in the navbar, return to the main page by clicking on 'Home' link, or go their profile page using the 'Profile' link.  
+        <span style='font-weight:bold'>Figure: </span> Flow Diagram for the Dashboard Page. The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page. Signed-in users can submit their Garmin credentials in the `Sync Garmin` form, in order to retrieve their latest health stats from the Garmin API. Users can give emotional rating for each day by clicking on the rating symbols next to each activity, which is updating the DB without reloading the page (thanks to htmx-AJAX requests). Users can also read, edit and delete any of their dailiy activities by clicking on 'edit' or 'delete' buttons next to each activity. They can sign out by clicking on the 'Logout' link in the navbar, return to the main page by clicking on 'Home' link, or go their profile page using the 'Profile' link.  
         </td>
     </tr>
   </table>
@@ -265,8 +265,12 @@ This is the central page of a signed-in user where the user can interact with th
 
 #### 5. Feature : Profile Page
 
-1. Profile Details Table
-2. Edit/Delete Functionality
+On the Profile page, users can update the information stored about them. The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page.
+
+Two buttos allow the users to interact with the page:
+
+- the `Edit button`allows the user to modify key information necessary to calculate the correct progression of this summary, namely the `height (cm)` and their `date of birth` to correct the healthy BMI range for age and body height. Upon successful edit, a toast appears on top of the screen to confirm that the DB has been updated successfully.
+- the `Delete` button triggers a modal for the user to confirm deleltion of their profile. It also includes a warning that this action cannot be undone. If confirmed, the user is deleted from the DB and the user receives a confirmation message that his profile and account has been deleted.
 
   <div style='text-align:center'>
     <table style='width:90%; content-align:center'>
