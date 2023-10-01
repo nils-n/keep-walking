@@ -199,8 +199,12 @@ This site is the main entry point and is accessible for all users.
 
 #### 2. Login/Signup Page
 
-1. Login Page
-2. Signup Page
+- New users can sign up on the website using the Signup Form.
+- If the username already exists, the user is prompted to choose a different, unique username
+- If the password is too common, i.e. `password` or `1234` the user will be asked to provide a more safe password with instructions on minimal requirement for a safe password
+- Users that have already signed up, can head to the Login page and enter their credentials
+- If the combination of username/password is valid and exists in the DB, the user will be directed to the personal dashboard and profile linked to that user
+- If the password does not match or the username does not exist, the user will receive feedback that the provided combination has been invalid.
 
 <div style='text-align:center'>
   <table style='width:90%; content-align:center'>
