@@ -48,7 +48,10 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
   - [Wireframes](#wireframes)
   - [Features](#features)
     - [General Features](#general-features)
-    - [Main Page](#main-page)
+      - [1. Landing Page](#1-landing-page)
+      - [2. Login/Signup Page](#2-loginsignup-page)
+      - [3. Dashboard](#3-dashboard)
+      - [4. Profile Page](#4-profile-page)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
@@ -132,11 +135,46 @@ User stories are prioritized and categorized according to the _MuSCoW_ priortiza
 
 ### General Features
 
-The website consits of several pages, and a 404 page and are responsive, designed using a mobile-first approach.
+The website consits of a landing page, and a personal area including a dashboard and a profile page, and a 404/403 page. All pages are responsive, designed using a mobile-first approach.
 
-### Main Page
+- `Landing Page` : this is the entry point where the website users arrive. From here, they can reach login/signup page to reach their personal page, or read general information about the project including a timeline, mission statement and a preview.
+- `Login/Signup Page` : New users can sign up with a username/password, and users who already signed up can login with their details entering their login credentials here.
+- `Dashboard`: Once logged in, users are directed to their personal dashboard, which includes a visual and textual summary of their latest walks, showing their progression in terms of BMI and body weight. Graphical visualizations of their step count progression and BMI are also here, and users find a form to synchronize their latest data with their Garmin watch.
+- `Profile Page`: On the profile page, users can edit their information such as body height (cm), birthday and their step goal - theses information are important to calculate the BMI for them more precise. Users can also delete their profile from here.
+
+#### 1. Landing Page
+
+1. Hero Image
+2. Mission Statement
+3. Timeline
+4. Example User Journey
+
+#### 2. Login/Signup Page
+
+1. Login Page
+2. Signup Page
+
+#### 3. Dashboard
+
+1. Banner
+2. Latest Walks
+   1. Emotional Rating
+   2. Edit/Delete Entry
+3. Garmin Sync Form
+4. Personalized Summary
+5. Graphs and Charts
+
+#### 4. Profile Page
+
+1. Profile Details Table
+2. Edit/Delete Functionality
 
 ### Future Implementations
+
+- Scalability: Garmin offers a vast range of body parameters that the website could use for the benefit of the user, such as tracking their sleep habits, stress levels or heart rate variability. Currently, this is not implemented as the project scope was creating a Minimum-Viable-Product (MVP) focussing on the step count and body weight.
+- Compatibility: Currently, this application works only with Garmin Devices, which is not a huge limitation as Garmin&copy; is the leading brand for sports/smartwatches using GPS tracking. This website works with each model of Garmin as it synchronizes the data via Garmins API to their Connect&copy; App. A next iteration of this project would be to allow users to use other brands, such as Samsung&copy; or FitBit&copy;
+- Cross-user data analysis: This project could be embedded into a wider research project that could study various body parameters across users under certain conditions. This would however require implementing GDPR compliance, including steps to provide privacy information and obtaining written consent of the users for their data to be used for that purpose - which is currently beyond the MVP scope of the this educational project.
+- Testimonials: A next iteration would include a User Testimonial section where Users could report their journey and experience with the site. They could report whether keeping track of their body parameters helped them reaching or maintaining a healthy BMI.
 
 ### Accessibility
 
