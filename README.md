@@ -210,13 +210,13 @@ This site is the main entry point and is accessible for all users.
   <table style='width:90%; content-align:center'>
     <tr>
       <td> 
-        <img style='width:49%' src="./assets/images/preview-signup.png"; alt="preview image of the website taken on multiple screen sizes" > 
-        <img style='width:49%' src="./assets/images/preview-login.png"; alt="preview image of the website taken on multiple screen sizes" > 
+        <img style='width:49%' src="./assets/images/preview-signup.png"; alt="preview image of the signup page" > 
+        <img style='width:49%' src="./assets/images/preview-login.png"; alt="preview image of the login page" > 
       </td>
     </tr>
     <tr>
       <td> 
-        <img style='width:90%' src="./assets/images/features-landing.png"; alt="preview image of the website taken on multiple screen sizes" >
+        <img style='width:90%' src="./assets/images/features-landing.png"; alt="preview image of features on landing page" >
       </td>
     </tr>
     <tr> 
@@ -244,20 +244,17 @@ This is the central page of a signed-in user where the user can interact with th
   - The progress towards a healthy BMI : The user receives information about their average BMI and the linear trend of the BMI over the past month. A friendly reminder is written when BMI is too high, too low. If the BMI has worsed over the past month, the user is informed with motivating words to walk more, and the user get positive feedback when the BMI change has been improving towards a healthy range.
   - Summary of the Average body weight (kg) over the past month
   - Summary over the average emotional rating over the past month
-
-1. Banner
-2. Latest Walks
-   1. Emotional Rating
-   2. Edit/Delete Entry
-3. Garmin Sync Form
-4. Personalized Summary
-5. Graphs and Charts
+- Additionally, two graphs are displaying the recent step counts over the past 30 days. When hover over the bar plot, the individual DB entry is displayed.
+  - The first plot is a bar plot showing the step count over the past months. A second line plot is overlayed that shows the 7000 steps and gives the user a feeling of whether they achieved or not the targeted step count.
+  - The second plot visualizes the BMI development over the past month. In addition, the healthy BMI range is plotted as a green interval, giving the user a feeling of achievment when they see their BMI line reaching the healthy levels, motivating them to keep walking.
 
 <div style='text-align:center'>
   <table style='width:100%; content-align:center'>
-      <tr>
-      <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-      </tr>
+      <tr> <td> <img src="./assets/images/dashboard-landing.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
+      <tr> <td> <img src="./assets/images/dashboard-activities.png"; alt="preview of activities of dashboard page" >  </td> </tr>
+      <tr> <td> <img src="./assets/images/dashboard-summary.png"; alt="preview of personalized summary of dashboard page" >  </td> </tr>
+       <tr> <td> <img src="./assets/images/dashboard-plots.png"; alt="graphical summary of the activities on dashboard page" >  </td> </tr>
+      <tr> <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td> </tr>
   </table>
 </div>
 
@@ -268,9 +265,9 @@ This is the central page of a signed-in user where the user can interact with th
 
   <div style='text-align:center'>
     <table style='width:90%; content-align:center'>
-       <tr>
+      <tr>
       <td> <img src="./assets/images/features-profile.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
-       </tr>
+      </tr>
     </table>
 
   </div>
