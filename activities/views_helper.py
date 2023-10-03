@@ -100,7 +100,10 @@ def convert_api_data_to_steps(garmin_api_data):
     """
     converts the output of the api call into step count
     """
-    return int(garmin_api_data["totalSteps"])
+    totalSteps = 0
+    if garmin_api_data["totalSteps"]:
+        totalSteps = garmin_api_data["totalSteps"]
+    return int(totalSteps)
 
 
 def extract_weight(garmin_weight_data, target_date) -> int:

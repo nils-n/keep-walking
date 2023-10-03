@@ -108,6 +108,15 @@ def test_converts_date_str_correctly_to_datetime(
             },
             1000,
         ),
+        (
+            {
+                "calendarDate": "2023-10-03",
+                "stepGoal": 7000,
+                "totalDistance": None,
+                "totalSteps": None,
+            },
+            0,
+        ),
     ],
 )
 def test_that_step_count_converts_correctly_to_integer(
