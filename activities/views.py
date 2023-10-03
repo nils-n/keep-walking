@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator
 from django.core.exceptions import PermissionDenied
+from django.db.models import Aggregate, Avg
+
 from icecream import ic
 
 from .models import GarminData, UserProfile, UserAverage
@@ -30,6 +32,38 @@ from .views_helper import (
     calculate_average_rating,
     calculate_user_stats,
 )
+
+
+def home_view(request):
+    """
+    view to render the landing page. This views loads average user stats
+    and renders recent progress across all users
+    """
+    # update the DB table with average user stats
+    recent_months_range = datetime.now() - timedelta(days=30)
+
+    recent_user_stats = UserAverage.objects.filter(
+        date__gte=recent_months_range
+    ).order_by("-date")
+
+    # count number of active users of last month
+    # https://stackoverflow.com/questions/54249017/distinct-on-fields-is-not-supported-by-this-database-backend
+    num_active_users = recent_user_stats.values("user_id").distinct().count()
+    bmi_values = [stats.avg_bmi for stats in recent_user_stats]
+
+    # extract the average values
+    # note that we only calculate the bmi change for users that don't yet have a healthy BMI
+    bmi_average = recent_user_stats.aggregate(Avg("avg_bmi"))
+    bmi_change_average = recent_user_stats.filter(
+        bmi_in_healthy_range=False
+    ).aggregate(Avg("avg_bmi_change"))
+    weight_average = recent_user_stats.aggregate(Avg("avg_weight"))
+
+    ic(bmi_average, weight_average, bmi_change_average)
+
+    context = {"num_active_users": num_active_users}
+    if request.method == "GET":
+        return render(request, "home.html", context)
 
 
 def user_profile(request, user_id, *args, **kwargs):
@@ -259,8 +293,7 @@ def load_activities(request):
     # it's just for the moment - start and end date are switched. Once the
     # final UI in place, handle the naming conventions better.
     garmin_end_date = convert_date_str_to_datetime(start_date)
-    # garmin_start_date = garmin_end_date - timedelta(days=25)
-    garmin_start_date = garmin_end_date - timedelta(days=4)
+    garmin_start_date = garmin_end_date - timedelta(days=25)
 
     # load information about the currently stored data for the user
     garmin_data = GarminData.objects.filter(user=request.user)

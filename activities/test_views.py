@@ -391,7 +391,7 @@ def test_unauthenticated_user_cannot_access_profile_page(
     ],
 )
 def test_404_is_raised_when_providing_wrong_url(
-    fixture_name, input_url, expected_status_code, request
+    fixture_name, input_url, expected_status_code, request, db
 ):
     """
     this tests whether a 404 error is raised when the website user
