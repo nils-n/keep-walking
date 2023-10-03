@@ -2325,6 +2325,10 @@ html {
   padding-bottom: 0.75rem;
 }
 
+.pb-32 {
+  padding-bottom: 8rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -2371,6 +2375,18 @@ html {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pb-64 {
+  padding-bottom: 16rem;
+}
+
+.pt-7 {
+  padding-top: 1.75rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
 }
 
 .text-left {
@@ -2705,6 +2721,14 @@ html {
 
   .sm\:w-1\/2 {
     width: 50%;
+  }
+
+  .sm\:w-2\/3 {
+    width: 66.666667%;
+  }
+
+  .sm\:w-8\/12 {
+    width: 66.666667%;
   }
 
   .sm\:max-w-sm {
