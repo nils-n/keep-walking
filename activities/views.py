@@ -254,7 +254,6 @@ def load_activities(request):
     start_date = request.POST.get("start_date")
 
     ic(garmin_username)
-    ic(garmin_password)
     ic(start_date)
 
     # it's just for the moment - start and end date are switched. Once the
@@ -317,14 +316,15 @@ def load_activities(request):
     ] = calculate_user_stats(recent_garmin_data, height_cm)
 
     # add a new entry to the userstats table
-    # new_stats_entry = UserAverage()
-    # new_stats_entry.user = request.user
-    # new_stats_entry.date = new_date
-    # new_stats_entry.avg_weight = avg_weight
-    # new_stats_entry.avg_bmi_change = avg_bmi_change
-    # new_stats_entry.bmi_in_healthy_range = avg_weight
-    # new_stats_entry.bmi_improving_or_maintaining = bmi_improving_or_maintaining
-    # new_stats_entry.save()
+    new_stats_entry = UserAverage()
+    new_stats_entry.user = request.user
+    new_stats_entry.date = new_date
+    new_stats_entry.avg_weight = avg_weight
+    new_stats_entry.avg_bmi = avg_bmi
+    new_stats_entry.avg_bmi_change = avg_bmi_change
+    new_stats_entry.bmi_in_healthy_range = bmi_in_healthy_range
+    new_stats_entry.bmi_improving_or_maintaining = bmi_improving_or_maintaining
+    new_stats_entry.save()
 
     # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
