@@ -316,6 +316,7 @@ User data are stored in a relational database. The main model has been carefully
 - **User**: each row is a user that has signed up on the website
 - **UserProfile**: each row is a profile where the user can enter more details (height, date of birth, profile picture)
 - **GarminData**: each row is an entry as read from the Garmin API for a specific date and user
+- **UserAverage** each row is a sample from recent user stats (average weight, average BMI and BMI trend over past month)
 
 <table style='width:60%; content-align:center'>
     <tr>
