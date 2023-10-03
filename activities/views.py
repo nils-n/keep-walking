@@ -69,6 +69,15 @@ def home_view(request):
     # handle case if there are no active users with healthy BMI
     if bmi_change_average is None:
         bmi_change_average = 0.0
+    if bmi_average is None:
+        bmi_average = 0.0
+    if weight_average is None:
+        weight_average = 0.0
+
+    # ensure float numbers do not have too many decimals on rendered page
+    bmi_average = around(bmi_average, 1)
+    weight_average = around(weight_average, 1)
+    bmi_change_average = around(bmi_change_average, 1)
 
     # count number of uses whose BMI is improving
     num_active_users_that_maintain_or_lower_bmi = recent_user_stats.filter(
@@ -88,9 +97,9 @@ def home_view(request):
 
     context = {
         "num_active_users": num_active_users,
-        "bmi_average": around(bmi_average, 1),
-        "weight_average": around(weight_average, 1),
-        "bmi_change_average": around(bmi_change_average, 1),
+        "bmi_average": bmi_average,
+        "weight_average": weight_average,
+        "bmi_change_average": bmi_change_average,
         "percentage_improved_or_maintained_bmi": percentage_with_improving_or_maintaining_bmi,
     }
 
