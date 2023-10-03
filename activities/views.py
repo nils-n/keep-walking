@@ -1,6 +1,7 @@
 from datetime import timedelta
 import os
 from typing import Any, Dict
+from numpy import around
 import pandas as pd
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
@@ -69,11 +70,23 @@ def home_view(request):
     if bmi_change_average is None:
         bmi_change_average = 0.0
 
+    # count number of uses whose BMI is improving
+    num_active_users_that_maintain_or_lower_bmi = recent_user_stats.filter(
+        bmi_in_healthy_range=True
+    ).count()
+    percentage_with_improving_or_maintaining_bmi = (
+        num_active_users_that_maintain_or_lower_bmi / (1.0 * num_active_users)
+    )
+    percentage_with_improving_or_maintaining_bmi = around(
+        100.0 * percentage_with_improving_or_maintaining_bmi, 1
+    )
+
     context = {
         "num_active_users": num_active_users,
         "bmi_average": bmi_average,
         "weight_average": weight_average,
         "bmi_change_average": bmi_change_average,
+        "percentage_improved_or_maintained_bmi": percentage_with_improving_or_maintaining_bmi,
     }
 
     if request.method == "GET":
