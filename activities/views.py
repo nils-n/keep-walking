@@ -72,7 +72,7 @@ def home_view(request):
 
     # count number of uses whose BMI is improving
     num_active_users_that_maintain_or_lower_bmi = recent_user_stats.filter(
-        bmi_in_healthy_range=True
+        bmi_improving_or_maintaining=True
     ).count()
 
     if num_active_users > 0:
