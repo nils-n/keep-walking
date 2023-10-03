@@ -349,15 +349,34 @@ def load_activities(request):
     ] = calculate_user_stats(recent_garmin_data, height_cm)
 
     # add a new entry to the userstats table
-    new_stats_entry = UserAverage()
-    new_stats_entry.user = request.user
-    new_stats_entry.date = new_date
-    new_stats_entry.avg_weight = avg_weight
-    new_stats_entry.avg_bmi = avg_bmi
-    new_stats_entry.avg_bmi_change = avg_bmi_change
-    new_stats_entry.bmi_in_healthy_range = bmi_in_healthy_range
-    new_stats_entry.bmi_improving_or_maintaining = bmi_improving_or_maintaining
-    new_stats_entry.save()
+    average_stats = UserAverage.objects.filter(user=request.user).first()
+    if average_stats:
+        error_msg = "data record exists-  updating the record now. "
+        ic(error_msg)
+        average_stats.date = datetime.now().date()
+        average_stats.updated_at = datetime.now().date()
+        average_stats.avg_weight = avg_weight
+        average_stats.avg_bmi = avg_bmi
+        average_stats.avg_bmi_change = avg_bmi_change
+        average_stats.bmi_in_healthy_range = bmi_in_healthy_range
+        average_stats.bmi_improving_or_maintaining = (
+            bmi_improving_or_maintaining
+        )
+
+    else:
+        error_msg = "data record does not exists for this user. Creating now "
+        ic(error_msg)
+        new_stats_entry = UserAverage()
+        new_stats_entry.user = request.user
+        new_stats_entry.date = datetime.now().date()
+        new_stats_entry.avg_weight = avg_weight
+        new_stats_entry.avg_bmi = avg_bmi
+        new_stats_entry.avg_bmi_change = avg_bmi_change
+        new_stats_entry.bmi_in_healthy_range = bmi_in_healthy_range
+        new_stats_entry.bmi_improving_or_maintaining = (
+            bmi_improving_or_maintaining
+        )
+        new_stats_entry.save()
 
     # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
