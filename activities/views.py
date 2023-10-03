@@ -69,9 +69,13 @@ def home_view(request):
     if bmi_change_average is None:
         bmi_change_average = 0.0
 
-    ic(bmi_average, weight_average, bmi_change_average)
+    context = {
+        "num_active_users": num_active_users,
+        "bmi_average": bmi_average,
+        "weight_average": weight_average,
+        "bmi_change_average": bmi_change_average,
+    }
 
-    context = {"num_active_users": num_active_users}
     if request.method == "GET":
         return render(request, "home.html", context)
 
