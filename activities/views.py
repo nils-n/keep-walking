@@ -11,8 +11,9 @@ from django.contrib import messages
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator
 from django.core.exceptions import PermissionDenied
+from icecream import ic
 
-from .models import GarminData, UserProfile
+from .models import GarminData, UserProfile, UserAverage
 from .forms import GarminDataForm, EditGarminDataForm, UserProfileForm
 from .views_helper import (
     garmin_api_call,
@@ -27,6 +28,7 @@ from .views_helper import (
     extract_bmi_timeseries,
     calculate_average_weight,
     calculate_average_rating,
+    calculate_user_stats,
 )
 
 
@@ -251,10 +253,14 @@ def load_activities(request):
     garmin_password = request.POST.get("garmin_password")
     start_date = request.POST.get("start_date")
 
+    ic(garmin_username)
+    ic(start_date)
+
     # it's just for the moment - start and end date are switched. Once the
     # final UI in place, handle the naming conventions better.
     garmin_end_date = convert_date_str_to_datetime(start_date)
-    garmin_start_date = garmin_end_date - timedelta(days=25)
+    # garmin_start_date = garmin_end_date - timedelta(days=25)
+    garmin_start_date = garmin_end_date - timedelta(days=4)
 
     # load information about the currently stored data for the user
     garmin_data = GarminData.objects.filter(user=request.user)
@@ -267,6 +273,9 @@ def load_activities(request):
         garmin_start_date,
         garmin_end_date,
     )
+
+    ic(garmin_step_data)
+    ic(garmin_weight_data)
     messages.add_message(
         request, messages.ERROR, "Sync with Garmin API successful"
     )
@@ -284,10 +293,40 @@ def load_activities(request):
                 garmin_weight_data[0], new_date
             )
             new_garmin_entry.save()
-    # update the template
+
+    # update the DB table with average user stats
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
     )
+
+    # update the DB table with average user stats
+    first_day_for_avg_userstats = datetime.now() - timedelta(days=30)
+    recent_garmin_data = garmin_data.filter(
+        user=request.user, date__gte=first_day_for_avg_userstats
+    ).order_by("-date")
+    user_profile = UserProfile.objects.filter(user=request.user)
+    profile = get_object_or_404(user_profile)
+    height_cm = profile.height_cm
+    [
+        avg_weight,
+        avg_bmi,
+        avg_bmi_change,
+        bmi_in_healthy_range,
+        bmi_improving_or_maintaining,
+    ] = calculate_user_stats(recent_garmin_data, height_cm)
+
+    # add a new entry to the userstats table
+    new_stats_entry = UserAverage()
+    new_stats_entry.user = request.user
+    new_stats_entry.date = new_date
+    new_stats_entry.avg_weight = avg_weight
+    new_stats_entry.avg_bmi = avg_bmi
+    new_stats_entry.avg_bmi_change = avg_bmi_change
+    new_stats_entry.bmi_in_healthy_range = bmi_in_healthy_range
+    new_stats_entry.bmi_improving_or_maintaining = bmi_improving_or_maintaining
+    new_stats_entry.save()
+
+    # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

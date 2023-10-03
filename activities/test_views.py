@@ -15,6 +15,7 @@ from .views_helper import (
     extract_bmi_timeseries,
     calculate_average_weight,
     calculate_average_rating,
+    calculate_user_stats,
 )
 
 
@@ -106,6 +107,15 @@ def test_converts_date_str_correctly_to_datetime(
                 "totalSteps": "1000",
             },
             1000,
+        ),
+        (
+            {
+                "calendarDate": "2023-10-03",
+                "stepGoal": 7000,
+                "totalDistance": None,
+                "totalSteps": None,
+            },
+            0,
         ),
     ],
 )
@@ -324,6 +334,27 @@ def test_user_data_extracted_correctly(garmin_data_list):
         assert result.date == days[i].date()
         assert result.weight_kg == weights[i]
         assert result.steps == steps[i]
+
+
+def test_user_stats_are_calculated_correctly(garmin_data_list):
+    """
+    this test ensures that the average values are calculated
+    correctly from a list of GarminData
+    """
+    expected_weight = 79.5
+    expected_bmi = 26.0
+    expected_bmi_change = -2.9
+    expectation_whether_BMI_is_in_healthy_range = False
+    expectation_whether_BMI_is_improving = True
+    random_height_cm = 175
+
+    model = calculate_user_stats(garmin_data_list, random_height_cm)
+
+    assert model[0] == expected_weight
+    assert model[1] == expected_bmi
+    assert model[2] == expected_bmi_change
+    assert model[3] == expectation_whether_BMI_is_in_healthy_range
+    assert model[4] == expectation_whether_BMI_is_improving
 
 
 def test_authenticated_user_can_access_profile_page(client, django_user_model):

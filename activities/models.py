@@ -32,6 +32,33 @@ class GarminData(models.Model):
         return self.user.username
 
 
+class UserAverage(models.Model):
+    """
+    Model to describe average user progression on the website
+    over past 25 days
+    """
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="user_average",
+    )
+    avg_weight = models.FloatField()
+    avg_bmi = models.FloatField()
+    avg_bmi_change = models.FloatField()
+    bmi_in_healthy_range = models.BooleanField()
+    bmi_improving_or_maintaining = models.BooleanField()
+    date = models.DateField(auto_now=True)
+    created_at = models.DateField(auto_now=True)
+    updated_at = models.DateField(auto_now=True)
+
+    class Meta:
+        ordering = ["-date"]
+
+    def __str__(self):
+        return self.user.username
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,

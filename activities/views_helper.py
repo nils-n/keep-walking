@@ -100,7 +100,10 @@ def convert_api_data_to_steps(garmin_api_data):
     """
     converts the output of the api call into step count
     """
-    return int(garmin_api_data["totalSteps"])
+    totalSteps = 0
+    if garmin_api_data["totalSteps"]:
+        totalSteps = garmin_api_data["totalSteps"]
+    return int(totalSteps)
 
 
 def extract_weight(garmin_weight_data, target_date) -> int:
@@ -128,6 +131,34 @@ def extract_user_data(
     ratings = [db_record.rating for db_record in garmin_data]
 
     return days, steps, weights, ratings
+
+
+def calculate_user_stats(
+    garmin_data: list[GarminData], height_cm: int
+) -> tuple[float, float, float, bool, bool]:
+    """
+    helper function to prepare a new row of the average user stats table
+    """
+    days, steps, weights, _ = extract_user_data(garmin_data)
+    average_bmi, change_bmi = calculate_bmi_change(days, weights, height_cm)
+    average_weight = calculate_average_weight(weights)
+
+    # check if BMI is in healthy range, also if the BMI is improving
+    # or maintining in healthy range
+    bmi_in_healthy_range = True
+    bmi_improving_or_maintaining = True
+    if average_bmi > 25.0:
+        bmi_in_healthy_range = False
+        if change_bmi > 0:
+            bmi_improving_or_maintaining = False
+
+    return (
+        average_weight,
+        average_bmi,
+        change_bmi,
+        bmi_in_healthy_range,
+        bmi_improving_or_maintaining,
+    )
 
 
 def extract_bmi_timeseries(
