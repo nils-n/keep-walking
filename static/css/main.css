@@ -2412,6 +2412,10 @@ html {
   padding-left: 1rem;
 }
 
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2725,6 +2729,10 @@ html {
 }
 
 @media (min-width: 640px) {
+  .sm\:visible {
+    visibility: visible;
+  }
+
   .sm\:mx-1 {
     margin-left: 0.25rem;
     margin-right: 0.25rem;
@@ -2863,6 +2871,11 @@ html {
 }
 
 @media (min-width: 768px) {
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .md\:mb-2 {
     margin-bottom: 0.5rem;
   }
@@ -2908,6 +2921,14 @@ html {
 }
 
 @media (min-width: 1024px) {
+  .lg\:visible {
+    visibility: visible;
+  }
+
+  .lg\:flex {
+    display: flex;
+  }
+
   .lg\:flex-row {
     flex-direction: row;
   }
