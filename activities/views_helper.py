@@ -347,8 +347,11 @@ def calculate_average_rating(ratings: list[int]) -> float:
     """
     calculate the average emotional rating over given input
     """
-    ratings = [float(r) for r in ratings]
-    filtered_ratings = list(map(lambda r: min(r, 2), ratings))
-    average_rating = int(around(mean(filtered_ratings)))
     verbose_rating = ["bad", "neutral", "good"]
+    average_rating = 1
+    if ratings:
+        ratings = [float(r) for r in ratings]
+        filtered_ratings = list(map(lambda r: min(r, 2), ratings))
+        average_rating = int(around(mean(filtered_ratings)))
+        verbose_rating = ["bad", "neutral", "good"]
     return verbose_rating[average_rating]
