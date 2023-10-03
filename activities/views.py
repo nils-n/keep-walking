@@ -88,9 +88,9 @@ def home_view(request):
 
     context = {
         "num_active_users": num_active_users,
-        "bmi_average": bmi_average,
-        "weight_average": weight_average,
-        "bmi_change_average": bmi_change_average,
+        "bmi_average": around(bmi_average, 1),
+        "weight_average": around(weight_average, 1),
+        "bmi_change_average": around(bmi_change_average, 1),
         "percentage_improved_or_maintained_bmi": percentage_with_improving_or_maintaining_bmi,
     }
 
