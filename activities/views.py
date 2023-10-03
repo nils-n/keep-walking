@@ -53,15 +53,29 @@ def home_view(request):
 
     # extract the average values
     # note that we only calculate the bmi change for users that don't yet have a healthy BMI
-    bmi_average = recent_user_stats.aggregate(Avg("avg_bmi"))
-    bmi_change_average = recent_user_stats.filter(
-        bmi_in_healthy_range=False
-    ).aggregate(Avg("avg_bmi_change"))
-    weight_average = recent_user_stats.aggregate(Avg("avg_weight"))
+    bmi_average = recent_user_stats.aggregate(Avg("avg_bmi")).get(
+        "avg_bmi__avg"
+    )
+    bmi_change_average = (
+        recent_user_stats.filter(bmi_in_healthy_range=False)
+        .aggregate(Avg("avg_bmi_change"))
+        .get("avg_bmi_change__avg")
+    )
+    weight_average = recent_user_stats.aggregate(Avg("avg_weight")).get(
+        "avg_weight__avg"
+    )
 
-    ic(bmi_average, weight_average, bmi_change_average)
+    # handle case if there are no active users with healthy BMI
+    if bmi_change_average is None:
+        bmi_change_average = 0.0
 
-    context = {"num_active_users": num_active_users}
+    context = {
+        "num_active_users": num_active_users,
+        "bmi_average": bmi_average,
+        "weight_average": weight_average,
+        "bmi_change_average": bmi_change_average,
+    }
+
     if request.method == "GET":
         return render(request, "home.html", context)
 
@@ -287,9 +301,6 @@ def load_activities(request):
     garmin_password = request.POST.get("garmin_password")
     start_date = request.POST.get("start_date")
 
-    ic(garmin_username)
-    ic(start_date)
-
     # it's just for the moment - start and end date are switched. Once the
     # final UI in place, handle the naming conventions better.
     garmin_end_date = convert_date_str_to_datetime(start_date)
@@ -307,8 +318,6 @@ def load_activities(request):
         garmin_end_date,
     )
 
-    ic(garmin_step_data)
-    ic(garmin_weight_data)
     messages.add_message(
         request, messages.ERROR, "Sync with Garmin API successful"
     )
@@ -349,15 +358,31 @@ def load_activities(request):
     ] = calculate_user_stats(recent_garmin_data, height_cm)
 
     # add a new entry to the userstats table
-    new_stats_entry = UserAverage()
-    new_stats_entry.user = request.user
-    new_stats_entry.date = new_date
-    new_stats_entry.avg_weight = avg_weight
-    new_stats_entry.avg_bmi = avg_bmi
-    new_stats_entry.avg_bmi_change = avg_bmi_change
-    new_stats_entry.bmi_in_healthy_range = bmi_in_healthy_range
-    new_stats_entry.bmi_improving_or_maintaining = bmi_improving_or_maintaining
-    new_stats_entry.save()
+    average_stats = UserAverage.objects.filter(user=request.user).first()
+    if average_stats:
+        average_stats.date = datetime.now().date()
+        average_stats.updated_at = datetime.now().date()
+        average_stats.avg_weight = avg_weight
+        average_stats.avg_bmi = avg_bmi
+        average_stats.avg_bmi_change = avg_bmi_change
+        average_stats.bmi_in_healthy_range = bmi_in_healthy_range
+        average_stats.bmi_improving_or_maintaining = (
+            bmi_improving_or_maintaining
+        )
+        average_stats.save()
+
+    else:
+        new_stats_entry = UserAverage()
+        new_stats_entry.user = request.user
+        new_stats_entry.date = datetime.now().date()
+        new_stats_entry.avg_weight = avg_weight
+        new_stats_entry.avg_bmi = avg_bmi
+        new_stats_entry.avg_bmi_change = avg_bmi_change
+        new_stats_entry.bmi_in_healthy_range = bmi_in_healthy_range
+        new_stats_entry.bmi_improving_or_maintaining = (
+            bmi_improving_or_maintaining
+        )
+        new_stats_entry.save()
 
     # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.

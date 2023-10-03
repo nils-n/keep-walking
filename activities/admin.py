@@ -16,6 +16,7 @@ class GarminDataAdmin(admin.ModelAdmin):
 @admin.register(UserAverage)
 class UserAverageAdmin(admin.ModelAdmin):
     list_display = (
+        "user",
         "date",
         "avg_weight",
         "avg_bmi",
