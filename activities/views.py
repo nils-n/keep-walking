@@ -259,8 +259,7 @@ def load_activities(request):
     # it's just for the moment - start and end date are switched. Once the
     # final UI in place, handle the naming conventions better.
     garmin_end_date = convert_date_str_to_datetime(start_date)
-    # garmin_start_date = garmin_end_date - timedelta(days=25)
-    garmin_start_date = garmin_end_date - timedelta(days=4)
+    garmin_start_date = garmin_end_date - timedelta(days=25)
 
     # load information about the currently stored data for the user
     garmin_data = GarminData.objects.filter(user=request.user)
