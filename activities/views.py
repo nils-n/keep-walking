@@ -362,6 +362,7 @@ def load_activities(request):
         average_stats.bmi_improving_or_maintaining = (
             bmi_improving_or_maintaining
         )
+        average_stats.save()
 
     else:
         error_msg = "data record does not exists for this user. Creating now "
