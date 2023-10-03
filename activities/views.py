@@ -74,12 +74,17 @@ def home_view(request):
     num_active_users_that_maintain_or_lower_bmi = recent_user_stats.filter(
         bmi_in_healthy_range=True
     ).count()
-    percentage_with_improving_or_maintaining_bmi = (
-        num_active_users_that_maintain_or_lower_bmi / (1.0 * num_active_users)
-    )
-    percentage_with_improving_or_maintaining_bmi = around(
-        100.0 * percentage_with_improving_or_maintaining_bmi, 1
-    )
+
+    if num_active_users > 0:
+        percentage_with_improving_or_maintaining_bmi = (
+            num_active_users_that_maintain_or_lower_bmi
+            / (1.0 * num_active_users)
+        )
+        percentage_with_improving_or_maintaining_bmi = around(
+            100.0 * percentage_with_improving_or_maintaining_bmi, 1
+        )
+    else:
+        percentage_with_improving_or_maintaining_bmi = 100.0
 
     context = {
         "num_active_users": num_active_users,
