@@ -27,6 +27,7 @@ from .views_helper import (
     extract_bmi_timeseries,
     calculate_average_weight,
     calculate_average_rating,
+    calculate_user_stats,
 )
 
 
@@ -284,10 +285,29 @@ def load_activities(request):
                 garmin_weight_data[0], new_date
             )
             new_garmin_entry.save()
-    # update the template
+
+    # update the DB table with average user stats
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
     )
+
+    # update the DB table with average user stats
+    first_day_for_avg_userstats = datetime.now() - timedelta(days=30)
+    recent_garmin_data = garmin_data.filter(
+        user=request.user, date__gte=first_day_for_avg_userstats
+    ).order_by("-date")
+    user_profile = UserProfile.objects.filter(user=request.user)
+    profile = get_object_or_404(user_profile)
+    height_cm = profile.height_cm
+    [
+        avg_weight,
+        avg_BMI,
+        avg_BMI_change,
+        bmi_in_healthy_range,
+        bmi_improving_or_maintaining,
+    ] = calculate_user_stats(recent_garmin_data, height_cm)
+
+    # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
