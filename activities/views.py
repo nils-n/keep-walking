@@ -32,6 +32,15 @@ from .views_helper import (
 )
 
 
+def home_view(request):
+    """
+    view to render the landing page
+    """
+    context = {}
+    if request.method == "GET":
+        return render(request, "home.html", context)
+
+
 def user_profile(request, user_id, *args, **kwargs):
     """
     view to see and edit data stored for an
