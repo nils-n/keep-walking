@@ -102,25 +102,25 @@
   </div>
   <!-- Average User Stats -->
   <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-    <div class='font-sans bg-blue-50 px-6 pt-7 pb-1 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+    <div class='font-sans bg-blue-50 px-6 pt-7 pb-4 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
       <div class='px-4'>
         <h2 class='font-bold text-2xl text-blue-900'> Success Stories</h2>
-        <p class=' text-md text-gray-800 py-4' style='line-height:1.6'> This month we have {{ num_active_users }} active users.  </p>
-        <ul class='list-disc'>
+        <p class=' text-md text-gray-800 pt-4 pb-3' style='line-height:1.6'> This month we have {{ num_active_users }} active users.  </p>
+        <ul class='list-disc pl-4 '>
           <li>  The average BMI of our users is  <span class='text-bold text-blue-500' > {{ bmi_average }} </span> </li>
-          <li>  The average BMI change of our users is  <span class='text-bold text-blue-500' > {{ bmi_change_average }} </span> </li>
-          <li>  The average body weight of our users is  <span class='text-bold text-blue-500' > {{ weight_average }} </span> kg </li>
+          <li>  The average BMI change of our users this months was  <span class='text-bold text-blue-500' > {{ bmi_change_average }} </span> </li>
+          <li>  The average body weight of our users this months is  <span class='text-bold text-blue-500' > {{ weight_average }} </span> kg </li>
         </ul>
       </div>
     </div>
   </div>
-
-  <!-- CTA to sign up  -->
+  <!-- Site Preview  -->
   <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50 pb-32'>
     <div class='font-sans bg-blue-200/80 sm:px-16 px-4 pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl bg-cover bg-no-repeat  bg-blend-soft-light '  style="background-image: url({% static 'images/bg-walking-medium.jpg' %});">
-      <div class='flex flex-col pb-8 sm:pb-16 '>
-         <p  style='line-height: 0.9;' class='text-3xl py-4 sm:w-8/12 w-full text-gray-800'> <span class='text-bold text-4xl text-blue-500' > {{ percentage_improved_or_maintained_bmi }}% </span>  of our users lowered or maintainted a healthy BMI in the last month. </p>
-         <div class='flex flex-col sm:flex-row justify-between'>
+      <div class='flex flex-col pb-8 sm:pb-16  '>
+         <p  style='line-height: 0.9;' class='text-3xl pt-4 pb-8 sm:pb-4  sm:w-8/12 w-full text-gray-800'> <span class='text-bold text-4xl text-blue-500' > {{ percentage_improved_or_maintained_bmi }}% </span>  of our users lowered or maintainted a healthy BMI in the last month. </p>
+         <p class = 'text-lg text-gray-700 pb-4 '> Join us, start walking and stay motivated by seeing your monthly progress. </p>
+         <div class='flex flex-col lg:flex-row justify-between items-center gap-x-4 gap-y-4  '>
             <div class =''>  <img src="{% static  'images/landing-example-1.png' %}" alt="preview of user area"> </div>
             <div class =''>  <img src="{% static  'images/landing-example-2.png' %}" alt="preview of user area"> </div>
             <div class =''>  <img src="{% static  'images/landing-example-3.png' %}" alt="preview of user area">  </div>
@@ -128,7 +128,6 @@
       </div>
     </div>
   </div>
-
 </div>
 {% endblock %}
 
