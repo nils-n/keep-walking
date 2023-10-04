@@ -17,7 +17,12 @@ from django.db.models import Aggregate, Avg
 from icecream import ic
 
 from .models import GarminData, UserProfile, UserAverage
-from .forms import GarminDataForm, EditGarminDataForm, UserProfileForm
+from .forms import (
+    GarminDataForm,
+    EditGarminDataForm,
+    UserProfileForm,
+    ManualGarminDataForm,
+)
 from .views_helper import (
     garmin_api_call,
     convert_api_data_to_datetime,
@@ -112,8 +117,8 @@ def swap_to_manual(request, *args, **kwargs):
     view to swap the garmin sync form with a form
     to enter walks and weight manually
     """
-    garmin_form = GarminDataForm()
-    context = {"garmin_form": garmin_form}
+    manual_garmin_form = ManualGarminDataForm()
+    context = {"manual_garmin_form": manual_garmin_form}
     return render(request, "partials/load_manually.html", context=context)
 
 
@@ -326,6 +331,74 @@ class ActivityList(ListView):
 
     def get_queryset(self):
         return GarminData.objects.filter(user=self.request.user)
+
+
+def load_activities_manually(request):
+    """
+    this view loads all activities stored in the DB and also adds
+    the manually posted acitivty to that list
+    """
+    ic()
+    if request.user.is_authenticated:
+        manully_entered_date = request.POST.get("date")
+        manully_entered_steps = request.POST.get("steps")
+        manully_entered_steps_kg = request.POST.get("weight_kg")
+
+        ic(
+            manully_entered_date,
+            manully_entered_steps,
+            manully_entered_steps_kg,
+        )
+
+        # load information about the currently stored data for the user
+        garmin_data = GarminData.objects.filter(user=request.user)
+        existing_dates = [db_record.date for db_record in garmin_data]
+        new_date = convert_date_str_to_datetime(manully_entered_date)
+
+        ic(existing_dates)
+        ic(manully_entered_date not in existing_dates)
+        ic(new_date not in existing_dates)
+        # enter the form fields into the DB
+        if new_date not in existing_dates:
+            new_garmin_entry = GarminData()
+            new_garmin_entry.user = request.user
+            new_garmin_entry.date = manully_entered_date
+            new_garmin_entry.steps = manully_entered_steps
+            new_garmin_entry.weight_kg = manully_entered_steps_kg
+            new_garmin_entry.save()
+
+            messages.add_message(
+                request, messages.SUCCESS, "Entry manually entered"
+            )
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "There is already a record for this day",
+            )
+    else:
+        messages.add_message(
+            request, messages.ERROR, "No permission to do this request"
+        )
+        raise PermissionDenied
+
+    # load the DB table with the stored activities
+    garmin_data = GarminData.objects.filter(user=request.user).order_by(
+        "-date"
+    )
+
+    # update the template
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+            "page_obj": page_obj,
+        },
+    )
 
 
 def load_activities(request):

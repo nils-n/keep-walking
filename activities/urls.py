@@ -13,6 +13,7 @@ from .views import (
     edit_profile,
     delete_profile,
     swap_to_manual,
+    load_activities_manually,
 )
 
 urlpatterns = [
@@ -38,6 +39,11 @@ urlpatterns = [
 
 htmx_urlpatterns = [
     path("load_activities", load_activities, name="load_activities"),
+    path(
+        "load_activities_manually",
+        load_activities_manually,
+        name="load_activities_manually",
+    ),
     path(
         "delete_activity/<int:garmin_data_id>/",
         delete_activity,

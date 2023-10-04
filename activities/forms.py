@@ -80,3 +80,37 @@ class EditGarminDataForm(forms.ModelForm):
                 }
             ),
         }
+
+
+class ManualGarminDataForm(forms.ModelForm):
+    """
+    Form to enter GarminData manually
+    """
+
+    class Meta:
+        model = GarminData
+        fields = ["date", "steps", "weight_kg"]
+        widgets = {
+            "date": forms.DateInput(
+                attrs={
+                    "id": "manually-enter-date",
+                    "required": True,
+                    "value": now().date(),
+                    "placeholder": "Date",
+                }
+            ),
+            "steps": forms.NumberInput(
+                attrs={
+                    "id": "manually-enter-steps",
+                    "required": True,
+                    "placeholder": "Number of steps",
+                }
+            ),
+            "weight_kg": forms.NumberInput(
+                attrs={
+                    "id": "manually-enter-weight",
+                    "required": True,
+                    "placeholder": "Weight in kg",
+                }
+            ),
+        }
