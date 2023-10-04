@@ -6,7 +6,7 @@ import pandas as pd
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.timezone import datetime
-from django.http import QueryDict
+from django.http import QueryDict, HttpRequest
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.views.generic.list import ListView
@@ -355,9 +355,6 @@ def load_activities_manually(request):
         existing_dates = [db_record.date for db_record in garmin_data]
         new_date = convert_date_str_to_datetime(manully_entered_date)
 
-        ic(existing_dates)
-        ic(manully_entered_date not in existing_dates)
-        ic(new_date not in existing_dates)
         # enter the form fields into the DB
         if new_date not in existing_dates:
             new_garmin_entry = GarminData()
@@ -386,6 +383,9 @@ def load_activities_manually(request):
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
         "-date"
     )
+
+    # update the DB table with average user stats
+    update_user_stats(request, garmin_data)
 
     # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
@@ -452,6 +452,29 @@ def load_activities(request):
     )
 
     # update the DB table with average user stats
+    update_user_stats(request, garmin_data)
+
+    # update the template
+    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(
+        request,
+        "partials/activities.html",
+        {
+            "garmin_data": garmin_data,
+            "page_obj": page_obj,
+        },
+    )
+
+
+def update_user_stats(request: HttpRequest, garmin_data: GarminData) -> None:
+    """
+    helper function to update user stats table after a user updated their walks
+    """
+    entry_msg = "entering function"
+    ic(entry_msg)
+
     first_day_for_avg_userstats = datetime.now() - timedelta(days=30)
     recent_garmin_data = garmin_data.filter(
         user=request.user, date__gte=first_day_for_avg_userstats
@@ -493,19 +516,6 @@ def load_activities(request):
             bmi_improving_or_maintaining
         )
         new_stats_entry.save()
-
-    # update the template
-    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(
-        request,
-        "partials/activities.html",
-        {
-            "garmin_data": garmin_data,
-            "page_obj": page_obj,
-        },
-    )
 
 
 def delete_activity(request, garmin_data_id, *args, **kwargs):
