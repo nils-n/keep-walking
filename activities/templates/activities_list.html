@@ -29,7 +29,16 @@
 						<h2 class = 'text-blue-900 text-2xl font-bold pt-4 '><span> <i class="fa-solid fa-rotate"> </i> </span> Sync Your Data </h2>
 						<div class='pt-2 pb-4'>
 							<p class='text-gray-800  sm:text-lg font-normal' style='line-height:1.6'> Use your Garmin login to sync your data from your watch. </p>
-							<p class='text-blue-700 text-sm pt-1 '> Don't have a Garmin watch? No problem, enter your walks manually <button class='px-2 py-1 text-blue-50 bg-blue-800 hover:bg-blue-300  hover:text-blue-800 rounded shadow'><i class="fa-solid fa-arrow-right"></i></button></p>
+							<p class='text-blue-500 text-sm pt-1 '> 
+								Don't have a Garmin watch? No problem, enter your walks manually 
+								<button class="px-2 py-1 text-blue-50 bg-blue-600 hover:bg-blue-300  hover:text-blue-800 rounded shadow"
+												hx-get="{% url 'swap_to_manual' %}" 
+												hx-target='#update-walks'
+												hx-swap='innerHTML'
+											>
+									<i class="fa-solid fa-arrow-right"></i>
+								</button>
+								</p>
 						</div>
 						<div class='bg-blue-200 px-4 py-7 rounded-2xl shadow-lg mt-2 mb-8'>
 							<div class='pt-1 block'>

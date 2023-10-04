@@ -12,6 +12,7 @@ from .views import (
     update_profile,
     edit_profile,
     delete_profile,
+    swap_to_manual,
 )
 
 urlpatterns = [
@@ -52,6 +53,7 @@ htmx_urlpatterns = [
         update_profile,
         name="update_profile",
     ),
+    path("swap_to_manual", swap_to_manual, name="swap_to_manual"),
 ]
 
 urlpatterns += htmx_urlpatterns

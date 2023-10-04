@@ -107,6 +107,16 @@ def home_view(request):
         return render(request, "home.html", context)
 
 
+def swap_to_manual(request, *args, **kwargs):
+    """
+    view to swap the garmin sync form with a form
+    to enter walks and weight manually
+    """
+    garmin_form = GarminDataForm()
+    context = {"garmin_form": garmin_form}
+    return render(request, "partials/load_manually.html", context=context)
+
+
 def user_profile(request, user_id, *args, **kwargs):
     """
     view to see and edit data stored for an
