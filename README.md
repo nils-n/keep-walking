@@ -54,6 +54,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
       - [4. Feature: Dashboard](#4-feature-dashboard)
       - [5. Feature : Profile Page](#5-feature--profile-page)
       - [6. Feature : Other Pages](#6-feature--other-pages)
+  - [Logic and Flow Diagrams](#logic-and-flow-diagrams)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
@@ -350,16 +351,6 @@ On the bottom of the page, a preview is presented to allow a new user to form an
         <img style='width:49%' src="./assets/images/preview-login.png"; alt="preview image of the login page" > 
       </td>
     </tr>
-    <tr>
-      <td> 
-        <img style='width:90%' src="./assets/images/features-landing.png"; alt="preview image of features on landing page" >
-      </td>
-    </tr>
-    <tr> 
-     <td style='text-align: left'> 
-      Figure: Flow Diagram for the Landing Page and the Login/Signup Routes. When user enters the site, they will be directed to the Home Page, from where the 'Login' or 'Signup' Buttons direct to the Login and Signup Page. New site users can sign up providing a username/password combination. Users that have already signed-up users can login using their credentials in order to access their personal area.
-      </td>
-    </tr>
   </table>
 </div>
 
@@ -390,12 +381,6 @@ This is the central page of a signed-in user where the user can interact with th
       <tr> <td> <img src="./assets/images/dashboard-activities.png"; alt="preview of activities of dashboard page" >  </td> </tr>
       <tr> <td> <img src="./assets/images/dashboard-summary.png"; alt="preview of personalized summary of dashboard page" >  </td> </tr>
        <tr> <td> <img src="./assets/images/dashboard-plots.png"; alt="graphical summary of the activities on dashboard page" >  </td> </tr>
-      <tr> <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td> </tr>
-      <tr> 
-      <td style='text-align: left'> 
-        <span style='font-weight:bold'>Figure: </span> Flow Diagram for the Dashboard Page. The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page. Signed-in users can submit their Garmin credentials in the `Sync Garmin` form, in order to retrieve their latest health stats from the Garmin API. Users can give emotional rating for each day by clicking on the rating symbols next to each activity, which is updating the DB without reloading the page (thanks to htmx-AJAX requests). Users can also read, edit and delete any of their dailiy activities by clicking on 'edit' or 'delete' buttons next to each activity. They can sign out by clicking on the 'Logout' link in the navbar, return to the main page by clicking on 'Home' link, or go their profile page using the 'Profile' link.  
-        </td>
-    </tr>
   </table>
 </div>
 
@@ -430,6 +415,53 @@ This page contains a friendly message when the 404 and 403 server error have occ
       <td> <img src="./assets/images/feature-404-page.png"; alt="preview image of the 404 page" >  </td>
       </tr>
     </table>
+</div>
+
+---
+
+## Logic and Flow Diagrams
+
+### 1. Landing Page
+
+See below a flow Diagram for the Landing Page and the Login/Signup Routes.
+
+- When user enters the site, they will be directed to the Home Page
+- the 'Login' or 'Signup' Buttons direct to the Login and Signup Page.
+- New site users can sign up providing a username/password combination.
+- Users that have already signed-up users can login using their credentials in order to access their personal area.
+
+<div style='text-align:center'>
+  <table style='width:90%; content-align:center'>
+    <tr>
+        <th colspan=2> Flow Diagram for Landing Page</th>
+    </tr>
+    <tr>
+      <td> 
+        <img style='width:90%' src="./assets/images/features-landing.png"; alt="preview image of features on landing page" >
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
+
+## 2. Dashboard Page
+
+The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page.
+
+- Signed-in users can submit their Garmin credentials in the `Sync Garmin` form, in order to retrieve their latest health stats from the Garmin API.
+- Signed-in users that don't have a Garmin watch (or prefer to enter their walks manually) have the option to enter their walks manually (without reloading the page as all `POST` requests are handled with `htmx-post`)
+- Users can give emotional rating for each day by clicking on the rating symbols next to each activity, which is updating the DB without reloading the page (thanks to htmx-AJAX requests).
+- Users can read, edit and delete any of their dailiy activities by clicking on 'edit' or 'delete' buttons next to each activity.
+- Users can sign out by clicking on the 'Logout' link in the navbar, return to the main page by clicking on 'Home' link, or go their profile page using the 'Profile' link.
+
+<div style='text-align:center'>
+  <table style='width:100%; content-align:center'>
+      <tr>
+        <th colspan=2> Flow Diagram for Dashboard Page </th>
+      </tr>
+      <tr> <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td> </tr>
+  </table>
 </div>
 
 ---
