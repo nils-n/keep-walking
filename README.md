@@ -55,6 +55,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [Profile Page](#profile-page)
     - [Other Pages](#other-pages)
   - [Logic and Flow Diagrams](#logic-and-flow-diagrams)
+    - [Dashboard Page](#dashboard-page-1)
+    - [Profile Page](#profile-page-1)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
@@ -326,7 +328,7 @@ On the bottom of the page, a preview is presented to allow a new user to form an
 <div style='text-align:center'>
    <table style='width:90%; content-align:center'>
     <tr>
-        <th colspan=2> Landing Page (Bootom)</th>
+        <th colspan=2> Landing Page (Bottom)</th>
       </tr>
        <tr>
       <td> <img src="./assets/images/landing-page-3.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
@@ -453,7 +455,7 @@ This page contains a friendly message when the 404 and 403 server error have occ
 
 ## Logic and Flow Diagrams
 
-### 1. Landing Page
+### Landing Page
 
 See below a flow Diagram for the Landing Page and the Login/Signup Routes.
 
@@ -477,7 +479,7 @@ See below a flow Diagram for the Landing Page and the Login/Signup Routes.
 
 ---
 
-## 2. Dashboard Page
+### Dashboard Page
 
 The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page.
 
@@ -498,7 +500,7 @@ The user can enter this page only after authentication, otherwise an access atte
 
 ---
 
-## 3. Profile Page
+### Profile Page
 
 The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page.
 
