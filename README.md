@@ -55,6 +55,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [Profile Page](#profile-page)
     - [Other Pages](#other-pages)
   - [Logic and Flow Diagrams](#logic-and-flow-diagrams)
+    - [Landing Page](#landing-page-1)
     - [Dashboard Page](#dashboard-page-1)
     - [Profile Page](#profile-page-1)
     - [Future Implementations](#future-implementations)
@@ -455,7 +456,7 @@ This page contains a friendly message when the 404 and 403 server error have occ
 
 ## Logic and Flow Diagrams
 
-### Landing Page
+### Landing Page
 
 See below a flow Diagram for the Landing Page and the Login/Signup Routes.
 
