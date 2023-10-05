@@ -378,6 +378,7 @@ User data are stored in a relational database. The main model has been carefully
 - [python-garminconnect](https://github.com/cyberjunky/python-garminconnect/tree/master) for Garmin API calls
 - [icecream](https://github.com/gruns/icecream) for more expressive print statements
 - [black](https://github.com/psf/black) for code formatting
+- [DaisyUI](https://opencollective.com/daisyui) components for Tailwind
 
 ### Languages
 
