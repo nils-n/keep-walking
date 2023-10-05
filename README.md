@@ -47,13 +47,13 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [Imagery](#imagery)
   - [Wireframes](#wireframes)
   - [Features](#features)
-    - [General Features](#general-features)
-      - [1. Feature: Navbar](#1-feature-navbar)
-      - [2. Feature: Landing Page](#2-feature-landing-page)
-      - [3. Feature: Login/Signup Page](#3-feature-loginsignup-page)
-      - [4. Feature: Dashboard](#4-feature-dashboard)
-      - [5. Feature : Profile Page](#5-feature--profile-page)
-      - [6. Feature : Other Pages](#6-feature--other-pages)
+  - [General Features](#general-features)
+    - [Navbar](#navbar)
+    - [Landing Page](#landing-page)
+    - [Login/Signup Page](#loginsignup-page)
+    - [Dashboard Page](#dashboard-page)
+    - [Profile Page](#profile-page)
+    - [Other Pages](#other-pages)
   - [Logic and Flow Diagrams](#logic-and-flow-diagrams)
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
@@ -247,7 +247,7 @@ Wireframes for individual Components:
 
 ## Features
 
-### General Features
+## General Features
 
 The website consits of a landing page, and a personal area including a dashboard and a profile page, and a 404/403 page. All pages are responsive, designed using a mobile-first approach.
 
@@ -258,7 +258,7 @@ The website consits of a landing page, and a personal area including a dashboard
 
 The landing page is accessible for all users, whereas the Dashboard and Profile page can only be accessed by the User (and the site Admin) after signing in with their credentials. Any attempt for unauthorized access redirects directly to the 403 error page (unauthorized access).
 
-#### 1. Feature: Navbar
+### Navbar
 
 On top of each page, a navbar is placed leading to sites available to the user.
 
@@ -284,7 +284,7 @@ On top of each page, a navbar is placed leading to sites available to the user.
     </table>
 </div>
 
-#### 2. Feature: Landing Page
+### Landing Page
 
 This site is the main entry point and is accessible for all users.
 
@@ -334,7 +334,7 @@ On the bottom of the page, a preview is presented to allow a new user to form an
     </table>
 </div>
 
-#### 3. Feature: Login/Signup Page
+### Login/Signup Page
 
 - New users can sign up on the website using the Signup Form.
 - If the username already exists, the user is prompted to choose a different, unique username
@@ -354,57 +354,89 @@ On the bottom of the page, a preview is presented to allow a new user to form an
   </table>
 </div>
 
-#### 4. Feature: Dashboard
+### Dashboard Page
 
 This is the central page of a signed-in user where the user can interact with the main functionalities of the website, and read a brief summary from the data analysis of their personal progress.
 
-- A banner on top of the Dashboard greets the user with their username aimed to create a postitive emotion and a feeling of welcome
-- The user can interact with a component that allows syncing their data with the data stored in their Garmin App. By providing their Garmin username/password and clicking the `sync` button, an asynchroneous request is sent to the Garmin API.
-  - If the synchronization was successfull, the data `JSON` received from the Garmin API is then processed in the `View` , where the data is entered in the `GarminData` DB table. The page is also updated without reloading (since htmx uses AJAX in the background) displaying the latest walks.
-  - If the synchronization was not successful, a toast displaying the error appears on top of the screen with the error message
+A banner on top of the Dashboard greets the user with their username aimed to create a postitive emotion and a feeling of welcome.
+
+<div style='text-align:center'>
+  <table style='width:100%; content-align:center'>
+      <tr>
+        <th colspan=2> Dashboard Page (Top)</th>
+      </tr>
+      <tr> <td> <img src="./assets/images/dashboard-landing.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
+  </table>
+</div>
+
+In the middle of the Dashboard Page, the user can interact with a component that allows user adding their data using two different methods :
+
+- (Default) Sync with their Garmin smartwach. Users can sync their data with the data stored in their Garmin App. By providing their Garmin username/password and clicking the `sync` button, an asynchroneous request is sent to the Garmin API.
+- (Optional) Manually entering walks. When a user does not have a Garmin Watch or Garmin Connect account, or prefers not to use the default feature, they can still enter their walks manually. The form for adding the data manually is swapped without reloading using `htmx-swap`
+
+<div style='text-align:center'>
+  <table style='width:100%; content-align:center'>
+      <tr>
+        <th colspan=2> Dashboard Page (Middle)</th>
+      </tr>
+      <tr> <td> <img src="./assets/images/dashboard-garmin.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
+      <tr> <td> <img src="./assets/images/dashboard-manual-swapped.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
+  </table>
+</div>
+
+If the synchronization was successfull, the data `JSON` received from the Garmin API is then processed in the `View` , where the data is entered in the `GarminData` DB table. The page is also updated without reloading (since htmx uses AJAX in the background) displaying the latest walks.
+
+- If the synchronization was not successful, a toast displaying the error appears on top of the screen with the error message
 - A paginated list of the most recent walks is displayed, allowing the user to get a quick overview of their recent activity and step counts of the last 7 days. The list contains:
   - General information about daily activities such as : Date, number of steps (as extracted from Garmin API) and body weight (as entered inside the Garmin Connect App)
   - The user can give and modify an emotional rating of the day (via `htmx-post` request that updates the DB without reloading the page )
   - For each activity, the user can press an `Edit` button to update missing or wrong entries (such as, if the watch was charging but the user did go for walk - an estimated step count is still closer than zero steps).
   - For each activity, the user has the option to entirely delete the activty if they desire so. Upon pressing the `Delete` button, a confirmation modal pops up (using `htmx-confirm`). If confirmed, the entry is deleted from the DB and the activites are loaded in-place (using `htmx-delete` requests)
-- On the bottom of the page, the user can read a personalized summary that is based on data processing and simple linear regression of the data provided in the DB. The data processing pipeline informs the user :
-  - The progress towards a healthy BMI : The user receives information about their average BMI and the linear trend of the BMI over the past month. A friendly reminder is written when BMI is too high, too low. If the BMI has worsed over the past month, the user is informed with motivating words to walk more, and the user get positive feedback when the BMI change has been improving towards a healthy range.
-  - Summary of the Average body weight (kg) over the past month
-  - Summary over the average emotional rating over the past month
+
+On the bottom of the Dashboard page, the user can read a personalized summary that is based on data processing and simple linear regression of the data provided in the DB. The data processing pipeline informs the user :
+
+- The progress towards a healthy BMI : The user receives information about their average BMI and the linear trend of the BMI over the past month. A friendly reminder is written when BMI is too high, too low. If the BMI has worsed over the past month, the user is informed with motivating words to walk more, and the user get positive feedback when the BMI change has been improving towards a healthy range.
+- Summary of the Average body weight (kg) over the past month
+- Summary over the average emotional rating over the past month
 - Additionally, two graphs are displaying the recent step counts over the past 30 days. When hover over the bar plot, the individual DB entry is displayed.
   - The first plot is a bar plot showing the step count over the past months. A second line plot is overlayed that shows the 7000 steps and gives the user a feeling of whether they achieved or not the targeted step count.
   - The second plot visualizes the BMI development over the past month. In addition, the healthy BMI range is plotted as a green interval, giving the user a feeling of achievment when they see their BMI line reaching the healthy levels, motivating them to keep walking.
 
 <div style='text-align:center'>
   <table style='width:100%; content-align:center'>
-      <tr> <td> <img src="./assets/images/dashboard-landing.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
-      <tr> <td> <img src="./assets/images/dashboard-activities.png"; alt="preview of activities of dashboard page" >  </td> </tr>
-      <tr> <td> <img src="./assets/images/dashboard-summary.png"; alt="preview of personalized summary of dashboard page" >  </td> </tr>
-       <tr> <td> <img src="./assets/images/dashboard-plots.png"; alt="graphical summary of the activities on dashboard page" >  </td> </tr>
+      <tr> <th colspan=2> Dashboard Page (Bottom)</th> </tr>
+      <tr> <td> <img src="./assets/images/dashboard-summary.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
+      <tr> <td> <img src="./assets/images/dashboard-plots.png"; alt="preview of entry point of dashboard page" >  </td> </tr>
   </table>
 </div>
 
-#### 5. Feature : Profile Page
+---
+
+### Profile Page
 
 On the Profile page, users can update the information stored about them. The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page.
 
 Two buttos allow the users to interact with the page:
 
-- the `Edit button`allows the user to modify key information necessary to calculate the correct progression of this summary, namely the `height (cm)` and their `date of birth` to correct the healthy BMI range for age and body height. Upon successful edit, a toast appears on top of the screen to confirm that the DB has been updated successfully.
-- the `Delete` button triggers a modal for the user to confirm deleltion of their profile. It also includes a warning that this action cannot be undone. If confirmed, the user is deleted from the DB and the user receives a confirmation message that his profile and account has been deleted.
+- `Edit button` : allows the user to modify key information necessary to calculate the correct progression of this summary, namely the `height (cm)` and their `date of birth` (to correct the healthy BMI range for age and body height).
+- When edit was successful, a toast appears on top of the screen to confirm that the DB has been updated successfully.
+- `Delete` button : This button triggers a modal for the user to confirm deleltion of their profile. It also includes a warning that this action cannot be undone. If confirmed, the user is deleted from the DB and the user receives a confirmation message that his profile and account has been deleted.
 
 <div style='text-align:center'>
     <table style='width:90%; content-align:center'>
+      <tr> <th colspan=2> Profile Page</th> </tr>
       <tr> <td> <img src="./assets/images/feature-profile-1.png"; alt="preview image of the profile page" >  </td> </tr>
       <tr> <td> <img src="./assets/images/feature-profile-2.png"; alt="preview image of the profile page" >  </td> </tr>
       <tr> <td> <img style='width:50%'  src="./assets/images/feature-profile-3.png"; alt="preview image of the profile page" >  </td> </tr>
-      <tr> <td> <img  src="./assets/images/features-profile.png"; alt="preview image of the profile page" >  </td> </tr>
   </table>
 </div>
 
-#### 6. Feature : Other Pages
+### Other Pages
 
 This page contains a friendly message when the 404 and 403 server error have occured.
+
+- 404 page: appears when the user enters a URL that does not exist
+- 403 page: appears when users try to enter a site that they have no authorization for
 
 <div style='text-align:center'>
     <table style='width:90%; content-align:center'>
@@ -461,6 +493,22 @@ The user can enter this page only after authentication, otherwise an access atte
         <th colspan=2> Flow Diagram for Dashboard Page </th>
       </tr>
       <tr> <td> <img src="./assets/images/features-dashboard.png"; alt="preview image of the website taken on multiple screen sizes" >  </td> </tr>
+  </table>
+</div>
+
+---
+
+## 3. Profile Page
+
+The user can enter this page only after authentication, otherwise an access attempt would redirect to the 403 page.
+
+- Signed-in users can edit their profile details that are stored about them in the DB
+- They also have the option here to delete their profile. In order to avoid unwanted deletion, the user needs to confirm in a modal that they wish to do so. They are also warned that this operation cannot be done as is deletes any record about them from the DB (no soft deletion is implemenented as per definition of the project scope).
+
+<div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+      <tr> <th colspan=2> Flow Diagram for Profile Page</th> </tr>
+      <tr> <td> <img  src="./assets/images/features-profile.png"; alt="preview image of the profile page" >  </td> </tr>
   </table>
 </div>
 
