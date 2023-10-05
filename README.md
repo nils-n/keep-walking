@@ -41,6 +41,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How these needs are addressed](#how-these-needs-are-addressed)
     - [Opportunities](#opportunities)
     - [Feature selection](#feature-selection)
+  - [Agile Methodology](#agile-methodology)
   - [Design](#design)
     - [Color Scheme](#color-scheme)
     - [Typography](#typography)
@@ -119,6 +120,41 @@ User stories are prioritized and categorized according to the _MuSCoW_ priortiza
 ### Opportunities
 
 ### Feature selection
+
+---
+
+## Agile Methodology
+
+This project was created following agile principles using the GitHub Projects board. User Stories / Epics were entered and categorized using the **MuSCoW** priotization method labelling them as follows:
+
+- `must-have` : need to be implemented in this iteration
+- `could-have` : if time permits, features and User Stories from this category can be delivered but they cannot be promised in this iteration
+- `should-have` : User Stories in this category would be implemented only if the other stories are already implemented in this timebox
+- `wont-have`: stories in this category will not be implemented in this iteration - but they are kept for documentation purpose
+
+See below the final GitHub Project boards, after reaching the first Milestone (Project submission for assessment to Code Institute).
+
+- All `must-have` stories were implemented
+- **1** `should-have` story was implemented
+- **2** `could-have` stories did not fit into the timebox and will be pushed to the next iteration
+- **3** `wont-have` that would allow user to write testimonials about their website experience
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center; '>
+    <tr>
+      <th colspan=2> GitHub Project Board </th>
+    </tr> 
+      <tr>
+        <td >  <img src="./assets/images/github-projects.png"; alt="github projects board after reaching Miletstone 1 (Project submission to Code Institute) " > </td>
+      </tr>
+       <tr>
+        <td >  <img src="./assets/images/github-projects-issues-2.png"; alt="user stories delivered in this iteration" > </td>
+      </tr>
+      <tr>
+        <td >  <img src="./assets/images/github-project-issues.png"; alt="user stories not delivered in this iteration" > </td>
+      </tr>
+    </table>
+</div>
 
 ---
 
