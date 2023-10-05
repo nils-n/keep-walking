@@ -57,7 +57,6 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [Future Implementations](#future-implementations)
     - [Accessibility](#accessibility)
   - [Models](#models)
-  - [](#)
   - [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Frameworks](#frameworks)
@@ -292,19 +291,44 @@ This site is the main entry point and is accessible for all users.
 - When a user is not signed in, the CTA buttons lead to `Signup` and `Login` page to allow users fast access to the main functionality of the page
 - When a user is signed in, the CTA buttons lead to the personal `Dashboard` or the `Logout` page
 - Below the Hero image, the user can find the mission statement of the website, consisting of a brief intrductory summary of the site goal and three cards showcasing the main ethos of the page
-- On the middle of the page, a timeline is displayed that explains the user their journey through the page and what steps they will be expecting :
-  - Step 1: Signing up and filling out profile details which enables calculation of personal Body-Mass-Index (BMI)
-  - Step 2: Synchronization with the Garmin watch to track recent daily walks
-  - Step 3: Repeating to log into the page over time, in order to keep track of the progress in terms of BMI, body weight and happiness
-- On the bottom of the page, a preview is presented to allow a new user to form an expectation of the site content and to motivate them to sign up.
 
 <div style='text-align:center'>
    <table style='width:90%; content-align:center'>
+    <tr>
+        <th colspan=2> Landing Page (Top)</th>
+      </tr>
       <tr>
       <td> <img src="./assets/images/landing-page.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
       </tr>
+    </table>
+</div>
+
+On the middle of the landing page, a timeline is displayed that explains the user their journey through the page and what steps they will be expecting after they have signed up:
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center'>
+    <tr>
+        <th colspan=2> Landing Page (Middle)</th>
+      </tr>
        <tr>
       <td> <img src="./assets/images/landing-page-2.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
+      </tr>
+    </table>
+</div>
+
+On the bottom of the page, a preview is presented to allow a new user to form an expectation of the site content and to motivate them to sign up. It also displays :
+
+- The number of users that have been active at least once in the current month
+- The average BMI of those users and their average change of BMI(absolute value)
+- The percentage (%) of active users that have either maintained or improved their BMI in the past month
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center'>
+    <tr>
+        <th colspan=2> Landing Page (Bootom)</th>
+      </tr>
+       <tr>
+      <td> <img src="./assets/images/landing-page-3.png"; alt="preview image of the website taken on multiple screen sizes" >  </td>
       </tr>
     </table>
 </div>
@@ -417,6 +441,8 @@ This page contains a friendly message when the 404 and 403 server error have occ
 - Cross-user data analysis: This project could be embedded into a wider research project that could study various body parameters across users under certain conditions. This would however require implementing GDPR compliance, including steps to provide privacy information and obtaining written consent of the users for their data to be used for that purpose - which is currently beyond the MVP scope of the this educational project.
 - Testimonials: A next iteration would include a User Testimonial section where Users could report their journey and experience with the site. They could report whether keeping track of their body parameters helped them reaching or maintaining a healthy BMI.
 
+---
+
 ### Accessibility
 
 ---
@@ -430,11 +456,12 @@ User data are stored in a relational database. The main model has been carefully
 - **GarminData**: each row is an entry as read from the Garmin API for a specific date and user
 - **UserAverage** each row is a sample from recent user stats (average weight, average BMI and BMI trend over past month)
 
-<table style='width:60%; content-align:center'>
+<table style='width:90%; content-align:center'>
     <tr>
        <td> <img src="./assets/images/drawSQL-pp4-activity-tracker.png"; alt="ER diagram of the model" >  </td>
     </tr>
 </table>
+
 ---
 
 ## Technologies Used
