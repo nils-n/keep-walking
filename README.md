@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-  - [Project Goal](#project-goal)
-  - [Table of Content](#table-of-content)
+    - [Project Goal](#project-goal)
+    - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
@@ -122,6 +122,41 @@ User stories are prioritized and categorized according to the _MuSCoW_ priortiza
 ## Design
 
 ### Color Scheme
+
+A light blue color scheme has been selected with the aim to create an energetic, positive atmosphere. The colours were chosen from Tailwind's carefully crafted color system to build this website.
+
+Main Colours:
+
+- A light blue was chosen as Background
+- For text and subheadings, shades of dark gray were chosen over the black (`#fff`) to look less harsh on the eye
+- For accents, a less aggressive contrast was chosen from Tailwinds CSS color palette to keep a harmonic overall visual impression.
+
+The main reasoning of choosing these colors was to create an overall harmonic, playful emotion with only slight accents.
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center'>
+      <tr>
+        <th> Type </th>
+        <th> Color </th>
+        <th> Used for</th>
+      </tr>
+      <tr>
+        <td> Primary </td>
+        <td  style='width:60%'>  <img src="./assets/images/colors-blue.png"; alt="preview image of the navbar" > </td>
+        <td> Buttons, Backgrounds, Cards, Hover States, Headings </td>
+      </tr>
+      <tr>
+        <td> Secondary </td>
+        <td  style='width:60%'>  <img src="./assets/images/colors-gray.png"; alt="preview image of the navbar" > </td>
+        <td> Text, Tables, Subheadings </td>
+      </tr>
+       <tr>
+        <td> Accent </td>
+        <td  style='width:60%'>  <img src="./assets/imagees/../images/colors-emotionpng.png"; alt="preview image of the navbar" > </td>
+        <td> Emotional Rating of Walks, Toasts, Warnings, Error </td>
+      </tr>
+    </table>
+</div>
 
 ### Typography
 
