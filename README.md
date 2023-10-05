@@ -172,6 +172,77 @@ The font was chosen from the `serif sans`font family. The aim of this selection 
 
 ## Wireframes
 
+Wireframes were created in [Figma](https://www.figma.com/), using a mobile-first approach. Wireframes were created for:
+
+- Landing page
+- User dashboard
+- Small Components (Login/Signup Forms, Daily Activitites)
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center; '>
+    <tr>
+      <th colspan=2> Wireframes for Home Page </th>
+    </tr> 
+      <tr>
+        <th> Mobile </th>
+        <th> Desktop </th>
+      </tr>
+      <tr>
+        <td  style='width:25%; vertical-align:top'>  <img src="./assets/wireframes/home-mobile.png"; alt="wireframe for Home (mobile) " > </td>
+        <td  style='width:75%; vertical-align:top'>  <img src="./assets/wireframes/home-desktop.png"; alt="wireframe for Home (dekstop) " > </td>
+      </tr>
+    </table>
+</div>
+
+---
+
+Wireframes for User dashboard:
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center; '>
+      <tr>
+        <th colspan=2> Wireframes for User Dashboard</th>
+      </tr> 
+      <tr>
+        <th> Mobile </th>
+        <th> Desktop </th>
+      </tr>
+      <tr>
+        <td  style='width:25%; vertical-align:top'>  <img src="./assets/wireframes/dashboard-mobile.png"; alt="wireframe for User Dashboard (mobile) " > </td>
+        <td  style='width:75%; vertical-align:top'>  <img src="./assets/wireframes/dashboard-desktop.png"; alt="wireframe for User Dashboard (dekstop) " > </td>
+      </tr>
+    </table>
+</div>
+
+Wireframes for individual Components:
+
+<div style='text-align:center'>
+   <table style='width:90%; content-align:center; '>
+      <tr>
+        <th colspan=2> Daily Activity Component</th>
+      </tr>
+      <tr>
+        <th> Mobile </th>
+        <th> Desktop </th>
+      </tr>
+      <tr>
+        <td  style='width:40%; vertical-align:center'>  <img src="./assets/wireframes/rating-mobile.png"; alt="wireframe for Activity Component " > </td>
+        <td  style='width:60%; vertical-align:center'>  <img src="./assets/wireframes/rating-desktop.png"; alt="wireframe for Activity Component " > </td>
+      </tr>
+      <tr>
+        <th colspan=2>  Login/Sign Up Forms</th>
+      </tr>
+      <tr>
+        <th> Signup </th>
+        <th> Login </th>
+      </tr>
+      <tr>
+        <td  style='width:50%; vertical-align:center'>  <img src="./assets/wireframes/signup-component.png"; alt="wireframe for Home (mobile) " > </td>
+        <td  style='width:50%; vertical-align:center'>  <img src="./assets/wireframes/login-component.png"; alt="wireframe for Home (dekstop) " > </td>
+      </tr>
+    </table>
+</div>
+
 ---
 
 ## Features
