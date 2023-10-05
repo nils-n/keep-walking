@@ -160,6 +160,12 @@ The main reasoning of choosing these colors was to create an overall harmonic, p
 
 ### Typography
 
+The font was chosen from the `serif sans`font family. The aim of this selection was to create a harmonic and professional, clean tone. For all text and headings of the website, this font class was applied using the `font-sans` utility class from Tailwind CSS.
+
+- Headings : `Sans-serif` 500/700 bold, 3rem, line-height 0.9
+- Subheadings: `Sans-serif` 600 semibold, 1.125rem/1.25rem, line-height 1.5
+- Text: `Sans-serif`, 400 light, 1rem, line-height 1.6
+
 ### Imagery
 
 ---
