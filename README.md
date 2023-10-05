@@ -152,7 +152,7 @@ The main reasoning of choosing these colors was to create an overall harmonic, p
       </tr>
        <tr>
         <td> Accent </td>
-        <td  style='width:60%'>  <img src="./assets/imagees/../images/colors-emotionpng.png"; alt="preview image of the navbar" > </td>
+        <td  style='width:60%; height:40%; text-align:left'>  <img src="./assets/imagees/../images/colors-accents.png"; alt="preview image of the navbar" > </td>
         <td> Emotional Rating of Walks, Toasts, Warnings, Error </td>
       </tr>
     </table>
