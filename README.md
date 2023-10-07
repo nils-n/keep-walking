@@ -595,6 +595,7 @@ User data are stored in a relational database. The main model has been carefully
 - [python-garminconnect](https://github.com/cyberjunky/python-garminconnect/tree/master) for Garmin API calls
 - [icecream](https://github.com/gruns/icecream) for more expressive print statements
 - [black](https://github.com/psf/black) for code formatting
+- [AlpineJS](https://alpinejs.dev/) for dynamic event handling
 - [DaisyUI](https://opencollective.com/daisyui) components for Tailwind
 
 ### Languages
@@ -746,6 +747,7 @@ The deployment consists of 2 steps :
   - Django messages with HTMX swap [HTMX, AlpineJS and Django Messages - Adding Toast / Alert messages in HTMX Responses](https://youtu.be/T7TgfRiRb10?feature=shared)
 - How to use Django's signals to automatically create a User Profile at signup: [Automatically Create User Profiles - Django Wednesdays Twitter #3](https://youtu.be/H8MmNqDyra8?feature=shared)
 - How to use factoryboy with pytest for testing functions (Very Academy) [Pytest | Django | Introducing Factory Boy and Faker - Fixture Replacement](https://youtu.be/qrvqNdCDKjM?feature=shared)
+- How to dismiss dynamic events such as toasts using AlpineJS [Youtube - HTMX, AlpineJS and Django Messages - Adding Toast / Alert messages in HTMX Responses](https://youtu.be/T7TgfRiRb10?feature=shared)
 - Setup of automatic tests using Github Actions and pytest
   - Okken, Brian. "Python Testing with pytest." (2nd ed.) Pragmatic Bookshelf, 2022.
   - Automated Testing in Python with pytest, tox, and GitHub Actions [mCoding (Youtube) ](https://www.youtube.com/watch?v=DhUpxWjOhME)
