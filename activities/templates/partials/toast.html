@@ -1,36 +1,38 @@
+<!-- based on : 
+HTMX, AlpineJS and Django Messages - Adding Toast / Alert messages in HTMX Responses
+https://www.youtube.com/watch?v=T7TgfRiRb10
+-->
 
 {% if messages %}
 
+<!-- using AlpineJS to allow the user to dismiss the toast -->
+<div x-data="{dismissed: false}" x-show='!dismissed'>
   <div style='animation: fadeOut 4s;' class="toast toast-top toast-center" id='message-toast'>
     {% for message in messages %}
 
       {% if message.tags == 'alert-success'%} 
-        <div class="alert alert-success py-2 px-10  text-gray-50 font-bold rounded-lg">
-          <span>{{ message }}</span>
+        <div class="alert alert-success py-2 px-5  text-gray-50 font-bold rounded-lg">
+          <span>{{ message }}  <button 
+            @click='dismissed=true'
+            class=" text-green-400 bg-blue-50 px-4 ml-4 
+             hover:bg-green-300  hover:text-green-800 rounded shadow inline-block">
+            X
+        </button></span>
         </div>
       {% elif message.tags == 'alert-info'%} 
         <div class="alert alert-info">
           <span>{{ message }}</span>
         </div>
       {% endif %}
+
+     
+
     
     {% endfor %}
 
+  </div>
 </div>
 
-<script>
-
-  let profile_msg = document.getElementById("message-toast");
-  profile_msg.addEventListener("animationend", function () {
-  profile_msg.style.opacity = 0;
-  profile_msg.style.visibility = "hidden";
-});
-profile_msg.addEventListener("animationstart", function () {
-  profile_msg.style.opacity = 1;
-  profile_msg.style.visibility = "visible";
-});
-
-</script>
 
 {% endif %}
 
