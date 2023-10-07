@@ -411,3 +411,37 @@ def test_unauthenticated_user_can_access_home_page(client, django_user_model):
     """
     response = client.get("/")
     assert response.status_code == 200
+
+
+def test_authenticated_user_can_edit_own_profile_page(
+    client, django_user_model
+):
+    """
+    this tests whether a signed in user can edit their profile page
+    """
+    username = "testuser2"
+    password = "1234-abcd"
+    user = django_user_model.objects.create_user(
+        username=username, password=password
+    )
+    client.login(username=username, password=password)
+    response = client.get("/activities/profile/1/edit_profile")
+    assert response.status_code == 200
+
+
+def test_authenticated_user_cannot_edit_profile_page_of_someone_else(
+    client, django_user_model
+):
+    """
+    this tests whether a signed in user is denied to edit other users profile page
+    """
+    usernames = ["testuser1", "testuser2"]
+    passwords = ["1234-abcd", "abcd-1234"]
+    for username, password in zip(usernames, passwords):
+        user = django_user_model.objects.create_user(
+            username=username, password=password
+        )
+
+    client.login(username=usernames[0], password=passwords[0])
+    response = client.get("/activities/profile/2/edit_profile")
+    assert response.status_code == 403
