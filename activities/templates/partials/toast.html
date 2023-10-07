@@ -21,7 +21,12 @@ https://www.youtube.com/watch?v=T7TgfRiRb10
         </div>
       {% elif message.tags == 'alert-info'%} 
         <div class="alert alert-info">
-          <span>{{ message }}</span>
+          <span>{{ message }}<button 
+            @click='dismissed=true'
+            class=" text-red-400 bg-blue-50 px-4 ml-4 
+             hover:bg-red-300  hover:text-red-800 rounded shadow inline-block">
+            X
+        </button></span>
         </div>
       {% endif %}
 
