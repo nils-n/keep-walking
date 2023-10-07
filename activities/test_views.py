@@ -466,3 +466,42 @@ def test_only_authenticated_users_can_access_personal_pages(
     response = client.get(url)
 
     assert response.status_code == expected_status_code
+
+
+@pytest.mark.parametrize()(
+    "client_fixture_name, model_fixture_name, gamindata_fixture, url, expected_status_code",
+    [
+        (
+            "client",
+            "django_user_model",
+            "garmin_data_list",
+            "/activities/load_activities_manually",
+            200,
+        ),
+    ],
+)
+def test_only_authenticated_users_enter_activities_manually(
+    client_fixture_name,
+    model_fixture_name,
+    gamindata_fixture,
+    url,
+    expected_status_code,
+    db,
+    request,
+):
+    """
+    this tests whether a signed in user can edit their profile page
+    """
+    client = request.getfixturevalue(client_fixture_name)
+    django_user_model = request.getfixturevalue(model_fixture_name)
+    random_garmin_data = request.getfixturevalue(gamindata_fixture)
+    
+    username = "testuser2"
+    password = "1234-abcd"
+    user = django_user_model.objects.create_user(
+        username=username, password=password
+    )
+    client.login(username=username, password=password)
+    response = client.get(url)
+
+    assert response.status_code == expected_status_code

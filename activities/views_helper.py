@@ -169,10 +169,13 @@ def extract_bmi_timeseries(
     simple linear fit of the BMI measurments
     """
     num_days = len(days)
-    slope = 2 * change_bmi / (num_days - 1)
-    intercept = average_bmi - (num_days - 1) / 2.0 * slope
-
-    return [intercept + slope * i for i, day in enumerate(days)]
+    if num_days > 1:
+        slope = 2 * change_bmi / (num_days - 1)
+        intercept = average_bmi - (num_days - 1) / 2.0 * slope
+        return [intercept + slope * i for i, day in enumerate(days)]
+    return [
+        0,
+    ]
 
 
 def create_bokeh_plot(data: pd.DataFrame, title: str):

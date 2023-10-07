@@ -240,7 +240,8 @@ class ActivityList(ListView):
         # if there is no data for the requested range, don't render content for it
         garmin_data_exist = False
 
-        if garmin_data_bokeh.count() > 0:
+        # we need at least 2 garmindata entries to calculate a trend
+        if garmin_data_bokeh.count() > 1:
             garmin_data_exist = True
 
             # provide data strucutre for bokeh
@@ -311,46 +312,41 @@ def load_activities_manually(request):
     this view loads all activities stored in the DB and also adds
     the manually posted acitivty to that list
     """
-    ic()
-    if request.user.is_authenticated:
-        manully_entered_date = request.POST.get("date")
-        manully_entered_steps = request.POST.get("steps")
-        manully_entered_steps_kg = request.POST.get("weight_kg")
 
-        ic(
-            manully_entered_date,
-            manully_entered_steps,
-            manully_entered_steps_kg,
-        )
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            manully_entered_date = request.POST.get("date")
+            manully_entered_steps = request.POST.get("steps")
+            manully_entered_steps_kg = request.POST.get("weight_kg")
 
-        # load information about the currently stored data for the user
-        garmin_data = GarminData.objects.filter(user=request.user)
-        existing_dates = [db_record.date for db_record in garmin_data]
-        new_date = convert_date_str_to_datetime(manully_entered_date)
+            # load information about the currently stored data for the user
+            garmin_data = GarminData.objects.filter(user=request.user)
+            existing_dates = [db_record.date for db_record in garmin_data]
+            new_date = convert_date_str_to_datetime(manully_entered_date)
 
-        # enter the form fields into the DB
-        if new_date not in existing_dates:
-            new_garmin_entry = GarminData()
-            new_garmin_entry.user = request.user
-            new_garmin_entry.date = manully_entered_date
-            new_garmin_entry.steps = manully_entered_steps
-            new_garmin_entry.weight_kg = manully_entered_steps_kg
-            new_garmin_entry.save()
+            # enter the form fields into the DB
+            if new_date not in existing_dates:
+                new_garmin_entry = GarminData()
+                new_garmin_entry.user = request.user
+                new_garmin_entry.date = manully_entered_date
+                new_garmin_entry.steps = manully_entered_steps
+                new_garmin_entry.weight_kg = manully_entered_steps_kg
+                new_garmin_entry.save()
 
-            messages.add_message(
-                request, messages.SUCCESS, "Entry manually entered"
-            )
+                messages.add_message(
+                    request, messages.SUCCESS, "Entry manually entered"
+                )
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "There is already a record for this day",
+                )
         else:
             messages.add_message(
-                request,
-                messages.ERROR,
-                "There is already a record for this day",
+                request, messages.ERROR, "No permission to do this request"
             )
-    else:
-        messages.add_message(
-            request, messages.ERROR, "No permission to do this request"
-        )
-        raise PermissionDenied
+            raise PermissionDenied
 
     # load the DB table with the stored activities
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
@@ -358,7 +354,8 @@ def load_activities_manually(request):
     )
 
     # update the DB table with average user stats
-    update_user_stats(request, garmin_data)
+    if len(garmin_data) > 1:
+        update_user_stats(request, garmin_data)
 
     # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
@@ -425,7 +422,8 @@ def load_activities(request):
     )
 
     # update the DB table with average user stats
-    update_user_stats(request, garmin_data)
+    if len(garmin_data) > 1:
+        update_user_stats(request, garmin_data)
 
     # update the template
     paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
@@ -445,13 +443,14 @@ def update_user_stats(request: HttpRequest, garmin_data: GarminData) -> None:
     """
     helper function to update user stats table after a user updated their walks
     """
-    entry_msg = "entering function"
-    ic(entry_msg)
 
     first_day_for_avg_userstats = datetime.now() - timedelta(days=30)
     recent_garmin_data = garmin_data.filter(
         user=request.user, date__gte=first_day_for_avg_userstats
     ).order_by("-date")
+    if len(recent_garmin_data) == 0:
+        return  # finish the view as there are no records for this user in the DB
+
     user_profile = UserProfile.objects.filter(user=request.user)
     profile = get_object_or_404(user_profile)
     height_cm = profile.height_cm
