@@ -237,57 +237,69 @@ class ActivityList(ListView):
             user=self.request.user, date__gte=first_day_for_bokeh_plot
         ).order_by("-date")
 
-        # provide data strucutre for bokeh
-        # this will create components for the template
-        # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
-        days, steps, weights, ratings = extract_user_data(garmin_data_bokeh)
+        # if there is no data for the requested range, don't render content for it
+        garmin_data_exist = False
 
-        # create pandas dataframe for tooltips
-        # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
-        data = pd.DataFrame()
-        data["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
-        data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
-        data.insert(2, "Steps", pd.to_numeric(steps))
+        if garmin_data_bokeh.count() > 0:
+            garmin_data_exist = True
 
-        # calculate the average bmi and the linear trend for the last 30 days
-        # get height from the user profile for calculating BMI
-        user_profile = UserProfile.objects.filter(user=self.request.user)
-        profile = get_object_or_404(user_profile)
-        average_bmi, change_bmi = calculate_bmi_change(
-            days, weights, profile.height_cm
-        )
-        bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
-        bmi = bmi[::-1]
-        print(f"average : {average_bmi}")
-        print(f"change_bmi : {change_bmi}")
-        print(f"bmi : {bmi}")
+            # provide data strucutre for bokeh
+            # this will create components for the template
+            # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
+            days, steps, weights, ratings = extract_user_data(
+                garmin_data_bokeh
+            )
 
-        # create a bokeh plot and styling of the plot inside a helper function
-        script, div = create_bokeh_plot(data, "Steps")
+            # create pandas dataframe for tooltips
+            # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
+            data = pd.DataFrame()
+            data["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
+            data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
+            data.insert(2, "Steps", pd.to_numeric(steps))
 
-        # create a second bokeh plot with the BMI progression
-        data_bmi = pd.DataFrame()
-        data_bmi["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
-        data_bmi["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
-        data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
-        script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
+            # calculate the average bmi and the linear trend for the last 30 days
+            # get height from the user profile for calculating BMI
+            user_profile = UserProfile.objects.filter(user=self.request.user)
+            profile = get_object_or_404(user_profile)
+            average_bmi, change_bmi = calculate_bmi_change(
+                days, weights, profile.height_cm
+            )
+            bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
+            bmi = bmi[::-1]
+            print(f"average : {average_bmi}")
+            print(f"change_bmi : {change_bmi}")
+            print(f"bmi : {bmi}")
 
-        # calculate the average weight over the last 30 days
-        average_weight = calculate_average_weight(weights)
+            # create a bokeh plot and styling of the plot inside a helper function
+            script, div = create_bokeh_plot(data, "Steps")
 
-        # calculate the average emotional rating over the last 30 days
-        average_rating = calculate_average_rating(ratings)
+            # create a second bokeh plot with the BMI progression
+            data_bmi = pd.DataFrame()
+            data_bmi["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
+            data_bmi["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
+            data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
+            script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
 
-        context_data["average_bmi"] = average_bmi
-        context_data["change_bmi"] = change_bmi
+            # calculate the average weight over the last 30 days
+            average_weight = calculate_average_weight(weights)
+
+            # calculate the average emotional rating over the last 30 days
+            average_rating = calculate_average_rating(ratings)
+
+            context_data["average_bmi"] = average_bmi
+            context_data["change_bmi"] = change_bmi
+
+            context_data["script"] = script
+            context_data["div"] = div
+            context_data["script_bmi"] = script_bmi
+            context_data["div_bmi"] = div_bmi
+            context_data["average_weight"] = average_weight
+            context_data["average_rating"] = average_rating
+
         context_data["garmin_form"] = GarminDataForm()
         context_data["page_obj"] = page_obj
-        context_data["script"] = script
-        context_data["div"] = div
-        context_data["script_bmi"] = script_bmi
-        context_data["div_bmi"] = div_bmi
-        context_data["average_weight"] = average_weight
-        context_data["average_rating"] = average_rating
+        context_data["garmin_data_exist"] = garmin_data_exist
+
         return context_data
 
     def get_queryset(self):

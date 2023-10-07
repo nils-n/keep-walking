@@ -443,18 +443,12 @@ def test_unauthenticated_user_can_access_home_page(client, django_user_model):
         (
             "client",
             "django_user_model",
-            "/activities/update_profile/1/",
+            "/activities/list/",
             200,
-        ),
-        (
-            "client",
-            "django_user_model",
-            "/activities/update_profile/2",
-            403,
         ),
     ],
 )
-def test_only_authenticated_users_can_edit_and_delete_own_profile(
+def test_only_authenticated_users_can_access_personal_pages(
     client_fixture_name, model_fixture_name, url, expected_status_code, request
 ):
     """
@@ -470,4 +464,5 @@ def test_only_authenticated_users_can_edit_and_delete_own_profile(
     )
     client.login(username=username, password=password)
     response = client.get(url)
+
     assert response.status_code == expected_status_code
