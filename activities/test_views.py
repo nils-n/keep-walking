@@ -440,6 +440,18 @@ def test_unauthenticated_user_can_access_home_page(client, django_user_model):
             "/activities/profile/2/delete_profile",
             403,
         ),
+        (
+            "client",
+            "django_user_model",
+            "/activities/update_profile/1/",
+            200,
+        ),
+        (
+            "client",
+            "django_user_model",
+            "/activities/update_profile/2",
+            403,
+        ),
     ],
 )
 def test_only_authenticated_users_can_edit_and_delete_own_profile(

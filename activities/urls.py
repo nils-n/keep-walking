@@ -9,7 +9,6 @@ from .views import (
     rate_neutral,
     rate_bad,
     user_profile,
-    update_profile,
     edit_profile,
     delete_profile,
     swap_to_manual,
@@ -54,11 +53,6 @@ htmx_urlpatterns = [
         "rate_neutral/<int:garmin_data_id>/", rate_neutral, name="rate_neutral"
     ),
     path("rate_bad/<int:garmin_data_id>/", rate_bad, name="rate_bad"),
-    path(
-        "update_profile/<int:user_id>/",
-        update_profile,
-        name="update_profile",
-    ),
     path("swap_to_manual", swap_to_manual, name="swap_to_manual"),
 ]
 

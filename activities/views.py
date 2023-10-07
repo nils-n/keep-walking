@@ -208,45 +208,6 @@ def delete_profile(request, user_id, *args, **kwargs):
         return render(request, "partials/delete_profile.html", {})
 
 
-def update_profile(request, user_id, *args, **kwargs):
-    """
-    this view creates a profile view of the user
-    """
-    print("-->entering update_profile")
-    queryset = UserProfile.objects.filter(user=user_id)
-    profile = get_object_or_404(queryset)
-
-    if request.user.id == user_id:
-        print("--> Profile found in DB ")
-        profile_form = UserProfileForm(request.POST)
-        if profile_form.is_valid():
-            print("Data in form is valid")
-            form_data = profile_form.cleaned_data
-            profile.height_cm = form_data["height_cm"]
-            profile.birthday = form_data["birthday"]
-            profile.step_goal = form_data["step_goal"]
-            profile.start_date = form_data["start_date"]
-            profile.save()
-            messages.add_message(
-                request, messages.SUCCESS, "Profile Updates edited"
-            )
-
-    else:
-        profile = UserProfile()
-        profile_form = UserProfileForm(request.POST)
-        messages.add_message(
-            request, messages.ERROR, "No permission to do this request"
-        )
-        raise PermissionDenied
-
-    # update the template
-    user_profile = UserProfile.objects.filter(user=request.user)
-    profile = get_object_or_404(user_profile)
-    context = {"profile_form": profile_form, "user_profile": profile}
-
-    return render(request, "partials/profile_details.html", context)
-
-
 class ActivityList(ListView):
     """
     this view loads all activities for the user
