@@ -2,8 +2,7 @@ import pytest
 import datetime
 import pandas as pd
 from .models import GarminData
-from pandas import to_datetime
-from django.urls import reverse
+from datetime import date
 from django.contrib.messages.storage.fallback import FallbackStorage
 
 from .views_helper import (
@@ -20,7 +19,7 @@ from .views_helper import (
     calculate_user_stats,
 )
 
-from .views import delete_activity
+from .views import delete_activity, load_activities_manually
 
 
 def test_the_obvious():
@@ -619,3 +618,39 @@ def test_authenticated_users_can_enter_view_to_delete_activities(
     response = delete_activity(request, garmin_data_id=garmin_data.id)
 
     assert response.status_code == expected_status_code
+
+
+def test_authenticated_user_can_enter_activities_manually(
+    client, django_user_model, rf, garmin_data
+):
+    """
+    this is a test for the view function to add an
+    activity manually
+    """
+    random_username = "testuser"
+    random_password = "1234-abcd"
+    random_date = date(2023, 8, 31)
+    random_steps = 5000
+    random_weight = 75
+    url = "load_activities_manually"
+    expected_status_code = 200
+
+    user = django_user_model.objects.create_user(
+        username=random_username, password=random_password
+    )
+    client.login(username=random_username, password=random_password)
+    data = {
+        "date": random_date,
+        "steps": random_steps,
+        "weight": random_weight,
+    }
+    print(data)
+    request = rf.post(url, data=data)
+    request.user = user
+    setattr(request, "session", "session")
+    messages = FallbackStorage(request)
+    setattr(request, "_messages", messages)
+    response = load_activities_manually(request)
+
+    assert response.status_code == expected_status_code
+    assert GarminData.objects.count() == 1
