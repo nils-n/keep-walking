@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-    - [Project Goal](#project-goal)
-    - [Table of Content](#table-of-content)
+  - [Project Goal](#project-goal)
+  - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
@@ -65,13 +65,12 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
   - [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Frameworks](#frameworks)
-  - [Deployment](#deployment)
-    - [1. DB Setup (PostgreSQL / ElephantSQL)](#1-db-setup-postgresql--elephantsql)
-    - [2. Heroku Setup](#2-heroku-setup)
-      - [How to Fork](#how-to-fork)
-      - [How to Clone](#how-to-clone)
-    - [Deployment on Heroku](#deployment-on-heroku)
-    - [2. Heroku Setup](#2-heroku-setup-1)
+  - [Deployment on Heroku](#deployment-on-heroku)
+    - [Setup for the Backend (PostgreSQL / ElephantSQL)](#setup-for-the-backend-postgresql--elephantsql)
+    - [Setup for Heroku](#setup-for-heroku)
+    - [Setup for Cloudinary](#setup-for-cloudinary)
+    - [How to Fork](#how-to-fork)
+    - [How to Clone](#how-to-clone)
   - [Testing](#testing)
     - [Testing Procedure](#testing-procedure)
     - [Solved Bugs](#solved-bugs)
@@ -614,14 +613,14 @@ User data are stored in a relational database. The main model has been carefully
 
 ---
 
-## Deployment
+## Deployment on Heroku
 
 The deployment consists of 2 steps :
 
 1.  setting up backend DB (PostgreSQL)
 2.  setting up Heroku app and connect to DB
 
-### 1. DB Setup (PostgreSQL / ElephantSQL)
+### Setup for the Backend (PostgreSQL / ElephantSQL)
 
 - Create ElephantSQL account (if needed) and login on website
   - click on `create New Instance` and choose a name (recommend not using `-` or `.` in the name - that seems to cause issues)
@@ -630,12 +629,6 @@ The deployment consists of 2 steps :
 - open the `settings.py` of your main django project and update the `DATABASE_URL`
 
 ```python
- # DATABASES = {
- #     'default': {
- #         'ENGINE': 'django.db.backends.sqlite3',
- #         'NAME': BASE_DIR / 'db.sqlite3',
- #     }
- # }
 
  DATABASES = {
      'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
@@ -645,30 +638,45 @@ The deployment consists of 2 steps :
 - To confirm that we can now connect to the BD hosted on ElephantSQL, Run the migration command in your terminal to migrate your database structure to the newly-connected ElephantSQL database
 
 ```
- python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 
-### 2. Heroku Setup
+### Setup for Heroku
 
 - Login to Heroku Website and Create a new App (EU)
 - Connect the App with your GitHub Repository on the Heroku Website
-- Go to `Settings > Config Vars` and add your secret environment variables from your `env.py`:
-  - `SECRET_KEY` = (as per `env.py`)
-  - `DATABASE_URL` = (as per `env.py`)
-  - `CLOUDINARY_URL` = (as per `env.py`)
-  - `PORT` = 8000
-  - `DISABLE_COLLECTSTATIC` = 1
-  - `DEBUG` = False
+- a `SECRET_KEY` can be generated and copied from here [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
+- the `DATABASE_URL` is taken from your ElephantSQL project as described above (copy entire `URL`)
+- the `CLOUDINARY_URL` is taken from the cloudinary website as described below (copy API Environment Variable)
+- Go to `Settings > Config Vars` and enter your secret environment variables from your `env.py` using the following variables:
 
-#### How to Fork
+```python
+  SECRET_KEY=SECRET_KEY
+  DATABASE_URL=DATABASE_URL
+  CLOUDINARY_URL=CLOUDINARY_URL
+  PORT=8000
+  DISABLE_COLLECTSTATIC=1
+  DEBUG=False
+```
 
-#### How to Clone
+### Setup for Cloudinary
 
----
+- Go to Cloudinary website and create an account
+- Go to dashboard and copy `API Environment Variable` to clipboad. This will be used to connect the django app to the cloudinary storage. Set this key as your environment variable `CLOUDINARY_URL`
 
-### Deployment on Heroku
+### How to Fork
 
-### 2. Heroku Setup
+- Log into GitHub and navigate to this repository
+- Click on the "Main" Branch button and type the name of the forked branch
+- Click on "Create Branch" to confirm
+
+### How to Clone
+
+- Click on the "Code" button and copy the link to this repository
+- open terminal on your machine and navigate to the folder you want to store a local copy
+- in the terminal, type 'git clone ' followed by the link you copied
+- press enter to confirm
 
 ---
 
