@@ -494,31 +494,33 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
     """
     this view sends a post request to delete an activity.
     """
-    garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
-
-    if garmin_data.user.username == request.user.username:
-        garmin_data.delete()
-        messages.add_message(request, messages.SUCCESS, "Entry deleted")
+    if request.user.is_authenticated:
+        garmin_data = get_object_or_404(GarminData, id=garmin_data_id)
+        if garmin_data.user.username == request.user.username:
+            garmin_data.delete()
+            messages.add_message(request, messages.SUCCESS, "Entry deleted")
+            # update the template
+            garmin_data = GarminData.objects.filter(
+                user=request.user
+            ).order_by("-date")
+            paginator = Paginator(
+                garmin_data, 8
+            )  # Show 8 last activities per page.
+            page_number = request.GET.get("page")
+            page_obj = paginator.get_page(page_number)
+            return render(
+                request,
+                "partials/activities.html",
+                {
+                    "garmin_data": garmin_data,
+                    "page_obj": page_obj,
+                },
+            )
     else:
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
         raise PermissionDenied
-    # update the template
-    garmin_data = GarminData.objects.filter(user=request.user).order_by(
-        "-date"
-    )
-    paginator = Paginator(garmin_data, 8)  # Show 8 last activities per page.
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(
-        request,
-        "partials/activities.html",
-        {
-            "garmin_data": garmin_data,
-            "page_obj": page_obj,
-        },
-    )
 
 
 def edit_activity(request, garmin_data_id, *args, **kwargs):
