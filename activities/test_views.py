@@ -336,6 +336,15 @@ def test_user_data_extracted_correctly(garmin_data_list):
         assert result.steps == steps[i]
 
 
+def test_garmindata_fixture_works(garmin_data):
+    """
+    tests that a GarminData instance can be created by this fixture
+    """
+    model = garmin_data
+
+    assert isinstance(model, GarminData)
+
+
 def test_user_stats_are_calculated_correctly(garmin_data_list):
     """
     this test ensures that the average values are calculated
@@ -448,11 +457,11 @@ def test_unauthenticated_user_can_access_home_page(client, django_user_model):
         ),
     ],
 )
-def test_only_authenticated_users_can_access_personal_pages(
+def test_authenticated_users_can_access_personal_pages(
     client_fixture_name, model_fixture_name, url, expected_status_code, request
 ):
     """
-    this tests whether a signed in user can edit their profile page
+    this tests whether a signed in user can access their personal area
     """
     client = request.getfixturevalue(client_fixture_name)
     django_user_model = request.getfixturevalue(model_fixture_name)
@@ -469,38 +478,77 @@ def test_only_authenticated_users_can_access_personal_pages(
 
 
 @pytest.mark.parametrize()(
-    "client_fixture_name, model_fixture_name, gamindata_fixture, url, expected_status_code",
+    "client_fixture_name, model_fixture_name, url, expected_status_code",
     [
         (
             "client",
             "django_user_model",
-            "garmin_data_list",
             "/activities/load_activities_manually",
             200,
         ),
     ],
 )
-def test_only_authenticated_users_enter_activities_manually(
+def test_authenticated_users_enter_activities_manually(
     client_fixture_name,
     model_fixture_name,
-    gamindata_fixture,
     url,
     expected_status_code,
     db,
     request,
 ):
     """
-    this tests whether a signed in user can edit their profile page
+    this tests whether a signed in user can edit their activities
     """
     client = request.getfixturevalue(client_fixture_name)
     django_user_model = request.getfixturevalue(model_fixture_name)
-    random_garmin_data = request.getfixturevalue(gamindata_fixture)
-    
+
     username = "testuser2"
     password = "1234-abcd"
     user = django_user_model.objects.create_user(
         username=username, password=password
     )
+    client.login(username=username, password=password)
+    response = client.get(url)
+
+    assert response.status_code == expected_status_code
+
+
+@pytest.mark.parametrize()(
+    "client_fixture_name, model_fixture_name, garmin_fixture_name,  url, expected_status_code",
+    [
+        (
+            "client",
+            "django_user_model",
+            "garmin_data",
+            "/activities/list/edit_activity/1",
+            200,
+        ),
+    ],
+)
+def test_authenticated_users_edit_activities(
+    client_fixture_name,
+    model_fixture_name,
+    garmin_fixture_name,
+    url,
+    expected_status_code,
+    request,
+):
+    """
+    this tests whether a signed in user can edit their activities
+    """
+    client = request.getfixturevalue(client_fixture_name)
+    django_user_model = request.getfixturevalue(model_fixture_name)
+
+    # arrange : user that has activities stored in DB
+    username = "testuser2"
+    password = "1234-abcd"
+    user = django_user_model.objects.create_user(
+        username=username, password=password
+    )
+    garmin_data = request.getfixturevalue(garmin_fixture_name)
+    garmin_data.user = user
+    garmin_data.save()
+
     client.login(username=username, password=password)
     response = client.get(url)
 

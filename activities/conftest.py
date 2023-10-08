@@ -36,3 +36,17 @@ def garmin_data_list(
         for i in range(number_of_random_dates)
     ]
     return data
+
+
+@pytest.fixture()
+def garmin_data(garmindata_factory) -> GarminData:
+    """
+    create a single instance of the GarminData model
+    """
+    random_date = date(2023, 8, 31)
+    random_steps = 5000
+    random_weight = 75
+
+    return garmindata_factory.build(
+        date=random_date, weight_kg=random_steps, steps=random_weight
+    )
