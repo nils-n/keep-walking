@@ -72,7 +72,6 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
   - [Testing](#testing)
-    - [Testing Procedure](#testing-procedure)
     - [Solved Bugs](#solved-bugs)
     - [Open Bugs](#open-bugs)
   - [Credits](#credits)
@@ -682,7 +681,27 @@ python manage.py migrate
 
 ## Testing
 
-### Testing Procedure
+This website was tested using a mix of manual and automated tests for several apsects of this Django application. The results were documented in [TESTING.md](./TESTING.md). The testing scope was:
+
+- ... User Stories
+- ... Authentication
+- ... Functionality
+- ... Usability
+- ... Accessibility
+- ... Synatx
+- ... Accessibility
+
+In addition, this application was mostly developed using a `test-driven development` (TDD) approach using the `pytest` and `Jest` frameworks for Python and JavaScript. Results of of the unit tests are documented in same document above. The reasons for TDD is to
+
+- ... ensure core functionality
+- ... better code re-usability
+- ... better code readibility by enforcing smaller functions.
+
+All of the `pytest` test cases were also integrated in a [GitHub actions](https://github.com/features/actions) workflow that runs all tests for each pull request and push to the main branch, spotting erros in the code early on.
+
+### Limitation
+
+No automated tests were created for functions to render the bar charts and line plots and for the API calls. While this should be included in a future version, these were only tested manually was deemed beyond the scope being mindful about the time frame to complete the MVP for this iteration.
 
 ---
 
