@@ -40,6 +40,8 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 ## Integration Tests (Manual Testing)
 
+<table>
+
 ### Results of Syntax Validation with PEP8
 
 ### Results of User Stories Test
