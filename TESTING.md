@@ -20,8 +20,8 @@ The Integration Testing document can be found here : [ Integration Test Results]
     - [Results Chrome Lighthouse](#results-chrome-lighthouse)
   - [Tests for Compatibility](#tests-for-compatibility)
   - [Automated Testing](#automated-testing)
-    - [Results of Jest (Javascript)](#results-of-jest-javascript)
-    - [Results of Pytest (Python)](#results-of-pytest-python)
+    - [Results of testing framework for Javascript (Jest)](#results-of-testing-framework-for-javascript-jest)
+    - [Results of testing framework for Python (Pytest)](#results-of-testing-framework-for-python-pytest)
       - [Coverage Report](#coverage-report)
 
 ---
@@ -72,9 +72,9 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 ## Automated Testing
 
-### Results of Jest (Javascript)
+### Results of testing framework for Javascript (Jest)
 
-### Results of Pytest (Python)
+### Results of testing framework for Python (Pytest)
 
 #### Coverage Report
 

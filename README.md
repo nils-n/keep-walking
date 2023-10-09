@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-  - [Project Goal](#project-goal)
-  - [Table of Content](#table-of-content)
+    - [Project Goal](#project-goal)
+    - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
@@ -72,6 +72,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
   - [Testing](#testing)
+      - [Limitation](#limitation)
     - [Solved Bugs](#solved-bugs)
     - [Open Bugs](#open-bugs)
   - [Credits](#credits)
@@ -699,7 +700,7 @@ In addition, this application was mostly developed using a `test-driven developm
 
 All of the `pytest` test cases were also integrated in a [GitHub actions](https://github.com/features/actions) workflow that runs all tests for each pull request and push to the main branch, spotting erros in the code early on.
 
-### Limitation
+#### Limitation
 
 No automated tests were created for functions to render the bar charts and line plots and for the API calls. While this should be included in a future version, these were only tested manually was deemed beyond the scope being mindful about the time frame to complete the MVP for this iteration.
 
@@ -731,7 +732,11 @@ No automated tests were created for functions to render the bar charts and line 
         return [date.date() for date in time_diff]
     ```
 
+---
+
 ### Open Bugs
+
+- While adding activities to the Dashboard happens without reloading the page (using `htmx-post`), the `bokeh` bar chart and line plots are not updated dynamically while entering the data. Theses plots will only be updated when the user reloads the page. While this is certainly a `could-have` feature for a future iteration, it was not considered part of the MVP. The programming overhead of a clean implementation using `htmx` out-of-band swaps (`htmx-oob-swap`) to update the plot dynamically was not considered crucial for the functioning of the MVP. In contrast, *entering the activities dynamically* has a strong positive effect on the UX, allowing the user to add many walks without reloading the page (and was therefore considered part of the MVP).
 
 ---
 
