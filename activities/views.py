@@ -438,11 +438,9 @@ def load_activities(request):
         GarminConnectTooManyRequestsError,
         GarthHTTPError,
     ):
-        ic("adding error message now")
         messages.add_message(
             request, messages.ERROR, "Synchronization with Garmin API failed"
         )
-        ic("tost is sent message now")
 
     # update the DB table with average user stats
     garmin_data = GarminData.objects.filter(user=request.user).order_by(
