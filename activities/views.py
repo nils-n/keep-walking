@@ -219,92 +219,102 @@ class ActivityList(ListView):
     context_object_name = "garmin_data"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context_data = super().get_context_data(**kwargs)
-        garmin_data = self.model.objects.filter(
-            user=self.request.user
-        ).order_by("-date")
-        paginator = Paginator(
-            garmin_data, 8
-        )  # Show 8 last activities per page.
-        page_number = self.request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
+        if self.request.user.is_authenticated:
+            context_data = super().get_context_data(**kwargs)
+            garmin_data = self.model.objects.filter(
+                user=self.request.user
+            ).order_by("-date")
+            paginator = Paginator(
+                garmin_data, 8
+            )  # Show 8 last activities per page.
+            page_number = self.request.GET.get("page")
+            page_obj = paginator.get_page(page_number)
 
-        # ensure to plot only data from the last 30 days using field lookup
-        # and chaining the filter to the existing query
-        # https://stackoverflow.com/questions/1984047/django-filter-older-than-days
-        first_day_for_bokeh_plot = datetime.now() - timedelta(days=30)
-        garmin_data_bokeh = garmin_data.filter(
-            user=self.request.user, date__gte=first_day_for_bokeh_plot
-        ).order_by("-date")
+            # ensure to plot only data from the last 30 days using field lookup
+            # and chaining the filter to the existing query
+            # https://stackoverflow.com/questions/1984047/django-filter-older-than-days
+            first_day_for_bokeh_plot = datetime.now() - timedelta(days=30)
+            garmin_data_bokeh = garmin_data.filter(
+                user=self.request.user, date__gte=first_day_for_bokeh_plot
+            ).order_by("-date")
 
-        # if there is no data for the requested range, don't render content for it
-        garmin_data_exist = False
+            # if there is no data for the requested range, don't render content for it
+            garmin_data_exist = False
 
-        # we need at least 2 garmindata entries to calculate a trend
-        if garmin_data_bokeh.count() > 1:
-            garmin_data_exist = True
+            # we need at least 2 garmindata entries to calculate a trend
+            if garmin_data_bokeh.count() > 1:
+                garmin_data_exist = True
 
-            # provide data strucutre for bokeh
-            # this will create components for the template
-            # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
-            days, steps, weights, ratings = extract_user_data(
-                garmin_data_bokeh
-            )
+                # provide data strucutre for bokeh
+                # this will create components for the template
+                # https://docs.bokeh.org/en/2.4.3/docs/user_guide/embed.html
+                days, steps, weights, ratings = extract_user_data(
+                    garmin_data_bokeh
+                )
 
-            # create pandas dataframe for tooltips
-            # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
-            data = pd.DataFrame()
-            data["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
-            data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
-            data.insert(2, "Steps", pd.to_numeric(steps))
+                # create pandas dataframe for tooltips
+                # https://stackoverflow.com/questions/48792770/bokeh-hovertool-tooltips-showing-date-as-number
+                data = pd.DataFrame()
+                data["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
+                data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
+                data.insert(2, "Steps", pd.to_numeric(steps))
 
-            # calculate the average bmi and the linear trend for the last 30 days
-            # get height from the user profile for calculating BMI
-            user_profile = UserProfile.objects.filter(user=self.request.user)
-            profile = get_object_or_404(user_profile)
-            average_bmi, change_bmi = calculate_bmi_change(
-                days, weights, profile.height_cm
-            )
-            bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
-            bmi = bmi[::-1]
-            print(f"average : {average_bmi}")
-            print(f"change_bmi : {change_bmi}")
-            print(f"bmi : {bmi}")
+                # calculate the average bmi and the linear trend for the last 30 days
+                # get height from the user profile for calculating BMI
+                user_profile = UserProfile.objects.filter(
+                    user=self.request.user
+                )
+                profile = get_object_or_404(user_profile)
+                average_bmi, change_bmi = calculate_bmi_change(
+                    days, weights, profile.height_cm
+                )
+                bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
+                bmi = bmi[::-1]
+                print(f"average : {average_bmi}")
+                print(f"change_bmi : {change_bmi}")
+                print(f"bmi : {bmi}")
 
-            # create a bokeh plot and styling of the plot inside a helper function
-            script, div = create_bokeh_plot(data, "Steps")
+                # create a bokeh plot and styling of the plot inside a helper function
+                script, div = create_bokeh_plot(data, "Steps")
 
-            # create a second bokeh plot with the BMI progression
-            data_bmi = pd.DataFrame()
-            data_bmi["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
-            data_bmi["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
-            data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
-            script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
+                # create a second bokeh plot with the BMI progression
+                data_bmi = pd.DataFrame()
+                data_bmi["Date"] = pd.to_datetime(days, format="%Y-%m-%d")
+                data_bmi["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
+                data_bmi.insert(2, "BMI", pd.to_numeric(bmi))
+                script_bmi, div_bmi = create_bokeh_plot(data_bmi, "BMI")
 
-            # calculate the average weight over the last 30 days
-            average_weight = calculate_average_weight(weights)
+                # calculate the average weight over the last 30 days
+                average_weight = calculate_average_weight(weights)
 
-            # calculate the average emotional rating over the last 30 days
-            average_rating = calculate_average_rating(ratings)
+                # calculate the average emotional rating over the last 30 days
+                average_rating = calculate_average_rating(ratings)
 
-            context_data["average_bmi"] = average_bmi
-            context_data["change_bmi"] = change_bmi
+                context_data["average_bmi"] = average_bmi
+                context_data["change_bmi"] = change_bmi
 
-            context_data["script"] = script
-            context_data["div"] = div
-            context_data["script_bmi"] = script_bmi
-            context_data["div_bmi"] = div_bmi
-            context_data["average_weight"] = average_weight
-            context_data["average_rating"] = average_rating
+                context_data["script"] = script
+                context_data["div"] = div
+                context_data["script_bmi"] = script_bmi
+                context_data["div_bmi"] = div_bmi
+                context_data["average_weight"] = average_weight
+                context_data["average_rating"] = average_rating
 
-        context_data["garmin_form"] = GarminDataForm()
-        context_data["page_obj"] = page_obj
-        context_data["garmin_data_exist"] = garmin_data_exist
+            context_data["garmin_form"] = GarminDataForm()
+            context_data["page_obj"] = page_obj
+            context_data["garmin_data_exist"] = garmin_data_exist
+
+        else:
+            # user is not authenticated
+            raise PermissionDenied
 
         return context_data
 
     def get_queryset(self):
-        return GarminData.objects.filter(user=self.request.user)
+        if self.request.user.is_authenticated:
+            return GarminData.objects.filter(user=self.request.user)
+        else:
+            raise PermissionDenied
 
 
 def load_activities_manually(request):
