@@ -14,6 +14,7 @@ The Integration Testing document can be found here : [ Integration Test Results]
     - [Results W3C HTML Validation](#results-w3c-html-validation)
     - [Results W3C CSS Validation](#results-w3c-css-validation)
     - [Results Jshint Javascript Validation](#results-jshint-javascript-validation)
+    - [Issues Found During Manual Testing](#issues-found-during-manual-testing)
   - [Tests of Accessibility](#tests-of-accessibility)
     - [Results A11y Color Test](#results-a11y-color-test)
     - [Results WebAIM Accesibility Test](#results-webaim-accesibility-test)
@@ -55,6 +56,28 @@ The Integration Testing document can be found here : [ Integration Test Results]
 ### Results W3C CSS Validation
 
 ### Results Jshint Javascript Validation
+
+### Issues Found During Manual Testing
+
+There were several issues found during Manual Testing that required refactoring of the code to make it pass the test.
+
+<table style="width:90%">
+    <tr>
+        <th style="text-align:center"> Test Case</th>
+        <th style="width:45%"> Description </th>
+        <th style="width:45%"> Errors Found  </th>
+    </tr>
+    <tr>
+      <td style="text-align:center"> TC-03 (second pass) </td>
+      <td> Ensure that all URLs on the Dashboard Page can only be accessed by authenticated users. For unauthenticated users it should raise 403 error.  </td>
+      <td> 
+        <ul>
+          <li> In the first round, a 500 server error was raised. A view did not check if a user was authenticated, and tried to find records in the DB for the AnonymousUser </li>
+          <li> After adding appropriate checks to the view function, the 403 error was raised correctly, and the test passed </li>
+        </ul>
+      </td>
+    </tr>
+ </table>
 
 ---
 
