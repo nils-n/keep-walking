@@ -68,14 +68,25 @@ There were several issues found during Manual Testing that required refactoring 
         <th style="width:45%"> Errors Found  </th>
     </tr>
     <tr>
-      <td style="text-align:center"> TC-03 (second pass) </td>
+      <td style="text-align:center"> TC_03 </td>
       <td> Ensure that all URLs on the Dashboard Page can only be accessed by authenticated users. For unauthenticated users it should raise 403 error.  </td>
       <td> 
-        <ul>
-          <li> In the first round, a 500 server error was raised. A view did not check if a user was authenticated, and tried to find records in the DB for the AnonymousUser </li>
-          <li> After adding appropriate checks to the view function, the 403 error was raised correctly, and the test passed </li>
-        </ul>
-      </td>
+         <ul>
+            <li> In the first round, a 500 server error was raised. A view did not check if a user was authenticated, and tried to find records in the DB for the AnonymousUser </li>
+            <li> After adding appropriate checks to the view function, the 403 error was raised correctly, and the test passed </li>
+         </ul>
+     </td>
+     </tr>
+     <tr>
+      <td style="text-align:center"> TC_19  </td>
+      <td> User Story 7 : As a signed in user I can load my health stats from my Garmin watch so that (over time) I can track my exact step count and my weight measurements from the Garmin App </td>
+      <td> 
+         <ul>
+            <li> In the first round, it was noted that there was no feedback (in form of a toast message) telling the user that the synchronisation was successful </li>
+            <li> After refactoring the corresponding view function, the correct toasts appeared, and test passed
+            </li>
+         </ul>
+     </td>
     </tr>
  </table>
 

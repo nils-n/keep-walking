@@ -15,6 +15,12 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Aggregate, Avg
 
 from icecream import ic
+from garth.exc import GarthHTTPError
+from garminconnect import (
+    GarminConnectAuthenticationError,
+    GarminConnectConnectionError,
+    GarminConnectTooManyRequestsError,
+)
 
 from .models import GarminData, UserProfile, UserAverage
 from .forms import (
@@ -401,30 +407,42 @@ def load_activities(request):
     existing_dates = [db_record.date for db_record in garmin_data]
 
     # retrieve latest data from garmin api
-    garmin_step_data, garmin_weight_data = garmin_api_call(
-        garmin_username,
-        garmin_password,
-        garmin_start_date,
-        garmin_end_date,
-    )
+    try:
+        garmin_step_data, garmin_weight_data = garmin_api_call(
+            garmin_username,
+            garmin_password,
+            garmin_start_date,
+            garmin_end_date,
+        )
+        messages.add_message(
+            request, messages.SUCCESS, "Sync with Garmin API successful"
+        )
 
-    messages.add_message(
-        request, messages.ERROR, "Sync with Garmin API successful"
-    )
-    garmin_step_data = garmin_step_data[0]
+        garmin_step_data = garmin_step_data[0]
 
-    for garmin_entry in garmin_step_data:
-        new_date = convert_api_data_to_datetime(garmin_entry)
-        new_steps = convert_api_data_to_steps(garmin_entry)
-        if new_date not in existing_dates:
-            new_garmin_entry = GarminData()
-            new_garmin_entry.user = request.user
-            new_garmin_entry.date = new_date
-            new_garmin_entry.steps = new_steps
-            new_garmin_entry.weight_kg = extract_weight(
-                garmin_weight_data[0], new_date
-            )
-            new_garmin_entry.save()
+        for garmin_entry in garmin_step_data:
+            new_date = convert_api_data_to_datetime(garmin_entry)
+            new_steps = convert_api_data_to_steps(garmin_entry)
+            if new_date not in existing_dates:
+                new_garmin_entry = GarminData()
+                new_garmin_entry.user = request.user
+                new_garmin_entry.date = new_date
+                new_garmin_entry.steps = new_steps
+                new_garmin_entry.weight_kg = extract_weight(
+                    garmin_weight_data[0], new_date
+                )
+                new_garmin_entry.save()
+    except (
+        GarminConnectAuthenticationError,
+        GarminConnectConnectionError,
+        GarminConnectTooManyRequestsError,
+        GarthHTTPError,
+    ):
+        ic("adding error message now")
+        messages.add_message(
+            request, messages.ERROR, "Synchronization with Garmin API failed"
+        )
+        ic("tost is sent message now")
 
     # update the DB table with average user stats
     garmin_data = GarminData.objects.filter(user=request.user).order_by(

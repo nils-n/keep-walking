@@ -4,7 +4,7 @@ import pandas as pd
 from .models import GarminData
 from pandas import to_datetime
 from icecream import ic
-
+from garth.exc import GarthHTTPError
 from garminconnect import (
     Garmin,
     GarminConnectAuthenticationError,
@@ -72,11 +72,13 @@ def garmin_api_call(
         GarminConnectConnectionError,
         GarminConnectAuthenticationError,
         GarminConnectTooManyRequestsError,
+        GarthHTTPError,
     ) as err:
-        print(f"Error occurred during Garmin Connect communication: {err}")
-        return [], []
-
-    return [], []
+        error_msg = (
+            f"Error occurred during Garmin Connect communication: {err}"
+        )
+        print(error_msg)
+        raise err
 
 
 def convert_date_str_to_datetime(date_str):
