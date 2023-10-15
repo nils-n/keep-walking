@@ -4,8 +4,22 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 ---
 
+## Test Strategy
+
+The test strategy consisted of a combination of manual and automated tests.
+
+- Parts of the appliction rely on CRUD operations to an external DB and the Garmin API, manual test cases were created to ensure isolate those tests that require internet access. It may have been done with Selenium, but keeping in mind the MVP of this iteration, it was chosen to follow a manual test strategy here.
+- The main parts of automated testing focussed on python unit testing with the pytest framework. Most of the functions were isolated from Django in separate files, in order to ensure atomic unit testing of pure application logic following a principle of **design for testability**. The Django functions then simply import the tested functions using pythons `import` statement.
+- For a few python helper functions, the DB access was mocked using `FactoryBoy` package
+- The modules for JS were tested both manual and automatically using the JEST framework
+
+---
+
+## Table of Content
+
 - [Test Results](#test-results)
   - [Test Strategy](#test-strategy)
+  - [Table of Content](#table-of-content)
   - [Manual Testing](#manual-testing)
     - [Results of Syntax Validation with PEP8](#results-of-syntax-validation-with-pep8)
     - [Results of User Stories Test](#results-of-user-stories-test)
@@ -27,16 +41,6 @@ The Integration Testing document can be found here : [ Integration Test Results]
       - [Coverage Report](#coverage-report)
 
 ---
-
-## Test Strategy
-
-- Integration Tests
-- Automated Tests
-  - Coverage Reports
-- Test-driven Development
-  - Testing View Functions (Django)
-  - Testing Models with Factory Boy (Pytest)
-  - Tests for Javascript
 
 ---
 
