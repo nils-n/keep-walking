@@ -1,10 +1,18 @@
+"""
+view functions for the activities app
+
+uses functions from a helper file (views_helper.py) in order
+to make the application logic testable , see
+
+A.Pelme - Testing Django applications with pytest
+https://www.youtube.com/watch?v=aUf8Fkb7TaY
+"""
 from datetime import timedelta
-import os
 from typing import Any, Dict
 from numpy import around
 import pandas as pd
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.utils.timezone import datetime
 from django.http import QueryDict, HttpRequest
 from django.shortcuts import get_object_or_404
@@ -12,9 +20,7 @@ from django.contrib import messages
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator
 from django.core.exceptions import PermissionDenied
-from django.db.models import Aggregate, Avg
-
-from icecream import ic
+from django.db.models import Avg
 from garth.exc import GarthHTTPError
 from garminconnect import (
     GarminConnectAuthenticationError,
@@ -38,7 +44,6 @@ from .views_helper import (
     extract_user_data,
     create_bokeh_plot,
     calculate_bmi_change,
-    calculate_bmi_change,
     extract_bmi_timeseries,
     calculate_average_weight,
     calculate_average_rating,
@@ -61,10 +66,10 @@ def home_view(request):
     # count number of active users of last month
     # https://stackoverflow.com/questions/54249017/distinct-on-fields-is-not-supported-by-this-database-backend
     num_active_users = recent_user_stats.values("user_id").distinct().count()
-    bmi_values = [stats.avg_bmi for stats in recent_user_stats]
 
     # extract the average values
-    # note that we only calculate the bmi change for users that don't yet have a healthy BMI
+    # note that we only calculate the bmi change for
+    # users that don't yet have a healthy BMI
     bmi_average = recent_user_stats.aggregate(Avg("avg_bmi")).get(
         "avg_bmi__avg"
     )
@@ -96,29 +101,27 @@ def home_view(request):
     ).count()
 
     if num_active_users > 0:
-        percentage_with_improving_or_maintaining_bmi = (
+        percentage_improved_bmi = (
             num_active_users_that_maintain_or_lower_bmi
             / (1.0 * num_active_users)
         )
-        percentage_with_improving_or_maintaining_bmi = around(
-            100.0 * percentage_with_improving_or_maintaining_bmi, 1
-        )
+        percentage_improved_bmi = around(100.0 * percentage_improved_bmi, 1)
     else:
-        percentage_with_improving_or_maintaining_bmi = 100.0
+        percentage_improved_bmi = 100.0
 
     context = {
         "num_active_users": num_active_users,
         "bmi_average": bmi_average,
         "weight_average": weight_average,
         "bmi_change_average": bmi_change_average,
-        "percentage_improved_or_maintained_bmi": percentage_with_improving_or_maintaining_bmi,
+        "percentage_improved_or_maintained_bmi": percentage_improved_bmi,
     }
 
     if request.method == "GET":
         return render(request, "home.html", context)
 
 
-def swap_to_manual(request, *args, **kwargs):
+def swap_to_manual(request):
     """
     view to swap the garmin sync form with a form
     to enter walks and weight manually
@@ -128,7 +131,7 @@ def swap_to_manual(request, *args, **kwargs):
     return render(request, "partials/load_manually.html", context=context)
 
 
-def user_profile(request, user_id, *args, **kwargs):
+def user_profile(request, user_id):
     """
     view to see and edit data stored for an
     authenticated user
@@ -170,7 +173,7 @@ def user_profile(request, user_id, *args, **kwargs):
         raise PermissionDenied
 
 
-def edit_profile(request, user_id, *args, **kwargs):
+def edit_profile(request, user_id):
     """
     view to edit profile of an authenticated user
     https://stackoverflow.com/questions/813418/django-set-field-value-after-a-form-is-initialized
@@ -191,7 +194,7 @@ def edit_profile(request, user_id, *args, **kwargs):
     return render(request, "partials/edit_profile.html", context)
 
 
-def delete_profile(request, user_id, *args, **kwargs):
+def delete_profile(request, user_id):
     """this view sends a post request to delete an profile."""
 
     if request.user.id != user_id:
@@ -199,8 +202,6 @@ def delete_profile(request, user_id, *args, **kwargs):
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
-        profile = UserProfile()
-        context = {"user_profile": profile}
         raise PermissionDenied
     else:
         print("searching for user...")
@@ -225,6 +226,7 @@ class ActivityList(ListView):
     context_object_name = "garmin_data"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        """enter context data for main activities view"""
         if self.request.user.is_authenticated:
             context_data = super().get_context_data(**kwargs)
             garmin_data = self.model.objects.filter(
@@ -244,7 +246,8 @@ class ActivityList(ListView):
                 user=self.request.user, date__gte=first_day_for_bokeh_plot
             ).order_by("-date")
 
-            # if there is no data for the requested range, don't render content for it
+            # if there is no data for the requested range,
+            #  don't render content for it
             garmin_data_exist = False
 
             # we need at least 2 garmindata entries to calculate a trend
@@ -265,12 +268,11 @@ class ActivityList(ListView):
                 data["DateString"] = data["Date"].dt.strftime("%Y-%m-%d")
                 data.insert(2, "Steps", pd.to_numeric(steps))
 
-                # calculate the average bmi and the linear trend for the last 30 days
+                # calculate the average bmi and the linear trend
+                # for the last 30 days
                 # get height from the user profile for calculating BMI
-                user_profile = UserProfile.objects.filter(
-                    user=self.request.user
-                )
-                profile = get_object_or_404(user_profile)
+                profile = UserProfile.objects.filter(user=self.request.user)
+                profile = get_object_or_404(profile)
                 average_bmi, change_bmi = calculate_bmi_change(
                     days, weights, profile.height_cm
                 )
@@ -280,7 +282,7 @@ class ActivityList(ListView):
                 print(f"change_bmi : {change_bmi}")
                 print(f"bmi : {bmi}")
 
-                # create a bokeh plot and styling of the plot inside a helper function
+                # create a styled bokeh plot
                 script, div = create_bokeh_plot(data, "Steps")
 
                 # create a second bokeh plot with the BMI progression
@@ -317,6 +319,7 @@ class ActivityList(ListView):
         return context_data
 
     def get_queryset(self):
+        """load garmin data from DB if user is authenticated"""
         if self.request.user.is_authenticated:
             return GarminData.objects.filter(user=self.request.user)
         else:
@@ -475,10 +478,10 @@ def update_user_stats(request: HttpRequest, garmin_data: GarminData) -> None:
         user=request.user, date__gte=first_day_for_avg_userstats
     ).order_by("-date")
     if len(recent_garmin_data) == 0:
-        return  # finish the view as there are no records for this user in the DB
+        return  # there are no records for this user in the DB
 
-    user_profile = UserProfile.objects.filter(user=request.user)
-    profile = get_object_or_404(user_profile)
+    profile = UserProfile.objects.filter(user=request.user)
+    profile = get_object_or_404(profile)
     height_cm = profile.height_cm
     [
         avg_weight,
@@ -516,7 +519,7 @@ def update_user_stats(request: HttpRequest, garmin_data: GarminData) -> None:
         new_stats_entry.save()
 
 
-def delete_activity(request, garmin_data_id, *args, **kwargs):
+def delete_activity(request, garmin_data_id):
     """
     this view sends a post request to delete an activity.
     """
@@ -549,7 +552,7 @@ def delete_activity(request, garmin_data_id, *args, **kwargs):
         raise PermissionDenied
 
 
-def edit_activity(request, garmin_data_id, *args, **kwargs):
+def edit_activity(request, garmin_data_id):
     """
     this view sends a post request to edit an existing activity
     """
@@ -591,12 +594,18 @@ def rate_good(request, garmin_data_id):
             print("-->Emotion does not exist : creating now. ")
             garmin_data.rating = garmin_data.EmotionRating.GOOD
             garmin_data.save()
-            request, messages.SUCCESS, "Emotion Rating successful"
+            messages.add_message(
+                request, messages.SUCCESS, "Emotion Rating successful"
+            )
         else:
             print("-->Emotion exists : updating now. ")
             garmin_data.rating = garmin_data.EmotionRating.GOOD
             garmin_data.save()
-            request, messages.SUCCESS, "Emotion Rating changed successfully"
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Emotion Rating changed successfully",
+            )
     else:
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
@@ -632,12 +641,18 @@ def rate_neutral(request, garmin_data_id):
             print("-->Emotion does not exist : creating now. ")
             garmin_data.rating = garmin_data.EmotionRating.NEUTRAL
             garmin_data.save()
-            request, messages.SUCCESS, "Emotion Rating successful"
+            messages.add_message(
+                request, messages.SUCCESS, "Emotion Rating successful"
+            )
         else:
             print("-->Emotion exists : updating now. ")
             garmin_data.rating = garmin_data.EmotionRating.NEUTRAL
             garmin_data.save()
-            request, messages.SUCCESS, "Emotion Rating changed successfully"
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Emotion Rating changed successfully",
+            )
     else:
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
@@ -672,12 +687,18 @@ def rate_bad(request, garmin_data_id):
             print("-->Emotion does not exist : creating now. ")
             garmin_data.rating = garmin_data.EmotionRating.BAD
             garmin_data.save()
-            request, messages.SUCCESS, "Emotion Rating successful"
+            messages.add_message(
+                request, messages.SUCCESS, "Emotion Rating successful"
+            )
         else:
             print("-->Emotion exists : updating now. ")
             garmin_data.rating = garmin_data.EmotionRating.BAD
             garmin_data.save()
-            request, messages.SUCCESS, "Emotion Rating changed successfully"
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                "Emotion Rating changed successfully",
+            )
     else:
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"

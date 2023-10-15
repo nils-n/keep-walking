@@ -1,9 +1,8 @@
-import pytest
+"""
+unit tests for the view helper functions
+"""
 import datetime
-import pandas as pd
-from datetime import date
-from django.contrib.messages.storage.fallback import FallbackStorage
-
+import pytest
 from .views_helper import (
     create_date_range,
     convert_api_data_to_datetime,
@@ -317,8 +316,8 @@ def test_user_stats_are_calculated_correctly(garmin_data_list):
     expected_weight = 79.5
     expected_bmi = 26.0
     expected_bmi_change = -2.9
-    expectation_whether_BMI_is_in_healthy_range = False
-    expectation_whether_BMI_is_improving = True
+    expectation_whether_bmi_is_in_healthy_range = False
+    expectation_whether_bmi_is_improving = True
     random_height_cm = 175
 
     model = calculate_user_stats(garmin_data_list, random_height_cm)
@@ -326,5 +325,5 @@ def test_user_stats_are_calculated_correctly(garmin_data_list):
     assert model[0] == expected_weight
     assert model[1] == expected_bmi
     assert model[2] == expected_bmi_change
-    assert model[3] == expectation_whether_BMI_is_in_healthy_range
-    assert model[4] == expectation_whether_BMI_is_improving
+    assert model[3] == expectation_whether_bmi_is_in_healthy_range
+    assert model[4] == expectation_whether_bmi_is_improving

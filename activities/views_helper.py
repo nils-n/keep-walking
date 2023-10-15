@@ -1,9 +1,16 @@
-import datetime
-from datetime import datetime, date
+"""
+based on: 
+A.Pelme - Testing Django applications with pytest
+https://www.youtube.com/watch?v=aUf8Fkb7TaY
+
+Idea is separate the application logic from the view
+into isolated, testable units independent of django.
+"""
+from datetime import datetime
 import pandas as pd
-from .models import GarminData
 from pandas import to_datetime
-from icecream import ic
+from scipy.stats import linregress
+from numpy import around, median, mean
 from garth.exc import GarthHTTPError
 from garminconnect import (
     Garmin,
@@ -19,8 +26,8 @@ from bokeh.models import (
     HoverTool,
     Range1d,
 )
-from scipy.stats import linregress
-from numpy import around, median, mean
+
+from .models import GarminData
 
 
 def create_date_range(
@@ -31,16 +38,16 @@ def create_date_range(
     function to create a list of dates in between
     a start and end date
     """
-
     if start_date > end_date:
         return []
     else:
         # https://www.geeksforgeeks.org/python-iterating-through-a-range-of-dates/
         time_diff = pd.date_range(start=start_date, end=end_date)
-        return [date.date() for date in time_diff]
+        return [entry.date() for entry in time_diff]
 
 
 def init_api(email, password):
+    """establishes connection to garmin api"""
     api = Garmin(email, password)
     api.login()
     return api
@@ -52,7 +59,7 @@ def garmin_api_call(
     start_date: datetime.date,
     end_date: datetime.date,
 ) -> list[str]:
-    """calls the data from the garmin api"""
+    """fetches data from the garmin api"""
     try:
         # api = init_api(garmin_username, garmin_password)
         api = Garmin(garmin_username, garmin_password)
@@ -102,10 +109,10 @@ def convert_api_data_to_steps(garmin_api_data):
     """
     converts the output of the api call into step count
     """
-    totalSteps = 0
+    total_steps = 0
     if garmin_api_data["totalSteps"]:
-        totalSteps = garmin_api_data["totalSteps"]
-    return int(totalSteps)
+        total_steps = garmin_api_data["totalSteps"]
+    return int(total_steps)
 
 
 def extract_weight(garmin_weight_data, target_date) -> int:
@@ -141,7 +148,7 @@ def calculate_user_stats(
     """
     helper function to prepare a new row of the average user stats table
     """
-    days, steps, weights, _ = extract_user_data(garmin_data)
+    days, _, weights, _ = extract_user_data(garmin_data)
     average_bmi, change_bmi = calculate_bmi_change(days, weights, height_cm)
     average_weight = calculate_average_weight(weights)
 
@@ -323,9 +330,7 @@ def calculate_bmi_change(
     # flip list to calculate from latest to new
     bmi_list = bmi_list[::-1]
 
-    slope, intercept, r_value, p_value, std_err = linregress(
-        range(len(bmi_list)), bmi_list
-    )
+    slope, intercept, _, _, _ = linregress(range(len(bmi_list)), bmi_list)
 
     num_days = len(bmi_list)
     bmi_change = (num_days - 1) * slope
