@@ -93,7 +93,7 @@ All tests passed.
       <td style="width:70%"> 
         <img src='/assets/testing/html-validation-signup-1.png'  alt='Validation Results screenshot'>
       </td>
-      <td style="width:20%"> Passed except for a `ul` element that was inserted automatically by the crispy-tailwind library. </td>
+      <td style="width:20%"> Passed (except for a `ul` element that was rendered automatically by the crispy-tailwind library inside a "small" tag. See further argumentation below.) </td>
    </tr>
     <tr>
       <td style="text-align:center"> 404 Page</td>
@@ -184,10 +184,15 @@ There were several issues found during Manual Testing that required refactoring 
       <td> 
          <ul>
             <li> For the Signup page, the tailwind-cripsyform library rendered a form that did not pass the W2C HTML validator </li>
-            <li> Since tailwind-crispy is still in early stages of development, there was no easy fix for this. I will leave this error documented here. 
+            <li> Since tailwind-crispy is still in early stages of development, there was no easy fix for this. I tried replacing the 'small' tags with 'p' tags using javascript (while the rendered page was correct, the W2C validator still complained). 
+            </li>
+            <li>It did not seem reasonable to create a manual form with many lines of code, only to replace the elegant one-liner <strong> forms | crispy</strong>, especially in terms of code readibility and maintainability
+            </li>
+            <li> In the end, i decided to leave the form rendered by crispy-tailwind.
             </li>
          </ul>
          <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
          <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
      </td>
     </tr>

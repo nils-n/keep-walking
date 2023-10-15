@@ -27,30 +27,3 @@
 </div>
 
 {% endblock %}
-
-
-{% block javascript %}
-
-<script> 
-    //to make the tailwind-crisy form element pass W2C validation 
-    document.addEventListener("DOMContentLoaded", function(event){
-        // loop over all <small> elements and replace with <p>
-        const smalls = document.getElementsByTagName('small');
-        for (let small of smalls) {
-          small.outerHTML = "<p class='text-sm'>" + small.innerHTML + "</p>"
-        }
-        // update text of password1 
-        const password1 = document.getElementById('hint_id_password1')
-        password1.outerHTML = "<p class='text-sm'>" + password1.innerHTML + "</p>"
-
-        // update text of ul 
-        const uls = document.getElementsByTagName('ul');
-        for (let ul of uls) {
-          ul.setAttribute('style','font-size:12px;');
-        }
-        console.log('done')
-
-    });
-</script>
-
-{% endblock %}

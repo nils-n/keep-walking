@@ -1,5 +1,3 @@
-console.log("well well well");
-
 //toggle hamburger button when clicked on navbar
 const navButton = document.getElementById("hamburger-button");
 navButton.addEventListener("click", (e) => {
