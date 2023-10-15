@@ -113,6 +113,22 @@ All tests passed.
 
 ### Results W3C CSS Validation
 
+All custom written CSS passed the W2C Validator. The CSS created from the Tailwind CSS build process can be assumed to function correctly and is therefore not included in the tests.
+
+<table style="width:90%">
+  <tr>
+      <th style="text-align:center"> Page</th>
+      <th style="width:50%"> Output</th>
+      <th style="width:10%"> Result</th>
+   </tr>
+   <tr>
+      <td style="text-align:center"> Home</td>
+      <td style="width:70%"> <img src='/assets/testing/css-validation-custom.png'  alt='Validation Results screenshot'></td>
+      <td style="width:10%"> Passed </td>
+   </tr>
+
+</table>
+
 ### Results Jshint Javascript Validation
 
 ### Issues Found During Manual Testing
@@ -147,7 +163,7 @@ There were several issues found during Manual Testing that required refactoring 
      </td>
     </tr>
       <tr>
-      <td style="text-align:center"> TC_24  </td>
+      <td style="text-align:center"> TC_22  </td>
       <td> Validate that all html files pass W3C HTML Validation Tool  </td>
       <td> 
          <ul>
@@ -164,7 +180,7 @@ There were several issues found during Manual Testing that required refactoring 
     </tr>
       </tr>
       <tr>
-      <td style="text-align:center"> TC_24  </td>
+      <td style="text-align:center"> TC_22  </td>
       <td> Validate that all html files pass W3C HTML Validation Tool  </td>
       <td> 
          <ul>
@@ -179,7 +195,7 @@ There were several issues found during Manual Testing that required refactoring 
      </tr>
       </tr>
       <tr>
-      <td style="text-align:center"> TC_24  </td>
+      <td style="text-align:center"> TC_22  </td>
       <td> Validate that all html files pass W3C HTML Validation Tool  </td>
       <td> 
          <ul>
@@ -188,10 +204,10 @@ There were several issues found during Manual Testing that required refactoring 
             </li>
             <li>It did not seem reasonable to create a manual form with many lines of code, only to replace the elegant one-liner <strong> forms | crispy</strong>, especially in terms of code readibility and maintainability
             </li>
-            <li> In the end, i decided to leave the form rendered by crispy-tailwind.
+            <li> In the end, this error was considered insignificant and it was decided to leave the form rendered by crispy-tailwind.
             </li>
          </ul>
-         <img src='//assets/testing/html-validation-signup-1.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/html-validation-signup-1.png'  alt='Validation tailwind-crispyforms'>
          <img src='/assets/testing/html-validation-signup-3.png'  alt='Validation tailwind-crispyforms'>
          <img src='/assets/testing/html-validation-signup-2.png'  alt='Validation tailwind-crispyforms'>
      </td>
