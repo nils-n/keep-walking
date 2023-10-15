@@ -92,10 +92,8 @@ All tests passed.
       <td style="text-align:center"> Signup</td>
       <td style="width:70%"> 
         <img src='/assets/testing/html-validation-signup-1.png'  alt='Validation Results screenshot'>
-        <img src='/assets/testing/html-validation-signup-2.png'  alt='Validation Results screenshot'>
-        <img src='/assets/testing/html-validation-signup-3.png'  alt='Validation Results screenshot'>
       </td>
-      <td style="width:20%"> Passed except for a form entered via cripyforms which was entered automatically from django.  </td>
+      <td style="width:20%"> Passed except for a `ul` element that was inserted automatically by the crispy-tailwind library. </td>
    </tr>
     <tr>
       <td style="text-align:center"> 404 Page</td>
@@ -108,13 +106,6 @@ All tests passed.
       <td style="text-align:center"> 403 Page</td>
       <td style="width:70%"> 
         <img src='/assets/testing/html-validation-403.png'  alt='Validation Results screenshot'>
-      </td>
-      <td style="width:20%">  </td>
-   </tr>
-    <tr>
-      <td style="text-align:center"> 500 Page</td>
-      <td style="width:70%"> 
-        <img src='/assets/testing/html-validation-500.png'  alt='Validation Results screenshot'>
       </td>
       <td style="width:20%">  </td>
    </tr>
@@ -179,6 +170,21 @@ There were several issues found during Manual Testing that required refactoring 
          <ul>
             <li> In the first round, the tailwind-cripsyform library rendered a form that did not pass the W2C HTML validator </li>
             <li> Removing the label attribute on the corresponding Django form (forms.GarminForm) ensured that the crispyform library rendered and W2C passed.
+            </li>
+         </ul>
+         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
+     </td>
+    </tr>
+     </tr>
+      </tr>
+      <tr>
+      <td style="text-align:center"> TC_24  </td>
+      <td> Validate that all html files pass W3C HTML Validation Tool  </td>
+      <td> 
+         <ul>
+            <li> For the Signup page, the tailwind-cripsyform library rendered a form that did not pass the W2C HTML validator </li>
+            <li> Since tailwind-crispy is still in early stages of development, there was no easy fix for this. I will leave this error documented here. 
             </li>
          </ul>
          <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>

@@ -13,9 +13,11 @@
       <div class="w-full sm:w-1/2 bg-blue-200 px-6 py-7 sm:mt-5 sm:mx-16 sm:rounded-2xl ">
         <h2 class='pb-4  text-blue-800 font-bold text-2xl'>Sign Up </h2>
         <div class=''>
-          <form method="post" >
+          <form method="post">
             {% csrf_token %}
-            {{ form |crispy }}
+            {{ form.username| as_crispy_field  }}
+            {{ form.password1| as_crispy_field  }}
+            {{ form.password2| as_crispy_field  }}
             <button class='px-10 py-3 mt-4  text-blue-50 bg-blue-800 hover:bg-blue-300  hover:text-blue-800 rounded shadow' type="submit">Sign Up</button>
           </form>
         </div>
@@ -23,5 +25,32 @@
     </div>
   </div>
 </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script> 
+    //to make the tailwind-crisy form element pass W2C validation 
+    document.addEventListener("DOMContentLoaded", function(event){
+        // loop over all <small> elements and replace with <p>
+        const smalls = document.getElementsByTagName('small');
+        for (let small of smalls) {
+          small.outerHTML = "<p class='text-sm'>" + small.innerHTML + "</p>"
+        }
+        // update text of password1 
+        const password1 = document.getElementById('hint_id_password1')
+        password1.outerHTML = "<p class='text-sm'>" + password1.innerHTML + "</p>"
+
+        // update text of ul 
+        const uls = document.getElementsByTagName('ul');
+        for (let ul of uls) {
+          ul.setAttribute('style','font-size:12px;');
+        }
+        console.log('done')
+
+    });
+</script>
 
 {% endblock %}
