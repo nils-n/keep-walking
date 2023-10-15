@@ -191,11 +191,12 @@ There were several issues found during Manual Testing that required refactoring 
             <li> In the end, i decided to leave the form rendered by crispy-tailwind.
             </li>
          </ul>
-         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>
-         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
-         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
+         <img src='//assets/testing/html-validation-signup-1.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/html-validation-signup-3.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/html-validation-signup-2.png'  alt='Validation tailwind-crispyforms'>
      </td>
     </tr>
+
  </table>
 
 ---
