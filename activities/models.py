@@ -1,11 +1,14 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
 
 
 class GarminData(models.Model):
+    """Data Table for imported values from Garmin API"""
+
     class EmotionRating(models.IntegerChoices):
+        """Choices for Emotional Ratings of an Activity"""
+
         BAD = 0
         NEUTRAL = 1
         GOOD = 2
@@ -26,10 +29,12 @@ class GarminData(models.Model):
     )
 
     class Meta:
+        """arrange them by latest date first"""
+
         ordering = ["-date"]
 
     def __str__(self):
-        return self.user.username
+        return settings.user.username
 
 
 class UserAverage(models.Model):

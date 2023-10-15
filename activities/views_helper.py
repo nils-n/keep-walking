@@ -1,5 +1,5 @@
 """
-based on: 
+based on:
 A.Pelme - Testing Django applications with pytest
 https://www.youtube.com/watch?v=aUf8Fkb7TaY
 

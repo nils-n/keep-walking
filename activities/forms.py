@@ -1,7 +1,7 @@
 from django.utils.timezone import now
 from django import forms
 
-from .models import GarminData, UserProfile
+from .models import GarminData
 
 
 # to make datepicker work with crispyforms

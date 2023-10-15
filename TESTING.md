@@ -14,6 +14,7 @@ The Integration Testing document can be found here : [ Integration Test Results]
     - [Results W3C HTML Validation](#results-w3c-html-validation)
     - [Results W3C CSS Validation](#results-w3c-css-validation)
     - [Results Jshint Javascript Validation](#results-jshint-javascript-validation)
+    - [Results Flake8 Python Syntax Validation](#results-flake8-python-syntax-validation)
     - [Issues Found During Manual Testing](#issues-found-during-manual-testing)
   - [Tests of Accessibility](#tests-of-accessibility)
     - [Results A11y Color Test](#results-a11y-color-test)
@@ -161,15 +162,32 @@ In the table below the outputs of the JSHint Validation results. No significant 
   </tr>
 </table>
 
+### Results Flake8 Python Syntax Validation
+
+In the table below the outputs of the Flake8 Python Validation results. No significant errors occured.
+
+<table>
+  <tr>
+    <th> Flake8 linter output </th>
+    <th style='width:20%'>Result</th>
+  </tr>
+   <tr>
+     <td style="width:70%"> 
+        <img src='/assets/testing/flake8-validation-2.png'  alt='Validation Python Results screenshot'>
+      </td>
+    <td> Passed - The warnings regarding the migrations will be ignored as they were automatically generated from Django.  </td>
+  </tr>
+</table>
+
 ### Issues Found During Manual Testing
 
 There were several issues found during Manual Testing that required refactoring of the code to make it pass the test.
 
 <table style="width:90%">
     <tr>
-        <th style="text-align:center"> Test Case</th>
-        <th style="width:45%"> Description </th>
-        <th style="width:45%"> Errors Found  </th>
+        <th style="text-align:center;width:10%"> Test Case</th>
+        <th style="width:35%"> Description </th>
+        <th style="width:60%"> Errors Found  </th>
     </tr>
     <tr>
       <td style="text-align:center"> TC_03 </td>
@@ -225,24 +243,35 @@ There were several issues found during Manual Testing that required refactoring 
      </tr>
       </tr>
       <tr>
-      <td style="text-align:center"> TC_22  </td>
-      <td> Validate that all html files pass W3C HTML Validation Tool  </td>
-      <td> 
-         <ul>
-            <li> For the Signup page, the tailwind-cripsyform library rendered a form that did not pass the W2C HTML validator </li>
-            <li> Since tailwind-crispy is still in early stages of development, there was no easy fix for this. I tried replacing the 'small' tags with 'p' tags using javascript (while the rendered page was correct, the W2C validator still complained). 
-            </li>
-            <li>It did not seem reasonable to create a manual form with many lines of code, only to replace the elegant one-liner <strong> forms | crispy</strong>, especially in terms of code readibility and maintainability
-            </li>
-            <li> In the end, this error was considered insignificant and it was decided to leave the form rendered by crispy-tailwind.
-            </li>
-         </ul>
-         <img src='/assets/testing/html-validation-signup-1.png'  alt='Validation tailwind-crispyforms'>
-         <img src='/assets/testing/html-validation-signup-3.png'  alt='Validation tailwind-crispyforms'>
-         <img src='/assets/testing/html-validation-signup-2.png'  alt='Validation tailwind-crispyforms'>
-     </td>
+        <td style="text-align:center"> TC_22  </td>
+        <td> Validate that all html files pass W3C HTML Validation Tool  </td>
+        <td> 
+          <ul>
+              <li> For the Signup page, the tailwind-cripsyform library rendered a form that did not pass the W2C HTML validator </li>
+              <li> Since tailwind-crispy is still in early stages of development, there was no easy fix for this. I tried replacing the 'small' tags with 'p' tags using javascript (while the rendered page was correct, the W2C validator still complained). 
+              </li>
+              <li>It did not seem reasonable to create a manual form with many lines of code, only to replace the elegant one-liner <strong> forms | crispy</strong>, especially in terms of code readibility and maintainability
+              </li>
+              <li> In the end, this error was considered insignificant and it was decided to leave the form rendered by crispy-tailwind.
+              </li>
+          </ul>
+          <img src='/assets/testing/html-validation-signup-1.png'  alt='Validation tailwind-crispyforms'>
+          <img src='/assets/testing/html-validation-signup-3.png'  alt='Validation tailwind-crispyforms'>
+          <img src='/assets/testing/html-validation-signup-2.png'  alt='Validation tailwind-crispyforms'>
+      </td>
     </tr>
-
+    <tr>
+        <td style="text-align:center"> TC_25  </td>
+        <td> Validate that all python files pass flake8 Validation Tool  </td>
+        <td> 
+          <ul>
+              <li> In the first run, several issues were flagged by flake8 regaring 'Line too long' and unused variables </li>
+              <li> After addressing these errors in the code, all of these issues were resolved </li>
+              <li> the remaining issues raised by flake8 are concerned with files that Django created for the migrations, which will be left untouched. As a result, tests was then marked as PASSED. </li>
+          </ul>
+          <img src='/assets/testing/flake8-validation-1.png'  alt='Validation flake8 before refactoring'>
+      </td>
+    </tr>
  </table>
 
 ---

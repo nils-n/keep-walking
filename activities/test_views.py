@@ -1,5 +1,4 @@
 import pytest
-import pandas as pd
 from .models import GarminData
 from datetime import date
 from django.contrib.messages.storage.fallback import FallbackStorage
@@ -13,9 +12,7 @@ def test_authenticated_user_can_access_profile_page(client, django_user_model):
     """
     username = "testuser2"
     password = "1234-abcd"
-    user = django_user_model.objects.create_user(
-        username=username, password=password
-    )
+    django_user_model.objects.create_user(username=username, password=password)
     client.login(username=username, password=password)
     response = client.get("/activities/profile/1")
     assert response.status_code == 200
@@ -109,9 +106,7 @@ def test_authenticated_users_can_access_personal_pages(
 
     username = "testuser2"
     password = "1234-abcd"
-    user = django_user_model.objects.create_user(
-        username=username, password=password
-    )
+    django_user_model.objects.create_user(username=username, password=password)
     client.login(username=username, password=password)
     response = client.get(url)
 
@@ -145,9 +140,7 @@ def test_authenticated_users_enter_activities_manually(
 
     username = "testuser2"
     password = "1234-abcd"
-    user = django_user_model.objects.create_user(
-        username=username, password=password
-    )
+    django_user_model.objects.create_user(username=username, password=password)
     client.login(username=username, password=password)
     response = client.get(url)
 
@@ -155,7 +148,8 @@ def test_authenticated_users_enter_activities_manually(
 
 
 @pytest.mark.parametrize()(
-    "client_fixture_name, model_fixture_name, garmin_fixture_name,  url, expected_status_code",
+    "client_fixture_name, model_fixture_name, garmin_fixture_name, \
+     url, expected_status_code",
     [
         (
             "client",

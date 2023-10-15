@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=aUf8Fkb7TaY
 """
 from datetime import timedelta
 from typing import Any, Dict
-from numpy import around
+from numpy import around, divide
 import pandas as pd
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -101,9 +101,8 @@ def home_view(request):
     ).count()
 
     if num_active_users > 0:
-        percentage_improved_bmi = (
-            num_active_users_that_maintain_or_lower_bmi
-            / (1.0 * num_active_users)
+        percentage_improved_bmi = divide(
+            num_active_users_that_maintain_or_lower_bmi, 1.0 * num_active_users
         )
         percentage_improved_bmi = around(100.0 * percentage_improved_bmi, 1)
     else:

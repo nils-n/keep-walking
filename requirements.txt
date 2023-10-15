@@ -1,3 +1,7 @@
+flake8==6.1.0
+mccabe==0.7.0
+pycodestyle==2.11.1
+pyflakes==3.1.0
 annotated-types==0.5.0
 asgiref==3.7.2
 asttokens==2.4.0
