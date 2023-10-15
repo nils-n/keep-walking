@@ -45,7 +45,7 @@
 	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
 
 
-	<script type='text/javascript'>
+	<script>
 			// attach the CSRF token to the CRUD requests with htmx 
 			document.body.addEventListener('htmx:configRequest', function(evt) {
 				evt.detail.headers['X-CSRFToken'] =  '{{ csrf_token }}'; 
