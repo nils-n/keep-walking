@@ -53,9 +53,9 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 ### Results W3C HTML Validation
 
-The only issue found during HTML validation was that [htmx](https://htmx.org/attributes/hx-get/) attributes are not yet allowed by the W3C HTML validator. I tried to replace the `button` element with a`span` and a `div` (as per original documentation of `htmx`) but same result. I then decided to use a `button` element for all the elements using `hx-get`, `hx-delete`, and leave the errors documented here.
+All Pages were tested with the offical W2C HTML validator [Markup Validation Service](https://validator.w3.org/) using the option 'Validate by Direct Input', copying the rendered html code from the browser with `Right Click > View Page Source`.
 
-Other than the htmx-attributes , all tests passed.
+All tests passed.
 
 <table style="width:90%">
   <tr>
@@ -70,12 +70,8 @@ Other than the htmx-attributes , all tests passed.
    </tr>
     <tr>
       <td style="text-align:center"> Profile</td>
-      <td style="width:70%"> 
-          <img src='/assets/testing/html-validation-htmx-1.png'  alt='Validation Results screenshot'>
-          <img src='/assets/testing/html-validation-htmx-2.png'  alt='Validation Results screenshot'>
-          <img src='/assets/testing/html-validation-htmx-3.png'  alt='Validation Results screenshot'>
-      </td>
-      <td style="width:20%"> Passed (with expected fail for htmx elements). Explanation see above. </td>
+      <td style="width:70%"> <img src='/assets/testing/html-validation-profile.png'  alt='Validation Results screenshot'></td>
+      <td style="width:20%"> Passed </td>
    </tr>
 </table>
 
@@ -123,7 +119,11 @@ There were several issues found during Manual Testing that required refactoring 
             <li> It was tried to replace buttons with spans (and even divs as per htmx documentation), same result
             </li>
             <li> It was then decided to keep the button elements, and document the validation errors. </li>
+            <li> The solution was (as found on the Project-Portfolio-4 Slack Channel, 1.April 2022, M. Bodden + Ed_B_alumn) to prepend all hx-get, hx-delete etc attribues with data-hx-get, data-hx-delete. All tests passed then.  </li>
          </ul>
+           <img src='/assets/testing/errors-found/html-validation-htmx-1.png'  alt='Validation Results screenshot'>
+          <img src='/assets/testing/errors-found/html-validation-htmx-2.png'  alt='Validation Results screenshot'>
+          <img src='/assets/testing/errors-found/html-validation-htmx-3.png'  alt='Validation Results screenshot'>
      </td>
     </tr>
       </tr>

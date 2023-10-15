@@ -80,7 +80,7 @@
 
 <div id='edit-profile'></div>
 <div class='py-4 '>
-  <span class="btn  bg-blue-700 hover:bg-blue-300 hover:text-blue-700 text-blue-50  btn-md uppercase" hx-get="{% url 'edit_profile' user.id %}" hx-target='#user-profile-info'> Edit </span>
+  <span class="btn  bg-blue-700 hover:bg-blue-300 hover:text-blue-700 text-blue-50  btn-md uppercase" data-hx-get="{% url 'edit_profile' user.id %}" data-hx-target='#user-profile-info'> Edit </span>
   <!-- Modal taken from DaisyUI components  https://daisyui.com/components/modal/ -->
   <button class="btn  bg-blue-50 hover:bg-red-400 hover:text-blue-50 text-red-400  btn-md uppercase" onclick="my_modal_1.showModal()">Delete</button>
   <dialog id="my_modal_1" class="modal">
@@ -94,8 +94,8 @@
           <button class="btn">Close</button>
           <button 
                 class='btn bg-red-500 hover:bg-red-300 hover:text-red-70 text-red-50' 
-                hx-delete="{% url 'delete_profile' user.id %}"  
-                hx-target='#delete_message' 
+                data-hx-delete="{% url 'delete_profile' user.id %}"  
+                data-hx-target='#delete_message' 
                 > Confirm </button>
         </form>
       </div>
