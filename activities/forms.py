@@ -50,7 +50,6 @@ class GarminDataForm(forms.Form):
                 "required": True,
                 "placeholder": "Start Date",
                 "value": now().date(),
-                "label": "date",
             }
         ),
     )

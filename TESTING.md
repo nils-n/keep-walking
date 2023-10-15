@@ -6,7 +6,7 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 - [Test Results](#test-results)
   - [Test Strategy](#test-strategy)
-  - [Integration Tests (Manual Testing)](#integration-tests-manual-testing)
+  - [Manual Testing](#manual-testing)
     - [Results of Syntax Validation with PEP8](#results-of-syntax-validation-with-pep8)
     - [Results of User Stories Test](#results-of-user-stories-test)
     - [Results of Functionality Tests](#results-of-functionality-tests)
@@ -39,7 +39,7 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 ---
 
-## Integration Tests (Manual Testing)
+## Manual Testing
 
 <table>
 
@@ -112,6 +112,32 @@ There were several issues found during Manual Testing that required refactoring 
             <li> After refactoring the corresponding view function, the correct toasts appeared, and test passed
             </li>
          </ul>
+     </td>
+    </tr>
+      <tr>
+      <td style="text-align:center"> TC_24  </td>
+      <td> Validate that all html files pass W3C HTML Validation Tool  </td>
+      <td> 
+         <ul>
+            <li> In the first round, all htmx attributes of the buttons created warning of the W3C HTML validator </li>
+            <li> It was tried to replace buttons with spans (and even divs as per htmx documentation), same result
+            </li>
+            <li> It was then decided to keep the button elements, and document the validation errors. </li>
+         </ul>
+     </td>
+    </tr>
+      </tr>
+      <tr>
+      <td style="text-align:center"> TC_24  </td>
+      <td> Validate that all html files pass W3C HTML Validation Tool  </td>
+      <td> 
+         <ul>
+            <li> In the first round, the tailwind-cripsyform library rendered a form that did not pass the W2C HTML validator </li>
+            <li> Removing the label attribute on the corresponding Django form (forms.GarminForm) ensured that the crispyform library rendered and W2C passed.
+            </li>
+         </ul>
+         <img src='/assets/testing/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
      </td>
     </tr>
  </table>
