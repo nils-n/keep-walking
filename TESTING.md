@@ -21,9 +21,9 @@ The test strategy consisted of a combination of manual and automated tests.
   - [Test Strategy](#test-strategy)
   - [Table of Content](#table-of-content)
   - [Manual Testing](#manual-testing)
-    - [Results of Syntax Validation with PEP8](#results-of-syntax-validation-with-pep8)
     - [Results of User Stories Test](#results-of-user-stories-test)
     - [Results of Functionality Tests](#results-of-functionality-tests)
+    - [Results of Authentication Tests](#results-of-authentication-tests)
     - [Results of Other Tests](#results-of-other-tests)
     - [Results W3C HTML Validation](#results-w3c-html-validation)
     - [Results W3C CSS Validation](#results-w3c-css-validation)
@@ -42,17 +42,27 @@ The test strategy consisted of a combination of manual and automated tests.
 
 ---
 
----
-
 ## Manual Testing
-
-<table>
-
-### Results of Syntax Validation with PEP8
 
 ### Results of User Stories Test
 
+The user stories have been tested case-by-case. All tests passed.
+
+<table>
+  <tr>
+    <th> Verify User Stories<th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/user-stories-1.png'  alt='Validation Results screenshot'>
+      <img src='/assets/testing/user-stories-2.png'  alt='Validation Results screenshot'>
+    </td>
+  </tr>
+</table>
+
 ### Results of Functionality Tests
+
+### Results of Authentication Tests
 
 ### Results of Other Tests
 
