@@ -8,26 +8,23 @@
 
 {% if user.is_authenticated %}
 
-
-
-<div style='min-height:vmax; ' class='bg-blue-50'>
-	<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-		<div class='font-sans bg-blue-200 sm:px-16 px-4  pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
-				<h1 class = 'text-blue-900 text-4xl font-bold py-4 '> <span><i class="fa-solid fa-heart-pulse"></i> </span> Your Profile</h1>
-				<!--p class='text-blue-400 font-semibold text-lg'>Hi {{ user.username }}!<-->
-				<p class='pt-1 pb-4 text-gray-600 sm:text-lg font-normal' style='line-height:1.6; max-width:79ch'> Here you can find all the information stored about you. Keep these information accurate, so that your BMI is calculated correctly according to your age and height.</p>
-				<!-- small form to allow user syncing data with Garmin watch--> 
-				<div class='pt-8 pb-6'> 
-					<div id='user-profile-info'>
-						{% include 'partials/profile_details.html' %}
+<div style='min-height:1vmax;'>
+	<div class='bg-blue-50'>
+		<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+			<div class='font-sans bg-blue-200 sm:px-16 px-4  pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+					<h1 class = 'text-blue-900 text-4xl font-bold py-4 '> <span><i class="fa-solid fa-heart-pulse"></i> </span> Your Profile</h1>
+					<!--p class='text-blue-400 font-semibold text-lg'>Hi {{ user.username }}!<-->
+					<p class='pt-1 pb-4 text-gray-600 sm:text-lg font-normal' style='line-height:1.6; max-width:79ch'> Here you can find all the information stored about you. Keep these information accurate, so that your BMI is calculated correctly according to your age and height.</p>
+					<!-- small form to allow user syncing data with Garmin watch--> 
+					<div class='pt-8 pb-6'> 
+						<div id='user-profile-info'>
+							{% include 'partials/profile_details.html' %}
+						</div>
 					</div>
-				</div>
-				
-			<p class='text-gray-400 text-sm pb-16'> We don't recommend deleting your data - it will keep the calculation of the BMI correct.</p>
-			
+				<p class='text-gray-400 text-sm pb-16'> We don't recommend deleting your data - it will keep the calculation of the BMI correct.</p>	
 			</div>
 		</div>
-	
+	</div>
 </div>
 
 {% else %}
@@ -37,7 +34,6 @@
 {% endif %}
 
 {% endblock %}
-
 
 {% block javascript %}
 

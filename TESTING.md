@@ -53,6 +53,32 @@ The Integration Testing document can be found here : [ Integration Test Results]
 
 ### Results W3C HTML Validation
 
+The only issue found during HTML validation was that [htmx](https://htmx.org/attributes/hx-get/) attributes are not yet allowed by the W3C HTML validator. I tried to replace the `button` element with a`span` and a `div` (as per original documentation of `htmx`) but same result. I then decided to use a `button` element for all the elements using `hx-get`, `hx-delete`, and leave the errors documented here.
+
+Other than the htmx-attributes , all tests passed.
+
+<table style="width:90%">
+  <tr>
+      <th style="text-align:center"> Page</th>
+      <th style="width:50%"> Output</th>
+      <th style="width:10%"> Result</th>
+   </tr>
+   <tr>
+      <td style="text-align:center"> Home</td>
+      <td style="width:70%"> <img src='/assets/testing/html-validation-home.png'  alt='Validation Results screenshot'></td>
+      <td style="width:10%"> Passed </td>
+   </tr>
+    <tr>
+      <td style="text-align:center"> Profile</td>
+      <td style="width:70%"> 
+          <img src='/assets/testing/html-validation-htmx-1.png'  alt='Validation Results screenshot'>
+          <img src='/assets/testing/html-validation-htmx-2.png'  alt='Validation Results screenshot'>
+          <img src='/assets/testing/html-validation-htmx-3.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%"> Passed (with expected fail for htmx elements). Explanation see above. </td>
+   </tr>
+</table>
+
 ### Results W3C CSS Validation
 
 ### Results Jshint Javascript Validation
