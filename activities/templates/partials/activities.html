@@ -37,21 +37,18 @@
     <div class="text-3xl font-normal sm:px-2 md:px-8  text-gray-600 flex flex-row gap-x-1 items-center">
       <button
         class="h-8 w-8  mask mask-heart rate-bad-button {% if garmin_row.rating >= 0 %} bg-red-400  {% else %} bg-blue-300 opacity-50 {% endif%}  "
-        ,
         style="cursor: pointer"
         data-hx-post=" {% url 'rate_bad' garmin_row.id %} "
         data-hx-target="#activities-list"
       ></button>
       <button
         class="mask mask-heart rate-neutral-button {% if garmin_row.rating >= 1 %} bg-amber-400  {% else %} bg-blue-300 opacity-50 {% endif%} h-8 w-8  "
-        ,
         style="cursor: pointer"
         data-hx-post=" {% url 'rate_neutral' garmin_row.id %} "
         data-hx-target="#activities-list"
       ></button>
       <button
         class="mask mask-heart rate-good-button {% if garmin_row.rating >= 2 %}bg-green-400   {% else %} bg-blue-300 opacity-50  {% endif%} h-8 w-8 "
-        ,
         style="cursor: pointer"
         data-hx-post=" {% url 'rate_good' garmin_row.id %} "
         data-hx-target="#activities-list"
@@ -129,6 +126,6 @@
 HTMX, AlpineJS and Django Messages - Adding Toast / Alert messages in HTMX Responses
 https://www.youtube.com/watch?v=T7TgfRiRb10
 -->
-<section id='profile-messages'data-hx-swap-oop='true' data-hx-swap='innerHTML'>
+<div id='profile-messages' data-hx-swap-oop='true' data-hx-swap='innerHTML'>
   {% include 'partials/toast.html'%}
-</section>
+</div>

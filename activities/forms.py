@@ -17,7 +17,6 @@ class UserProfileForm(forms.Form):
             attrs={
                 "id": "user-birthday",
                 "required": True,
-                "placeholder": "Birthday",
                 "value": now().date(),
                 "label": "birthday",
             }
@@ -26,12 +25,10 @@ class UserProfileForm(forms.Form):
     height_cm = forms.IntegerField(label=("Height (cm)"))
     step_goal = forms.IntegerField(label="Daily Step Goal")
     start_date = forms.DateField(
-        label="Start Date",
         widget=DateInput(
             attrs={
                 "id": "user-start-state",
                 "required": True,
-                "placeholder": "Start Date",
                 "value": now().date(),
                 "label": "start_date",
             }
@@ -48,7 +45,6 @@ class GarminDataForm(forms.Form):
             attrs={
                 "id": "start-date-input",
                 "required": True,
-                "placeholder": "Start Date",
                 "value": now().date(),
             }
         ),
@@ -95,7 +91,6 @@ class ManualGarminDataForm(forms.ModelForm):
                     "id": "manually-enter-date",
                     "required": True,
                     "value": now().date(),
-                    "placeholder": "Date",
                 }
             ),
             "steps": forms.NumberInput(

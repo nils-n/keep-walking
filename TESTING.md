@@ -73,6 +73,51 @@ All tests passed.
       <td style="width:70%"> <img src='/assets/testing/html-validation-profile.png'  alt='Validation Results screenshot'></td>
       <td style="width:20%"> Passed </td>
    </tr>
+    <tr>
+      <td style="text-align:center"> Profile</td>
+      <td style="width:70%"> 
+        <img src='/assets/testing/html-validation-activities-1.png'  alt='Validation Results screenshot'>
+        <img src='/assets/testing/html-validation-activities-2.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%"> Passed. Regarding warnings about `Bokeh` plot: these scripts are entered by the Bokeh JS library automatically. Re-naming and messing with it seemed not advisable, nor reasonable, nor necessary. </td>
+   </tr>
+    <tr>
+      <td style="text-align:center"> Login</td>
+      <td style="width:70%"> 
+        <img src='/assets/testing/html-validation-login.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%"> Passed. </td>
+   </tr>
+   <tr>
+      <td style="text-align:center"> Signup</td>
+      <td style="width:70%"> 
+        <img src='/assets/testing/html-validation-signup-1.png'  alt='Validation Results screenshot'>
+        <img src='/assets/testing/html-validation-signup-2.png'  alt='Validation Results screenshot'>
+        <img src='/assets/testing/html-validation-signup-3.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%"> Passed except for a form entered via cripyforms which was entered automatically from django.  </td>
+   </tr>
+    <tr>
+      <td style="text-align:center"> 404 Page</td>
+      <td style="width:70%"> 
+        <img src='/assets/testing/html-validation-404.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%">  </td>
+   </tr>
+    <tr>
+      <td style="text-align:center"> 403 Page</td>
+      <td style="width:70%"> 
+        <img src='/assets/testing/html-validation-403.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%">  </td>
+   </tr>
+    <tr>
+      <td style="text-align:center"> 500 Page</td>
+      <td style="width:70%"> 
+        <img src='/assets/testing/html-validation-500.png'  alt='Validation Results screenshot'>
+      </td>
+      <td style="width:20%">  </td>
+   </tr>
 </table>
 
 ### Results W3C CSS Validation
