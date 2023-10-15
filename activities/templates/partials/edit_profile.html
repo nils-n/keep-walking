@@ -5,7 +5,7 @@
 <!-- https://www.youtube.com/watch?v=_B_GnVr43kY&list=PL-2EBeDYMIbRByZ8GXhcnQSuv2dog4JxY&index=19 
 Django and HTMX #16 - Click to Edit pattern (adapted from there)-->
 
-<form class=' text-blue-100 text-normal bg-transparent' hx-put="{% url 'user_profile' user.id %}" hx-target='#user-profile-info'>
+<form class=' text-blue-100 text-normal bg-transparent' data-hx-put="{% url 'user_profile' user.id %}" data-hx-target='#user-profile-info'>
 
   {% csrf_token %}
   {{profile_form | crispy }}

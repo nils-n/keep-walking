@@ -39,22 +39,22 @@
         class="h-8 w-8  mask mask-heart rate-bad-button {% if garmin_row.rating >= 0 %} bg-red-400  {% else %} bg-blue-300 opacity-50 {% endif%}  "
         ,
         style="cursor: pointer"
-        hx-post=" {% url 'rate_bad' garmin_row.id %} "
-        hx-target="#activities-list"
+        data-hx-post=" {% url 'rate_bad' garmin_row.id %} "
+        data-hx-target="#activities-list"
       ></button>
       <button
         class="mask mask-heart rate-neutral-button {% if garmin_row.rating >= 1 %} bg-amber-400  {% else %} bg-blue-300 opacity-50 {% endif%} h-8 w-8  "
         ,
         style="cursor: pointer"
-        hx-post=" {% url 'rate_neutral' garmin_row.id %} "
-        hx-target="#activities-list"
+        data-hx-post=" {% url 'rate_neutral' garmin_row.id %} "
+        data-hx-target="#activities-list"
       ></button>
       <button
         class="mask mask-heart rate-good-button {% if garmin_row.rating >= 2 %}bg-green-400   {% else %} bg-blue-300 opacity-50  {% endif%} h-8 w-8 "
         ,
         style="cursor: pointer"
-        hx-post=" {% url 'rate_good' garmin_row.id %} "
-        hx-target="#activities-list"
+        data-hx-post=" {% url 'rate_good' garmin_row.id %} "
+        data-hx-target="#activities-list"
       ></button>
     </div>
 
@@ -69,9 +69,9 @@
       <span   class="btn text-gray-600 delete-button"
             style="cursor: pointer"
             data-id="{{ garmin_row.id }}"
-            hx-delete="{%  url 'delete_activity' garmin_row.id %} "
-            hx-target="#activities-list"
-            hx-confirm="Are your sure to delete?"
+            data-hx-delete="{%  url 'delete_activity' garmin_row.id %} "
+            data-hx-target="#activities-list"
+            data-hx-confirm="Are your sure to delete?"
       > delete </span>
     </div>
 
@@ -129,6 +129,6 @@
 HTMX, AlpineJS and Django Messages - Adding Toast / Alert messages in HTMX Responses
 https://www.youtube.com/watch?v=T7TgfRiRb10
 -->
-<section id='profile-messages' hx-swap-oop='true' hx-swap='innerHTML'>
+<section id='profile-messages'data-hx-swap-oop='true' data-hx-swap='innerHTML'>
   {% include 'partials/toast.html'%}
 </section>

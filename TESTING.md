@@ -136,8 +136,8 @@ There were several issues found during Manual Testing that required refactoring 
             <li> Removing the label attribute on the corresponding Django form (forms.GarminForm) ensured that the crispyform library rendered and W2C passed.
             </li>
          </ul>
-         <img src='/assets/testing/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>
-         <img src='/assets/testing/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-1.png'  alt='Validation tailwind-crispyforms'>
+         <img src='/assets/testing/errors-found/html-validation-error-tailwind-crispy-forms-2.png'  alt='Validation tailwind-crispyforms'>
      </td>
     </tr>
  </table>
