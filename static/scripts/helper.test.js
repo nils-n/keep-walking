@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 const helpers = require("./helper");
 const sum = helpers.sum;
 const getBMIstatus = helpers.getBMIstatus;

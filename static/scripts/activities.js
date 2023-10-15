@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 //  async POST requests with async (including CSRF tokens)
 // were based on the following post :
 //https://realpython.com/django-and-ajax-form-submissions/

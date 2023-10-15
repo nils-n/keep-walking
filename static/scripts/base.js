@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 //toggle hamburger button when clicked on navbar
 const navButton = document.getElementById("hamburger-button");
 navButton.addEventListener("click", (e) => {

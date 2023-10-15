@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 function createBmiSummaryMessage(avg_bmi, change_bmi) {
   // first assess whether BMI is currently too high, too low, or just right
   bmi_status = getBMIstatus(avg_bmi);

@@ -131,6 +131,36 @@ All custom written CSS passed the W2C Validator. The CSS created from the Tailwi
 
 ### Results Jshint Javascript Validation
 
+In the table below the outputs of the JSHint Validation results. No significant errors occured.
+
+<table>
+  <tr>
+    <th>File</th>
+    <th style='width:20%'>Result</th>
+    <th> Justificaction of insignificant errors  </th>
+  </tr>
+  <tr>
+    <td>activities.js</td>
+    <td> 0 errors, 0 warnings </td>
+    <td>    </td>
+  </tr>
+   <tr>
+    <td>helper.js</td>
+    <td>0 errors, 0 warnings  </td>
+    <td>   </td>
+  </tr>
+   <tr>
+    <td>helper.test.js</td>
+    <td>0 errors,  0 warnings </td>
+    <td>   </td>
+  </tr>
+   <tr>
+    <td>summary.js</td>
+    <td>0 errors, 2 warnings </td>
+    <td> warnings regarding ES8 modules. 'Trailing comma in arguments lists' is only available in ES8 (use 'esversion: 8'). Was considered not significant   </td>
+  </tr>
+</table>
+
 ### Issues Found During Manual Testing
 
 There were several issues found during Manual Testing that required refactoring of the code to make it pass the test.
