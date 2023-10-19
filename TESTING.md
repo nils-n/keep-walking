@@ -340,7 +340,7 @@ There were several issues found during Manual Testing that required refactoring 
 
 ### Results Chrome Lighthouse
 
-All pages were tested with Google lighthouse using the `chrome-debug` browser as described in this document, using Option 4 of the Lighthouse documentation for testing authenticated pages [Running Lighthouse on Authenticated Pages](https://github.com/GoogleChrome/lighthouse/blob/main/docs/authenticated-pages.md), after globablly installing `lighthouse` with `node`.
+All pages were tested with Google lighthouse using the `chrome-debug` browser as described in this document, using Option 4 of the Lighthouse documentation for testing authenticated pages [Running Lighthouse on Authenticated Pages](https://github.com/GoogleChrome/lighthouse/blob/main/docs/authenticated-pages.md), after globablly installing `lighthouse` with `node`. All Tests passed.
 
 <table>
   <tr>
@@ -350,7 +350,33 @@ All pages were tested with Google lighthouse using the `chrome-debug` browser as
   </tr>
   <tr>
     <td>
-      <img src='/assets/testing/lighthouse/lighthouse.png'  alt='Validation flake8 before refactoring'>
+      <img src='/assets/testing/lighthouse/lighthouse.png'  alt='Lighthouse Scores - Activities Page'>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>
+      Google Lighthouse - Profile Page (Authenticated)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/lighthouse/lighthouse-profile.png'  alt='Lighthouse Scores - Profile Page'>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>
+      Google Lighthouse - Home Page
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/lighthouse/lighthouse-home.png'  alt='Lighthouse Scores - Home Page'>
     </td>
   </tr>
 </table>
