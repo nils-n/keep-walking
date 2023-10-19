@@ -338,7 +338,7 @@ There were several issues found during Manual Testing that required refactoring 
 
 ### Results WebAIM Accesibility Test
 
-While the home page could be checkecd via URL in the automatic color contrast checker, that was not possible for the authenticated pages. For the pages that required authentication, only the color contrast check was done mannually for each background-to-text color pair on the page. All Tests passed.
+While the home page could be checkecd via URL in the automatic color contrast checker, that was not possible for the authenticated pages. For the pages that required authentication, only the color contrast check was done manually for each background-to-text color pair on the page. All Tests passed.
 
 <table>
   <tr>
@@ -353,20 +353,22 @@ While the home page could be checkecd via URL in the automatic color contrast ch
   </tr>
 </table>
 
-
 <table>
   <tr>
-    <th>  Color  </th>
-    <th>  Result   </th>
+    <th colspan="2" >  WebAIM Colour Contrast Results </th>
   </tr>
   <tr>
-    <td> <img src='/assets/testing/wave-webaim.png'  alt='Wave WebAim Check - Home Page'> </td>
-    <td> <img src='/assets/testing/wave-webaim.png'  alt='Wave WebAim Check - Home Page'> </td>
+    <td> <img src='/assets/testing/webaim/color-pair-1.png'  alt='Color Contrast Results WAVE Webaim'> </td>
+    <td> <img src='/assets/testing/webaim/color-pair-2.png'  alt='Color Contrast Results WAVE Webaim'> </td>
   </tr>
+  <tr>
+      <td> <img src='/assets/testing/webaim/color-pair-3.png'  alt='Color Contrast Results WAVE Webaim'> </td>
+      <td> <img src='/assets/testing/webaim/color-pair-4.png'  alt='Color Contrast Results WAVE Webaim'> </td>
+  </tr>
+  <tr>
+  </tr>
+
 </table>
-
-
-
 
 ### Results Chrome Lighthouse
 
