@@ -39,6 +39,7 @@ The test strategy consisted of a combination of manual and automated tests.
     - [Results of testing framework for Javascript (Jest)](#results-of-testing-framework-for-javascript-jest)
     - [Results of testing framework for Python (Pytest)](#results-of-testing-framework-for-python-pytest)
       - [Coverage Report](#coverage-report)
+      - [CI Integration](#ci-integration)
 
 ---
 
@@ -476,7 +477,7 @@ The website has been tested for compatibility between browsers, and that the web
 
 ### Results of testing framework for Javascript (Jest)
 
-In the screenshot below the outputs of the Jest Unit Test results. No errors occured.
+In the screenshot below the outputs of the Jest Unit Test results (3 tests in total). No errors occured.
 
 <table>
   <tr>
@@ -493,6 +494,61 @@ In the screenshot below the outputs of the Jest Unit Test results. No errors occ
 
 ### Results of testing framework for Python (Pytest)
 
+In the screenshot below the outputs of the Python (pytest) Unit Test results (43 tests in total). No errors occured.
+
+<table>
+  <tr>
+    <th>
+      Results of Automated Testing for Python (pytest)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/results-pytest.png'  alt='Results of pytest'>
+    </td>
+  </tr>
+</table>
+
 #### Coverage Report
 
----
+Coverage of Python Unit test was `75%`. It could have been aimed to test more functions, but in terms of the MVP not every view was tested, and the test focussed on the core logic, combined with manual integration tests as outlined above in the testing strategy.
+
+<table>
+  <tr>
+    <th>
+      Coverage Automated Testing for Python (pytest)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/results-pytest-coverage.png'  alt='Coverage report of pytest'>
+    </td>
+  </tr>
+</table>
+
+#### CI Integration
+
+All unit tests were added to a continous integration workflow, that is being run after each push to the main branch. Several times during the development of this project, this flagged errors early on without needing to run `pytest` manually each time.
+
+<table>
+  <tr>
+    <th>
+      Coverage Automated Testing for Python (pytest)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/ci-django/ci-django-1.png'  alt='CI setup to run automated test after each push to main branch'>
+    </td>
+  </tr>
+    <tr>
+    <td>
+      <img src='/assets/testing/ci-django/ci-django-2.png'  alt='CI setup to run automated test after each push to main branch'>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/ci-django/ci-django-3.png'  alt='CI setup to run automated test after each push to main branch'>
+    </td>
+  </tr>
+</table>
