@@ -338,6 +338,36 @@ There were several issues found during Manual Testing that required refactoring 
 
 ### Results WebAIM Accesibility Test
 
+While the home page could be checkecd via URL in the automatic color contrast checker, that was not possible for the authenticated pages. For the pages that required authentication, only the color contrast check was done mannually for each background-to-text color pair on the page. All Tests passed.
+
+<table>
+  <tr>
+    <th>
+      Wave WebAim Accessibility evalulation - Home Page
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/wave-webaim.png'  alt='Wave WebAim Check - Home Page'>
+    </td>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <th>  Color  </th>
+    <th>  Result   </th>
+  </tr>
+  <tr>
+    <td> <img src='/assets/testing/wave-webaim.png'  alt='Wave WebAim Check - Home Page'> </td>
+    <td> <img src='/assets/testing/wave-webaim.png'  alt='Wave WebAim Check - Home Page'> </td>
+  </tr>
+</table>
+
+
+
+
 ### Results Chrome Lighthouse
 
 All pages were tested with Google lighthouse using the `chrome-debug` browser as described in this document, using Option 4 of the Lighthouse documentation for testing authenticated pages [Running Lighthouse on Authenticated Pages](https://github.com/GoogleChrome/lighthouse/blob/main/docs/authenticated-pages.md), after globablly installing `lighthouse` with `node`. All Tests passed.
