@@ -455,6 +455,21 @@ All pages were tested with Google lighthouse using the `chrome-debug` browser as
 
 ## Tests for Compatibility
 
+The website has been tested for compatibility between browsers, and that the website is responsive and displays correctly on all screen sizes as specified during the design stage. All tests passed.
+
+<table>
+  <tr>
+    <th>
+      Results of Browser compatibility tests
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/browser-compatibility.png'  alt='Results of Browser compatibility tests'>
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## Automated Testing
