@@ -316,6 +316,18 @@ There were several issues found during Manual Testing that required refactoring 
           <img src='/assets/testing/flake8-validation-1.png'  alt='Validation flake8 before refactoring'>
       </td>
     </tr>
+   <tr>
+        <td style="text-align:center"> TC_28  </td>
+        <td>Validate website with Google Chrome Lighthouse Tools  </td>
+        <td> 
+          <ul>
+              <li> In the first run, lighthouse flagged that several buttons on the on the activities pages did not have an `aria` label for screen readers, and scored low</li>
+              <li> After adding aria-label" labels , the lighthouse accessiblity score was above 90% and the test passed </li>
+          </ul>
+          <img src='/assets/testing/lighthouse/lighthouse-buttons.png'  alt='Validation flake8 before refactoring'>
+      </td>
+    </tr>
+
  </table>
 
 ---
@@ -327,6 +339,21 @@ There were several issues found during Manual Testing that required refactoring 
 ### Results WebAIM Accesibility Test
 
 ### Results Chrome Lighthouse
+
+All pages were tested with Google lighthouse using the `chrome-debug` browser as described in this document, using Option 4 of the Lighthouse documentation for testing authenticated pages [Running Lighthouse on Authenticated Pages](https://github.com/GoogleChrome/lighthouse/blob/main/docs/authenticated-pages.md), after globablly installing `lighthouse` with `node`.
+
+<table>
+  <tr>
+    <th>
+      Google Lighthouse - Activities Page (Authenticated)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/lighthouse/lighthouse.png'  alt='Validation flake8 before refactoring'>
+    </td>
+  </tr>
+</table>
 
 ---
 

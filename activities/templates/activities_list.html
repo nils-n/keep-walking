@@ -35,6 +35,7 @@
 												data-hx-get="{% url 'swap_to_manual' %}" 
 												data-hx-target='#update-walks'
 												data-hx-swap='innerHTML'
+												aria-label='Enter walks manually'
 											>
 									<i class="fa-solid fa-arrow-right"></i>
 								</button>
@@ -46,7 +47,7 @@
 									<form data-hx-post=" {% url 'load_activities' %}" data-hx-target='#activities-list'  >
 										{% csrf_token %}
 										{{ garmin_form |crispy }}
-										<button class='px-10 py-3 mt-4  text-blue-50 bg-blue-800 hover:bg-blue-300  hover:text-blue-800 rounded shadow' type="submit">Sync</button>
+										<button class='px-10 py-3 mt-4  text-blue-50 bg-blue-800 hover:bg-blue-300  hover:text-blue-800 rounded shadow' type="submit" aria-label='Fetch data from Garmin'>Sync</button>
 									</form>
 								</div>
 							</div>

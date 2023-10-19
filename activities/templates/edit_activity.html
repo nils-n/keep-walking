@@ -19,7 +19,7 @@
       <form method="post" class>
         {% csrf_token %}
         {{ garmin_edit_form | crispy }}
-        <button type="submit" class='mt-4 py-4 btn bg-blue-400 hover:bg-blue-700 text-blue-50'>Save Changes</button>
+        <button type="submit" class='mt-4 py-4 btn bg-blue-400 hover:bg-blue-700 text-blue-50'  aria-label='Submit'>Save Changes</button>
       </form>
 
     </div>
@@ -28,8 +28,8 @@
 
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
+  <a href="{% url 'login' %}"  aria-label='Log in'>Log In</a> |
+  <a href="{% url 'signup' %}"  aria-label='Sign Up'>Sign Up</a>
 {% endif %}
 
 {% endblock %}

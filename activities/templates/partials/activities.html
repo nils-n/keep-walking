@@ -40,18 +40,21 @@
         style="cursor: pointer"
         data-hx-post=" {% url 'rate_bad' garmin_row.id %} "
         data-hx-target="#activities-list"
+        aria-label='Rate the emotion of activity as bad'
       ></button>
       <button
         class="mask mask-heart rate-neutral-button {% if garmin_row.rating >= 1 %} bg-amber-400  {% else %} bg-blue-300 opacity-50 {% endif%} h-8 w-8  "
         style="cursor: pointer"
         data-hx-post=" {% url 'rate_neutral' garmin_row.id %} "
         data-hx-target="#activities-list"
+        aria-label='Rate the emotion of activity as neutral'
       ></button>
       <button
         class="mask mask-heart rate-good-button {% if garmin_row.rating >= 2 %}bg-green-400   {% else %} bg-blue-300 opacity-50  {% endif%} h-8 w-8 "
         style="cursor: pointer"
         data-hx-post=" {% url 'rate_good' garmin_row.id %} "
         data-hx-target="#activities-list"
+        aria-label='Rate the emotion of activity as good'
       ></button>
     </div>
 
@@ -62,6 +65,7 @@
           style="cursor: pointer"
           data-id="{{ garmin_row.id }}"
           href="edit_activity/{{ garmin_row.id}}"
+          aria-label='Edit activity'
       > edit </a>
       <span   class="btn text-gray-600 delete-button"
             style="cursor: pointer"
@@ -69,6 +73,7 @@
             data-hx-delete="{%  url 'delete_activity' garmin_row.id %} "
             data-hx-target="#activities-list"
             data-hx-confirm="Are your sure to delete?"
+            aria-label='Delete activity'
       > delete </span>
     </div>
 
@@ -84,11 +89,13 @@
       <a
         class="rounded-lg bg-blue-100 px-3 py-2 text-blue-700 hover:bg-blue-700 hover:text-blue-100"
         href="?page=1"
+        aria-label='Load First Activities Page'
         >&laquo; first</a
       >
       <a
         class="rounded-lg bg-blue-100 px-3 py-2 text-blue-700 hover:bg-blue-700 hover:text-blue-100"
         href="?page={{ page_obj.previous_page_number }}"
+        aria-label='Load previous Activities Page'
         >previous</a
       >
       {% endif %}
@@ -101,11 +108,13 @@
       <a
         href="?page={{ page_obj.next_page_number }}"
         class="rounded-lg bg-blue-100 px-3 py-2 text-blue-700 hover:bg-blue-700 hover:text-blue-100"
+        aria-label='Load next Activities Page'
         >next</a
       >
       <a
         href="?page={{ page_obj.paginator.num_pages }}"
         class="rounded-lg bg-blue-100 px-3 py-2 text-blue-700 hover:bg-blue-700 hover:text-blue-100"
+        aria-label='Load last Activities Page'
         >last &raquo;</a
       >
       {% endif %}
