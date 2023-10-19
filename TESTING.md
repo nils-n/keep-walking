@@ -476,6 +476,21 @@ The website has been tested for compatibility between browsers, and that the web
 
 ### Results of testing framework for Javascript (Jest)
 
+In the screenshot below the outputs of the Jest Unit Test results. No errors occured.
+
+<table>
+  <tr>
+    <th>
+      Results of Automated Testing for Javascript (JEST)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/results-jest-javascript.png'  alt='Results of Browser compatibility tests'>
+    </td>
+  </tr>
+</table>
+
 ### Results of testing framework for Python (Pytest)
 
 #### Coverage Report
