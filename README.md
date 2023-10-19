@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-    - [Project Goal](#project-goal)
-    - [Table of Content](#table-of-content)
+  - [Project Goal](#project-goal)
+  - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
@@ -72,7 +72,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
   - [Testing](#testing)
-      - [Limitation](#limitation)
+    - [Limitation](#limitation)
     - [Solved Bugs](#solved-bugs)
     - [Open Bugs](#open-bugs)
   - [Credits](#credits)
@@ -563,6 +563,14 @@ The user can enter this page only after authentication, otherwise an access atte
 
 ### Accessibility
 
+All pages were designed with accessibility in mind for website users that require screen reading tools:
+
+- semantic html such as `<main>`, `<nav>` and `<header>` were used across all pages to express a clear intent of all page elements
+- all headings `<h1>-<h3>` were used with the purpose to clearly organize the content (and not for styling) and convey clear page structures
+- All buttons and links have a matching `aria-label` that explains its purpose
+- The navbar on small screens could confuse screen readers since it collapses to a hamburger icon. Following this article [Accessibility for Hamburger Menu](https://medium.com/@linlinghao/accessibility-for-hamburger-menu-a37fa9617a89) , and `aria-hidden` label was added to the hamburger icon, and a corresponding `aria-label` was added for the link to open the menu
+- Color Contrast has been thoroughly tested to ensure a minimum colour contrast of all background-text pairs of at least `4.5:1`
+
 ---
 
 ## Models
@@ -736,7 +744,7 @@ No automated tests were created for functions to render the bar charts and line 
 
 ### Open Bugs
 
-- While adding activities to the Dashboard happens without reloading the page (using `htmx-post`), the `bokeh` bar chart and line plots are not updated dynamically while entering the data. Theses plots will only be updated when the user reloads the page. While this is certainly a `could-have` feature for a future iteration, it was not considered part of the MVP. The programming overhead of a clean implementation using `htmx` out-of-band swaps (`htmx-oob-swap`) to update the plot dynamically was not considered crucial for the functioning of the MVP. In contrast, *entering the activities dynamically* has a strong positive effect on the UX, allowing the user to add many walks without reloading the page (and was therefore considered part of the MVP).
+- While adding activities to the Dashboard happens without reloading the page (using `htmx-post`), the `bokeh` bar chart and line plots are not updated dynamically while entering the data. Theses plots will only be updated when the user reloads the page. While this is certainly a `could-have` feature for a future iteration, it was not considered part of the MVP. The programming overhead of a clean implementation using `htmx` out-of-band swaps (`htmx-oob-swap`) to update the plot dynamically was not considered crucial for the functioning of the MVP. In contrast, _entering the activities dynamically_ has a strong positive effect on the UX, allowing the user to add many walks without reloading the page (and was therefore considered part of the MVP).
 
 ---
 
