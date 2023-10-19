@@ -107,9 +107,9 @@
         <h2 class='font-bold text-2xl text-blue-900'> Success Stories</h2>
         <p class=' text-md text-gray-800 pt-4 pb-3' style='line-height:1.6'> This month we have {{ num_active_users }} active users.  </p>
         <ul class='list-disc pl-4 '>
-          <li>  The average Body-Mass-Index (BMI) of our users is  <span class='text-bold text-blue-500' > {{ bmi_average }} </span> </li>
-          <li>  The average BMI change of our users in this month was  <span class='text-bold text-blue-500' > {{ bmi_change_average }} </span> </li>
-          <li>  The average body weight of our users in this month was  <span class='text-bold text-blue-500' > {{ weight_average }} </span> kg </li>
+          <li>  The average Body-Mass-Index (BMI) of our users is  <span class='text-bold text-blue-700' > {{ bmi_average }} </span> </li>
+          <li>  The average BMI change of our users in this month was  <span class='text-bold text-blue-700' > {{ bmi_change_average }} </span> </li>
+          <li>  The average body weight of our users in this month was  <span class='text-bold text-blue-700' > {{ weight_average }} </span> kg </li>
         </ul>
       </div>
     </div>
@@ -118,8 +118,8 @@
   <div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50 pb-32'>
     <div class='font-sans bg-blue-200/80 sm:px-16 px-4 pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl bg-cover bg-no-repeat  bg-blend-soft-light '  style="background-image: url({% static 'images/bg-walking-medium.jpg' %});">
       <div class='flex flex-col pb-8 sm:pb-4 '>
-         <p  style='line-height: 0.9;' class='text-3xl pt-4 pb-8 sm:pb-4  sm:w-8/12 w-full text-gray-800'> <span class='text-bold text-4xl text-blue-500' > {{ percentage_improved_or_maintained_bmi }}% </span>  of our users lowered or maintained a healthy BMI in the last month. </p>
-         <p class = 'text-lg text-gray-700 pb-4 '> Join us, start walking and stay motivated by seeing your monthly progress. </p>
+         <p  style='line-height: 0.9;' class='text-3xl pt-4 pb-8 sm:pb-4  sm:w-8/12 w-full text-gray-800'> <span class='text-bold text-4xl text-blue-800' > {{ percentage_improved_or_maintained_bmi }}% </span>  of our users lowered or maintained a healthy BMI in the last month. </p>
+         <p class = 'text-xl font-semibold text-gray-700 pb-4 '> Join us, start walking and stay motivated by seeing your monthly progress. </p>
          <div class='flex flex-col lg:flex-row justify-between items-center gap-x-4 gap-y-4  '>
             <div class =''>  <img src="{% static  'images/landing-example-1.png' %}" alt="preview of user area"> </div>
             <div class ='hidden lg:flex'>  <img src="{% static  'images/landing-example-2.png' %}" alt="preview of user area"> </div>
@@ -127,9 +127,9 @@
          </div>
          <div class='md:flex md:w-1/2 md:mx-auto pt-5 '>
             {% if  user.is_authenticated %}
-              <a  href="{% url 'activity_home' %}" class=' bg-blue-300 text-blue-800 text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md' aria-label='Link to Dashboard'> Go to your Dashboard</a>
+              <a  href="{% url 'activity_home' %}" class=' bg-blue-800 text-blue-100 text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md' aria-label='Link to Dashboard'> Go to your Dashboard</a>
             {% else %}
-              <a  href="{% url 'signup' %}" class=' bg-blue-300 text-blue-800  text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md'  aria-label='Sign Up'> Sign Up </a>
+              <a  href="{% url 'signup' %}" class=' bg-blue-800 text-blue-100  text-bold w-full block md:inline-block text-center mb-2 py-2 md:mr-2 rounded-md'  aria-label='Sign Up'> Sign Up </a>
             {% endif %}
          </div>   
       </div>
