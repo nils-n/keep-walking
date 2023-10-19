@@ -348,6 +348,26 @@ There were several issues found during Manual Testing that required refactoring 
 
 ### Results A11y Color Test
 
+The main page was passed to the A11y Automatic Colour Contrast Checker. All Tests passed.
+
+<table>
+  <tr>
+    <th>
+     Color Contrast Accessibility Validator
+WCAG 2.1 AA SC 1.4.3 Test for Color Contrast
+    </th>
+  </tr>
+  <tr>
+    <td> <img src='/assets/testing/a11y/a11y-results-1.png'  alt='A11y results - Home Page'> </td>
+  </tr>
+  <tr>
+    <td> <img src='/assets/testing/a11y/a11y-results-2.png'  alt='A11y results - Home Page'> </td>
+  </tr>
+  <tr>
+    <td> <img src='/assets/testing/a11y/a11y-results-3.png'  alt='A11y results - Home Page'> </td>
+  </tr>
+</table>
+
 ### Results WebAIM Accesibility Test
 
 While the home page could be checkecd via URL in the automatic color contrast checker, that was not possible for the authenticated pages. For the pages that required authentication, only the color contrast check was done manually for each background-to-text color pair on the page. All Tests passed.
