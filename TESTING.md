@@ -316,6 +316,18 @@ There were several issues found during Manual Testing that required refactoring 
           <img src='/assets/testing/flake8-validation-1.png'  alt='Validation flake8 before refactoring'>
       </td>
     </tr>
+     <tr>
+        <td style="text-align:center"> TC_27  </td>
+        <td>Validate website with Google Chrome Lighthouse Tools  </td>
+        <td> 
+          <ul>
+              <li> In the first run, several colour contrasts for background-text elements showed a too low score of WebAIM Colour Contrast (below 4.62 )</li>
+              <li> After adapting the color contrasts of the flagged elements, the test passed. </li>
+          </ul>
+          <img src='/assets/testing/webaim/color-pair-too-low-1.png'  alt='color contrast too low before refactoring'>
+          <img src='/assets/testing/webaim/color-pair-too-low-2.png'  alt='color contrast too low before refactoring'>
+      </td>
+    </tr>
    <tr>
         <td style="text-align:center"> TC_28  </td>
         <td>Validate website with Google Chrome Lighthouse Tools  </td>
@@ -366,6 +378,12 @@ While the home page could be checkecd via URL in the automatic color contrast ch
       <td> <img src='/assets/testing/webaim/color-pair-4.png'  alt='Color Contrast Results WAVE Webaim'> </td>
   </tr>
   <tr>
+      <td> <img src='/assets/testing/webaim/color-pair-5.png'  alt='Color Contrast Results WAVE Webaim'> </td>
+      <td> <img src='/assets/testing/webaim/color-pair-6.png'  alt='Color Contrast Results WAVE Webaim'> </td>
+  </tr>
+ <tr>
+      <td> <img src='/assets/testing/webaim/color-pair-7.png'  alt='Color Contrast Results WAVE Webaim'> </td>
+      <td> <img src='/assets/testing/webaim/color-pair-8.png'  alt='Color Contrast Results WAVE Webaim'> </td>
   </tr>
 
 </table>
