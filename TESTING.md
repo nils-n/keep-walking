@@ -509,6 +509,22 @@ In the screenshot below the outputs of the Python (pytest) Unit Test results (43
   </tr>
 </table>
 
+An individual summary of all tests was also created with the `pytest-html` plugin :
+
+<table>
+  <tr>
+    <th>
+      Results of Automated Testing for Python (pytest)
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/pytest-html-report-1.png'  alt='Results of pytest-html 1/2'>
+      <img src='/assets/testing/pytest-html-report-2.png'  alt='Results of pytest-html 2/2'>
+    </td>
+  </tr>
+</table>
+
 #### Coverage Report
 
 Coverage of Python Unit test was `75%`. It could have been aimed to test more functions, but in terms of the MVP not every view was tested, and the test focussed on the core logic, combined with manual integration tests as outlined above in the testing strategy.
