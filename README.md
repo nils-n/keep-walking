@@ -36,16 +36,15 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
   - [Project Goal](#project-goal)
   - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
-    - [User Stories](#user-stories)
     - [Website Aims](#website-aims)
     - [How these needs are addressed](#how-these-needs-are-addressed)
     - [Opportunities](#opportunities)
     - [Feature selection](#feature-selection)
-  - [Agile Methodology](#agile-methodology)
-  - [Design](#design)
-    - [Color Scheme](#color-scheme)
-    - [Typography](#typography)
-    - [Imagery](#imagery)
+    - [Agile Methodology](#agile-methodology)
+    - [User Stories](#user-stories)
+    - [Design](#design)
+      - [Color Scheme](#color-scheme)
+      - [Typography](#typography)
   - [Wireframes](#wireframes)
   - [Features](#features)
   - [General Features](#general-features)
@@ -84,47 +83,71 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 
 ## User Experience (UX)
 
-### User Stories
-
-User stories are prioritized and categorized according to the _MuSCoW_ priortization principle, aiming for 60 % must-have User Stories in the first iteration. The first iteration of this project has 14 User stories:
-
-- 8 must-have stories (**57 %** )
-- 1 should-have story (**7 %** )
-- 2 could-have stories ( **14 %**)
-- 3 wont-have stories ( **21 %**)
-
-| **#** | **USER STORY**                                                                                                                                                                                                                                                                                                                                                                                       | **PRIORITY** |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| 1     | As a website user I can log in with a username/password so that I can access my personal area and my dashboard                                                                                                                                                                                                                                                                                       | Must-have    |
-| 2     | As a signed in website user I can click on the logout button so that I sign out of my personal area and close the website                                                                                                                                                                                                                                                                            | Must-have    |
-| 3     | As a website user I can create a new user account so that I can access my personal area                                                                                                                                                                                                                                                                                                              | Must-have    |
-| 4     | As a signed in user I can view my step count and weight measurements of the recent time so that I am motivated to moving more and be on a good way of maintaining or reaching a healthy BMI (Body-mass-index)                                                                                                                                                                                        | Must-have    |
-| 5     | As a signed in user I can give an emotional rating for each day so that (over time) I can find out whether increasing daily walks leads to increased happiness                                                                                                                                                                                                                                       | Must-have    |
-| 6     | As a signed in user I can CRUD my emotional rating for each day so that I can correct a wrong mistakes, or delete my records from the database                                                                                                                                                                                                                                                       | Must-have    |
-| 7     | As a signed in user I can load my health stats from my Garmin watch so that (over time) I can track my exact step count and my weight measurements from the Garmin App                                                                                                                                                                                                                               | Must-have    |
-| 8     | As a signed in user I can CRUD my Garmin stats for each day so that I can correct a wrong reading (such as a wrong manual entry of weight in the App), or delete my records from the database                                                                                                                                                                                                        | Must-have    |
-| 9     | As a website user I can upload a user profile picture so that the website is personalized and my testimonials look more personalized                                                                                                                                                                                                                                                                 | Could-have   |
-| 10    | As a site admin I can create and run a simple statistical analysis whether increased step count is associated also with improved sleep patterns, reduced heart variablity and stress levels so that this creates further evidence of the main site goal and can be used to advertise the method on the main website (i.e. 'our users increase their sleep by xx per cent and reduced stress levels') | Could-have   |
-| 11    | As a authenticated user I can give or reject my consent at any time to collect specific data (daily steps) so that the website can use this information anonymously to evaulate a cross-section of users whether increasing daily steps leads to loss of weight and more happiness                                                                                                                   | Should-have  |
-| 12    | As a website user I can write a testimonial in my personal area so that I can express my opinion about the website to other users                                                                                                                                                                                                                                                                    | Won’t-have   |
-| 13    | As a website admin I can approve or reject testimonials so that the approved testimonial will be displayed on the main page                                                                                                                                                                                                                                                                          | Won’t-have   |
-| 14    | As a authenticated I can write a testimonal of my user experience so that other users can benefit from my experience and feel motivated to sign up or continue using the website                                                                                                                                                                                                                     | Won’t-have   |
-
----
-
 ### Website Aims
+
+- Encouraging of users to daily walks, helping them to reach and maintain a healthy BMI (Body-Mass-Index)
+- Tracking of various body health parameters by synchronizing with Garmin Smartwach (or manually entered data)
+- Providing feedback and visualizing individual progression of body parameters and happiness levels over time
+- Based on latest peer-reviewed research: 7000 daily steps lead to improved mental and body health[1,2]
 
 ### How these needs are addressed
 
+- Users can sign up and either import their data automatically via the Garmin API into the website, or enter their walks manually (if they don't own a Garmin Watch, or don't want to connect it to the website)
+- The website is implemented in `Django`'s `MVT` (Model-View-Template) architecture including :
+  - `Model` The website is connected to an external `Postgres` database that securely stores the user data on a server
+  - `View` A backend is added that allows user authentication mechanism, including application logic such as calculating the average user BMI and the linear trend of the BMI, or providing individual feedback to the user based on their body health parameters
+  - `Template` A frontend is added that allows users smooth entering and handling of their data using `htmx` framework including creating,updating and deleting of data entries without reloading the page. A frontend implementation using`Tailwind CSS` creates a professional, clean and individual look to ensure a consistent positive interaction with the website
+
 ### Opportunities
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Feature</th>
+    <th>Impact</th>
+    <th>Feasibility</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Add an authentication mechnanism to allow users to track their walks and body parameters over time while keeping their information isolated from other users</td>
+    <td>5</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Create and connect the website to an external database, and allow authenticated users to enter and modify all data stored from them (ensuring full CRUD functionality)</td>
+    <td>5</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td> Allow users to enter walks and body parameters into the DB, either manually or automatically as import from a smartwatch such as Garmin, Fitbit or Samsung</td>
+    <td>5</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>List all saved activities such as daily step count, BMI levels and body weight (kg) and visualize these data in a pleasant and structured way </td>
+    <td>5</td>
+    <td>5</td>
+  </tr>
+    <tr>
+    <td>5</td>
+    <td>Give the user visual and written feeback in their progression of reaching and maintaining a healthy Body-Mass-Index (BMI) </td>
+    <td>5</td>
+    <td>5</td>
+  </tr>
+
+</table>
 
 ### Feature selection
 
----
+- Features `1`, `2`, `4` and `5` are within the scope of the project and within the capability of the development team
+- While being appealing, Feature `3` had to be descoped in this iteration to allow only for one vendor (Garmin) to automatically synchronize the data. The reason being, a clean implementation of vender-agnostic API access would not fit in the timebox of the first iteration. However, since it was considered a significant `UX` impact to enter all walks and body parameters of a month with a single click, it was chosen to create an implementation of the `Garmin` API access, and moving the other vendors to a future implementation.
 
-## Agile Methodology
+### Agile Methodology
 
-This project was created following agile principles using the GitHub Projects board. User Stories / Epics were entered and categorized using the **MuSCoW** priotization method labelling them as follows:
+The implementation of this project followed agile principles using the GitHub Projects board. User Stories / Epics were entered and categorized using the **MuSCoW** priotization method labelling them as follows:
 
 - `must-have` : need to be implemented in this iteration
 - `could-have` : if time permits, features and User Stories from this category can be delivered but they cannot be promised in this iteration
@@ -155,11 +178,37 @@ See below the final GitHub Project boards, after reaching the first Milestone (P
     </table>
 </div>
 
+### User Stories
+
+User stories are prioritized and categorized according to the _MuSCoW_ priortization principle, aiming for 60 % must-have User Stories in the first iteration. The first iteration of this project has 14 User stories:
+
+- 8 must-have stories (**57 %** )
+- 1 should-have story (**7 %** )
+- 2 could-have stories ( **14 %**)
+- 3 wont-have stories ( **21 %**)
+
+| **#** | **USER STORY**                                                                                                                                                                                                                                                                                                                                                                                       | **PRIORITY** |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| 1     | As a website user I can log in with a username/password so that I can access my personal area and my dashboard                                                                                                                                                                                                                                                                                       | Must-have    |
+| 2     | As a signed in website user I can click on the logout button so that I sign out of my personal area and close the website                                                                                                                                                                                                                                                                            | Must-have    |
+| 3     | As a website user I can create a new user account so that I can access my personal area                                                                                                                                                                                                                                                                                                              | Must-have    |
+| 4     | As a signed in user I can view my step count and weight measurements of the recent time so that I am motivated to moving more and be on a good way of maintaining or reaching a healthy BMI (Body-mass-index)                                                                                                                                                                                        | Must-have    |
+| 5     | As a signed in user I can give an emotional rating for each day so that (over time) I can find out whether increasing daily walks leads to increased happiness                                                                                                                                                                                                                                       | Must-have    |
+| 6     | As a signed in user I can CRUD my emotional rating for each day so that I can correct a wrong mistakes, or delete my records from the database                                                                                                                                                                                                                                                       | Must-have    |
+| 7     | As a signed in user I can load my health stats from my Garmin watch so that (over time) I can track my exact step count and my weight measurements from the Garmin App                                                                                                                                                                                                                               | Must-have    |
+| 8     | As a signed in user I can CRUD my Garmin stats for each day so that I can correct a wrong reading (such as a wrong manual entry of weight in the App), or delete my records from the database                                                                                                                                                                                                        | Must-have    |
+| 9     | As a website user I can upload a user profile picture so that the website is personalized and my testimonials look more personalized                                                                                                                                                                                                                                                                 | Could-have   |
+| 10    | As a site admin I can create and run a simple statistical analysis whether increased step count is associated also with improved sleep patterns, reduced heart variablity and stress levels so that this creates further evidence of the main site goal and can be used to advertise the method on the main website (i.e. 'our users increase their sleep by xx per cent and reduced stress levels') | Could-have   |
+| 11    | As a authenticated user I can give or reject my consent at any time to collect specific data (daily steps) so that the website can use this information anonymously to evaulate a cross-section of users whether increasing daily steps leads to loss of weight and more happiness                                                                                                                   | Should-have  |
+| 12    | As a website user I can write a testimonial in my personal area so that I can express my opinion about the website to other users                                                                                                                                                                                                                                                                    | Won’t-have   |
+| 13    | As a website admin I can approve or reject testimonials so that the approved testimonial will be displayed on the main page                                                                                                                                                                                                                                                                          | Won’t-have   |
+| 14    | As a authenticated I can write a testimonal of my user experience so that other users can benefit from my experience and feel motivated to sign up or continue using the website                                                                                                                                                                                                                     | Won’t-have   |
+
 ---
 
-## Design
+### Design
 
-### Color Scheme
+#### Color Scheme
 
 A light blue color scheme has been selected with the aim to create an energetic, positive atmosphere. The colours were chosen from Tailwind's carefully crafted color system to build this website.
 
@@ -196,15 +245,13 @@ The main reasoning of choosing these colors was to create an overall harmonic, p
     </table>
 </div>
 
-### Typography
+#### Typography
 
 The font was chosen from the `serif sans`font family. The aim of this selection was to create a harmonic and professional, clean tone. For all text and headings of the website, this font class was applied using the `font-sans` utility class from Tailwind CSS.
 
 - Headings : `Sans-serif` 500/700 bold, 3rem, line-height 0.9
 - Subheadings: `Sans-serif` 600 semibold, 1.125rem/1.25rem, line-height 1.5
 - Text: `Sans-serif`, 400 light, 1rem, line-height 1.6
-
-### Imagery
 
 ---
 
