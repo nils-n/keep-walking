@@ -61,7 +61,6 @@ def garmin_api_call(
 ) -> list[str]:
     """fetches data from the garmin api"""
     try:
-        # api = init_api(garmin_username, garmin_password)
         api = Garmin(garmin_username, garmin_password)
         api.login()
         # get the steps from the api
@@ -225,7 +224,6 @@ def create_bokeh_plot(data: pd.DataFrame, title: str):
         border_fill_color=None,
         sizing_mode="scale_both",
     )
-    # fig.line(source=source, x="days", y="steps", line_width=2)
     # ensure correct scaling - the width unit needs to be scaled to
     # the displayed time range (it's a relativ value - see )
     # https://stackoverflow.com/questions/51642602/bokeh-bar-chart-not-showing-width-properly
