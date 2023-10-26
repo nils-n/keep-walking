@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-    - [Project Goal](#project-goal)
-    - [Table of Content](#table-of-content)
+  - [Project Goal](#project-goal)
+  - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [Website Aims](#website-aims)
     - [How these needs are addressed](#how-these-needs-are-addressed)
@@ -71,7 +71,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
   - [Testing](#testing)
-      - [Limitation](#limitation)
+    - [Limitation](#limitation)
     - [Solved Bugs](#solved-bugs)
     - [Open Bugs](#open-bugs)
   - [Credits](#credits)
@@ -188,7 +188,8 @@ See below the [GitHub Project board](https://github.com/users/nils-n/projects/15
 - **1** `should-have` story was implemented
 - **2** `could-have` stories did not fit into the timebox and will be pushed to the next iteration
 - **3** `wont-have` that would allow user to write testimonials about their website experience
-  
+
+In addition to the `MuSCoW` labels, Acceptance Criterias have been added to each User Story that were used during [Manual Testing](#testing). Furthermore, each User Story has been refined into a list of tasks needed for their implementation.
 
 <div style='text-align:center'>
    <table style='width:90%; content-align:center; '>
@@ -204,7 +205,6 @@ See below the [GitHub Project board](https://github.com/users/nils-n/projects/15
     </table>
 </div>
 
-
 <div style='text-align:center'>
      <table style='width:90%; content-align:center; '>
       <tr>
@@ -216,6 +216,16 @@ See below the [GitHub Project board](https://github.com/users/nils-n/projects/15
       </table>
   </div>
 
+<div style='text-align:center'>
+     <table style='width:90%; content-align:center; '>
+      <tr>
+        <th colspan=2> Example: Adding Acceptance Critera and Refining User Story into Tasks</th>
+      </tr> 
+        <tr>
+          <td >  <img src="./assets/images/agile-example-of-refined-US.png"; alt="example user story including acceptance criteria and tasks " > </td>
+        </tr>
+      </table>
+  </div>
 
 ---
 
