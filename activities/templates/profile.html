@@ -8,10 +8,10 @@
 
 {% if user.is_authenticated %}
 
-<div style='min-height:1vmax;'>
-	<div class='bg-blue-50'>
-		<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
-			<div class='font-sans bg-blue-200 sm:px-16 px-4  pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl'>
+<div style='max-width:var(--max-page-width)' class='mx-auto bg-blue-50'>
+  <div class='font-sans '>
+    <div class="flex "> 
+      <div class="w-full lg:w-1/2 bg-blue-200 sm:px-16 px-4  pt-8 pb-16 sm:mt-5 sm:mx-16 sm:rounded-2xl ">
 					<h1 class = 'text-blue-900 text-4xl font-bold py-4 '> <span><i class="fa-solid fa-heart-pulse"></i> </span> Your Profile</h1>
 					<!--p class='text-blue-400 font-semibold text-lg'>Hi {{ user.username }}!<-->
 					<p class='pt-1 pb-4 text-gray-600 sm:text-lg font-normal' style='line-height:1.6; max-width:60ch'> Here you can find all the information stored about you. Keep these information accurate, so that your BMI is calculated correctly according to your age and height.</p>
