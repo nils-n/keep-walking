@@ -197,18 +197,12 @@ def delete_profile(request, user_id):
     """this view sends a post request to delete an profile."""
 
     if request.user.id != user_id:
-        print("-->no permission to do that")
         messages.add_message(
             request, messages.ERROR, "No permission to do this request"
         )
         raise PermissionDenied
     else:
-        print("searching for user...")
         profile = get_object_or_404(UserProfile, user=request.user)
-        print(profile)
-        print(" profile found ...")
-        print("need to add dialog to confirm here")
-        print("--> Not deleting the user for now")
         profile.user.delete()
         messages.add_message(request, messages.SUCCESS, "User Profile deleted")
         return render(request, "partials/delete_profile.html", {})
@@ -277,9 +271,6 @@ class ActivityList(ListView):
                 )
                 bmi = extract_bmi_timeseries(days, average_bmi, change_bmi)
                 bmi = bmi[::-1]
-                print(f"average : {average_bmi}")
-                print(f"change_bmi : {change_bmi}")
-                print(f"bmi : {bmi}")
 
                 # create a styled bokeh plot
                 script, div = create_bokeh_plot(data, "Steps")
@@ -394,7 +385,6 @@ def load_activities(request):
     this views loads all activities from the Garmin API
     into the DB
     """
-    print("-->views.py : entering load_activities")
     garmin_username = request.POST.get("garmin_username")
     garmin_password = request.POST.get("garmin_password")
     start_date = request.POST.get("start_date")
@@ -590,14 +580,12 @@ def rate_good(request, garmin_data_id):
 
     if garmin_data.user.username == request.user.username:
         if garmin_data.rating == garmin_data.EmotionRating.UNDEFINED:
-            print("-->Emotion does not exist : creating now. ")
             garmin_data.rating = garmin_data.EmotionRating.GOOD
             garmin_data.save()
             messages.add_message(
                 request, messages.SUCCESS, "Emotion Rating successful"
             )
         else:
-            print("-->Emotion exists : updating now. ")
             garmin_data.rating = garmin_data.EmotionRating.GOOD
             garmin_data.save()
             messages.add_message(
@@ -637,14 +625,12 @@ def rate_neutral(request, garmin_data_id):
 
     if garmin_data.user.username == request.user.username:
         if garmin_data.rating == garmin_data.EmotionRating.UNDEFINED:
-            print("-->Emotion does not exist : creating now. ")
             garmin_data.rating = garmin_data.EmotionRating.NEUTRAL
             garmin_data.save()
             messages.add_message(
                 request, messages.SUCCESS, "Emotion Rating successful"
             )
         else:
-            print("-->Emotion exists : updating now. ")
             garmin_data.rating = garmin_data.EmotionRating.NEUTRAL
             garmin_data.save()
             messages.add_message(
@@ -683,14 +669,12 @@ def rate_bad(request, garmin_data_id):
 
     if garmin_data.user.username == request.user.username:
         if garmin_data.rating == garmin_data.EmotionRating.UNDEFINED:
-            print("-->Emotion does not exist : creating now. ")
             garmin_data.rating = garmin_data.EmotionRating.BAD
             garmin_data.save()
             messages.add_message(
                 request, messages.SUCCESS, "Emotion Rating successful"
             )
         else:
-            print("-->Emotion exists : updating now. ")
             garmin_data.rating = garmin_data.EmotionRating.BAD
             garmin_data.save()
             messages.add_message(

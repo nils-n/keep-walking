@@ -193,8 +193,6 @@ def create_bokeh_plot(data: pd.DataFrame, title: str):
     """
     source = ColumnDataSource(data=data)
 
-    print(source)
-
     # plot also the step goal
     if title == "Steps":
         steps_goal = [7000 for day in data["Date"]]
