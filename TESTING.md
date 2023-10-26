@@ -381,7 +381,33 @@ While the home page could be checkecd via URL in the automatic color contrast ch
   </tr>
   <tr>
     <td>
-      <img src='/assets/testing/wave-webaim.png'  alt='Wave WebAim Check - Home Page'>
+      <img src='/assets/testing/wave-webaim-home.png'  alt='Wave WebAim Check - Home Page'>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>
+      Wave WebAim Accessibility evalulation - Activities Dashboard Page
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/wave-webaim-dashboard.png'  alt='Wave WebAim Check - Dashboard Page'>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>
+      Wave WebAim Accessibility evalulation -  Profile Page
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <img src='/assets/testing/wave-webaim-profile.png'  alt='Wave WebAim Check - Dashboard Page'>
     </td>
   </tr>
 </table>
