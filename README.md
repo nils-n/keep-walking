@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-  - [Project Goal](#project-goal)
-  - [Table of Content](#table-of-content)
+    - [Project Goal](#project-goal)
+    - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [Website Aims](#website-aims)
     - [How these needs are addressed](#how-these-needs-are-addressed)
@@ -71,7 +71,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
   - [Testing](#testing)
-    - [Limitation](#limitation)
+      - [Limitation](#limitation)
     - [Solved Bugs](#solved-bugs)
     - [Open Bugs](#open-bugs)
   - [Credits](#credits)
@@ -182,29 +182,40 @@ The implementation of this project followed agile principles using the GitHub Pr
 - `should-have` : User Stories in this category would be implemented only if the other stories are already implemented in this timebox
 - `wont-have`: stories in this category will not be implemented in this iteration - but they are kept for documentation purpose
 
-See below the final GitHub Project boards, after reaching the first Milestone (Project submission for assessment to Code Institute).
+See below the [GitHub Project board](https://github.com/users/nils-n/projects/15), after reaching the first Milestone (Project submission for assessment to Code Institute).
 
 - All `must-have` stories were implemented
 - **1** `should-have` story was implemented
 - **2** `could-have` stories did not fit into the timebox and will be pushed to the next iteration
 - **3** `wont-have` that would allow user to write testimonials about their website experience
+  
 
 <div style='text-align:center'>
    <table style='width:90%; content-align:center; '>
     <tr>
-      <th colspan=2> GitHub Project Board </th>
+      <th colspan=2> User Stories / GitHub Issues Page  </th>
     </tr> 
-      <tr>
-        <td >  <img src="./assets/images/github-projects.png"; alt="github projects board after reaching Miletstone 1 (Project submission to Code Institute) " > </td>
-      </tr>
        <tr>
-        <td >  <img src="./assets/images/github-projects-issues-2.png"; alt="user stories delivered in this iteration" > </td>
+        <td >  <img src="./assets/images/github-project-issues-1.png"; alt="user stories delivered in this iteration" > </td>
       </tr>
       <tr>
-        <td >  <img src="./assets/images/github-project-issues.png"; alt="user stories not delivered in this iteration" > </td>
+        <td >  <img src="./assets/images/github-project-issues-2.png"; alt="user stories not delivered in this iteration" > </td>
       </tr>
     </table>
 </div>
+
+
+<div style='text-align:center'>
+     <table style='width:90%; content-align:center; '>
+      <tr>
+        <th colspan=2> GitHub Project Board </th>
+      </tr> 
+        <tr>
+          <td >  <img src="./assets/images/github-projects.png"; alt="github projects board after reaching Miletstone 1 (Project submission to Code Institute) " > </td>
+        </tr>
+      </table>
+  </div>
+
 
 ---
 
