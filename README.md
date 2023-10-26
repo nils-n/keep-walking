@@ -33,8 +33,8 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
 ### Table of Content
 
 - [_Keep on Walking_ - improve your health and happiness by daily walks](#keep-on-walking---improve-your-health-and-happiness-by-daily-walks)
-  - [Project Goal](#project-goal)
-  - [Table of Content](#table-of-content)
+    - [Project Goal](#project-goal)
+    - [Table of Content](#table-of-content)
   - [User Experience (UX)](#user-experience-ux)
     - [Website Aims](#website-aims)
     - [How these needs are addressed](#how-these-needs-are-addressed)
@@ -71,7 +71,7 @@ Link to live website : [Keep Walking](https://keep-walking-49be464b8318.herokuap
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
   - [Testing](#testing)
-    - [Limitation](#limitation)
+      - [Limitation](#limitation)
     - [Solved Bugs](#solved-bugs)
     - [Open Bugs](#open-bugs)
   - [Credits](#credits)
@@ -809,6 +809,40 @@ No automated tests were created for functions to render the bar charts and line 
         time_diff = pd.date_range(start=start_date, end=end_date)
         return [date.date() for date in time_diff]
     ```
+
+- Calling the Garmin API has caused in early stages of this iteration to `400 (Bad Request)` Error. The reason for that was the `AJAX` request did not have a `CSRF` token. Adding this token to the form, the API was successfully called and the health stats were loaded
+  <div style='text-align:center'>
+      <table style='width:90%; content-align:center'>
+        <tr> 
+        <td> <img  src="./assets/images/bugs-400-bad-request.png"; alt="bug - missing CSRF token for AJAX request" >  </td> </tr>
+    </table>
+  </div>
+- The hamburger menu on small screen sizes did overflow out of the navbar on certain mobile screen sizes. Adding an appropriate `min-height` to the navbar solved this issue.
+  <div style='text-align:center'>
+      <table style='width:90%; content-align:center'>
+      <tr> 
+      <td> <img  src="./assets/images/bugs-login-hamburger-1.png"; alt="bug - overflow" >  </td>
+       <td> <img  src="./assets/images/bugs-login-hamburger-2.png"; alt="bug - overflow" >  </td> 
+      </tr>
+    </table>
+  </div>
+
+- The BMI value in the user summary contained at first the BMI value with an unnecessarily high `float` precision , and would have let the user rather left with confusion than with a useful feedback for their BMI progression. The `float` number was rounded to two digits, making it more easily readible.
+<div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+     <tr>  <td> <img  src="./assets/images/bug-float-point-1.png"; alt="bug - float precision" >  </td> </tr>
+     <tr> <td> <img  src="./assets/images/bug-float-point-2.png"; alt="bug - float precision" >  </td> </tr>
+  </table>
+</div>
+
+- Over the time it took to implement the website, the `Garmin API` changed their `JSON` tag names. This suddenly caused fetching of the health stats to fail. After identifying the source of the problem, the `JSON` tags for `totalSteps` has been adapted to the new key name, and fetching values for the API worked again.
+
+<div style='text-align:center'>
+    <table style='width:90%; content-align:center'>
+     <tr>  <td> <img  src="./assets/images/garmin-api-change-error-1.png"; alt="bug - API changed" >  </td> </tr>
+     <tr>  <td> <img  src="./assets/images/garmin-api-change-error-2.png"; alt="bug - API changed" >  </td> </tr>
+  </table>
+</div>
 
 ---
 
