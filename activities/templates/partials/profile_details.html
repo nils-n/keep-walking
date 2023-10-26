@@ -4,14 +4,14 @@
 {% if user_profile %}
 
 <!-- using DaisyUI table component https://daisyui.com/components/table/ -->
-<div class='w-100 sm:w-1/2'>
+<div class='w-100  md:w-2/3 lg: w-1/3'>
   <div class="overflow-x-auto text-blue-900 ">
     <table class="table text-blue-900">
       <!-- head -->
       <thead>
         <tr>
-          <th class='text-gray-700'>Description</th>
-          <th class='text-gray-700'>Value</th>
+          <th class='text-gray-700 text-lg font-semibold'>Description</th>
+          <th class='text-gray-700 text-lg font-semibold'>Value</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
           <td>
             <div class="flex items-center space-x-3">
               <div>
-                  <p class='text-lg font-bold'>Birthday</p>
+                  <p class='text-base font-bold'>Birthday</p>
               </div>
             </div>
           </td>
@@ -35,11 +35,11 @@
           <td>
             <div class="flex items-center space-x-3">
               <div>
-                  <p class='text-lg font-bold'>Height / cm</p>
+                  <p class='text-base font-bold'>Height / cm</p>
               </div>
             </div>
           </td>
-          <td class="text-lg font-semibold">
+          <td class="text-base font-semibold">
             {{ user_profile.height_cm }}
           </td>
         </tr>
@@ -48,11 +48,11 @@
           <td>
             <div class="flex items-center space-x-3">
               <div >
-                  <p class='text-lg font-bold'>Step Goal</p>
+                  <p class='text-base font-bold'>Step Goal</p>
               </div>
             </div>
           </td>
-          <td class="text-xl font-semibold">
+          <td class="text-base font-semibold">
             {{ user_profile.step_goal }}
           </td>
         </tr>
@@ -61,11 +61,11 @@
           <td>
             <div class="flex items-center space-x-3">
               <div>
-                  <p class='text-lg font-bold'>Start Date</p>
+                  <p class='text-base font-bold'>Start Date</p>
               </div>
             </div>
           </td>
-          <td class="text-lg font-semibold">
+          <td class="text-base font-semibold">
             {{ user_profile.start_date }}
           </td>
         </tr>
@@ -82,7 +82,7 @@
 <div class='py-4 '>
   <span class="btn  bg-blue-700 hover:bg-blue-300 hover:text-blue-700 text-blue-50  btn-md uppercase" data-hx-get="{% url 'edit_profile' user.id %}" data-hx-target='#user-profile-info'> Edit </span>
   <!-- Modal taken from DaisyUI components  https://daisyui.com/components/modal/ -->
-  <button class="btn  bg-blue-50 hover:bg-red-400 hover:text-blue-50 text-red-400  btn-md uppercase" onclick="my_modal_1.showModal()">Delete</button>
+  <button class="btn  bg-blue-50 hover:bg-red-400 hover:text-blue-50 text-red-700  btn-md uppercase" onclick="my_modal_1.showModal()">Delete</button>
   <dialog id="my_modal_1" class="modal">
     <div class="modal-box" id='delete_message'>
       <h3 class="font-bold text-lg">Confirm Deleting your Profile</h3>

@@ -2074,6 +2074,14 @@ html {
   width: 100%;
 }
 
+.w-1\/3 {
+  width: 33.333333%;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -2562,6 +2570,11 @@ html {
   color: rgb(153 27 27 / var(--tw-text-opacity));
 }
 
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
 .opacity-50 {
   opacity: 0.5;
 }
@@ -2881,6 +2894,10 @@ html {
 
   .md\:w-1\/2 {
     width: 50%;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
   }
 
   .md\:gap-x-8 {
