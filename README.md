@@ -871,6 +871,9 @@ No automated tests were created for functions to render the bar charts and line 
 
 - Teaching and Support from Code Insitute [Code Insitute](https://codeinstitute.net/)
 - Convert Excel Tables (User Stories) into Markdown format [Link to TableConvert](https://tableconvert.com/)
+- Images from [Pexels](https://pexels.com/) using [this image](https://www.pexels.com/photo/man-wearing-blue-bubble-hoodie-jacket-walking-on-green-grass-field-951886/) for main background
+  - Photographer : [Tamar Willoughby](https://www.pexels.com/@tamar-willoughby-346256/)
+- Example Readme from Kera Cudmore [Kera's Github](https://github.com/kera-cudmore/readme-examples/blob/main/milestone1-readme.md)
 - How to approach designing Django Models :
   - DjangoGirls online tutorial : [Django models](https://tutorial.djangogirls.org/en/django_models/)
   - LearnDjango Blog from W. Vincent [Django Best Practices: Models](https://learndjango.com/tutorials/django-best-practices-models)
