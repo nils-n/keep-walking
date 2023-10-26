@@ -93,7 +93,7 @@
           {% csrf_token %}
           <button class="btn" aria-label='Close'>Close</button>
           <button 
-                class='btn bg-red-500 hover:bg-red-300 hover:text-red-70 text-red-50' 
+                class='btn bg-red-700 hover:bg-red-300 hover:text-red-70 text-red-50' 
                 data-hx-delete="{% url 'delete_profile' user.id %}"  
                 data-hx-target='#delete_message' 
                 aria-label='Confirm Delete (cannot be made undone)'
