@@ -68,6 +68,6 @@ tox==4.11.3
 typing_extensions==4.7.1
 tzdata==2023.3
 urllib3==1.26.17
-virtualenv==20.24.5
+virtualenv==20.26.6
 whitenoise==6.5.0
 xyzservices==2023.7.0
